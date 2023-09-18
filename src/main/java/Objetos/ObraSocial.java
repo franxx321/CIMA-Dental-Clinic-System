@@ -40,4 +40,5 @@ public class ObraSocial {
     public void setNombreRepresentante(String nombreRepresentante) {
         this.nombreRepresentante = nombreRepresentante;
     }
+
 }

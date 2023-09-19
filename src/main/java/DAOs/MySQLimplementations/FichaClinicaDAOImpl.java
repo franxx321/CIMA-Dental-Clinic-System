@@ -12,15 +12,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
-    DBConnector DBConnection = new DBConnector();
+    DBConnector DBConnection ;
+    Connection con = null;
     @Override
     public boolean register(FichaClinica fichaClinica) {
         boolean register = false;
-        Connection con = null;
+        
         Statement stm = null;
         String sql = "INSERT INTO FichaClinica values (NULL, "+", "+fichaClinica.getDescripcion()+")";
         try{
-            con = DBConnection.conexion;
+            DBConnection = DBConnector.getInstance();
+            con = DBConnection.getConnection();
             stm = con.createStatement();
             stm.execute(sql);
             register = true;
@@ -35,13 +37,14 @@ public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
     // Review tables
     @Override
     public List<FichaClinica> obtain(FichaClinica fichaClinica) {
-        Connection con = null;
+        
         Statement stm = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM FichaClinica ORDER BY id";
         List<FichaClinica> fichaClinicaList = new ArrayList<>();
         try{
-            con = DBConnection.conexion;
+            DBConnection = DBConnector.getInstance();
+            con = DBConnection.getConnection();
             stm = con.createStatement();
             rs = stm.executeQuery(sql);
             while(rs.next()){

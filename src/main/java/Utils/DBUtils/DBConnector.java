@@ -4,7 +4,6 @@
  */
 package Utils.DBUtils;
 
-import java.net.Inet4Address;
 import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,54 +11,59 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class DBConnector {
+public  class  DBConnector  {
     
-    public String user = "root";
-    public String pass = "123";
-    public java.sql.Statement s;
-    public ResultSet resultado;
-    public Connection conexion = null;
+    private static final String user = "root";
+    private static final String pass = "123";
+    private java.sql.Statement s;
+    private ResultSet resultado;
+    private Connection connection = null;
+    private static DBConnector instance;
+    
+    
 
-     public void Conectar() throws SQLException, ClassNotFoundException, UnknownHostException {
-
-        try {
+    public void startConnection()throws SQLException, ClassNotFoundException, UnknownHostException {
+        try{
             
-
-            String ip_local = Inet4Address.getLocalHost().getHostAddress().replaceAll("\\.\\d+$", "");
-            DriverManager.setLoginTimeout(1);
-
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306;database=bd_is;encrypt=true;trustServerCertificate=true;", user, pass);
-
-            if (conexion != null) {
+        this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306;database=bd_is;encrypt=true;trustServerCertificate=true;", user, pass);
+        
+        if (connection != null) {
                 System.out.println("Conexion a base de datos:  ... Ok");
             }
-        } catch (SQLException e) {
-            System.out.println(e.toString());
         }
-        this.s = conexion.createStatement();
-
+        catch(SQLException e){
+            System.out.println("Fallo!" + e.getMessage());
+        
     }
-     
-      public void Desconectar() {
+    }
+    
+    public void setConnection(Connection conn) {
+        this.connection = conn;
+    }
+    
+    public Connection getConnection() {
+        return connection ;
+    }
+    
+      public void endConnection() {
         try {
-            conexion.close();
-            conexion = null;
+            connection.close();
+            connection = null;
         } catch (Exception e) {
             System.out.println("Problema para cerrar la Conexión a la base de datos ");
         }
     }
-}
-
-
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author lautaro
- */
-
     
+      
+
+
+        public static DBConnector getInstance() throws SQLException {
+        if (instance == null) {
+            instance = new DBConnector();
+        } 
+
+        return instance;
+        }
+      
+     
+}

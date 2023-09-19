@@ -12,15 +12,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ObraSocialDAOImpl implements IObraSocialDAO {
-    DBConnector DBConnection = new DBConnector();
+    DBConnector DBConnection ;
+    Connection con = null;
     @Override
     public boolean register(ObraSocial obraSocial) {
         boolean register = false;
-        Connection con = null;
+        
         Statement stm = null;
         String sql = "INSERT INTO ObraSocial values (NULL, "+obraSocial.getNombre()+", "+", "+obraSocial.getTelefono()+","+obraSocial.getNombreRepresentante()+")";
         try{
-            con = DBConnection.conexion;
+            DBConnection = DBConnector.getInstance();
+            con = DBConnection.getConnection();
             stm = con.createStatement();
             stm.execute(sql);
             register = true;
@@ -34,13 +36,14 @@ public class ObraSocialDAOImpl implements IObraSocialDAO {
 
     @Override
     public List<ObraSocial> obtain(ObraSocial obraSocial) {
-        Connection con = null;
+        
         Statement stm = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM ObraSocial ORDER BY id";
         List<ObraSocial> obraSocialList = new ArrayList<>();
         try{
-            con = DBConnection.conexion;
+            DBConnection = DBConnector.getInstance();
+            con = DBConnection.getConnection();
             stm = con.createStatement();
             rs = stm.executeQuery(sql);
             while(rs.next()){

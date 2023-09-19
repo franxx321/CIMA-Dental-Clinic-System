@@ -12,17 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PacienteDAOImpl implements IPacienteDAO {
-    DBConnector DBConnection = new DBConnector();
+    DBConnector DBConnection ;
+    Connection con = null;
 
     // Look for the date and make the connection with the DB
     @Override
     public boolean register(Paciente paciente) {
         boolean register = false;
         Statement stm = null;
-        Connection con = null;
+        
         String sql = "INSERT INTO Paciente values (NULL, "+paciente.getNombre()+", "+paciente.getApellido()+", "+", "+paciente.getDni()+")";
         try{
-            con =  DBConnection.conexion;
+            DBConnection = DBConnector.getInstance();
+            con = DBConnection.getConnection();
             stm = con.createStatement();
             stm.execute(sql);
             register = true;
@@ -51,7 +53,7 @@ public class PacienteDAOImpl implements IPacienteDAO {
     public boolean modify(Paciente paciente, Paciente aux) {
         boolean modify = false;
         Statement stm = null;
-        Connection con = null;
+        
         String sql = "UPDATE Paciente SET ID = NULL, Nombre = "+aux.getNombre()+", Apellido = "+aux.getApellido()+", "+", Direccion = ";
 
         return false;
@@ -65,7 +67,8 @@ public class PacienteDAOImpl implements IPacienteDAO {
         String sql = "SELECT * FROM paciente ORDER BY id";
         List<Paciente> pacienteList = new ArrayList<Paciente>();
         try{
-            con = DBConnection.conexion;
+            DBConnection = DBConnector.getInstance();
+            con = DBConnection.getConnection();
             stm = con.createStatement();
             rs = stm.executeQuery(sql);
             while(rs.next()){

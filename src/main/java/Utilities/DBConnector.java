@@ -12,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class dbconnector {
+public class DBConnector {
     
     public String user = "root";
     public String pass = "123";

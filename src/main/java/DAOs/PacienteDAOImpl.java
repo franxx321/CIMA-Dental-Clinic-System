@@ -1,6 +1,7 @@
 package DAOs;
 
 import Objetos.Paciente;
+import Utilities.DBConnector;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PacienteDAOImpl implements IPacienteDAO {
+    DBConnector DBConnection = new DBConnector();
 
     // Look for the date and make the connection with the DB
     @Override
@@ -18,7 +20,18 @@ public class PacienteDAOImpl implements IPacienteDAO {
         Statement stm = null;
         Connection con = null;
         String sql = "INSERT INTO Paciente values (NULL, "+paciente.getNombre()+", "+paciente.getApellido()+", "+", "+paciente.getDni()+")";
-        return false;
+        try{
+            con =  DBConnection.conexion;
+            stm = con.createStatement();
+            stm.execute(sql);
+            register = true;
+            stm.close();
+            con.close();
+
+        } catch (SQLException e){
+            System.out.println("Error: Clase PacienteDAOImpl, metodo register");
+        }
+        return register;
     }
 
     @Override
@@ -26,7 +39,7 @@ public class PacienteDAOImpl implements IPacienteDAO {
         boolean delete = false;
         Statement stm = null;
         Connection con = null;
-        String sql = "DELETE FROM Paciente";
+        String sql = "DELETE FROM Paciente WHERE id = ";
 
 
         return false;
@@ -45,18 +58,31 @@ public class PacienteDAOImpl implements IPacienteDAO {
 
     @Override
     public List<Paciente> obtain(Paciente paciente) {
-        Connection co = null;
+        Connection con = null;
         Statement stm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM paciente";
-        List<Paciente> listPaciente = new ArrayList<Paciente>();
-
-        /* try{
-
+        String sql = "SELECT * FROM paciente ORDER BY id";
+        List<Paciente> pacienteList = new ArrayList<Paciente>();
+        try{
+            con = DBConnection.conexion;
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+            while(rs.next()){
+                Paciente p = new Paciente();
+                p.setDni(rs.getInt(2));
+                p.setNombre(rs.getString(3));
+                //p.getFechaNacimiento(rs.getDate(4, Date.));
+                p.setDireccion(rs.getString(5));
+                //p.setSexo(rs.get(6));
+                pacienteList.add(p);
+                stm.close();
+                rs.close();
+                con.close();
+            }
         }catch (SQLException e){
             System.out.println("Error: Clase PacienteDAOImpl, metodo obtain");
-        } */
-
-        return null;
+            e.printStackTrace();
+        }
+        return pacienteList;
     }
 }

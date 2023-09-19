@@ -7,8 +7,10 @@ package Utils.DBUtils;
 import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 
 public  class  DBConnector  {
@@ -16,9 +18,11 @@ public  class  DBConnector  {
     private static final String user = "root";
     private static final String pass = "123";
     private java.sql.Statement s;
-    private ResultSet resultado;
+    private ResultSet result = null;
     private Connection connection = null;
     private static DBConnector instance;
+    private /*static*/ Statement query = null;
+    private /*static*/ PreparedStatement p_query = null;
     
     
 
@@ -49,7 +53,7 @@ public  class  DBConnector  {
         try {
             connection.close();
             connection = null;
-        } catch (Exception e) {
+        }catch (Exception e) {
             System.out.println("Problema para cerrar la Conexión a la base de datos ");
         }
     }
@@ -65,5 +69,26 @@ public  class  DBConnector  {
         return instance;
         }
       
+     public void setResult(ResultSet result) {
+        this.result= result;
+    }
+     public ResultSet getResult() {
+        return result;
+    } 
      
+     public  Statement getQuery() {
+        return query;
+    }
+
+    public  void setQuery(Statement query) {
+        this.query = query;
+    }
+    
+    public  PreparedStatement getP_query() {
+        return p_query;
+    }
+
+    public  void setP_query(PreparedStatement p_query) {
+        this.p_query = p_query;
+    }
 }

@@ -8,6 +8,8 @@ public class Profesional {
 
      private String nombre;
 
+     private String apellido;
+
      private String telefono;
 
      private String matricula;
@@ -65,5 +67,14 @@ public class Profesional {
 
     public void setIngresos(List<Ingreso> ingresos) {
         this.ingresos = ingresos;
+    }
+
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 }

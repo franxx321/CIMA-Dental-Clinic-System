@@ -1,5 +1,7 @@
 package Objetos;
 
+import java.util.List;
+
 public class ObraSocial {
     private String nombre;
 
@@ -8,6 +10,8 @@ public class ObraSocial {
     private String mail;
 
     private String nombreRepresentante;
+
+    private List<Cobertura> coberturas;
 
     public String getNombre() {
         return nombre;
@@ -41,4 +45,11 @@ public class ObraSocial {
         this.nombreRepresentante = nombreRepresentante;
     }
 
+    public List<Cobertura> getCoberturas() {
+        return coberturas;
+    }
+
+    public void setCoberturas(List<Cobertura> coberturas) {
+        this.coberturas = coberturas;
+    }
 }

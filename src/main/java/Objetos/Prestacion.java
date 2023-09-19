@@ -9,7 +9,9 @@ public class Prestacion {
 
     private String descripcion;
 
-    private List<ObraSocial> obrasSociales;
+    private boolean bien;
+
+    private List<Cobertura> coberturas;
 
 
     public String getNombre() {
@@ -28,11 +30,19 @@ public class Prestacion {
         this.descripcion = descripcion;
     }
 
-    public List<ObraSocial> getObrasSociales() {
-        return obrasSociales;
+    public List<Cobertura> getCoberturas() {
+        return coberturas;
     }
 
-    public void setObrasSociales(List<ObraSocial> obrasSociales) {
-        this.obrasSociales = obrasSociales;
+    public void setCoberturas(List<Cobertura> coberturas) {
+        this.coberturas = coberturas;
+    }
+
+    public boolean isBien() {
+        return bien;
+    }
+
+    public void setBien(boolean bien) {
+        this.bien = bien;
     }
 }

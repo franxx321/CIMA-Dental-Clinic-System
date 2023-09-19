@@ -1,12 +1,20 @@
 package Objetos;
 
+import java.sql.Date;
+
 public class Paciente {
-    //TODO posiblemente agregar mas datos como fecha nac, sexo, etc
+
     private String nombre;
 
     private String apellido;
 
     private long  dni;
+
+    private char sexo;
+
+    private Date fechaNacimiento;
+
+    private String direccion;
 
     private HistorialClinico historialClinico;
 
@@ -40,5 +48,29 @@ public class Paciente {
 
     public void setHistorialClinico(HistorialClinico historialClinico) {
         this.historialClinico = historialClinico;
+    }
+
+    public char getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(char sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 }

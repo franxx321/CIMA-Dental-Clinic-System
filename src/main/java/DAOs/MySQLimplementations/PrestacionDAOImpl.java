@@ -1,5 +1,6 @@
-package DAOs;
+package DAOs.MySQLimplementations;
 
+import DAOs.Interfaces.IPrestacionDAO;
 import Objetos.Prestacion;
 
 import java.util.List;

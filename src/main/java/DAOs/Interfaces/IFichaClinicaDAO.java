@@ -1,4 +1,4 @@
-package DAOs;
+package DAOs.Interfaces;
 
 import Objetos.FichaClinica;
 import java.util.List;

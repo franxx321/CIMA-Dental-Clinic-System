@@ -1,7 +1,8 @@
-package DAOs;
+package DAOs.MySQLimplementations;
 
-import Objetos.FichaClinica;
-import Utilities.DBConnector;
+import DAOs.Interfaces.IObraSocialDAO;
+import Objetos.ObraSocial;
+import Utils.DBUtils.DBConnector;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,14 +11,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
+public class ObraSocialDAOImpl implements IObraSocialDAO {
     DBConnector DBConnection = new DBConnector();
     @Override
-    public boolean register(FichaClinica fichaClinica) {
+    public boolean register(ObraSocial obraSocial) {
         boolean register = false;
         Connection con = null;
         Statement stm = null;
-        String sql = "INSERT INTO FichaClinica values (NULL, "+", "+fichaClinica.getDescripcion()+")";
+        String sql = "INSERT INTO ObraSocial values (NULL, "+obraSocial.getNombre()+", "+", "+obraSocial.getTelefono()+","+obraSocial.getNombreRepresentante()+")";
         try{
             con = DBConnection.conexion;
             stm = con.createStatement();
@@ -26,38 +27,37 @@ public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
             stm.close();
             con.close();
         } catch (SQLException e){
-            System.out.println("Error: Clase FiclaClinicaDAOImpl, metodo register");
+            System.out.println("Error: Clase ObraSocialDAOImpl, metodo register");
         }
         return register;
     }
 
-    // Review tables
     @Override
-    public List<FichaClinica> obtain(FichaClinica fichaClinica) {
+    public List<ObraSocial> obtain(ObraSocial obraSocial) {
         Connection con = null;
         Statement stm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM FichaClinica ORDER BY id";
-        List<FichaClinica> fichaClinicaList = new ArrayList<>();
+        String sql = "SELECT * FROM ObraSocial ORDER BY id";
+        List<ObraSocial> obraSocialList = new ArrayList<>();
         try{
             con = DBConnection.conexion;
             stm = con.createStatement();
             rs = stm.executeQuery(sql);
             while(rs.next()){
-                FichaClinica f = new FichaClinica();
-                //
-                f.setDescripcion(rs.getString(3));
-                //
-                fichaClinicaList.add(f);
+                ObraSocial o = new ObraSocial();
+                o.setNombre(rs.getString(2));
+                o.setTelefono(rs.getString(3));
+                o.setNombreRepresentante(rs.getString(4));
+                obraSocialList.add(o);
                 stm.close();
                 con.close();
                 rs.close();
             }
         } catch (SQLException e){
-            System.out.println("Error: Clase FichaClinicaDAOImpl, metodo obtain");
+            System.out.println("Error: Clase ObraSocialImpl, metodo obtain");
             e.printStackTrace();
         }
-        return fichaClinicaList;
+        return null;
     }
 
     @Override

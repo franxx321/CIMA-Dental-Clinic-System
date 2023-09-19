@@ -1,7 +1,8 @@
-package DAOs;
+package DAOs.MySQLimplementations;
 
+import DAOs.Interfaces.IPacienteDAO;
 import Objetos.Paciente;
-import Utilities.DBConnector;
+import Utils.DBUtils.DBConnector;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

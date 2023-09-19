@@ -1,6 +1,8 @@
-package DAOs;
+package DAOs.MySQLimplementations;
 
-public class ServicioDAOImpl implements IServicioDAO{
+import DAOs.Interfaces.IServicioDAO;
+
+public class ServicioDAOImpl implements IServicioDAO {
     @Override
     public boolean register() {
         return false;

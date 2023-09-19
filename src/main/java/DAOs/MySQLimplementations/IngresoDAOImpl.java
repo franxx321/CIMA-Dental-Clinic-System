@@ -1,17 +1,19 @@
-package DAOs;
+package DAOs.MySQLimplementations;
 
-import Objetos.Gasto;
+import DAOs.Interfaces.IIngresoDAO;
+import Objetos.Ingreso;
 
 import java.util.List;
 
-public class GastoDAOImpl implements IGastoDAO{
+public class IngresoDAOImpl implements IIngresoDAO {
+
     @Override
     public boolean register() {
         return false;
     }
 
     @Override
-    public List<Gasto> obtain() {
+    public List<Ingreso> obtain() {
         return null;
     }
 

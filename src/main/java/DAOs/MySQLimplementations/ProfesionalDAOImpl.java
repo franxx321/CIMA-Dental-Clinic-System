@@ -1,10 +1,11 @@
-package DAOs;
+package DAOs.MySQLimplementations;
 
+import DAOs.Interfaces.IProfesionalDAO;
 import Objetos.Profesional;
 
 import java.util.List;
 
-public class ProfesionalDAOImpl implements IProfesionalDAO{
+public class ProfesionalDAOImpl implements IProfesionalDAO {
     @Override
     public boolean register() {
         return false;

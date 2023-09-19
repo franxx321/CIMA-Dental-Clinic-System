@@ -1,17 +1,18 @@
-package DAOs;
+package DAOs.MySQLimplementations;
 
-import Objetos.Turno;
+import DAOs.Interfaces.IHistorialClinicoDAO;
+import Objetos.HistorialClinico;
 
 import java.util.List;
 
-public class TurnosDAOImpl implements ITurnosDAO{
+public class HistorialClinicoDAOImpl implements IHistorialClinicoDAO {
     @Override
     public boolean register() {
         return false;
     }
 
     @Override
-    public List<Turno> obtain() {
+    public List<HistorialClinico> obtain() {
         return null;
     }
 
@@ -24,4 +25,5 @@ public class TurnosDAOImpl implements ITurnosDAO{
     public boolean delete() {
         return false;
     }
+
 }

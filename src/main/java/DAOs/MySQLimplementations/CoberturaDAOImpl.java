@@ -1,10 +1,11 @@
-package DAOs;
+package DAOs.MySQLimplementations;
 
+import DAOs.Interfaces.ICoberturaDAO;
 import Objetos.Cobertura;
 
 import java.util.List;
 
-public class CoberturaDAOImpl implements ICoberturaDAO{
+public class CoberturaDAOImpl implements ICoberturaDAO {
     @Override
     public boolean register() {
         return false;

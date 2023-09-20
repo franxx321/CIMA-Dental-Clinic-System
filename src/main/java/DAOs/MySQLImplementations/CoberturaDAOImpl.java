@@ -1,18 +1,18 @@
-package DAOs.MySQLimplementations;
+package DAOs.MySQLImplementations;
 
-import DAOs.Interfaces.IPrestacionDAO;
-import Objetos.Prestacion;
+import DAOs.Interfaces.ICoberturaDAO;
+import Objetos.Cobertura;
 
 import java.util.List;
 
-public class PrestacionDAOImpl implements IPrestacionDAO {
+public class CoberturaDAOImpl implements ICoberturaDAO {
     @Override
     public boolean register() {
         return false;
     }
 
     @Override
-    public List<Prestacion> obtain() {
+    public List<Cobertura> obtain() {
         return null;
     }
 
@@ -25,4 +25,5 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
     public boolean modify() {
         return false;
     }
+
 }

@@ -3,6 +3,7 @@ package Objetos;
 import java.sql.Date;
 
 public class Paciente {
+    private int id;
 
     private String nombre;
 
@@ -73,4 +74,13 @@ public class Paciente {
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 }

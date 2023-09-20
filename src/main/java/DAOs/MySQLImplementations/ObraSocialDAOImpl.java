@@ -1,4 +1,4 @@
-package DAOs.MySQLimplementations;
+package DAOs.MySQLImplementations;
 
 import DAOs.Interfaces.IObraSocialDAO;
 import Objetos.ObraSocial;

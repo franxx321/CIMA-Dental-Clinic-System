@@ -5,8 +5,8 @@ import Objetos.Profesional;
 import java.util.List;
 
 public interface IProfesionalDAO {
-    public boolean register();
-    public List<Profesional> obtain();
-    public boolean delete();
-    public boolean modify();
+    public boolean register(Profesional profesional);
+    public List<Profesional> obtain(Profesional profesional);
+    public boolean delete(Profesional profesional);
+    public boolean modify(Profesional profesional, Profesional aux);
 }

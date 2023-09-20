@@ -23,7 +23,7 @@ public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
             pstm = con.prepareStatement(sql);
             //pstm.setInt(1, fichaClinica.getId());
             pstm.setDate(2, fichaClinica.getFecha());
-            pstm.setString(4, fichaClinica.getDescripcion());
+            pstm.setString(3, fichaClinica.getDescripcion());
             pstm.execute(sql);
             register = true;
             pstm.close();

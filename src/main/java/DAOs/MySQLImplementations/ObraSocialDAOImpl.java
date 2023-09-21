@@ -1,13 +1,11 @@
 package DAOs.MySQLImplementations;
 
 import DAOs.Interfaces.IObraSocialDAO;
+import Objetos.FichaClinica;
 import Objetos.ObraSocial;
 import Utils.DBUtils.DBConnector;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,59 +15,98 @@ public class ObraSocialDAOImpl implements IObraSocialDAO {
     @Override
     public boolean register(ObraSocial obraSocial) {
         boolean register = false;
-        
-        Statement stm = null;
-        String sql = "INSERT INTO ObraSocial values (NULL, "+obraSocial.getNombre()+", "+", "+obraSocial.getTelefono()+","+obraSocial.getNombreRepresentante()+")";
+        PreparedStatement pstm = null;
+        String sql = "INSERT INTO ObraSocial VALUES (?,?,?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
-            stm = con.createStatement();
-            stm.execute(sql);
+            pstm = con.prepareStatement(sql);
+            //pstm.setInt(1, obraSocial.getId());
+            pstm.setString(2, obraSocial.getNombre());
+            //pstm.setString(3, obraSocial.getMail());
+            pstm.setString(4, obraSocial.getTelefono());
+            pstm.setString(5, obraSocial.getNombreRepresentante());
+            pstm.execute(sql);
             register = true;
-            stm.close();
+            pstm.close();
             con.close();
         } catch (SQLException e){
-            System.out.println("Error: Clase ObraSocialDAOImpl, metodo register");
+            System.out.println("Error: Clase ObraSocialDAOImpl, metodo register "+e.getMessage());
         }
         return register;
     }
 
     @Override
     public List<ObraSocial> obtain(ObraSocial obraSocial) {
-        
-        Statement stm = null;
+        PreparedStatement pstm = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM ObraSocial ORDER BY id";
-        List<ObraSocial> obraSocialList = new ArrayList<>();
+        List<ObraSocial> obraSocialList = new ArrayList<ObraSocial>();
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
-            stm = con.createStatement();
-            rs = stm.executeQuery(sql);
+            pstm = con.prepareStatement(sql);
+            rs = pstm.executeQuery(sql);
             while(rs.next()){
-                ObraSocial o = new ObraSocial();
-                o.setNombre(rs.getString(2));
-                o.setTelefono(rs.getString(3));
-                o.setNombreRepresentante(rs.getString(4));
-                obraSocialList.add(o);
-                stm.close();
-                con.close();
-                rs.close();
+                ObraSocial os = new ObraSocial();
+                //os.setId(rs.getInt(1));
+                os.setNombre(rs.getString(2));
+                //os.setDireccion(rs.getString(3));
+                os.setTelefono(rs.getString(4));
+                os.setNombreRepresentante(rs.getString(5));
+                obraSocialList.add(os);
             }
-        } catch (SQLException e){
-            System.out.println("Error: Clase ObraSocialImpl, metodo obtain");
+            pstm.close();
+            rs.close();
+            con.close();
+        }catch (SQLException e){
+            System.out.println("Error: Clase ObraSocialDAOImpl, metodo obtain");
             e.printStackTrace();
         }
-        return null;
+        return obraSocialList;
     }
 
     @Override
-    public boolean delete() {
-        return false;
+    public boolean delete(ObraSocial obraSocial) {
+        boolean delete = false;
+        PreparedStatement pstm = null;
+        String sql = "DELETE FROM ObraSocial WHERE id = ?";
+        try{
+            DBConnection = DBConnector.getInstance();
+            con = DBConnection.getConnection();
+            pstm = con.prepareStatement(sql);
+            //pstm.setInt(1, os.getId());
+            pstm.execute(sql);
+            delete = true;
+            pstm.close();
+            con.close();
+        } catch (SQLException e){
+            System.out.println("Error: Clase ObraSocialDAOImpl, metodo delete" +e.getMessage());
+        }
+        return delete;
     }
 
     @Override
-    public boolean modify() {
-        return false;
+    public boolean modify(ObraSocial obraSocial, ObraSocial aux) {
+        boolean modify = false;
+        PreparedStatement pstm = null;
+        String sql = "UPDATE ObraSocial SET id = ?, nombre = ?, direccion = ?, telefono = ?, nombrerep = ? WHERE id = ?";
+        try{
+            DBConnection = DBConnector.getInstance();
+            con = DBConnection.getConnection();
+            pstm = con.prepareStatement(sql);
+            //pstm.setInt(1, aux.getId());
+            //pstm.setString(2, aux.getDireccion());
+            pstm.setString(3, aux.getTelefono());
+            pstm.setString(4, aux.getNombreRepresentante());
+            //pstm.setInt(5, obraSocial.getId());
+            pstm.execute(sql);
+            modify = true;
+            pstm.close();
+            con.close();
+        } catch (SQLException e){
+            System.out.println("Error: Clase ObraSocialDAOImpl, metodo modify. " +e.getMessage());
+        }
+        return modify;
     }
 }

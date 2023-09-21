@@ -2,28 +2,112 @@ package DAOs.MySQLImplementations;
 
 import DAOs.Interfaces.ICoberturaDAO;
 import Objetos.Cobertura;
+import Objetos.FichaClinica;
+import Utils.DBUtils.DBConnector;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CoberturaDAOImpl implements ICoberturaDAO {
+    DBConnector DBConnection ;
+    Connection con = null;
     @Override
-    public boolean register() {
-        return false;
+    public boolean register(Cobertura cobertura) {
+        boolean register = false;
+        PreparedStatement pstm = null;
+        String sql = "INSERT INTO Cobertura VALUES (?,?,?,?)";
+        try{
+            DBConnection = DBConnector.getInstance();
+            con = DBConnection.getConnection();
+            pstm = con.prepareStatement(sql);
+            //pstm.setInt(1, cobertura.getId_ObraSocial());
+            //pstm.setInt(2, cobertura.getId_Prestaciones());
+            pstm.setFloat(3, cobertura.getPorcentaje());
+            pstm.setFloat(4, cobertura.getTope());
+            pstm.execute(sql);
+            register = true;
+            pstm.close();
+            con.close();
+        } catch (SQLException e){
+            System.out.println("Error: Clase CoberturaDAOImpl, metodo register "+e.getMessage());
+        }
+        return register;
     }
 
     @Override
-    public List<Cobertura> obtain() {
-        return null;
+    public List<Cobertura> obtain(Cobertura cobertura) {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String sql = "SELECT * FROM Cobertura ORDER BY id";
+        List<Cobertura> coberturaList = new ArrayList<Cobertura>();
+        try{
+            DBConnection = DBConnector.getInstance();
+            con = DBConnection.getConnection();
+            pstm = con.prepareStatement(sql);
+            rs = pstm.executeQuery(sql);
+            while(rs.next()){
+                Cobertura c = new Cobertura();
+                //c.setId_ObraSocial(rs.getInt(1));
+                //c.setId_Prestaciones(rs.getInt(2));
+                c.setPorcentaje(rs.getFloat(3));
+                c.setTope(rs.getFloat(4));
+                coberturaList.add(c);
+            }
+            pstm.close();
+            rs.close();
+            con.close();
+        }catch (SQLException e){
+            System.out.println("Error: Clase CoberturaDAOImpl, metodo obtain");
+            e.printStackTrace();
+        }
+        return coberturaList;
     }
 
     @Override
-    public boolean delete() {
-        return false;
+    public boolean delete(Cobertura cobertura) {
+        boolean delete = false;
+        PreparedStatement pstm = null;
+        String sql = "DELETE FROM Cobertura WHERE id_obrasocial = ? AND id_prestaciones = ?";
+        try{
+            DBConnection = DBConnector.getInstance();
+            con = DBConnection.getConnection();
+            pstm = con.prepareStatement(sql);
+            //pstm.setInt(1, cobertura.getId_ObraSocial());
+            //pstm.setInt(2, cobertura.getId_Prestaciones());
+            pstm.execute(sql);
+            delete = true;
+            pstm.close();
+            con.close();
+        } catch (SQLException e){
+            System.out.println("Error: Clase CoberturaDAOImpl, metodo delete. " +e.getMessage());
+        }
+        return delete;
     }
 
     @Override
-    public boolean modify() {
-        return false;
+    public boolean modify(Cobertura cobertura, Cobertura aux) {
+        boolean modify = false;
+        PreparedStatement pstm = null;
+        String sql = "UPDATE Cobertura SET id_paciente = ?, id_prestaciones = ?, porcentaje = ?, tope = ? WHERE id_paciente = ?";
+        try{
+            DBConnection = DBConnector.getInstance();
+            con = DBConnection.getConnection();
+            pstm = con.prepareStatement(sql);
+            //pstm.setInt(1, aux.getId_Paciente());
+            //pstm.setInt(2, aux.getId_Prestaciones());
+            pstm.setFloat(3, aux.getPorcentaje());
+            pstm.setFloat(4, aux.getTope());
+            pstm.execute(sql);
+            modify = true;
+            pstm.close();
+            con.close();
+        } catch (SQLException e){
+            System.out.println("Error: Clase FichaClinicaDAOImpl, metodo modify. " +e.getMessage());
+        }
+        return modify;
     }
-
 }

@@ -86,7 +86,7 @@ public class PacienteDAOImpl implements IPacienteDAO {
     public List<Paciente> obtain(Paciente paciente) {
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM paciente ORDER BY id";
+        String sql = "SELECT * FROM Paciente ORDER BY id";
         List<Paciente> pacienteList = new ArrayList<Paciente>();
         try{
             DBConnection = DBConnector.getInstance();
@@ -101,10 +101,10 @@ public class PacienteDAOImpl implements IPacienteDAO {
                 p.setDireccion(rs.getString(5));
                 p.setSexo(rs.getString(6).charAt(0));
                 pacienteList.add(p);
-                pstm.close();
-                rs.close();
-                con.close();
             }
+            pstm.close();
+            rs.close();
+            con.close();
         }catch (SQLException e){
             System.out.println("Error: Clase PacienteDAOImpl, metodo obtain");
             e.printStackTrace();

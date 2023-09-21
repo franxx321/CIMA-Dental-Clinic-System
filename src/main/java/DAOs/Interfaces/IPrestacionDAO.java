@@ -5,8 +5,8 @@ import Objetos.Prestacion;
 import java.util.List;
 
 public interface IPrestacionDAO {
-    public boolean register();
-    public List<Prestacion> obtain();
-    public boolean delete();
-    public boolean modify();
+    public boolean register(Prestacion prestacion);
+    public List<Prestacion> obtain(Prestacion prestacion);
+    public boolean delete(Prestacion prestacion);
+    public boolean modify(Prestacion prestacion, Prestacion aux);
 }

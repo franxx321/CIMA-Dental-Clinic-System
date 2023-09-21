@@ -43,7 +43,7 @@ public class ProfesionalDAOImpl implements IProfesionalDAO {
     public List<Profesional> obtain(Profesional profesional) {
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM paciente ORDER BY id";
+        String sql = "SELECT * FROM Profesional ORDER BY id";
         List<Profesional> profesionalList = new ArrayList<Profesional>();
         try{
             DBConnection = DBConnector.getInstance();
@@ -58,10 +58,10 @@ public class ProfesionalDAOImpl implements IProfesionalDAO {
                 p.setTelefono(rs.getString(4));
                 p.setMatricula(rs.getString(5));
                 profesionalList.add(p);
-                pstm.close();
-                rs.close();
-                con.close();
             }
+            pstm.close();
+            rs.close();
+            con.close();
         }catch (SQLException e){
             System.out.println("Error: Clase ProfesionalDAOImpl, metodo obtain");
             e.printStackTrace();

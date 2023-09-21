@@ -16,7 +16,7 @@ public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
     public boolean register(FichaClinica fichaClinica) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO FichaClinicas VALUES (?,?,?)";
+        String sql = "INSERT INTO FichaClinica VALUES (?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -29,12 +29,11 @@ public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
             pstm.close();
             con.close();
         } catch (SQLException e){
-            System.out.println("Error: Clase FichaClinicaDAOImpl, metodo register, "+e.getMessage());
+            System.out.println("Error: Clase FichaClinicaDAOImpl, metodo register "+e.getMessage());
         }
         return register;
     }
 
-    // Review tables
     @Override
     public List<FichaClinica> obtain(FichaClinica fichaClinica) {
         PreparedStatement pstm = null;
@@ -52,10 +51,10 @@ public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
                 fc.setFecha(rs.getDate(3));
                 fc.setDescripcion(rs.getString(4));
                 fichaClinicaList.add(fc);
-                pstm.close();
-                rs.close();
-                con.close();
             }
+            pstm.close();
+            rs.close();
+            con.close();
         }catch (SQLException e){
             System.out.println("Error: Clase FichaClinicaDAOImpl, metodo obtain");
             e.printStackTrace();
@@ -95,6 +94,7 @@ public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
             //pstm.setInt(1, aux.getId());
             pstm.setDate(2, aux.getFecha());
             pstm.setString(3, aux.getDescripcion());
+            //pstm.setInt(4, fichaClinica.getId());
             pstm.execute(sql);
             modify = true;
             pstm.close();

@@ -24,7 +24,7 @@ public class ProfesionalDAOImpl implements IProfesionalDAO {
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            //pstm.setInt(1, profesional.getId());
+            pstm.setInt(1, profesional.getId());
             pstm.setString(2, profesional.getNombre());
             pstm.setString(3, profesional.getApellido());
             pstm.setString(4, profesional.getTelefono());
@@ -52,7 +52,7 @@ public class ProfesionalDAOImpl implements IProfesionalDAO {
             rs = pstm.executeQuery(sql);
             while(rs.next()){
                 Profesional p = new Profesional();
-                //p.setId(rs.getInt(1));
+                p.setId(rs.getInt(1));
                 p.setNombre(rs.getString(2));
                 p.setApellido(rs.getString(3));
                 p.setTelefono(rs.getString(4));
@@ -78,12 +78,12 @@ public class ProfesionalDAOImpl implements IProfesionalDAO {
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            //pstm.setInt(1, profesional.getId());
+            pstm.setInt(1, profesional.getId());
             pstm.setString(2, profesional.getNombre());
             pstm.setString(3, profesional.getApellido());
             pstm.setString(4, profesional.getTelefono());
             pstm.setString(5, profesional.getMatricula());
-            //pstm.setString(6, aux.getId());
+            pstm.setInt(6, profesional.getId());
             pstm.execute(sql);
             pstm.close();
             con.close();
@@ -102,7 +102,7 @@ public class ProfesionalDAOImpl implements IProfesionalDAO {
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            //pstm.setInt(1, profesional.getId());
+            pstm.setInt(1, profesional.getId());
             pstm.execute(sql);
             delete = true;
             pstm.close();

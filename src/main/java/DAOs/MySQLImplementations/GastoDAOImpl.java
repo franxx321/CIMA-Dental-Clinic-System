@@ -24,11 +24,11 @@ public class GastoDAOImpl implements IGastoDAO {
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            //pstm.setInt(1, gasto.getId());
+            pstm.setInt(1, gasto.getId());
             pstm.setFloat(2, gasto.getMonto());
             pstm.setString(3, gasto.getDescripcion());
             pstm.setDate(4, gasto.getFecha());
-            //pstm.setInt(5, gasto.getId_Profesional());
+            pstm.setInt(5, gasto.getIdProfesional());
             pstm.execute(sql);
             register = true;
             pstm.close();
@@ -44,7 +44,7 @@ public class GastoDAOImpl implements IGastoDAO {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM Gasto ORDER BY id";
-        List<Gasto> gastoList = new ArrayList<Gasto>();
+        List<Gasto> gastoList = new ArrayList<>();
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -52,10 +52,11 @@ public class GastoDAOImpl implements IGastoDAO {
             rs = pstm.executeQuery(sql);
             while(rs.next()){
                 Gasto g = new Gasto();
-                //g.setId(rs.getInt(1));
+                g.setId(rs.getInt(1));
                 g.setMonto(rs.getInt(2));
                 g.setDescripcion(rs.getString(3));
                 g.setFecha(rs.getDate(4));
+                g.setIdProfesional(rs.getInt(5));
                 gastoList.add(g);
             }
             pstm.close();
@@ -77,7 +78,7 @@ public class GastoDAOImpl implements IGastoDAO {
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            //pstm.setInt(1, gasto.getId());
+            pstm.setInt(1, gasto.getId());
             pstm.execute(sql);
             delete = true;
             pstm.close();
@@ -97,12 +98,12 @@ public class GastoDAOImpl implements IGastoDAO {
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            //pstm.setInt(1, aux.getId());
+            pstm.setInt(1, aux.getId());
             pstm.setFloat(2, aux.getMonto());
             pstm.setString(3, aux.getDescripcion());
             pstm.setDate(4, aux.getFecha());
-            //pstm.setInt(5, aux.getId_Profesional());
-            //pstm.setInt(6, gasto.getId());
+            pstm.setInt(5, aux.getIdProfesional());
+            pstm.setInt(6, gasto.getId());
             pstm.execute(sql);
             modify = true;
             pstm.close();

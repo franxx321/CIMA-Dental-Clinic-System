@@ -4,7 +4,15 @@ import java.sql.Date;
 
 public class Gasto {
 
+    private int id;
+
     private float monto;
+
+    private String descripcion;
+
+    private Date fecha;
+
+    private int idProfesional;
 
     public float getMonto() {
         return monto;
@@ -30,19 +38,19 @@ public class Gasto {
         this.fecha = fecha;
     }
 
-    public Profesional getProfesional() {
-        return profesional;
+    public int getIdProfesional() {
+        return idProfesional;
     }
 
-    public void setProfesional(Profesional profesional) {
-        this.profesional = profesional;
+    public void setIdProfesional(int idProfesional) {
+        this.idProfesional = idProfesional;
     }
 
-    private String descripcion;
+    public int getId() {
+        return id;
+    }
 
-    private Date fecha;
-
-    private Profesional profesional;
-
-
+    public void setId(int id) {
+        this.id = id;
+    }
 }

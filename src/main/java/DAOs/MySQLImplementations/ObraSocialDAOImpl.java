@@ -21,9 +21,9 @@ public class ObraSocialDAOImpl implements IObraSocialDAO {
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            //pstm.setInt(1, obraSocial.getId());
+            pstm.setInt(1, obraSocial.getId());
             pstm.setString(2, obraSocial.getNombre());
-            //pstm.setString(3, obraSocial.getMail());
+            pstm.setString(3, obraSocial.getMail());
             pstm.setString(4, obraSocial.getTelefono());
             pstm.setString(5, obraSocial.getNombreRepresentante());
             pstm.execute(sql);
@@ -49,9 +49,9 @@ public class ObraSocialDAOImpl implements IObraSocialDAO {
             rs = pstm.executeQuery(sql);
             while(rs.next()){
                 ObraSocial os = new ObraSocial();
-                //os.setId(rs.getInt(1));
+                os.setId(rs.getInt(1));
                 os.setNombre(rs.getString(2));
-                //os.setDireccion(rs.getString(3));
+                os.setMail(rs.getString(3));
                 os.setTelefono(rs.getString(4));
                 os.setNombreRepresentante(rs.getString(5));
                 obraSocialList.add(os);
@@ -75,7 +75,7 @@ public class ObraSocialDAOImpl implements IObraSocialDAO {
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            //pstm.setInt(1, os.getId());
+            pstm.setInt(1, obraSocial.getId());
             pstm.execute(sql);
             delete = true;
             pstm.close();
@@ -95,11 +95,11 @@ public class ObraSocialDAOImpl implements IObraSocialDAO {
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            //pstm.setInt(1, aux.getId());
-            //pstm.setString(2, aux.getDireccion());
+            pstm.setInt(1, aux.getId());
+            pstm.setString(2, aux.getMail());
             pstm.setString(3, aux.getTelefono());
             pstm.setString(4, aux.getNombreRepresentante());
-            //pstm.setInt(5, obraSocial.getId());
+            pstm.setInt(5, obraSocial.getId());
             pstm.execute(sql);
             modify = true;
             pstm.close();

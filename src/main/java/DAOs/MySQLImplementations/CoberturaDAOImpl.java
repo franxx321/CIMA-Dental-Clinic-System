@@ -2,7 +2,6 @@ package DAOs.MySQLImplementations;
 
 import DAOs.Interfaces.ICoberturaDAO;
 import Objetos.Cobertura;
-import Objetos.FichaClinica;
 import Utils.DBUtils.DBConnector;
 
 import java.sql.Connection;
@@ -24,8 +23,8 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            //pstm.setInt(1, cobertura.getId_ObraSocial());
-            //pstm.setInt(2, cobertura.getId_Prestaciones());
+            pstm.setInt(1, cobertura.getIdObraSocial());
+            pstm.setInt(2, cobertura.getIdPrestacion());
             pstm.setFloat(3, cobertura.getPorcentaje());
             pstm.setFloat(4, cobertura.getTope());
             pstm.execute(sql);
@@ -51,8 +50,8 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
             rs = pstm.executeQuery(sql);
             while(rs.next()){
                 Cobertura c = new Cobertura();
-                //c.setId_ObraSocial(rs.getInt(1));
-                //c.setId_Prestaciones(rs.getInt(2));
+                c.setIdObraSocial(rs.getInt(1));
+                c.setIdPrestacion(rs.getInt(2));
                 c.setPorcentaje(rs.getFloat(3));
                 c.setTope(rs.getFloat(4));
                 coberturaList.add(c);
@@ -76,8 +75,8 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            //pstm.setInt(1, cobertura.getId_ObraSocial());
-            //pstm.setInt(2, cobertura.getId_Prestaciones());
+            pstm.setInt(1, cobertura.getIdObraSocial());
+            pstm.setInt(2, cobertura.getIdPrestacion());
             pstm.execute(sql);
             delete = true;
             pstm.close();
@@ -97,8 +96,8 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            //pstm.setInt(1, aux.getId_Paciente());
-            //pstm.setInt(2, aux.getId_Prestaciones());
+            pstm.setInt(1, aux.getIdObraSocial());
+            pstm.setInt(2, aux.getIdPrestacion());
             pstm.setFloat(3, aux.getPorcentaje());
             pstm.setFloat(4, aux.getTope());
             pstm.execute(sql);

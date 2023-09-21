@@ -17,7 +17,7 @@ public class Paciente {
 
     private String direccion;
 
-    private HistorialClinico historialClinico;
+    private int idHistorialClinico;
 
     public String getNombre() {
         return nombre;
@@ -43,12 +43,12 @@ public class Paciente {
         this.dni = dni;
     }
 
-    public HistorialClinico getHistorialClinico() {
-        return historialClinico;
+    public int getIdHistorialClinico() {
+        return idHistorialClinico;
     }
 
-    public void setHistorialClinico(HistorialClinico historialClinico) {
-        this.historialClinico = historialClinico;
+    public void setIdHistorialClinico(int idHistorialClinico) {
+        this.idHistorialClinico = idHistorialClinico;
     }
 
     public char getSexo() {

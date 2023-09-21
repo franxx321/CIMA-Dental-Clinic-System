@@ -1,28 +1,26 @@
 package Objetos;
 
-import java.util.List;
-
 public class HistorialClinico {
 
-    private Paciente paciente;
+    private int id;
 
-    private List<FichaClinica> fichasClinicas;
+    private int idPaciente;
 
 
-    public Paciente getPaciente() {
-        return paciente;
+
+    public int getIdPaciente() {
+        return idPaciente;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
+    public void setIdPaciente(int idPaciente) {
+        this.idPaciente = idPaciente;
     }
 
-    public List<FichaClinica> getFichasClinicas() {
-        return fichasClinicas;
+    public int getId() {
+        return id;
     }
 
-    public void setFichasClinicas(List<FichaClinica> fichasClinicas) {
-        this.fichasClinicas = fichasClinicas;
+    public void setId(int id) {
+        this.id = id;
     }
-
 }

@@ -7,9 +7,10 @@ public class Cobertura {
 
     private String codigo;
 
-    private Prestacion prestacion;
+    private int idPrestacion;
 
-    private ObraSocial obraSocial;
+    private int idObraSocial;
+
 
     public float getPorcentaje() {
         return porcentaje;
@@ -35,19 +36,20 @@ public class Cobertura {
         this.codigo = codigo;
     }
 
-    public Prestacion getPrestacion() {
-        return prestacion;
+    public int getIdPrestacion() {
+        return idPrestacion;
     }
 
-    public void setPrestacion(Prestacion prestacion) {
-        this.prestacion = prestacion;
+    public void setIdPrestacion(int idPrestacion) {
+        this.idPrestacion = idPrestacion;
     }
 
-    public ObraSocial getObraSocial() {
-        return obraSocial;
+    public int getIdObraSocial() {
+        return idObraSocial;
     }
 
-    public void setObraSocial(ObraSocial obraSocial) {
-        this.obraSocial = obraSocial;
+    public void setIdObraSocial(int idObraSocial) {
+        this.idObraSocial = idObraSocial;
     }
+
 }

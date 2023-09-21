@@ -24,7 +24,7 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            //pstm.setInt(1, prestacion.getId());
+            pstm.setInt(1, prestacion.getId());
             pstm.setString(2, prestacion.getNombre());
             pstm.setBoolean(3, prestacion.isBien());
             pstm.setString(4, prestacion.getDescripcion());
@@ -51,7 +51,7 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
             rs = pstm.executeQuery(sql);
             while(rs.next()){
                 Prestacion p = new Prestacion();
-                //p.setId(rs.getInt(1));
+                p.setId(rs.getInt(1));
                 p.setNombre(rs.getString(2));
                 p.setBien(rs.getBoolean(3));
                 p.setDescripcion(rs.getString(4));
@@ -76,7 +76,7 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            //pstm.setInt(1, prestacion.getId());
+            pstm.setInt(1, prestacion.getId());
             pstm.execute(sql);
             delete = true;
             pstm.close();
@@ -96,11 +96,11 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
                 DBConnection = DBConnector.getInstance();
                 con = DBConnection.getConnection();
                 pstm = con.prepareStatement(sql);
-                //pstm.setInt(1, aux.getId());
+                pstm.setInt(1, aux.getId());
                 pstm.setString(2, aux.getNombre());
                 pstm.setBoolean(3, aux.isBien());
                 pstm.setString(4, aux.getDescripcion());
-                //pstm.setInt(5, prestacion.getId());
+                pstm.setInt(5, aux.getId());
                 pstm.execute(sql);
                 modify = true;
                 pstm.close();

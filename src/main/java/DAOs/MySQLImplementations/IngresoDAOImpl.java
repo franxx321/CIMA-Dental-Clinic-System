@@ -28,9 +28,9 @@ public class IngresoDAOImpl implements IIngresoDAO {
             pstm.setDate(2, ingreso.getFecha());
             pstm.setFloat(3, ingreso.getMonto());
             pstm.setString(4, ingreso.getDescripcion());
-            //pstm.setInt(5, ingreso.getId_Paciente());
-            //pstm.setInt(6, ingreso.getId_Profesional());
-            //pstm.setInt(7, ingreso.getId_ObraSocial());
+            pstm.setInt(5, ingreso.getIdPaciente());
+            pstm.setInt(6, ingreso.getIdProfesional());
+            pstm.setInt(7, ingreso.getIdObraSocial());
             pstm.execute(sql);
             register = true;
             pstm.close();
@@ -58,9 +58,9 @@ public class IngresoDAOImpl implements IIngresoDAO {
                 i.setFecha(rs.getDate(2));
                 i.setMonto(rs.getFloat(3));
                 i.setDescripcion(rs.getString(4));
-                //i.setId_Paciente(rs.getInt(5));
-                //i.setId_Profesional(rs.getInt(6));
-                //i.setId_ObraSocial(rs.getInt(7));
+                i.setIdPaciente(rs.getInt(5));
+                i.setIdProfesional(rs.getInt(6));
+                i.setIdObraSocial(rs.getInt(7));
                 ingresoList.add(i);
             }
             pstm.close();
@@ -82,7 +82,7 @@ public class IngresoDAOImpl implements IIngresoDAO {
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            //pstm.setInt(1, ingreso.getId());
+            pstm.setInt(1, ingreso.getId());
             pstm.execute(sql);
             delete = true;
             pstm.close();
@@ -106,10 +106,10 @@ public class IngresoDAOImpl implements IIngresoDAO {
             pstm.setDate(2, aux.getFecha());
             pstm.setFloat(3, aux.getMonto());
             pstm.setString(4, aux.getDescripcion());
-            //pstm.setInt(5, aux.getId_Paciente());
-            //pstm.setInt(6, aux.getId_Profesional());
-            //pstm.setInt(7, aux.getId_ObraSocial());
-            //pstm.setInt(8, ingreso.getId());
+            pstm.setInt(5, aux.getIdPaciente());
+            pstm.setInt(6, aux.getIdProfesional());
+            pstm.setInt(7, aux.getIdObraSocial());
+            pstm.setInt(8, ingreso.getId());
             pstm.execute(sql);
             modify = true;
             pstm.close();

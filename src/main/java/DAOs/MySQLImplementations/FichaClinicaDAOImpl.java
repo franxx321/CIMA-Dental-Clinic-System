@@ -2,7 +2,6 @@ package DAOs.MySQLImplementations;
 
 import DAOs.Interfaces.IFichaClinicaDAO;
 import Objetos.FichaClinica;
-import Objetos.Paciente;
 import Utils.DBUtils.DBConnector;
 
 import java.sql.*;
@@ -21,7 +20,7 @@ public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            //pstm.setInt(1, fichaClinica.getId());
+            pstm.setInt(1, fichaClinica.getId());
             pstm.setDate(2, fichaClinica.getFecha());
             pstm.setString(3, fichaClinica.getDescripcion());
             pstm.execute(sql);
@@ -39,7 +38,7 @@ public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM FichaClinica ORDER BY id";
-        List<FichaClinica> fichaClinicaList = new ArrayList<FichaClinica>();
+        List<FichaClinica> fichaClinicaList = new ArrayList<>();
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -71,7 +70,7 @@ public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            //pstm.setInt(1, fichaClinica.getId());
+            pstm.setInt(1, fichaClinica.getId());
             pstm.execute(sql);
             delete = true;
             pstm.close();
@@ -91,10 +90,10 @@ public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            //pstm.setInt(1, aux.getId());
+            pstm.setInt(1, aux.getId());
             pstm.setDate(2, aux.getFecha());
             pstm.setString(3, aux.getDescripcion());
-            //pstm.setInt(4, fichaClinica.getId());
+            pstm.setInt(4, fichaClinica.getId());
             pstm.execute(sql);
             modify = true;
             pstm.close();

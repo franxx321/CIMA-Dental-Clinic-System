@@ -24,7 +24,7 @@ public class HistorialClinicoDAOImpl implements IHistorialClinicoDAO {
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            //pstm.setInt(1, fichaClinica.getIdPaciente());
+            pstm.setInt(1, historialClinico.getIdPaciente());
             //pstm.setInt(2, historialClinico.getIdFichasClinicas());
             pstm.execute(sql);
             register = true;
@@ -49,7 +49,7 @@ public class HistorialClinicoDAOImpl implements IHistorialClinicoDAO {
             rs = pstm.executeQuery(sql);
             while(rs.next()){
                 HistorialClinico hs = new HistorialClinico();
-                //hs.setId_Paciente(rs.getInt(1));
+                hs.setIdPaciente(rs.getInt(1));
                 //hs.setId_FichasClinica(rs.getInt(2));
                 historialClinicoList.add(hs);
             }
@@ -72,7 +72,7 @@ public class HistorialClinicoDAOImpl implements IHistorialClinicoDAO {
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            //pstm.setInt(1, historialClinico.getId_Paciente());
+            pstm.setInt(1, historialClinico.getIdPaciente());
             //pstm.setInt(2, historialClinico.getId_FichasClinicas());
             pstm.execute(sql);
             delete = true;
@@ -93,7 +93,7 @@ public class HistorialClinicoDAOImpl implements IHistorialClinicoDAO {
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            //pstm.setInt(1, aux.getId_Paciente());
+            pstm.setInt(1, aux.getIdPaciente());
             //pstm.setInt(2, aux.getId_FichasClinica());
             pstm.execute(sql);
             modify = true;

@@ -1,9 +1,10 @@
 package Objetos;
 
 import java.sql.Date;
-import java.util.List;
 
 public class Turno {
+
+    private int id;
     private Date fecha;
 
     private float valor;
@@ -12,13 +13,9 @@ public class Turno {
 
     private boolean asistio;
 
-    private List<Ingreso> ingresos;
+    private int idPaciente;
 
-    private List<Prestacion> prestaciones;
-
-    private Paciente paciente;
-
-    private Profesional profesional;
+    private int idProfesional;
 
     public Date getFecha() {
         return fecha;
@@ -52,35 +49,27 @@ public class Turno {
         this.asistio = asistio;
     }
 
-    public List<Ingreso> getIngresos() {
-        return ingresos;
+    public int getIdPaciente() {
+        return idPaciente;
     }
 
-    public void setIngresos(List<Ingreso> ingresos) {
-        this.ingresos = ingresos;
+    public void setIdPaciente(int idPaciente) {
+        this.idPaciente = idPaciente;
     }
 
-    public List<Prestacion> getPrestaciones() {
-        return prestaciones;
+    public int getIdProfesional() {
+        return idProfesional;
     }
 
-    public void setPrestaciones(List<Prestacion> prestaciones) {
-        this.prestaciones = prestaciones;
+    public void setIdProfesional(int idProfesional) {
+        this.idProfesional = idProfesional;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
+    public int getId() {
+        return id;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
-
-    public Profesional getProfesional() {
-        return profesional;
-    }
-
-    public void setProfesional(Profesional profesional) {
-        this.profesional = profesional;
+    public void setId(int id) {
+        this.id = id;
     }
 }

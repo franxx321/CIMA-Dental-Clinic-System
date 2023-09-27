@@ -19,16 +19,15 @@ public class GastoDAOImpl implements IGastoDAO {
     public boolean register(Gasto gasto) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO Gasto VALUES (?x,?,?,?,?)";
+        String sql = "INSERT INTO Gasto (monto, descripcion, fecha, id_profesional) VALUES (?,?,?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            pstm.setInt(1, gasto.getId());
-            pstm.setFloat(2, gasto.getMonto());
-            pstm.setString(3, gasto.getDescripcion());
-            pstm.setDate(4, gasto.getFecha());
-            pstm.setInt(5, gasto.getIdProfesional());
+            pstm.setFloat(1, gasto.getMonto());
+            pstm.setString(2, gasto.getDescripcion());
+            pstm.setDate(3, gasto.getFecha());
+            pstm.setInt(4, gasto.getIdProfesional());
             pstm.execute(sql);
             register = true;
             pstm.close();

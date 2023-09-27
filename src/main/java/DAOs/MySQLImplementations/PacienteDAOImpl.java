@@ -16,16 +16,15 @@ public class PacienteDAOImpl implements IPacienteDAO {
     public boolean register(Paciente paciente) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO Paciente VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO Paciente(dni, fechanac, direccion, sexo) VALUES (?,?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            pstm.setInt(1, paciente.getId());
-            pstm.setLong(2, paciente.getDni());
-            pstm.setDate(3, paciente.getFechaNacimiento());
-            pstm.setString(4, paciente.getDireccion());
-            pstm.setString(5, String.valueOf(paciente.getSexo()));
+            pstm.setLong(1, paciente.getDni());
+            pstm.setDate(2, paciente.getFechaNacimiento());
+            pstm.setString(3, paciente.getDireccion());
+            pstm.setString(4, String.valueOf(paciente.getSexo()));
             pstm.execute(sql);
             register = true;
             pstm.close();

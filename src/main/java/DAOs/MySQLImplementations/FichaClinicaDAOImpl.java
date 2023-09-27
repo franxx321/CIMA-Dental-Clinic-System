@@ -15,14 +15,13 @@ public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
     public boolean register(FichaClinica fichaClinica) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO FichaClinica VALUES (?,?,?)";
+        String sql = "INSERT INTO FichaClinica(fecha, descripcion) VALUES (?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            pstm.setInt(1, fichaClinica.getId());
-            pstm.setDate(2, fichaClinica.getFecha());
-            pstm.setString(3, fichaClinica.getDescripcion());
+            pstm.setDate(1, fichaClinica.getFecha());
+            pstm.setString(2, fichaClinica.getDescripcion());
             pstm.execute(sql);
             register = true;
             pstm.close();

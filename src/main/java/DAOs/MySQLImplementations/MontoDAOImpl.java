@@ -1,7 +1,8 @@
 package DAOs.MySQLImplementations;
 
-import DAOs.Interfaces.ICoberturaDAO;
-import Objetos.Cobertura;
+import DAOs.Interfaces.IMontoDAO;
+import Objetos.FichaClinica;
+import Objetos.Monto;
 import Utils.DBUtils.DBConnector;
 
 import java.sql.Connection;
@@ -11,101 +12,98 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CoberturaDAOImpl implements ICoberturaDAO {
+public class MontoDAOImpl implements IMontoDAO {
     DBConnector DBConnection ;
     Connection con = null;
     @Override
-    public boolean register(Cobertura cobertura) {
+    public boolean register(Monto monto) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO Cobertura(id_obrasocial, id_prestaciones, procentaje, tope) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO Monto(precio, id_prestacion, id_profesional) VALUES (?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            pstm.setInt(1, cobertura.getIdObraSocial());
-            pstm.setInt(2, cobertura.getIdPrestacion());
-            pstm.setFloat(3, cobertura.getPorcentaje());
-            pstm.setFloat(4, cobertura.getTope());
+            pstm.setFloat(1, monto.getPrecio());
+            pstm.setInt(2, monto.getIdPrestacion());
+            pstm.setInt(3, monto.getIdProfesional());
             pstm.execute(sql);
             register = true;
             pstm.close();
             con.close();
         } catch (SQLException e){
-            System.out.println("Error: Clase CoberturaDAOImpl, metodo register "+e.getMessage());
+            System.out.println("Error: Clase MontoDAOImpl, metodo register "+e.getMessage());
         }
         return register;
     }
 
     @Override
-    public List<Cobertura> obtain(Cobertura cobertura) {
+    public List<Monto> obtain(Monto monto) {
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM Cobertura ORDER BY id";
-        List<Cobertura> coberturaList = new ArrayList<Cobertura>();
+        String sql = "SELECT * FROM Monto ORDER BY id";
+        List<Monto> montoList = new ArrayList<Monto>();
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             rs = pstm.executeQuery(sql);
             while(rs.next()){
-                Cobertura c = new Cobertura();
-                c.setIdObraSocial(rs.getInt(1));
-                c.setIdPrestacion(rs.getInt(2));
-                c.setPorcentaje(rs.getFloat(3));
-                c.setTope(rs.getFloat(4));
-                coberturaList.add(c);
+                Monto m = new Monto();
+                m.setPrecio(rs.getFloat(1));
+                m.setIdPrestacion(rs.getInt(2));
+                m.setIdProfesional(rs.getInt(3));
+                montoList.add(m);
             }
             pstm.close();
             rs.close();
             con.close();
         }catch (SQLException e){
-            System.out.println("Error: Clase CoberturaDAOImpl, metodo obtain");
+            System.out.println("Error: Clase MontoDAOImpl, metodo obtain");
             e.printStackTrace();
         }
-        return coberturaList;
+        return montoList;
     }
 
     @Override
-    public boolean delete(Cobertura cobertura) {
+    public boolean delete(Monto monto) {
         boolean delete = false;
         PreparedStatement pstm = null;
-        String sql = "DELETE FROM Cobertura WHERE id_obrasocial = ? AND id_prestaciones = ?";
+        String sql = "DELETE FROM Monto WHERE id_prestacion = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            pstm.setInt(1, cobertura.getIdObraSocial());
-            pstm.setInt(2, cobertura.getIdPrestacion());
+            pstm.setInt(1, monto.getIdPrestacion());
             pstm.execute(sql);
             delete = true;
             pstm.close();
             con.close();
         } catch (SQLException e){
-            System.out.println("Error: Clase CoberturaDAOImpl, metodo delete. " +e.getMessage());
+            System.out.println("Error: Clase MontoDAOImpl, metodo delete. " +e.getMessage());
         }
         return delete;
     }
 
     @Override
-    public boolean modify(Cobertura cobertura, Cobertura aux) {
+    public boolean modify(Monto monto, Monto aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE Cobertura SET id_paciente = ?, id_prestaciones = ?, porcentaje = ?, tope = ? WHERE id_paciente = ?";
+        String sql = "UPDATE Monto SET precio = ?, id_prestacion = ?, id_profesional = ? WHERE id_prestacion = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            pstm.setInt(1, aux.getIdObraSocial());
+            pstm.setFloat(1, aux.getPrecio());
             pstm.setInt(2, aux.getIdPrestacion());
-            pstm.setFloat(3, aux.getPorcentaje());
-            pstm.setFloat(4, aux.getTope());
+            pstm.setInt(3, aux.getIdProfesional());
+            pstm.setInt(4, monto.getIdPrestacion());
             pstm.execute(sql);
             modify = true;
             pstm.close();
             con.close();
         } catch (SQLException e){
-            System.out.println("Error: Clase FichaClinicaDAOImpl, metodo modify. " +e.getMessage());
+            System.out.println("Error: Clase MontoDAOImpl, metodo modify. " +e.getMessage());
         }
         return modify;
     }

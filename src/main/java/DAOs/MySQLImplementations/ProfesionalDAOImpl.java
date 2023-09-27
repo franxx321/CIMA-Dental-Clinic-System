@@ -19,16 +19,15 @@ public class ProfesionalDAOImpl implements IProfesionalDAO {
     public boolean register(Profesional profesional) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO Profesional VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO Profesional (nombre, apellido, telefono, matricula) VALUES (?,?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            pstm.setInt(1, profesional.getId());
-            pstm.setString(2, profesional.getNombre());
-            pstm.setString(3, profesional.getApellido());
-            pstm.setString(4, profesional.getTelefono());
-            pstm.setString(5, profesional.getMatricula());
+            pstm.setString(1, profesional.getNombre());
+            pstm.setString(2, profesional.getApellido());
+            pstm.setString(3, profesional.getTelefono());
+            pstm.setString(4, profesional.getMatricula());
             pstm.execute(sql);
             register = true;
             pstm.close();

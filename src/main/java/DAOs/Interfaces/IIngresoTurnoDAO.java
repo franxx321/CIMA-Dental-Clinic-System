@@ -8,7 +8,7 @@ public interface IIngresoTurnoDAO {
 
     public boolean register(IngresoTurno ingresoTurno);
 
-    public List<IngresoTurno> obtain ();
+    public List<IngresoTurno> obtain (IngresoTurno ingresoTurno);
 
     public boolean delete (IngresoTurno ingresoTurno);
 

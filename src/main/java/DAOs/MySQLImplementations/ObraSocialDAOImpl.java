@@ -16,16 +16,15 @@ public class ObraSocialDAOImpl implements IObraSocialDAO {
     public boolean register(ObraSocial obraSocial) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO ObraSocial VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO ObraSocial(nombre, direccion, telefono, nombrerep) VALUES (?,?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            pstm.setInt(1, obraSocial.getId());
-            pstm.setString(2, obraSocial.getNombre());
-            pstm.setString(3, obraSocial.getMail());
-            pstm.setString(4, obraSocial.getTelefono());
-            pstm.setString(5, obraSocial.getNombreRepresentante());
+            pstm.setString(1, obraSocial.getNombre());
+            pstm.setString(2, obraSocial.getMail());
+            pstm.setString(3, obraSocial.getTelefono());
+            pstm.setString(4, obraSocial.getNombreRepresentante());
             pstm.execute(sql);
             register = true;
             pstm.close();

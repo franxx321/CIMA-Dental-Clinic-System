@@ -19,15 +19,14 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
     public boolean register(Prestacion prestacion) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO Prestacion VALUES (?,?,?,?)";
+        String sql = "INSERT INTO Prestacion(nombre, bien, descripcion) VALUES (?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            pstm.setInt(1, prestacion.getId());
-            pstm.setString(2, prestacion.getNombre());
-            pstm.setBoolean(3, prestacion.isBien());
-            pstm.setString(4, prestacion.getDescripcion());
+            pstm.setString(1, prestacion.getNombre());
+            pstm.setBoolean(2, prestacion.isBien());
+            pstm.setString(3, prestacion.getDescripcion());
             pstm.execute(sql);
             register = true;
             pstm.close();

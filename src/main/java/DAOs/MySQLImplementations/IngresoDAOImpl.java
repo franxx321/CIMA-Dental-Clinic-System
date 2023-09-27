@@ -19,18 +19,17 @@ public class IngresoDAOImpl implements IIngresoDAO {
     public boolean register(Ingreso ingreso) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO Ingreso VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Ingreso(fecha, monto, descripcion, id_paciente, id_profesional, id_obrasocial) VALUES (?,?,?,?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            //pstm.setInt(1, ingreso.getId());
-            pstm.setDate(2, ingreso.getFecha());
-            pstm.setFloat(3, ingreso.getMonto());
-            pstm.setString(4, ingreso.getDescripcion());
-            pstm.setInt(5, ingreso.getIdPaciente());
-            pstm.setInt(6, ingreso.getIdProfesional());
-            pstm.setInt(7, ingreso.getIdObraSocial());
+            pstm.setDate(1, ingreso.getFecha());
+            pstm.setFloat(2, ingreso.getMonto());
+            pstm.setString(3, ingreso.getDescripcion());
+            pstm.setInt(4, ingreso.getIdPaciente());
+            pstm.setInt(5, ingreso.getIdProfesional());
+            pstm.setInt(6, ingreso.getIdObraSocial());
             pstm.execute(sql);
             register = true;
             pstm.close();

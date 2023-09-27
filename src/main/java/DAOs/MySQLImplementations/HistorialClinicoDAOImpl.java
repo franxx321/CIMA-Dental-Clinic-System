@@ -19,7 +19,7 @@ public class HistorialClinicoDAOImpl implements IHistorialClinicoDAO {
     public boolean register(HistorialClinico historialClinico) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO HistorialClinico VALUES (?,?)";
+        String sql = "INSERT INTO HistorialClinico(id_paciente, id_fichasclinicas) VALUES (?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();

@@ -1,6 +1,6 @@
 package Objetos;
 
-public class Precio {
+public class Monto {
     private int idPrestacion ;
 
     private int idProfesional;

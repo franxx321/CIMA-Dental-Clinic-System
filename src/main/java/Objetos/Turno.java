@@ -1,11 +1,14 @@
 package Objetos;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 public class Turno {
 
     private int id;
-    private Date fecha;
+    private Date horaInicio;
+
+    private Date horaFin;
 
     private float valor;
 
@@ -17,12 +20,20 @@ public class Turno {
 
     private int idProfesional;
 
-    public Date getFecha() {
-        return fecha;
+    public Date getHoraInicio() {
+        return horaInicio;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setHoraInicio(Date horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public Date getHoraFin() {
+        return horaFin;
+    }
+
+    public void setHoraFin(Date horaFin) {
+        this.horaFin = horaFin;
     }
 
     public float getValor() {

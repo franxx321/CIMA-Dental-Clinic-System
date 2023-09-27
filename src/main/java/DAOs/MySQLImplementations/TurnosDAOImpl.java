@@ -25,7 +25,7 @@ public class TurnosDAOImpl implements ITurnosDAO {
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             //pstm.setInt(1, turno.getId());
-            pstm.setDate(2, turno.getFecha());
+          //  pstm.setDate(2, turno.getFecha());
             pstm.setBoolean(3, turno.isAsistio());
             pstm.setInt(4, turno.getIdPaciente());
             pstm.setInt(5, turno.getIdProfesional());
@@ -55,7 +55,7 @@ public class TurnosDAOImpl implements ITurnosDAO {
             while(rs.next()){
                 Turno t = new Turno();
                 t.setId(rs.getInt(1));
-                t.setFecha(rs.getDate(2));
+                //t.setFecha(rs.getDate(2));
                 t.setAsistio(rs.getBoolean(3));
                 t.setIdPaciente(rs.getInt(4));
                 t.setIdProfesional(rs.getInt(5));
@@ -103,7 +103,7 @@ public class TurnosDAOImpl implements ITurnosDAO {
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, aux.getId());
-            pstm.setDate(2, aux.getFecha());
+            //pstm.setDate(2, aux.getFecha());
             pstm.setBoolean(3, aux.isAsistio());
             pstm.setInt(4, aux.getIdPaciente());
             pstm.setInt(5, aux.getIdProfesional());

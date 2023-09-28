@@ -5,10 +5,7 @@ import Objetos.FichaClinica;
 import Objetos.Turno;
 import Utils.DBUtils.DBConnector;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,13 +16,13 @@ public class TurnosDAOImpl implements ITurnosDAO {
     public boolean register(Turno turno) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO Turno VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Turno(horaInicio, horaFin,asistio,id_paciente,id_Profesional,valor,descuento) VALUES (?,?,?,?,?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            //pstm.setInt(1, turno.getId());
-          //  pstm.setDate(2, turno.getFecha());
+            pstm.setTimestamp(1, new Timestamp(turno.getHoraInicio().getTime()));
+            pstm.setTimestamp(2, new Timestamp(turno.getHoraFin().getTime()));
             pstm.setBoolean(3, turno.isAsistio());
             pstm.setInt(4, turno.getIdPaciente());
             pstm.setInt(5, turno.getIdProfesional());

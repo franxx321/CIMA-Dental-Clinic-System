@@ -10,7 +10,7 @@ public class FichaClinica {
 
     private String descripcion;
 
-    private int idHistorialClinico;
+    private int idPaciente;
 
     public Date getFecha() {
         return fecha;
@@ -36,11 +36,11 @@ public class FichaClinica {
         this.id = id;
     }
 
-    public int getIdHistorialClinico() {
-        return idHistorialClinico;
+    public int getIdPaciente() {
+        return idPaciente;
     }
 
-    public void setIdHistorialClinico(int idHistorialClinico) {
-        this.idHistorialClinico = idHistorialClinico;
+    public void setIdPaciente(int idPaciente) {
+        this.idPaciente = idPaciente;
     }
 }

@@ -27,39 +27,91 @@ public class Frame extends javax.swing.JFrame {
     private void initComponents() {
 
         menuSecundario = new javax.swing.JPanel();
+        menuSecundarioInit = new javax.swing.JPanel();
         menuPrincipal = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         panelPrincipal = new javax.swing.JPanel();
+        panelPrincipalInit = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         menuSecundario.setBackground(new java.awt.Color(78, 217, 255));
+        menuSecundario.setPreferredSize(new java.awt.Dimension(128, 64));
+        menuSecundario.setLayout(new java.awt.CardLayout());
 
-        javax.swing.GroupLayout menuSecundarioLayout = new javax.swing.GroupLayout(menuSecundario);
-        menuSecundario.setLayout(menuSecundarioLayout);
-        menuSecundarioLayout.setHorizontalGroup(
-            menuSecundarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        menuSecundarioInit.setBackground(new java.awt.Color(78, 217, 255));
+
+        javax.swing.GroupLayout menuSecundarioInitLayout = new javax.swing.GroupLayout(menuSecundarioInit);
+        menuSecundarioInit.setLayout(menuSecundarioInitLayout);
+        menuSecundarioInitLayout.setHorizontalGroup(
+            menuSecundarioInitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 907, Short.MAX_VALUE)
         );
-        menuSecundarioLayout.setVerticalGroup(
-            menuSecundarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        menuSecundarioInitLayout.setVerticalGroup(
+            menuSecundarioInitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 64, Short.MAX_VALUE)
         );
 
+        menuSecundario.add(menuSecundarioInit, "card2");
+
         menuPrincipal.setBackground(new java.awt.Color(48, 101, 172));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add 64x64.png"))); // NOI18N
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel1MousePressed(evt);
+            }
+        });
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/coin 64x64.png"))); // NOI18N
+        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel3MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout menuPrincipalLayout = new javax.swing.GroupLayout(menuPrincipal);
         menuPrincipal.setLayout(menuPrincipalLayout);
         menuPrincipalLayout.setHorizontalGroup(
             menuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 115, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPrincipalLayout.createSequentialGroup()
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addGroup(menuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
+                .addGap(24, 24, 24))
         );
         menuPrincipalLayout.setVerticalGroup(
             menuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(menuPrincipalLayout.createSequentialGroup()
+                .addGap(241, 241, 241)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelPrincipal.setBackground(new java.awt.Color(223, 246, 255));
         panelPrincipal.setLayout(new java.awt.CardLayout());
+
+        panelPrincipalInit.setBackground(new java.awt.Color(223, 246, 255));
+        panelPrincipalInit.setPreferredSize(new java.awt.Dimension(907, 652));
+
+        javax.swing.GroupLayout panelPrincipalInitLayout = new javax.swing.GroupLayout(panelPrincipalInit);
+        panelPrincipalInit.setLayout(panelPrincipalInitLayout);
+        panelPrincipalInitLayout.setHorizontalGroup(
+            panelPrincipalInitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 907, Short.MAX_VALUE)
+        );
+        panelPrincipalInitLayout.setVerticalGroup(
+            panelPrincipalInitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 661, Short.MAX_VALUE)
+        );
+
+        panelPrincipal.add(panelPrincipalInit, "card2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,15 +129,23 @@ public class Frame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(menuSecundario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 661, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(menuPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel1MousePressed
+
+    private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel3MousePressed
 
     /**
      * @param args the command line arguments
@@ -123,8 +183,12 @@ public class Frame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel menuPrincipal;
     private javax.swing.JPanel menuSecundario;
+    private javax.swing.JPanel menuSecundarioInit;
     private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JPanel panelPrincipalInit;
     // End of variables declaration//GEN-END:variables
 }

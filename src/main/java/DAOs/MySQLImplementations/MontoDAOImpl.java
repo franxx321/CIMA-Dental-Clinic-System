@@ -1,7 +1,6 @@
 package DAOs.MySQLImplementations;
 
 import DAOs.Interfaces.IMontoDAO;
-import Objetos.FichaClinica;
 import Objetos.Monto;
 import Utils.DBUtils.DBConnector;
 
@@ -69,12 +68,13 @@ public class MontoDAOImpl implements IMontoDAO {
     public boolean delete(Monto monto) {
         boolean delete = false;
         PreparedStatement pstm = null;
-        String sql = "DELETE FROM Monto WHERE id_prestacion = ?";
+        String sql = "DELETE FROM Monto WHERE id_prestacion = ? AND id_profesional = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, monto.getIdPrestacion());
+            pstm.setInt(2, monto.getIdProfesional());
             pstm.execute(sql);
             delete = true;
             pstm.close();
@@ -89,7 +89,7 @@ public class MontoDAOImpl implements IMontoDAO {
     public boolean modify(Monto monto, Monto aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE Monto SET precio = ?, id_prestacion = ?, id_profesional = ? WHERE id_prestacion = ?";
+        String sql = "UPDATE Monto SET precio = ?, id_prestacion = ?, id_profesional = ? WHERE id_prestacion = ? AND id_profesional = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -98,6 +98,7 @@ public class MontoDAOImpl implements IMontoDAO {
             pstm.setInt(2, aux.getIdPrestacion());
             pstm.setInt(3, aux.getIdProfesional());
             pstm.setInt(4, monto.getIdPrestacion());
+            pstm.setInt(5, monto.getIdProfesional());
             pstm.execute(sql);
             modify = true;
             pstm.close();

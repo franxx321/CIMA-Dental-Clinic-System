@@ -1,6 +1,7 @@
 package DAOs.MySQLImplementations;
 
-import DAOs.Interfaces.ITurnoPrestacionDAO;
+import DAOs.Interfaces.IPacienteObraSocialDAO;
+import Objetos.PacienteObraSocial;
 import Objetos.TurnoPrestacion;
 import Utils.DBUtils.DBConnector;
 
@@ -11,97 +12,97 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TurnoPrestacionDAOImpl implements ITurnoPrestacionDAO {
+public class PacienteObraSocialDAOImpl implements IPacienteObraSocialDAO {
     DBConnector DBConnection ;
     Connection con = null;
     @Override
-    public boolean register(TurnoPrestacion turnoPrestacion) {
+    public boolean register(PacienteObraSocial pacienteObraSocial) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO TurnoPrestacion(id_turno, id_prestacion) VALUES (?,?)";
+        String sql = "INSERT INTO PacienteObraSocial(idObraSocial, idPaciente) VALUES (?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            pstm.setInt(1, turnoPrestacion.getIdTurno());
-            pstm.setInt(2, turnoPrestacion.getIdPrestacion());
+            pstm.setInt(1, pacienteObraSocial.getIdObraSocial());
+            pstm.setInt(2, pacienteObraSocial.getIdPaciente());
             pstm.execute(sql);
             register = true;
             pstm.close();
             con.close();
         } catch (SQLException e){
-            System.out.println("Error: Clase TurnoPrestacionDAOImpl, metodo register "+e.getMessage());
+            System.out.println("Error: Clase PacienteObraSocialDAOImpl, metodo register "+e.getMessage());
         }
         return register;
     }
 
     @Override
-    public List<TurnoPrestacion> obtain(TurnoPrestacion turnoPrestacion) {
+    public List<PacienteObraSocial> obtain(PacienteObraSocial pacienteObraSocial) {
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM TurnoPrestacion ORDER BY id";
-        List<TurnoPrestacion> turnoPrestacionList = new ArrayList<TurnoPrestacion>();
+        String sql = "SELECT * FROM PacienteObraSocial ORDER BY id";
+        List<PacienteObraSocial> pacienteObraSocialList = new ArrayList<PacienteObraSocial>();
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             rs = pstm.executeQuery(sql);
             while(rs.next()){
-                TurnoPrestacion tp = new TurnoPrestacion();
-                tp.setIdTurno(rs.getInt(1));
-                tp.setIdPrestacion(rs.getInt(2));
-                turnoPrestacionList.add(tp);
+                PacienteObraSocial p = new PacienteObraSocial();
+                p.setIdObraSocial(rs.getInt(1));
+                p.setIdPaciente(rs.getInt(2));
+                pacienteObraSocialList.add(p);
             }
             pstm.close();
             rs.close();
             con.close();
         }catch (SQLException e){
-            System.out.println("Error: Clase TurnoPrestacionDAOImpl, metodo obtain");
+            System.out.println("Error: Clase PacienteObraSocialDAOImpl, metodo obtain");
             e.printStackTrace();
         }
-        return turnoPrestacionList;
+        return pacienteObraSocialList;
     }
 
     @Override
-    public boolean delete(TurnoPrestacion turnoPrestacion) {
+    public boolean delete(PacienteObraSocial pacienteObraSocial) {
         boolean delete = false;
         PreparedStatement pstm = null;
-        String sql = "DELETE FROM TurnoPrestacion WHERE id_turno = ? AND id_prestacion = ?";
+        String sql = "DELETE FROM PacienteObraSocial WHERE idObraSocial = ? AND idPaciente = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            pstm.setInt(1, turnoPrestacion.getIdTurno());
-            pstm.setInt(2, turnoPrestacion.getIdPrestacion());
+            pstm.setInt(1, pacienteObraSocial.getIdObraSocial());
+            pstm.setInt(2, pacienteObraSocial.getIdPaciente());
             pstm.execute(sql);
             delete = true;
             pstm.close();
             con.close();
         } catch (SQLException e){
-            System.out.println("Error: Clase TurnoPrestacionDAOImpl, metodo delete. " +e.getMessage());
+            System.out.println("Error: Clase PacienteObraSocialDAOImpl, metodo delete. " +e.getMessage());
         }
         return delete;
     }
 
     @Override
-    public boolean modify(TurnoPrestacion turnoPrestacion, TurnoPrestacion aux) {
+    public boolean modify(PacienteObraSocial pacienteObraSocial, PacienteObraSocial aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE TurnoPrestacion SET id_turno = ?, id_prestacion = ? WHERE id_turno = ? AND id_prestacion = ?";
+        String sql = "UPDATE PacienteObraSocial SET idObraSocial = ?, idPaciente = ? WHERE idObraSocial = ? AND idPaciente = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            pstm.setInt(1, aux.getIdTurno());
-            pstm.setInt(2, aux.getIdPrestacion());
-            pstm.setInt(3, turnoPrestacion.getIdTurno());
-            pstm.setInt(4, turnoPrestacion.getIdPrestacion());
+            pstm.setInt(1, aux.getIdObraSocial());
+            pstm.setInt(2, aux.getIdPaciente());
+            pstm.setInt(3, pacienteObraSocial.getIdObraSocial());
+            pstm.setInt(4, pacienteObraSocial.getIdPaciente());
             pstm.execute(sql);
             modify = true;
             pstm.close();
             con.close();
         } catch (SQLException e){
-            System.out.println("Error: Clase TurnoPrestacionDAOImpl, metodo modify. " +e.getMessage());
+            System.out.println("Error: Clase PacienteObraSocialDAOImpl, metodo modify. " +e.getMessage());
         }
         return modify;
     }

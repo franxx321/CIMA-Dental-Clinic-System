@@ -1,7 +1,6 @@
 package DAOs.MySQLImplementations;
 
 import DAOs.Interfaces.IPrestacionDAO;
-import Objetos.FichaClinica;
 import Objetos.Prestacion;
 import Utils.DBUtils.DBConnector;
 

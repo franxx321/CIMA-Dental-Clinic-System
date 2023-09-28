@@ -1,7 +1,6 @@
 package DAOs.MySQLImplementations;
 
 import DAOs.Interfaces.IObraSocialDAO;
-import Objetos.FichaClinica;
 import Objetos.ObraSocial;
 import Utils.DBUtils.DBConnector;
 

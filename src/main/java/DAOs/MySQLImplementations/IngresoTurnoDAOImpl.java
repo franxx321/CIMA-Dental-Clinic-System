@@ -67,12 +67,13 @@ public class IngresoTurnoDAOImpl implements IIngresoTurnoDAO {
     public boolean delete(IngresoTurno ingresoTurno) {
         boolean delete = false;
         PreparedStatement pstm = null;
-        String sql = "DELETE FROM IngresoTurno WHERE id_ingreso = ?";
+        String sql = "DELETE FROM IngresoTurno WHERE id_ingreso = ? AND id_turno = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, ingresoTurno.getIdIngreso());
+            pstm.setInt(2, ingresoTurno.getIdTurno());
             pstm.execute(sql);
             delete = true;
             pstm.close();
@@ -87,14 +88,15 @@ public class IngresoTurnoDAOImpl implements IIngresoTurnoDAO {
     public boolean modify(IngresoTurno ingresoTurno, IngresoTurno aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE IngresoTurno SET id_turno = ?, id_ingreso = ? WHERE id_turno = ?";
+        String sql = "UPDATE IngresoTurno SET id_turno = ?, id_ingreso = ? WHERE id_turno = ? AND id_ingreso = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, aux.getIdTurno());
             pstm.setInt(2, aux.getIdIngreso());
-            pstm.setInt(3, ingresoTurno.getIdIngreso());
+            pstm.setInt(3, ingresoTurno.getIdTurno());
+            pstm.setInt(4, ingresoTurno.getIdIngreso());
             pstm.execute(sql);
             modify = true;
             pstm.close();

@@ -1,7 +1,6 @@
 package DAOs.MySQLImplementations;
 
 import DAOs.Interfaces.IHistorialClinicoDAO;
-import Objetos.FichaClinica;
 import Objetos.HistorialClinico;
 import Utils.DBUtils.DBConnector;
 

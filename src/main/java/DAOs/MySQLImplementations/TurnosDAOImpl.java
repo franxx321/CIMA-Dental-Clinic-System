@@ -1,7 +1,6 @@
 package DAOs.MySQLImplementations;
 
 import DAOs.Interfaces.ITurnosDAO;
-import Objetos.FichaClinica;
 import Objetos.Turno;
 import Utils.DBUtils.DBConnector;
 
@@ -16,7 +15,7 @@ public class TurnosDAOImpl implements ITurnosDAO {
     public boolean register(Turno turno) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO Turno(horaInicio, horaFin,asistio,id_paciente,id_Profesional,valor,descuento) VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Turnos(horaInicio, horaFin,asistio,id_paciente,id_Profesional,valor,descuento) VALUES (?,?,?,?,?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -94,19 +93,20 @@ public class TurnosDAOImpl implements ITurnosDAO {
     public boolean modify(Turno turno, Turno aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE Turno SET id = ?, fecha = ?, asistio = ?, id_paciente = ?, id_profesional = ?, valor = ?, descuento = ? WHERE id = ?";
+        String sql = "UPDATE Turno SET id = ?, horainicio = ?, horafin = ?, asistio = ?, id_paciente = ?, id_profesional = ?, valor = ?, descuento = ? WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, aux.getId());
-            //pstm.setDate(2, aux.getFecha());
-            pstm.setBoolean(3, aux.isAsistio());
-            pstm.setInt(4, aux.getIdPaciente());
-            pstm.setInt(5, aux.getIdProfesional());
-            pstm.setFloat(6, aux.getValor());
-            pstm.setFloat(7, aux.getDescuento());
-            pstm.setInt(8, turno.getId());
+            pstm.setTimestamp(2, (Timestamp) aux.getHoraInicio());
+            pstm.setTimestamp(3, (Timestamp) aux.getHoraFin());
+            pstm.setBoolean(4, aux.isAsistio());
+            pstm.setInt(5, aux.getIdPaciente());
+            pstm.setInt(6, aux.getIdProfesional());
+            pstm.setFloat(7, aux.getValor());
+            pstm.setFloat(8, aux.getDescuento());
+            pstm.setInt(9, turno.getId());
             pstm.execute(sql);
             modify = true;
             pstm.close();

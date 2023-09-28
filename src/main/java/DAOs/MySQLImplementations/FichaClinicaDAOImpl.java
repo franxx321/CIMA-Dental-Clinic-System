@@ -15,7 +15,7 @@ public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
     public boolean register(FichaClinica fichaClinica) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO FichaClinica(fecha, descripcion,id_paciente) VALUES (?,?,?)";
+        String sql = "INSERT INTO FichaClinica (fecha, descripcion,id_paciente) VALUES (?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();

@@ -6,6 +6,7 @@ import Utils.DBUtils.DBConnector;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TurnosDAOImpl implements ITurnosDAO {
@@ -51,12 +52,13 @@ public class TurnosDAOImpl implements ITurnosDAO {
             while(rs.next()){
                 Turno t = new Turno();
                 t.setId(rs.getInt(1));
-                //t.setFecha(rs.getDate(2));
-                t.setAsistio(rs.getBoolean(3));
-                t.setIdPaciente(rs.getInt(4));
-                t.setIdProfesional(rs.getInt(5));
-                t.setValor(rs.getFloat(6));
-                t.setDescuento(rs.getFloat(7));
+                t.setHoraInicio(new Date(rs.getTimestamp(2).getTime()));
+                t.setHoraFin(new Date(rs.getTimestamp(3).getTime()));
+                t.setAsistio(rs.getBoolean(4));
+                t.setIdPaciente(rs.getInt(5));
+                t.setIdProfesional(rs.getInt(6));
+                t.setValor(rs.getFloat(7));
+                t.setDescuento(rs.getFloat(8));
                 turnoList.add(t);
             }
             pstm.close();
@@ -99,8 +101,8 @@ public class TurnosDAOImpl implements ITurnosDAO {
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, aux.getId());
-            pstm.setTimestamp(2, (Timestamp) aux.getHoraInicio());
-            pstm.setTimestamp(3, (Timestamp) aux.getHoraFin());
+            pstm.setTimestamp(2, new Timestamp(aux.getHoraInicio().getTime()) );
+            pstm.setTimestamp(3, new Timestamp(aux.getHoraFin().getTime()) );
             pstm.setBoolean(4, aux.isAsistio());
             pstm.setInt(5, aux.getIdPaciente());
             pstm.setInt(6, aux.getIdProfesional());

@@ -8,12 +8,21 @@ package GUIComponents;
  *
  * @author franc
  */
-public class PanelInicio extends javax.swing.JPanel {
+public class PanelInicio extends  Panel {
+
+    private static PanelInicio panelInicio;
+
+    public static PanelInicio getInstance(){
+        if(panelInicio==null){
+            panelInicio=new PanelInicio();
+        }
+        return panelInicio;
+    }
 
     /**
      * Creates new form PanelInicio
      */
-    public PanelInicio() {
+    private PanelInicio() {
         initComponents();
     }
 
@@ -77,5 +86,10 @@ public class PanelInicio extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+
+    @Override
+    public void setup() {
+
+    }
     // End of variables declaration//GEN-END:variables
 }

@@ -4,16 +4,27 @@
  */
 package GUIComponents;
 
+import javax.swing.*;
+
 /**
  *
  * @author franc
  */
-public class MenuSecundarioTurnos extends javax.swing.JPanel {
+public class MenuSecundarioTurnos extends Panel {
+
+    private static MenuSecundarioTurnos menuSecundarioTurnos;
+
+    public static MenuSecundarioTurnos getInstance(){
+        if(menuSecundarioTurnos==null){
+            menuSecundarioTurnos=new MenuSecundarioTurnos();
+        }
+        return menuSecundarioTurnos;
+    }
 
     /**
      * Creates new form MenuSecundarioTurnos
      */
-    public MenuSecundarioTurnos() {
+    private MenuSecundarioTurnos() {
         initComponents();
     }
 
@@ -98,5 +109,10 @@ public class MenuSecundarioTurnos extends javax.swing.JPanel {
     private javax.swing.JLabel agregarTurno;
     private javax.swing.JLabel consultarTurno;
     private javax.swing.JLabel modificarTurno;
+
+    @Override
+    public void setup() {
+
+    }
     // End of variables declaration//GEN-END:variables
 }

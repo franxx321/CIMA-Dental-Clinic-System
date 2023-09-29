@@ -4,18 +4,34 @@
  */
 package GUIComponents;
 
+import Utils.GUIUtils.PanelGUIHandler;
+import Utils.GUIUtils.SMenuGUIHandler;
+
+import javax.swing.*;
+
 /**
  *
  * @author franc
  */
 public class Frame extends javax.swing.JFrame {
 
+    private static Frame frame;
+
+    public static Frame getInstance(){
+        if(frame==null){
+            frame=new Frame();
+        }
+        return frame;
+    }
+
     /**
      * Creates new form Frame
      */
-    public Frame() {
+    private Frame() {
         initComponents();
     }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -177,7 +193,12 @@ public class Frame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Frame().setVisible(true);
+                Frame frame1= Frame.getInstance();
+                PanelGUIHandler panelGUIHandler = PanelGUIHandler.getinstance();
+                SMenuGUIHandler sMenuGUIHandler = SMenuGUIHandler.getInstance();
+                panelGUIHandler.changePanel(PanelGUIHandler.panelInicio);
+                sMenuGUIHandler.changePanel(SMenuGUIHandler.menuSecundarioVacio);
+                frame1.setVisible(true);
             }
         });
     }
@@ -190,5 +211,13 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JPanel menuSecundarioInit;
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JPanel panelPrincipalInit;
+
+    public JPanel getMenuSecundario() {
+        return menuSecundario;
+    }
+
+    public JPanel getPanelPrincipal() {
+        return panelPrincipal;
+    }
     // End of variables declaration//GEN-END:variables
 }

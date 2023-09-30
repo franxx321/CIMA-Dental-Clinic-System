@@ -1,9 +1,10 @@
 package GUIComponents;
 
 import javax.swing.*;
+import java.util.List;
 
-public abstract class Panel extends JFrame {
+public abstract class Panel extends JPanel {
 
 
-    public abstract void setup ();
+    public abstract void setup (List<Object> arguments);
 }

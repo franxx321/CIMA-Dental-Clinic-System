@@ -6,6 +6,7 @@ import GUIComponents.PanelInicio;
 
 import javax.swing.*;
 import java.util.HashMap;
+import java.util.List;
 
 public class PanelGUIHandler  implements  GUIHandler{
 
@@ -30,11 +31,12 @@ public class PanelGUIHandler  implements  GUIHandler{
     }
 
     @Override
-    public void changePanel(String panelKey) {
+    public void changePanel(String panelKey, List <Object> objects) {
         Panel nextPanel= panels.get(panelKey);
         JPanel panel=Frame.getInstance().getPanelPrincipal();
         panel.removeAll();
         panel.add(nextPanel);
+        nextPanel.setup(objects);
         currentPanel=nextPanel;
         Frame.getInstance().repaint();
         Frame.getInstance().revalidate();

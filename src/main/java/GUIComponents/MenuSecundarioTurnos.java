@@ -5,6 +5,7 @@
 package GUIComponents;
 
 import javax.swing.*;
+import java.util.List;
 
 /**
  *
@@ -26,6 +27,11 @@ public class MenuSecundarioTurnos extends Panel {
      */
     private MenuSecundarioTurnos() {
         initComponents();
+    }
+
+    @Override
+    public void setup(List<Object> arguments) {
+
     }
 
     /**
@@ -110,9 +116,6 @@ public class MenuSecundarioTurnos extends Panel {
     private javax.swing.JLabel consultarTurno;
     private javax.swing.JLabel modificarTurno;
 
-    @Override
-    public void setup() {
 
-    }
     // End of variables declaration//GEN-END:variables
 }

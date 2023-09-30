@@ -7,6 +7,7 @@ import GUIComponents.Panel;
 
 import javax.swing.*;
 import java.util.HashMap;
+import java.util.List;
 
 public class SMenuGUIHandler implements GUIHandler{
 
@@ -30,11 +31,12 @@ public class SMenuGUIHandler implements GUIHandler{
 
     }
     @Override
-    public void changePanel(String panelKey) {
+    public void changePanel(String panelKey, List <Object> objects) {
         Panel nextPanel = panels.get(panelKey);
         JPanel sMenu= Frame.getInstance().getMenuSecundario();
         sMenu.removeAll();
         sMenu.add(nextPanel);
+        nextPanel.setup(objects);
         Frame.getInstance().repaint();
         Frame.getInstance().revalidate();
 

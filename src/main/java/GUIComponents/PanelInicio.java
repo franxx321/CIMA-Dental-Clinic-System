@@ -4,6 +4,8 @@
  */
 package GUIComponents;
 
+import java.util.List;
+
 /**
  *
  * @author franc
@@ -24,6 +26,11 @@ public class PanelInicio extends  Panel {
      */
     private PanelInicio() {
         initComponents();
+    }
+
+    @Override
+    public void setup(List<Object> arguments) {
+
     }
 
     /**
@@ -87,9 +94,6 @@ public class PanelInicio extends  Panel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
 
-    @Override
-    public void setup() {
 
-    }
     // End of variables declaration//GEN-END:variables
 }

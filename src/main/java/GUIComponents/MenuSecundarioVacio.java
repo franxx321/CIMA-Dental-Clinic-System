@@ -5,6 +5,7 @@
 package GUIComponents;
 
 import javax.swing.*;
+import java.util.List;
 
 /**
  *
@@ -29,6 +30,12 @@ public class MenuSecundarioVacio extends Panel {
         initComponents();
     }
 
+    @Override
+    public void setup(List <Object> arguments) {
+
+    }
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,10 +59,7 @@ public class MenuSecundarioVacio extends Panel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    @Override
-    public void setup() {
 
-    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

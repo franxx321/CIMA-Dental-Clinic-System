@@ -196,8 +196,8 @@ public class Frame extends javax.swing.JFrame {
                 Frame frame1= Frame.getInstance();
                 PanelGUIHandler panelGUIHandler = PanelGUIHandler.getinstance();
                 SMenuGUIHandler sMenuGUIHandler = SMenuGUIHandler.getInstance();
-                panelGUIHandler.changePanel(PanelGUIHandler.panelInicio);
-                sMenuGUIHandler.changePanel(SMenuGUIHandler.menuSecundarioVacio);
+                panelGUIHandler.changePanel(PanelGUIHandler.panelInicio, null);
+                sMenuGUIHandler.changePanel(SMenuGUIHandler.menuSecundarioVacio, null);
                 frame1.setVisible(true);
             }
         });

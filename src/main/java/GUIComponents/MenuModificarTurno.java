@@ -4,6 +4,9 @@
  */
 package GUIComponents;
 
+import Utils.GUIUtils.PanelGUIHandler;
+import Utils.GUIUtils.SMenuGUIHandler;
+
 import java.util.List;
 
 /**
@@ -258,11 +261,12 @@ public class MenuModificarTurno extends Panel {
     }//GEN-LAST:event_configurarPrestacionesButtonMousePressed
 
     private void cancelarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMousePressed
-        // TODO add your handling code here:
+        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelInicio,null);
+        SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
     }//GEN-LAST:event_cancelarButtonMousePressed
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_confirmarButtonMousePressed
 
     private void flechaDerechaButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_flechaDerechaButtonMousePressed

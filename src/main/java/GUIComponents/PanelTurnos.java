@@ -4,6 +4,9 @@
  */
 package GUIComponents;
 
+import Utils.GUIUtils.PanelGUIHandler;
+import Utils.GUIUtils.SMenuGUIHandler;
+
 import java.util.List;
 
 /**
@@ -108,15 +111,18 @@ public class PanelTurnos extends Panel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarTurnoButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarTurnoButtonMousePressed
-        // TODO add your handling code here:
+        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.agregarTurno,null);
+        SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioTurnos,null);
     }//GEN-LAST:event_agregarTurnoButtonMousePressed
 
     private void modificarTurnoButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarTurnoButtonMousePressed
-        // TODO add your handling code here:
+        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.modificarTurno,null);
+        SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioTurnos,null);
     }//GEN-LAST:event_modificarTurnoButtonMousePressed
 
     private void eliminarTurnoButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarTurnoButtonMousePressed
-        // TODO add your handling code here:
+        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.eliminarTurno,null);
+        SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioTurnos,null);
     }//GEN-LAST:event_eliminarTurnoButtonMousePressed
 
 

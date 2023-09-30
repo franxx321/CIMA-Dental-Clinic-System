@@ -1,8 +1,6 @@
 package Utils.GUIUtils;
 
-import GUIComponents.Frame;
-import GUIComponents.Panel;
-import GUIComponents.PanelInicio;
+import GUIComponents.*;
 
 import javax.swing.*;
 import java.util.HashMap;
@@ -12,7 +10,7 @@ public class PanelGUIHandler  implements  GUIHandler{
 
     private static PanelGUIHandler panelGUIHandler;
 
-    public static String panelInicio ="Panel Inicio";
+    public static String panelInicio ="Panel Inicio",panelTurnos="Panel Turnos",agregarTurno= "Agregar Turno",modificarTurno="Modificar Turno",modificarPrestacion = "ModificarPrestaciones",eliminarTurno= "eliminarTurno";
 
     private HashMap<String, Panel> panels;
 
@@ -28,6 +26,10 @@ public class PanelGUIHandler  implements  GUIHandler{
     private PanelGUIHandler(){
         panels= new HashMap<>();
         panels.put(panelInicio, PanelInicio.getInstance());
+        panels.put(panelTurnos, PanelTurnos.getInstance());
+        panels.put(agregarTurno, PanelAgregarTurno.getInstance());
+        panels.put(modificarTurno, MenuModificarTurno.getInstance());
+        panels.put(eliminarTurno,EliminarTurno.getInstance());
     }
 
     @Override

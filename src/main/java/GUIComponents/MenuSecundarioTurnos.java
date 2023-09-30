@@ -4,6 +4,8 @@
  */
 package GUIComponents;
 
+import Utils.GUIUtils.PanelGUIHandler;
+
 import javax.swing.*;
 import java.util.List;
 
@@ -99,15 +101,15 @@ public class MenuSecundarioTurnos extends Panel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarTurnoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarTurnoMousePressed
-        // TODO add your handling code here:
+        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.agregarTurno,null);
     }//GEN-LAST:event_agregarTurnoMousePressed
 
     private void modificarTurnoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarTurnoMousePressed
-        // TODO add your handling code here:
+        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.modificarTurno,null);
     }//GEN-LAST:event_modificarTurnoMousePressed
 
     private void consultarTurnoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultarTurnoMousePressed
-        // TODO add your handling code here:
+        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.eliminarTurno,null);
     }//GEN-LAST:event_consultarTurnoMousePressed
 
 

@@ -2,6 +2,8 @@ package Objetos;
 
 public class TurnoPrestacion {
 
+    private int id;
+
     private int idTurno;
 
     private int idPrestacion;
@@ -20,5 +22,13 @@ public class TurnoPrestacion {
 
     public void setIdPrestacion(int idPrestacion) {
         this.idPrestacion = idPrestacion;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -48,8 +48,9 @@ public class TurnoPrestacionDAOImpl implements ITurnoPrestacionDAO {
             rs = pstm.executeQuery(sql);
             while(rs.next()){
                 TurnoPrestacion tp = new TurnoPrestacion();
-                tp.setIdTurno(rs.getInt(1));
-                tp.setIdPrestacion(rs.getInt(2));
+                tp.setId(rs.getInt(1));
+                tp.setIdTurno(rs.getInt(2));
+                tp.setIdPrestacion(rs.getInt(3));
                 turnoPrestacionList.add(tp);
             }
             pstm.close();
@@ -66,13 +67,12 @@ public class TurnoPrestacionDAOImpl implements ITurnoPrestacionDAO {
     public boolean delete(TurnoPrestacion turnoPrestacion) {
         boolean delete = false;
         PreparedStatement pstm = null;
-        String sql = "DELETE FROM TurnoPrestacion WHERE id_turno = ? AND id_prestacion = ?";
+        String sql = "DELETE FROM TurnoPrestacion WHERE id = ? ";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            pstm.setInt(1, turnoPrestacion.getIdTurno());
-            pstm.setInt(2, turnoPrestacion.getIdPrestacion());
+            pstm.setInt(1, turnoPrestacion.getId());
             pstm.execute(sql);
             delete = true;
             pstm.close();
@@ -87,15 +87,14 @@ public class TurnoPrestacionDAOImpl implements ITurnoPrestacionDAO {
     public boolean modify(TurnoPrestacion turnoPrestacion, TurnoPrestacion aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE TurnoPrestacion SET id_turno = ?, id_prestacion = ? WHERE id_turno = ? AND id_prestacion = ?";
+        String sql = "UPDATE TurnoPrestacion SET id_turno = ?, id_prestacion = ? WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, aux.getIdTurno());
             pstm.setInt(2, aux.getIdPrestacion());
-            pstm.setInt(3, turnoPrestacion.getIdTurno());
-            pstm.setInt(4, turnoPrestacion.getIdPrestacion());
+            pstm.setInt(3, turnoPrestacion.getId());
             pstm.execute(sql);
             modify = true;
             pstm.close();

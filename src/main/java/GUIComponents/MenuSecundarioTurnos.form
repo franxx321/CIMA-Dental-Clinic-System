@@ -26,8 +26,8 @@
               <Component id="agregarTurno" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="186" max="-2" attributes="0"/>
               <Component id="modificarTurno" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="189" max="32767" attributes="0"/>
-              <Component id="consultarTurno" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="201" max="32767" attributes="0"/>
+              <Component id="eliminarTurno" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="173" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -39,7 +39,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="agregarTurno" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="modificarTurno" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="consultarTurno" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="eliminarTurno" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="23" max="32767" attributes="0"/>
           </Group>
@@ -69,15 +69,15 @@
         <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="modificarTurnoMousePressed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="consultarTurno">
+    <Component class="javax.swing.JLabel" name="eliminarTurno">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Consultar Turno"/>
+        <Property name="text" type="java.lang.String" value="Elminar Turno"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Hand Cursor"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="consultarTurnoMousePressed"/>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="eliminarTurnoMousePressed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -47,7 +47,7 @@ public class MenuSecundarioTurnos extends Panel {
 
         agregarTurno = new javax.swing.JLabel();
         modificarTurno = new javax.swing.JLabel();
-        consultarTurno = new javax.swing.JLabel();
+        eliminarTurno = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(78, 217, 255));
 
@@ -67,11 +67,11 @@ public class MenuSecundarioTurnos extends Panel {
             }
         });
 
-        consultarTurno.setText("Consultar Turno");
-        consultarTurno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        consultarTurno.addMouseListener(new java.awt.event.MouseAdapter() {
+        eliminarTurno.setText("Elminar Turno");
+        eliminarTurno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        eliminarTurno.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                consultarTurnoMousePressed(evt);
+                eliminarTurnoMousePressed(evt);
             }
         });
 
@@ -84,8 +84,8 @@ public class MenuSecundarioTurnos extends Panel {
                 .addComponent(agregarTurno)
                 .addGap(186, 186, 186)
                 .addComponent(modificarTurno)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
-                .addComponent(consultarTurno)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
+                .addComponent(eliminarTurno)
                 .addGap(173, 173, 173))
         );
         layout.setVerticalGroup(
@@ -95,7 +95,7 @@ public class MenuSecundarioTurnos extends Panel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(agregarTurno)
                     .addComponent(modificarTurno)
-                    .addComponent(consultarTurno))
+                    .addComponent(eliminarTurno))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -108,16 +108,14 @@ public class MenuSecundarioTurnos extends Panel {
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.modificarTurno,null);
     }//GEN-LAST:event_modificarTurnoMousePressed
 
-    private void consultarTurnoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultarTurnoMousePressed
+    private void eliminarTurnoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarTurnoMousePressed
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.eliminarTurno,null);
-    }//GEN-LAST:event_consultarTurnoMousePressed
+    }//GEN-LAST:event_eliminarTurnoMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel agregarTurno;
-    private javax.swing.JLabel consultarTurno;
+    private javax.swing.JLabel eliminarTurno;
     private javax.swing.JLabel modificarTurno;
-
-
     // End of variables declaration//GEN-END:variables
 }

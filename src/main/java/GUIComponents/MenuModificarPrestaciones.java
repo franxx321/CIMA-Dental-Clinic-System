@@ -37,6 +37,7 @@ public class MenuModificarPrestaciones extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(223, 246, 255));
 
+        jTable1.setBackground(new java.awt.Color(223, 244, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

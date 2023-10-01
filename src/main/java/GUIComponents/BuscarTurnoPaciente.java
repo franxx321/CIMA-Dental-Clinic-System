@@ -4,33 +4,17 @@
  */
 package GUIComponents;
 
-import java.util.List;
-
 /**
  *
  * @author franc
  */
-public class EliminarTurno extends Panel {
-
-    private static EliminarTurno eliminarTurno;
-
-    public static EliminarTurno getInstance(){
-        if(eliminarTurno==null){
-            eliminarTurno=new EliminarTurno();
-        }
-        return eliminarTurno;
-    }
+public class BuscarTurnoPaciente extends javax.swing.JPanel {
 
     /**
-     * Creates new form EliminarTurno
+     * Creates new form BuscarTurnoPaciente
      */
-    private EliminarTurno() {
+    public BuscarTurnoPaciente() {
         initComponents();
-    }
-
-    @Override
-    public void setup(List<Object> arguments) {
-
     }
 
     /**
@@ -42,17 +26,15 @@ public class EliminarTurno extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         buscarButton = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         cancelarButton = new javax.swing.JLabel();
         confirmarButton = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(223, 246, 255));
-
-        jLabel1.setText("Ingrese el nombre del paciente");
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,6 +79,8 @@ public class EliminarTurno extends Panel {
                 confirmarButtonMousePressed(evt);
             }
         });
+
+        jLabel1.setText("Ingrese el nombre del paciente");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -145,13 +129,13 @@ public class EliminarTurno extends Panel {
         // TODO add your handling code here:
     }//GEN-LAST:event_buscarButtonMousePressed
 
-    private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_confirmarButtonMousePressed
-
     private void cancelarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_cancelarButtonMousePressed
+
+    private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_confirmarButtonMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

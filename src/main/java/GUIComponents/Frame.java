@@ -86,7 +86,7 @@ public class Frame extends javax.swing.JFrame {
 
         menuPrincipal.setBackground(new java.awt.Color(48, 101, 172));
 
-        turnosButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\franc\\Desktop\\uni\\Tercero\\IDS II\\TPM 1\\TPM\\src\\main\\java\\Images\\add 64x64.png")); // NOI18N
+        turnosButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add 64x64.png"))); // NOI18N
         turnosButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         turnosButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -94,7 +94,7 @@ public class Frame extends javax.swing.JFrame {
             }
         });
 
-        finanzasButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\franc\\Desktop\\uni\\Tercero\\IDS II\\TPM 1\\TPM\\src\\main\\java\\Images\\coin 64x64.png")); // NOI18N
+        finanzasButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/coin 64x64.png"))); // NOI18N
         finanzasButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         finanzasButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -169,6 +169,7 @@ public class Frame extends javax.swing.JFrame {
 
     private void turnosButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_turnosButtonMousePressed
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelTurnos, null);
+        SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio, null);
     }//GEN-LAST:event_turnosButtonMousePressed
 
     private void finanzasButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_finanzasButtonMousePressed

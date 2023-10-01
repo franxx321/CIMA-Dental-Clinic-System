@@ -15,8 +15,8 @@ import java.sql.Statement;
 
 public  class  DBConnector  {
     
-    private static final String user = "root";
-    private static final String pass = "123";
+    private static final String user = "prueba";
+    private static final String pass = "Holamundo1";
     private java.sql.Statement s;
     private ResultSet result = null;
     private Connection connection = null;

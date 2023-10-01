@@ -18,7 +18,7 @@ public class TurnoPrestacionDAOImpl implements ITurnoPrestacionDAO {
     public boolean register(TurnoPrestacion turnoPrestacion) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO TurnoPrestacion(id_turno, id_prestacion) VALUES (?,?)";
+        String sql = "INSERT INTO TurnosPrestaciones(id_turno, id_prestacion) VALUES (?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -39,7 +39,7 @@ public class TurnoPrestacionDAOImpl implements ITurnoPrestacionDAO {
     public List<TurnoPrestacion> obtain(TurnoPrestacion turnoPrestacion) {
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM TurnoPrestacion ORDER BY id";
+        String sql = "SELECT * FROM TurnosPrestaciones ORDER BY id";
         List<TurnoPrestacion> turnoPrestacionList = new ArrayList<TurnoPrestacion>();
         try{
             DBConnection = DBConnector.getInstance();
@@ -67,7 +67,7 @@ public class TurnoPrestacionDAOImpl implements ITurnoPrestacionDAO {
     public boolean delete(TurnoPrestacion turnoPrestacion) {
         boolean delete = false;
         PreparedStatement pstm = null;
-        String sql = "DELETE FROM TurnoPrestacion WHERE id = ? ";
+        String sql = "DELETE FROM TurnosPrestaciones WHERE id = ? ";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -87,7 +87,7 @@ public class TurnoPrestacionDAOImpl implements ITurnoPrestacionDAO {
     public boolean modify(TurnoPrestacion turnoPrestacion, TurnoPrestacion aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE TurnoPrestacion SET id_turno = ?, id_prestacion = ? WHERE id = ?";
+        String sql = "UPDATE TurnosPrestaciones SET id_turno = ?, id_prestacion = ? WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();

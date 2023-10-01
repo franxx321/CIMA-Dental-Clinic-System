@@ -14,11 +14,13 @@ import java.util.List;
 public class GastoDAOImpl implements IGastoDAO {
     DBConnector DBConnection ;
     Connection con = null;
+
+
     @Override
     public boolean register(Gasto gasto) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO Gasto (monto, descripcion, fecha, id_profesional) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO Gastos (monto, descripcion, fecha, id_profesional) VALUES (?,?,?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -41,7 +43,7 @@ public class GastoDAOImpl implements IGastoDAO {
     public List<Gasto> obtain(Gasto gasto) {
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM Gasto ORDER BY id";
+        String sql = "SELECT * FROM Gastos ORDER BY id";
         List<Gasto> gastoList = new ArrayList<>();
         try{
             DBConnection = DBConnector.getInstance();
@@ -71,7 +73,7 @@ public class GastoDAOImpl implements IGastoDAO {
     public boolean delete(Gasto gasto) {
         boolean delete = false;
         PreparedStatement pstm = null;
-        String sql = "DELETE FROM Gasto WHERE id = ?";
+        String sql = "DELETE FROM Gastos WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -91,7 +93,7 @@ public class GastoDAOImpl implements IGastoDAO {
     public boolean modify(Gasto gasto, Gasto aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE Gasto SET id = ?, monto = ?, descripcion = ?, fecha = ?, id_profesional = ? WHERE id = ?";
+        String sql = "UPDATE Gastos SET id = ?, monto = ?, descripcion = ?, fecha = ?, id_profesional = ? WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();

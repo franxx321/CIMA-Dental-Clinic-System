@@ -5,11 +5,25 @@ import Objetos.Turno;
 import Utils.DBUtils.DBConnector;
 
 import java.sql.*;
+import java.time.Clock;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class TurnosDAOImpl implements ITurnosDAO {
+    private static TurnosDAOImpl turnosDAO;
+
+    public static TurnosDAOImpl getInstance(){
+        if(turnosDAO==null){
+            turnosDAO= new TurnosDAOImpl();
+        }
+        return turnosDAO;
+    }
+
+    private TurnosDAOImpl() {
+    }
+
     DBConnector DBConnection ;
     Connection con = null;
     @Override
@@ -42,7 +56,7 @@ public class TurnosDAOImpl implements ITurnosDAO {
     public List<Turno> obtain(Turno turno) {
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM Turno ORDER BY id";
+        String sql = "SELECT * FROM Turnos ORDER BY id";
         List<Turno> turnoList = new ArrayList<Turno>();
         try{
             DBConnection = DBConnector.getInstance();
@@ -75,7 +89,7 @@ public class TurnosDAOImpl implements ITurnosDAO {
     public boolean delete(Turno turno) {
         boolean delete = false;
         PreparedStatement pstm = null;
-        String sql = "DELETE FROM Turno WHERE id = ?";
+        String sql = "DELETE FROM Turnos WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -95,7 +109,7 @@ public class TurnosDAOImpl implements ITurnosDAO {
     public boolean modify(Turno turno, Turno aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE Turno SET id = ?, horainicio = ?, horafin = ?, asistio = ?, id_paciente = ?, id_profesional = ?, valor = ?, descuento = ? WHERE id = ?";
+        String sql = "UPDATE Turnos SET id = ?, horainicio = ?, horafin = ?, asistio = ?, id_paciente = ?, id_profesional = ?, valor = ?, descuento = ? WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -117,5 +131,14 @@ public class TurnosDAOImpl implements ITurnosDAO {
             System.out.println("Error: Clase TurnoDAOImpl, metodo modify. " +e.getMessage());
         }
         return modify;
+    }
+
+    @Override
+    public List<Turno> profesionalFutureApointments(String idprofesional, int week) {
+        Timestamp tmstp = new Timestamp();
+        
+        Date date = new Date();
+        date.setTime(date.getTime()/86400000);
+        return null;
     }
 }

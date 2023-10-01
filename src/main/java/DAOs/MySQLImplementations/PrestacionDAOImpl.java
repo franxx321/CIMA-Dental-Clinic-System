@@ -18,7 +18,7 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
     public boolean register(Prestacion prestacion) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO Prestacion(nombre, bien, descripcion) VALUES (?,?,?)";
+        String sql = "INSERT INTO Prestaciones(nombre, bien, descripcion) VALUES (?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -40,7 +40,7 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
     public List<Prestacion> obtain(Prestacion prestacion) {
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM Prestacion ORDER BY id";
+        String sql = "SELECT * FROM Prestaciones ORDER BY id";
         List<Prestacion> prestacionList = new ArrayList<Prestacion>();
         try{
             DBConnection = DBConnector.getInstance();
@@ -69,7 +69,7 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
     public boolean delete(Prestacion prestacion) {
         boolean delete = false;
         PreparedStatement pstm = null;
-        String sql = "DELETE FROM Prestacion WHERE id = ?";
+        String sql = "DELETE FROM Prestaciones WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -89,7 +89,7 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
     public boolean modify(Prestacion prestacion, Prestacion aux) {
             boolean modify = false;
             PreparedStatement pstm = null;
-            String sql = "UPDATE Prestacion SET id = ?, nombre = ?, bien = ?, descripcion = ? WHERE id = ?";
+            String sql = "UPDATE Prestaciones SET id = ?, nombre = ?, bien = ?, descripcion = ? WHERE id = ?";
             try{
                 DBConnection = DBConnector.getInstance();
                 con = DBConnection.getConnection();

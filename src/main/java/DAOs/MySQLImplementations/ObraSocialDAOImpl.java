@@ -15,7 +15,7 @@ public class ObraSocialDAOImpl implements IObraSocialDAO {
     public boolean register(ObraSocial obraSocial) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO ObraSocial(nombre, direccion, telefono, nombrerep) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO ObrasSociales (nombre, mail, telefono, nombrerep) VALUES (?,?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -38,7 +38,7 @@ public class ObraSocialDAOImpl implements IObraSocialDAO {
     public List<ObraSocial> obtain(ObraSocial obraSocial) {
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM ObraSocial ORDER BY id";
+        String sql = "SELECT * FROM ObrasSociales ORDER BY id";
         List<ObraSocial> obraSocialList = new ArrayList<ObraSocial>();
         try{
             DBConnection = DBConnector.getInstance();
@@ -68,7 +68,7 @@ public class ObraSocialDAOImpl implements IObraSocialDAO {
     public boolean delete(ObraSocial obraSocial) {
         boolean delete = false;
         PreparedStatement pstm = null;
-        String sql = "DELETE FROM ObraSocial WHERE id = ?";
+        String sql = "DELETE FROM ObrasSociales WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -88,7 +88,7 @@ public class ObraSocialDAOImpl implements IObraSocialDAO {
     public boolean modify(ObraSocial obraSocial, ObraSocial aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE ObraSocial SET id = ?, nombre = ?, direccion = ?, telefono = ?, nombrerep = ? WHERE id = ?";
+        String sql = "UPDATE ObrasSociales SET id = ?, nombre = ?, mail = ?, telefono = ?, nombrerep = ? WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();

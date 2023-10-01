@@ -10,4 +10,6 @@ public interface ITurnosDAO {
     public boolean delete(Turno turno);
     public boolean modify(Turno turno, Turno aux);
 
+    public List<Turno> profesionalFutureApointments(String idprofesional, int week);
+
 }

@@ -15,7 +15,7 @@ public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
     public boolean register(FichaClinica fichaClinica) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO FichaClinica (fecha, descripcion,id_paciente) VALUES (?,?,?)";
+        String sql = "INSERT INTO FichasClinicas (fecha, descripcion,id_paciente) VALUES (?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -37,7 +37,7 @@ public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
     public List<FichaClinica> obtain(FichaClinica fichaClinica) {
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM FichaClinica ORDER BY id";
+        String sql = "SELECT * FROM FichasClinicas ORDER BY id";
         List<FichaClinica> fichaClinicaList = new ArrayList<>();
         try{
             DBConnection = DBConnector.getInstance();
@@ -65,7 +65,7 @@ public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
     public boolean delete(FichaClinica fichaClinica) {
         boolean delete = false;
         PreparedStatement pstm = null;
-        String sql = "DELETE FROM FichaClinica WHERE id = ?";
+        String sql = "DELETE FROM FichasClinicas WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -85,7 +85,7 @@ public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
     public boolean modify(FichaClinica fichaClinica, FichaClinica aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE FichaClinica SET id = ?, fecha = ?, descripcion = ? WHERE id = ?";
+        String sql = "UPDATE FichasClinicas SET id = ?, fecha = ?, descripcion = ? WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();

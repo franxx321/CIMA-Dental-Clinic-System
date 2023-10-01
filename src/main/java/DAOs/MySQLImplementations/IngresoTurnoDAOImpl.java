@@ -40,7 +40,7 @@ public class IngresoTurnoDAOImpl implements IIngresoTurnoDAO {
     public List<IngresoTurno> obtain(IngresoTurno ingresoTurno) {
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM IngresoTurno ORDER BY id";
+        String sql = "SELECT * FROM IngresoTurno ORDER BY id_ingreso";
         List<IngresoTurno> ingresoTurnoList = new ArrayList<IngresoTurno>();
         try{
             DBConnection = DBConnector.getInstance();

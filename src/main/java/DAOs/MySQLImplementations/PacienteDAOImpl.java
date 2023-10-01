@@ -16,15 +16,16 @@ public class PacienteDAOImpl implements IPacienteDAO {
     public boolean register(Paciente paciente) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO Paciente(dni, fechanac, direccion, sexo) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO Pacientes(nombreyapellido,dni, fechanac, direccion, sexo) VALUES (?,?,?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            pstm.setLong(1, paciente.getDni());
-            pstm.setDate(2, paciente.getFechaNacimiento());
-            pstm.setString(3, paciente.getDireccion());
-            pstm.setString(4, String.valueOf(paciente.getSexo()));
+            pstm.setString(1,paciente.getNombre());
+            pstm.setLong(2, paciente.getDni());
+            pstm.setDate(3, paciente.getFechaNacimiento());
+            pstm.setString(4, paciente.getEmail());
+            pstm.setString(5, String.valueOf(paciente.getSexo()));
             pstm.execute(sql);
             register = true;
             pstm.close();
@@ -39,7 +40,7 @@ public class PacienteDAOImpl implements IPacienteDAO {
     public boolean delete(Paciente paciente) {
         boolean delete = false;
         PreparedStatement pstm = null;
-        String sql = "DELETE FROM Paciente WHERE id = ?";
+        String sql = "DELETE FROM Pacientes WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -59,17 +60,18 @@ public class PacienteDAOImpl implements IPacienteDAO {
     public boolean modify(Paciente paciente, Paciente aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE Paciente SET id = ?, dni = ?, fechaNac = ?, direccion = ?, sexo = ? WHERE id = ?";
+        String sql = "UPDATE Pacientes SET nombreyapellido = ?, id = ?, dni = ?, fechaNac = ?, direccion = ?, sexo = ? WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            pstm.setInt(1, aux.getId());
-            pstm.setLong(2, aux.getDni());
-            pstm.setDate(3, aux.getFechaNacimiento());
-            pstm.setString(4, aux.getDireccion());
-            pstm.setString(5, String.valueOf(aux.getSexo()));
-            pstm.setInt(6, paciente.getId());
+            pstm.setString(1,aux.getNombre());
+            pstm.setInt(2, aux.getId());
+            pstm.setLong(3, aux.getDni());
+            pstm.setDate(4, aux.getFechaNacimiento());
+            pstm.setString(5, aux.getEmail());
+            pstm.setString(6, String.valueOf(aux.getSexo()));
+            pstm.setInt(7, paciente.getId());
             pstm.execute(sql);
             modify = true;
             pstm.close();
@@ -85,7 +87,7 @@ public class PacienteDAOImpl implements IPacienteDAO {
     public List<Paciente> obtain(Paciente paciente) {
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM Paciente ORDER BY id";
+        String sql = "SELECT * FROM Pacientes ORDER BY id";
         List<Paciente> pacienteList = new ArrayList<Paciente>();
         try{
             DBConnection = DBConnector.getInstance();
@@ -94,10 +96,11 @@ public class PacienteDAOImpl implements IPacienteDAO {
             rs = pstm.executeQuery(sql);
             while(rs.next()){
                 Paciente p = new Paciente();
+                p.setNombre(rs.getString(1));
                 p.setDni(rs.getInt(2));
                 p.setNombre(rs.getString(3));
                 p.setFechaNacimiento(rs.getDate(4));
-                p.setDireccion(rs.getString(5));
+                p.setEmail(rs.getString(5));
                 p.setSexo(rs.getString(6).charAt(0));
                 pacienteList.add(p);
             }

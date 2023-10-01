@@ -4,6 +4,7 @@
  */
 package GUIComponents;
 
+import Objetos.Turno;
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
 import java.util.List;
@@ -20,6 +21,7 @@ import org.jdatepicker.impl.UtilDateModel;
 public class PanelAgregarTurno extends Panel {
 
 
+
     //IMPORTANTE datepicker necesita un datepanel, que necesita un datemodel, la inicializacion de los mismos esta en el constructor
     // link de instruccion : https://www.codejava.net/java-se/swing/how-to-use-jdatepicker-to-display-calendar-component
 
@@ -27,6 +29,8 @@ public class PanelAgregarTurno extends Panel {
     private JDatePanelImpl datePanel;
 
     private UtilDateModel model;
+
+    private boolean working;
 
     private static PanelAgregarTurno panelAgregarTurno;
 
@@ -58,6 +62,14 @@ public class PanelAgregarTurno extends Panel {
 
     @Override
     public void setup(List<Object> arguments) {
+        if (!working){
+            profesionalCB.setSelectedIndex(0);
+            pacienteTF.setText("");
+            horaFinTF.setText("");
+            horaInicioTF.setText("");
+
+
+        }
 
     }
     /**
@@ -83,7 +95,7 @@ public class PanelAgregarTurno extends Panel {
         cancelarButton = new javax.swing.JLabel();
         confirmarButton = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        CalendarTable = new javax.swing.JTable();
+        calendarTable = new javax.swing.JTable();
         flechaDerButton = new javax.swing.JLabel();
         flechaIzqButton = new javax.swing.JLabel();
         datePickerPanel = new javax.swing.JPanel();
@@ -140,8 +152,8 @@ public class PanelAgregarTurno extends Panel {
             }
         });
 
-        CalendarTable.setBackground(new java.awt.Color(223, 244, 255));
-        CalendarTable.setModel(new javax.swing.table.DefaultTableModel(
+        calendarTable.setBackground(new java.awt.Color(223, 244, 255));
+        calendarTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -152,8 +164,8 @@ public class PanelAgregarTurno extends Panel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        CalendarTable.setGridColor(new java.awt.Color(223, 244, 255));
-        jScrollPane1.setViewportView(CalendarTable);
+        calendarTable.setGridColor(new java.awt.Color(223, 244, 255));
+        jScrollPane1.setViewportView(calendarTable);
 
         flechaDerButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/right-arrow 24x24.png"))); // NOI18N
         flechaDerButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -275,7 +287,11 @@ public class PanelAgregarTurno extends Panel {
     }//GEN-LAST:event_cancelarButtonMousePressed
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
-        // TODO add your handling code here:
+        Turno newTurno = new Turno();
+
+        date newhorafin = horaFinTF.getText();
+        newTurno.setHoraFin();
+        horaInicioTF.getText();
     }//GEN-LAST:event_confirmarButtonMousePressed
 
     private void flechaDerButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_flechaDerButtonMousePressed
@@ -290,7 +306,7 @@ public class PanelAgregarTurno extends Panel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable CalendarTable;
+    private javax.swing.JTable calendarTable;
     private javax.swing.JLabel cancelarButton;
     private javax.swing.JLabel confirmarButton;
     private javax.swing.JPanel datePickerPanel;

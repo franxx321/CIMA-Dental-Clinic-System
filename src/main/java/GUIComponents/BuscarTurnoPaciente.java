@@ -31,7 +31,7 @@ public class BuscarTurnoPaciente extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         buscarButton = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        turnosTable = new javax.swing.JTable();
         cancelarButton = new javax.swing.JLabel();
         confirmarButton = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -52,8 +52,8 @@ public class BuscarTurnoPaciente extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setBackground(new java.awt.Color(223, 244, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        turnosTable.setBackground(new java.awt.Color(223, 244, 255));
+        turnosTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -64,7 +64,7 @@ public class BuscarTurnoPaciente extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(turnosTable);
 
         cancelarButton.setText("Cancelar");
         cancelarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -146,7 +146,7 @@ public class BuscarTurnoPaciente extends javax.swing.JPanel {
     private javax.swing.JLabel confirmarButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable turnosTable;
     // End of variables declaration//GEN-END:variables
 }

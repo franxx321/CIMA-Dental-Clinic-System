@@ -65,7 +65,6 @@ public class MenuModificarTurno extends Panel {
 
     @Override
     public void setup(List<Object> arguments) {
-        
 
     }
 
@@ -79,7 +78,7 @@ public class MenuModificarTurno extends Panel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        calendarTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -104,8 +103,8 @@ public class MenuModificarTurno extends Panel {
 
         setBackground(new java.awt.Color(223, 246, 255));
 
-        jTable1.setBackground(new java.awt.Color(223, 244, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        calendarTable.setBackground(new java.awt.Color(223, 244, 255));
+        calendarTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -116,7 +115,7 @@ public class MenuModificarTurno extends Panel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(calendarTable);
 
         jLabel1.setText("Profesional: ");
 
@@ -322,6 +321,7 @@ public class MenuModificarTurno extends Panel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox asistioCheckBox;
+    private javax.swing.JTable calendarTable;
     private javax.swing.JLabel cancelarButton;
     private javax.swing.JLabel configurarPrestacionesButton;
     private javax.swing.JLabel confirmarButton;
@@ -340,7 +340,6 @@ public class MenuModificarTurno extends Panel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel pacienteLabel;
     private javax.swing.JLabel precioLabel;
     private javax.swing.JLabel profesionalLabel;

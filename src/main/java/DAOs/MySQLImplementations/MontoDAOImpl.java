@@ -18,7 +18,7 @@ public class MontoDAOImpl implements IMontoDAO {
     public boolean register(Monto monto) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO Monto(precio, id_prestacion, id_profesional) VALUES (?,?,?)";
+        String sql = "INSERT INTO Montos(precio, id_prestacion, id_profesional) VALUES (?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -40,7 +40,7 @@ public class MontoDAOImpl implements IMontoDAO {
     public List<Monto> obtain(Monto monto) {
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM Monto ORDER BY id";
+        String sql = "SELECT * FROM Montos ORDER BY id";
         List<Monto> montoList = new ArrayList<Monto>();
         try{
             DBConnection = DBConnector.getInstance();
@@ -68,7 +68,7 @@ public class MontoDAOImpl implements IMontoDAO {
     public boolean delete(Monto monto) {
         boolean delete = false;
         PreparedStatement pstm = null;
-        String sql = "DELETE FROM Monto WHERE id_prestacion = ? AND id_profesional = ?";
+        String sql = "DELETE FROM Montos WHERE id_prestacion = ? AND id_profesional = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -89,7 +89,7 @@ public class MontoDAOImpl implements IMontoDAO {
     public boolean modify(Monto monto, Monto aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE Monto SET precio = ?, id_prestacion = ?, id_profesional = ? WHERE id_prestacion = ? AND id_profesional = ?";
+        String sql = "UPDATE Montos SET precio = ?, id_prestacion = ?, id_profesional = ? WHERE id_prestacion = ? AND id_profesional = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();

@@ -43,7 +43,7 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM Cobertura ORDER BY id";
-        List<Cobertura> coberturaList = new ArrayList<Cobertura>();
+        List<Cobertura> coberturaList = new ArrayList<>();
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();

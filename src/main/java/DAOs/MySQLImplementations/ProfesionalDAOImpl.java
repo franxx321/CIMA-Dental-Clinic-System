@@ -18,7 +18,7 @@ public class ProfesionalDAOImpl implements IProfesionalDAO {
     public boolean register(Profesional profesional) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO Profesional (nombre, apellido, telefono, matricula) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO Profesionales (nombre, apellido, telefono, matricula) VALUES (?,?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -41,7 +41,7 @@ public class ProfesionalDAOImpl implements IProfesionalDAO {
     public List<Profesional> obtain(Profesional profesional) {
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM Profesional ORDER BY id";
+        String sql = "SELECT * FROM Profesionales ORDER BY id";
         List<Profesional> profesionalList = new ArrayList<Profesional>();
         try{
             DBConnection = DBConnector.getInstance();
@@ -71,7 +71,7 @@ public class ProfesionalDAOImpl implements IProfesionalDAO {
     public boolean modify(Profesional profesional, Profesional aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE Profesional SET id = ?, nombre = ?, apellido = ?, telefono = ?, matricula = ? WHERE id = ?";
+        String sql = "UPDATE Profesionales SET id = ?, nombre = ?, apellido = ?, telefono = ?, matricula = ? WHERE id = ?";
         try {
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -95,7 +95,7 @@ public class ProfesionalDAOImpl implements IProfesionalDAO {
     public boolean delete(Profesional profesional) {
         boolean delete = false;
         PreparedStatement pstm = null;
-        String sql = "DELETE FROM Profesional WHERE id = ?";
+        String sql = "DELETE FROM Profesionales WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();

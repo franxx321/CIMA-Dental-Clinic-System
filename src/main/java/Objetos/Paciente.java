@@ -7,7 +7,7 @@ public class Paciente {
 
     private String nombre;
 
-    private String apellido;
+
 
     private long  dni;
 
@@ -15,7 +15,7 @@ public class Paciente {
 
     private Date fechaNacimiento;
 
-    private String direccion;
+    private String email;
 
     private int idHistorialClinico;
 
@@ -27,13 +27,6 @@ public class Paciente {
         this.nombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
 
     public long getDni() {
         return dni;
@@ -59,12 +52,12 @@ public class Paciente {
         this.sexo = sexo;
     }
 
-    public String getDireccion() {
-        return direccion;
+    public String getEmail() {
+        return email;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Date getFechaNacimiento() {

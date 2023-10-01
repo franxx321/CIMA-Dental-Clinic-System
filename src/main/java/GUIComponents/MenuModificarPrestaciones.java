@@ -27,7 +27,7 @@ public class MenuModificarPrestaciones extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        prestacionesTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -37,8 +37,8 @@ public class MenuModificarPrestaciones extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(223, 246, 255));
 
-        jTable1.setBackground(new java.awt.Color(223, 244, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        prestacionesTable.setBackground(new java.awt.Color(223, 244, 255));
+        prestacionesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -49,7 +49,7 @@ public class MenuModificarPrestaciones extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(prestacionesTable);
 
         jLabel1.setText("Nueva Prestacion");
 
@@ -112,7 +112,7 @@ public class MenuModificarPrestaciones extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable prestacionesTable;
     // End of variables declaration//GEN-END:variables
 }

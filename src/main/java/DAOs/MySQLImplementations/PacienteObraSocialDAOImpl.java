@@ -19,7 +19,7 @@ public class PacienteObraSocialDAOImpl implements IPacienteObraSocialDAO {
     public boolean register(PacienteObraSocial pacienteObraSocial) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO PacienteObraSocial(idObraSocial, idPaciente) VALUES (?,?)";
+        String sql = "INSERT INTO PacienteObraSocial(id_ObraSocial, id_Paciente) VALUES (?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -40,7 +40,7 @@ public class PacienteObraSocialDAOImpl implements IPacienteObraSocialDAO {
     public List<PacienteObraSocial> obtain(PacienteObraSocial pacienteObraSocial) {
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM PacienteObraSocial ORDER BY id";
+        String sql = "SELECT * FROM PacienteObraSocial ORDER BY id_obrasocial";
         List<PacienteObraSocial> pacienteObraSocialList = new ArrayList<PacienteObraSocial>();
         try{
             DBConnection = DBConnector.getInstance();
@@ -67,7 +67,7 @@ public class PacienteObraSocialDAOImpl implements IPacienteObraSocialDAO {
     public boolean delete(PacienteObraSocial pacienteObraSocial) {
         boolean delete = false;
         PreparedStatement pstm = null;
-        String sql = "DELETE FROM PacienteObraSocial WHERE idObraSocial = ? AND idPaciente = ?";
+        String sql = "DELETE FROM PacienteObraSocial WHERE id_ObraSocial = ? AND id_Paciente = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -88,7 +88,7 @@ public class PacienteObraSocialDAOImpl implements IPacienteObraSocialDAO {
     public boolean modify(PacienteObraSocial pacienteObraSocial, PacienteObraSocial aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE PacienteObraSocial SET idObraSocial = ?, idPaciente = ? WHERE idObraSocial = ? AND idPaciente = ?";
+        String sql = "UPDATE PacienteObraSocial SET id_ObraSocial = ?, id_Paciente = ? WHERE id_ObraSocial = ? AND id_Paciente = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();

@@ -7,12 +7,26 @@ package GUIComponents;
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
 import java.util.List;
+import java.util.Properties;
+import org.jdatepicker.impl.DateComponentFormatter;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
 /**
  *
  * @author franc
  */
 public class PanelAgregarTurno extends Panel {
+
+
+    //IMPORTANTE datepicker necesita un datepanel, que necesita un datemodel, la inicializacion de los mismos esta en el constructor
+    // link de instruccion : https://www.codejava.net/java-se/swing/how-to-use-jdatepicker-to-display-calendar-component
+
+    private JDatePickerImpl datePicker;
+    private JDatePanelImpl datePanel;
+
+    private UtilDateModel model;
 
     private static PanelAgregarTurno panelAgregarTurno;
 
@@ -28,6 +42,17 @@ public class PanelAgregarTurno extends Panel {
      */
     private PanelAgregarTurno() {
         initComponents();
+        model= new UtilDateModel();
+
+        //IMPORTANTE a partir de la version 1.3.4 de JDatePicker se necesita darle properties al DatePanel
+        // link: https://stackoverflow.com/questions/26794698/how-do-i-implement-jdatepicker
+        Properties p = new Properties();
+        p.put("text.today", "Today");
+        p.put("text.month", "Month");
+        p.put("text.year", "Year");
+        datePanel=new JDatePanelImpl(model,p);
+        datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());
+        datePickerPanel.add(datePicker);
     }
 
 
@@ -61,6 +86,7 @@ public class PanelAgregarTurno extends Panel {
         CalendarTable = new javax.swing.JTable();
         flechaDerButton = new javax.swing.JLabel();
         flechaIzqButton = new javax.swing.JLabel();
+        datePickerPanel = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(223, 246, 255));
         setPreferredSize(new java.awt.Dimension(907, 652));
@@ -129,7 +155,7 @@ public class PanelAgregarTurno extends Panel {
         CalendarTable.setGridColor(new java.awt.Color(223, 244, 255));
         jScrollPane1.setViewportView(CalendarTable);
 
-        flechaDerButton.setText("/*flechita*/");
+        flechaDerButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/right-arrow 24x24.png"))); // NOI18N
         flechaDerButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         flechaDerButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -137,13 +163,16 @@ public class PanelAgregarTurno extends Panel {
             }
         });
 
-        flechaIzqButton.setText("/*flechita*/");
+        flechaIzqButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/left-arrow 24x24.png"))); // NOI18N
         flechaIzqButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         flechaIzqButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 flechaIzqButtonMousePressed(evt);
             }
         });
+
+        datePickerPanel.setBackground(new java.awt.Color(223, 246, 255));
+        datePickerPanel.setLayout(new java.awt.CardLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -157,10 +186,11 @@ public class PanelAgregarTurno extends Panel {
                     .addComponent(profesionalCB, 0, 202, Short.MAX_VALUE)
                     .addComponent(pacienteTF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(95, 95, 95)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3)
-                    .addComponent(servicioTF, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(servicioTF, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                    .addComponent(jLabel6)
+                    .addComponent(datePickerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
@@ -189,13 +219,15 @@ public class PanelAgregarTurno extends Panel {
                     .addComponent(jLabel6)
                     .addComponent(jLabel4))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(profesionalCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(horaInicioTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(horaInicioTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(profesionalCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(datePickerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -213,7 +245,7 @@ public class PanelAgregarTurno extends Panel {
                             .addComponent(flechaDerButton)
                             .addComponent(flechaIzqButton))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
@@ -261,6 +293,7 @@ public class PanelAgregarTurno extends Panel {
     private javax.swing.JTable CalendarTable;
     private javax.swing.JLabel cancelarButton;
     private javax.swing.JLabel confirmarButton;
+    private javax.swing.JPanel datePickerPanel;
     private javax.swing.JLabel flechaDerButton;
     private javax.swing.JLabel flechaIzqButton;
     private javax.swing.JTextField horaFinTF;

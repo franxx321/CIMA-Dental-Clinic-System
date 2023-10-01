@@ -18,7 +18,7 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
     public boolean register(Cobertura cobertura) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO Cobertura(id_obrasocial, id_prestaciones, procentaje, tope) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO Cobertura(id_obrasocial, id_prestaciones, procentaje, tope,codigo) VALUES (?,?,?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -27,6 +27,7 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
             pstm.setInt(2, cobertura.getIdPrestacion());
             pstm.setFloat(3, cobertura.getPorcentaje());
             pstm.setFloat(4, cobertura.getTope());
+            pstm.setString(5,cobertura.getCodigo());
             pstm.execute(sql);
             register = true;
             pstm.close();
@@ -91,7 +92,7 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
     public boolean modify(Cobertura cobertura, Cobertura aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE Cobertura SET id_paciente = ?, id_prestaciones = ?, porcentaje = ?, tope = ? WHERE id_paciente = ?";
+        String sql = "UPDATE Cobertura SET id_paciente = ?, id_prestaciones = ?, porcentaje = ?, tope = ?, codigo = ? WHERE id_obrasocial = ?";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -100,6 +101,8 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
             pstm.setInt(2, aux.getIdPrestacion());
             pstm.setFloat(3, aux.getPorcentaje());
             pstm.setFloat(4, aux.getTope());
+            pstm.setString(5,aux.getCodigo());
+            pstm.setInt(6, cobertura.getIdObraSocial());
             pstm.execute(sql);
             modify = true;
             pstm.close();

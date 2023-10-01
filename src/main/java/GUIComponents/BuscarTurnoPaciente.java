@@ -4,6 +4,8 @@
  */
 package GUIComponents;
 
+import Utils.GUIUtils.PanelGUIHandler;
+
 /**
  *
  * @author franc
@@ -134,7 +136,7 @@ public class BuscarTurnoPaciente extends javax.swing.JPanel {
     }//GEN-LAST:event_cancelarButtonMousePressed
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
-        // TODO add your handling code here:
+        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.modificarTurno,null);
     }//GEN-LAST:event_confirmarButtonMousePressed
 
 

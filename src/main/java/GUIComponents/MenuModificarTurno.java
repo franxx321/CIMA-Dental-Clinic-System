@@ -6,14 +6,29 @@ package GUIComponents;
 
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
+import org.jdatepicker.impl.DateComponentFormatter;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
 
 import java.util.List;
+import java.util.Properties;
 
 /**
  *
  * @author franc
  */
 public class MenuModificarTurno extends Panel {
+
+
+    //IMPORTANTE datepicker necesita un datepanel, que necesita un datemodel, la inicializacion de los mismos esta en el constructor
+    // link de instruccion : https://www.codejava.net/java-se/swing/how-to-use-jdatepicker-to-display-calendar-component
+    private JDatePickerImpl datePicker;
+    private JDatePanelImpl datePanel;
+    private UtilDateModel model;
+    
+    
 
     private static MenuModificarTurno modificarTurno;
 
@@ -23,18 +38,34 @@ public class MenuModificarTurno extends Panel {
         }
         return modificarTurno;
     }
+    
+    
 
     /**
      * Creates new form ModificarTurno
      */
     private MenuModificarTurno() {
         initComponents();
+
+
+        model= new UtilDateModel();
+
+        //IMPORTANTE a partir de la version 1.3.4 de JDatePicker se necesita darle properties al DatePanel
+        // link: https://stackoverflow.com/questions/26794698/how-do-i-implement-jdatepicker
+        Properties p = new Properties();
+        p.put("text.today", "Today");
+        p.put("text.month", "Month");
+        p.put("text.year", "Year");
+        datePanel=new JDatePanelImpl(model,p);
+        datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());
+        datePickerPanel.add(datePicker);
     }
 
 
 
     @Override
     public void setup(List<Object> arguments) {
+        
 
     }
 
@@ -68,8 +99,8 @@ public class MenuModificarTurno extends Panel {
         jLabel10 = new javax.swing.JLabel();
         descuentoTF = new javax.swing.JTextField();
         asistioCheckBox = new javax.swing.JCheckBox();
-        jTextField2 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        datePickerPanel = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(223, 246, 255));
 
@@ -109,7 +140,7 @@ public class MenuModificarTurno extends Panel {
 
         pacienteLabel.setText("Paciente");
 
-        flechaIzqButton.setText("/*flechita*/");
+        flechaIzqButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/left-arrow 24x24.png"))); // NOI18N
         flechaIzqButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         flechaIzqButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -133,7 +164,7 @@ public class MenuModificarTurno extends Panel {
             }
         });
 
-        flechaDerechaButton.setText("/*flechita*/");
+        flechaDerechaButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/right-arrow 24x24.png"))); // NOI18N
         flechaDerechaButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         flechaDerechaButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -156,6 +187,10 @@ public class MenuModificarTurno extends Panel {
 
         jLabel7.setText("%");
 
+        datePickerPanel.setBackground(new java.awt.Color(223, 246, 255));
+        datePickerPanel.setPreferredSize(new java.awt.Dimension(100, 29));
+        datePickerPanel.setLayout(new java.awt.CardLayout());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -171,16 +206,16 @@ public class MenuModificarTurno extends Panel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(88, 88, 88)
                                 .addComponent(jLabel10))
                             .addComponent(jLabel6)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(15, 15, 15)
-                                .addComponent(configurarPrestacionesButton)))
+                                .addComponent(configurarPrestacionesButton))
+                            .addComponent(datePickerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(129, 129, 129)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(horaFinTF, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -209,21 +244,18 @@ public class MenuModificarTurno extends Panel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(profesionalLabel)
-                            .addComponent(horaInicioTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(profesionalLabel)
+                        .addComponent(horaInicioTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(datePickerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,7 +288,7 @@ public class MenuModificarTurno extends Panel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cancelarButton)
                             .addComponent(confirmarButton))
-                        .addGap(0, 2, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -293,6 +325,7 @@ public class MenuModificarTurno extends Panel {
     private javax.swing.JLabel cancelarButton;
     private javax.swing.JLabel configurarPrestacionesButton;
     private javax.swing.JLabel confirmarButton;
+    private javax.swing.JPanel datePickerPanel;
     private javax.swing.JTextField descuentoTF;
     private javax.swing.JLabel flechaDerechaButton;
     private javax.swing.JLabel flechaIzqButton;
@@ -308,7 +341,6 @@ public class MenuModificarTurno extends Panel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel pacienteLabel;
     private javax.swing.JLabel precioLabel;
     private javax.swing.JLabel profesionalLabel;

@@ -6,6 +6,7 @@ package GUIComponents;
 
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
+import Utils.TableGenerator.CalendarTableGenerator;
 import org.jdatepicker.impl.DateComponentFormatter;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -65,6 +66,9 @@ public class MenuModificarTurno extends Panel {
 
     @Override
     public void setup(List<Object> arguments) {
+        calendarTable.setModel(CalendarTableGenerator.getInstance().resultToTable());
+
+
 
     }
 

@@ -7,13 +7,17 @@ package GUIComponents;
 import Objetos.Turno;
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import org.jdatepicker.impl.DateComponentFormatter;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 /**
  *
  * @author franc
@@ -289,9 +293,47 @@ public class PanelAgregarTurno extends Panel {
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
         Turno newTurno = new Turno();
 
-        date newhorafin = horaFinTF.getText();
-        newTurno.setHoraFin();
-        horaInicioTF.getText();
+        Date fecha = (Date) datePicker.getModel().getValue();
+
+        Date HI = new Date();
+        Date HF = new Date();
+        long milisegundos = fecha.getTime();
+        long horaInicioEnMilisegundos=0;
+        long horafinEnMilisegundos=0;
+        String horaInicioString = horaInicioTF.getText();
+        String horaFinString = horaFinTF.getText();
+
+
+        Pattern patron = Pattern.compile("^([01]?[0-9]|2[0-3]):([0-5][0-9])$");
+        Matcher matcher1 = patron.matcher(horaInicioString);
+        Matcher matcher2 = patron.matcher(horaFinString);
+
+        if (matcher1.matches()) {
+            int hora1 = Integer.parseInt(matcher1.group(1));
+            int minutos1 = Integer.parseInt(matcher1.group(2));
+            horaInicioEnMilisegundos = (hora1 * 60 * 60 * 1000) + (minutos1 * 60 * 1000);
+        }else{
+            JOptionPane.showMessageDialog(null, "Inserte una hora de inicio correcta.");
+            horaInicioTF.setText("");
+        }
+
+        if (matcher2.matches()) {
+            int hora2 = Integer.parseInt(matcher2.group(1));
+            int minutos2 = Integer.parseInt(matcher2.group(2));
+            horafinEnMilisegundos = (hora2 * 60 * 60 * 1000) + (minutos2 * 60 * 1000);
+        }else{
+            JOptionPane.showMessageDialog(null, "Inserte una hora de fin correcta.");
+            horaFinTF.setText("");
+        }
+
+
+        HI.setTime(horaInicioEnMilisegundos + milisegundos);
+        HF.setTime(horafinEnMilisegundos + milisegundos);
+
+        newTurno.setHoraInicio(HI);
+        newTurno.setHoraFin(HF);
+
+
     }//GEN-LAST:event_confirmarButtonMousePressed
 
     private void flechaDerButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_flechaDerButtonMousePressed

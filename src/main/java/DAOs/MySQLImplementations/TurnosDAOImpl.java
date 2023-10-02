@@ -135,8 +135,6 @@ public class TurnosDAOImpl implements ITurnosDAO {
 
     @Override
     public List<Turno> profesionalFutureApointments(String idprofesional, int week) {
-        Timestamp tmstp = new Timestamp();
-        
         Date date = new Date();
         date.setTime(date.getTime()/86400000);
         return null;

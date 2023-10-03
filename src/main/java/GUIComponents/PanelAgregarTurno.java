@@ -296,31 +296,24 @@ public class PanelAgregarTurno extends Panel {
     }//GEN-LAST:event_cancelarButtonMousePressed
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
-        boolean error =false;
+        boolean error;
         String errorString="";
-        Turno newTurno = new Turno();
         Date fecha = (Date) datePicker.getModel().getValue();
         fecha.setMinutes(0);
         fecha.setHours(0);
         fecha.setSeconds(0);
-
-        Date HI = new Date();
-        Date HF = new Date();
+        String horaInicioString = horaInicioTF.getText().trim();
+        String horaFinString = horaFinTF.getText().trim();
         long milisegundos = fecha.getTime();
         long horaInicioEnMilisegundos=0;
         long horafinEnMilisegundos=0;
         // trim recorta los espacios vacios adelante y atras del string
-        String horaInicioString = horaInicioTF.getText().trim();
-        String horaFinString = horaFinTF.getText().trim();
-
 
         Pattern patron = Pattern.compile("^([01]?[0-9]|2[0-3]):([0-5][0-9])$");
         Matcher matcher1 = patron.matcher(horaInicioString);
         Matcher matcher2 = patron.matcher(horaFinString);
 
         if (matcher1.matches()) {
-            //int hora1 = Integer.parseInt(horaInicioString.substring(0,horaInicioString.indexOf(":")));
-            //int minutos1 = Integer.parseInt(horaInicioString.substring(horaInicioString.indexOf(":")+1));
             int hora1= Integer.parseInt(matcher1.group(1));
             int minutos1= Integer.parseInt(matcher1.group(2));
             horaInicioEnMilisegundos = ((long) hora1 * 60 * 60 * 1000) + ((long) minutos1 * 60 * 1000);
@@ -343,12 +336,10 @@ public class PanelAgregarTurno extends Panel {
             errorString = errorString+"Hora de fin incorrecta.\n";
         }
 
+        horaInicioEnMilisegundos +=milisegundos;
+        horafinEnMilisegundos +=milisegundos;
 
-        HI.setTime(horaInicioEnMilisegundos + milisegundos);
-        HF.setTime(horafinEnMilisegundos + milisegundos);
 
-        newTurno.setHoraInicio(HI);
-        newTurno.setHoraFin(HF);
 
 
     }//GEN-LAST:event_confirmarButtonMousePressed

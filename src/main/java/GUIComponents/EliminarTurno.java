@@ -5,6 +5,7 @@
 package GUIComponents;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -146,7 +147,9 @@ public class EliminarTurno extends Panel {
     }//GEN-LAST:event_buscarButtonMousePressed
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
-        // TODO add your handling code here:
+        long dni;
+        Pattern patron = Pattern.compile("^[1-9]\\d{6,7}$");
+        
     }//GEN-LAST:event_confirmarButtonMousePressed
 
     private void cancelarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMousePressed

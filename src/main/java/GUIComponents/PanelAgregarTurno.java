@@ -27,14 +27,14 @@ public class PanelAgregarTurno extends Panel {
 
 
     //IMPORTANTE datepicker necesita un datepanel, que necesita un datemodel, la inicializacion de los mismos esta en el constructor
-    // link de instruccion : https://www.codejava.net/java-se/swing/how-to-use-jdatepicker-to-display-calendar-component
+    // link de instruccion : <https://www.codejava.net/java-se/swing/how-to-use-jdatepicker-to-display-calendar-component
 
     private JDatePickerImpl datePicker;
     private JDatePanelImpl datePanel;
 
     private UtilDateModel model;
 
-    private boolean working;
+    private boolean working = true;
 
     private static PanelAgregarTurno panelAgregarTurno;
 
@@ -287,6 +287,7 @@ public class PanelAgregarTurno extends Panel {
     private void cancelarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMousePressed
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelTurnos, null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio, null);
+        working=false;
                
     }//GEN-LAST:event_cancelarButtonMousePressed
 
@@ -294,14 +295,17 @@ public class PanelAgregarTurno extends Panel {
         Turno newTurno = new Turno();
 
         Date fecha = (Date) datePicker.getModel().getValue();
+        fecha.setMinutes(0);
+        fecha.setHours(0);
+        fecha.setSeconds(0);
 
         Date HI = new Date();
         Date HF = new Date();
         long milisegundos = fecha.getTime();
         long horaInicioEnMilisegundos=0;
         long horafinEnMilisegundos=0;
-        String horaInicioString = horaInicioTF.getText();
-        String horaFinString = horaFinTF.getText();
+        String horaInicioString = horaInicioTF.getText().trim();
+        String horaFinString = horaFinTF.getText().trim();
 
 
         Pattern patron = Pattern.compile("^([01]?[0-9]|2[0-3]):([0-5][0-9])$");
@@ -309,18 +313,20 @@ public class PanelAgregarTurno extends Panel {
         Matcher matcher2 = patron.matcher(horaFinString);
 
         if (matcher1.matches()) {
-            int hora1 = Integer.parseInt(matcher1.group(1));
-            int minutos1 = Integer.parseInt(matcher1.group(2));
-            horaInicioEnMilisegundos = (hora1 * 60 * 60 * 1000) + (minutos1 * 60 * 1000);
+            //int hora1 = Integer.parseInt(horaInicioString.substring(0,horaInicioString.indexOf(":")));
+            //int minutos1 = Integer.parseInt(horaInicioString.substring(horaInicioString.indexOf(":")+1));
+            int hora1= Integer.parseInt(matcher1.group(1));
+            int minutos1= Integer.parseInt(matcher1.group(2));
+            horaInicioEnMilisegundos = ((long) hora1 * 60 * 60 * 1000) + ((long) minutos1 * 60 * 1000);
         }else{
             JOptionPane.showMessageDialog(null, "Inserte una hora de inicio correcta.");
             horaInicioTF.setText("");
         }
 
         if (matcher2.matches()) {
-            int hora2 = Integer.parseInt(matcher2.group(1));
-            int minutos2 = Integer.parseInt(matcher2.group(2));
-            horafinEnMilisegundos = (hora2 * 60 * 60 * 1000) + (minutos2 * 60 * 1000);
+            int hora2= Integer.parseInt(matcher2.group(1));
+            int minutos2= Integer.parseInt(matcher2.group(2));
+            horafinEnMilisegundos = ((long) hora2 * 60 * 60 * 1000) + ((long) minutos2 * 60 * 1000);
         }else{
             JOptionPane.showMessageDialog(null, "Inserte una hora de fin correcta.");
             horaFinTF.setText("");

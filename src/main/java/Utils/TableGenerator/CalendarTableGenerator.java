@@ -6,6 +6,7 @@ import Objetos.Turno;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.DefaultTextUI;
+import java.awt.*;
 import java.sql.ResultSet;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +32,7 @@ public class CalendarTableGenerator implements TableGenerator{
         JTable table = new JTable();
         DefaultTableModel tm = resultToTable();
         table.setModel(tm);
+        // c = table.getCellRenderer(1,1).getTableCellRendererComponent(table)
         return table;
     }
 

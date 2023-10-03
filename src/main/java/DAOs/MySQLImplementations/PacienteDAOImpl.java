@@ -4,6 +4,7 @@ import DAOs.Interfaces.IPacienteDAO;
 import Objetos.Paciente;
 import Utils.DBUtils.DBConnector;
 
+import java.net.UnknownHostException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,15 @@ import java.util.List;
 public class PacienteDAOImpl implements IPacienteDAO {
     DBConnector DBConnection ;
     Connection con = null;
+
+    private static PacienteDAOImpl pacienteDAO;
+
+    public static PacienteDAOImpl getInstance(){
+        if (pacienteDAO==null){
+            pacienteDAO = new PacienteDAOImpl();
+        }
+        return pacienteDAO;
+    }
 
     @Override
     public boolean register(Paciente paciente) {
@@ -112,5 +122,37 @@ public class PacienteDAOImpl implements IPacienteDAO {
             e.printStackTrace();
         }
         return pacienteList;
+    }
+
+
+    @Override
+    public Paciente getByDni(long dni){
+        Paciente paciente = new Paciente();
+        try{
+        DBConnector connector = DBConnector.getInstance();
+        connector.startConnection();
+        Connection conn = connector.getConnection();
+        PreparedStatement ptsm = conn.prepareStatement("SELECT * FROM pacientes WHERE dni = ?");
+        ptsm.setLong(1,dni);
+        ResultSet rs = ptsm.executeQuery();
+        rs.next();
+        if(rs.getInt(1)==0){
+            paciente.setDni(-1);
+        }
+        else {
+            paciente.setId(rs.getInt(1));
+            paciente.setNombre(rs.getString(2));
+            paciente.setDni(rs.getLong(3));
+            paciente.setFechaNacimiento(rs.getDate(4));
+            paciente.setEmail(rs.getString(5));
+            paciente.setSexo(rs.getString(6).charAt(0));
+        }
+        con.close();
+        }
+        catch  (SQLException e){
+            System.out.println("fallo paciente Dao"+e.getMessage());
+        }
+
+        return paciente;
     }
 }

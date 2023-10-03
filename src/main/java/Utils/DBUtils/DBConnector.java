@@ -26,7 +26,7 @@ public  class  DBConnector  {
     
     
 
-    public void startConnection()throws SQLException, ClassNotFoundException, UnknownHostException {
+    public void startConnection()throws SQLException {
         try{
             
         this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306;database=bd_is;encrypt=true;trustServerCertificate=true;", user, pass);

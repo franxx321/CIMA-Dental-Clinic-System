@@ -11,5 +11,8 @@ public interface IPacienteDAO {
     boolean register(Paciente paciente);
 
     public boolean delete(Paciente paciente);
+
     public boolean modify(Paciente paciente, Paciente aux);
+
+    public Paciente getByDni(long dni);
 }

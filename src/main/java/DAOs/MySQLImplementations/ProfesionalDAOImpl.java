@@ -1,6 +1,7 @@
 package DAOs.MySQLImplementations;
 
 import DAOs.Interfaces.IProfesionalDAO;
+import Objetos.Paciente;
 import Objetos.Profesional;
 import Utils.DBUtils.DBConnector;
 
@@ -14,6 +15,25 @@ import java.util.List;
 public class ProfesionalDAOImpl implements IProfesionalDAO {
     DBConnector DBConnection;
     Connection con = null;
+
+    private static ProfesionalDAOImpl profesionalDAO;
+
+    public static ProfesionalDAOImpl getInstance(){
+        if(profesionalDAO==null){
+            profesionalDAO = new ProfesionalDAOImpl();
+        }
+        return profesionalDAO;
+    }
+    private ProfesionalDAOImpl(){
+
+    }
+
+
+
+
+
+
+
     @Override
     public boolean register(Profesional profesional) {
         boolean register = false;

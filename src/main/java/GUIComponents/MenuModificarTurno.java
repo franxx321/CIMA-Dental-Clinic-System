@@ -13,6 +13,7 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 
+import javax.swing.*;
 import java.util.List;
 import java.util.Properties;
 
@@ -50,7 +51,6 @@ public class MenuModificarTurno extends Panel {
 
 
         model= new UtilDateModel();
-
         //IMPORTANTE a partir de la version 1.3.4 de JDatePicker se necesita darle properties al DatePanel
         // link: https://stackoverflow.com/questions/26794698/how-do-i-implement-jdatepicker
         Properties p = new Properties();
@@ -66,7 +66,13 @@ public class MenuModificarTurno extends Panel {
 
     @Override
     public void setup(List<Object> arguments) {
-        calendarTable.setModel(CalendarTableGenerator.getInstance().resultToTable());
+        //calendarTable.setModel(CalendarTableGenerator.getInstance().resultToTable());
+        calendarTable= CalendarTableGenerator.getInstance().generateTable(null);
+        jScrollPane1.removeAll();
+        jScrollPane1.add(calendarTable);
+        jScrollPane1.repaint();
+        jScrollPane1.revalidate();
+
 
 
 

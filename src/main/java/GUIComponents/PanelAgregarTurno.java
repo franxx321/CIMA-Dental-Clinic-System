@@ -27,7 +27,7 @@ public class PanelAgregarTurno extends Panel {
 
 
     //IMPORTANTE datepicker necesita un datepanel, que necesita un datemodel, la inicializacion de los mismos esta en el constructor
-    // link de instruccion : <https://www.codejava.net/java-se/swing/how-to-use-jdatepicker-to-display-calendar-component
+    // link de instruccion : https://www.codejava.net/java-se/swing/how-to-use-jdatepicker-to-display-calendar-component
 
     private JDatePickerImpl datePicker;
     private JDatePanelImpl datePanel;
@@ -58,20 +58,24 @@ public class PanelAgregarTurno extends Panel {
         p.put("text.today", "Today");
         p.put("text.month", "Month");
         p.put("text.year", "Year");
+        Date today = new Date();
+        model.setDate(today.getYear(), today.getMonth(),today.getDay());
         datePanel=new JDatePanelImpl(model,p);
         datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());
         datePickerPanel.add(datePicker);
+
     }
 
 
     @Override
     public void setup(List<Object> arguments) {
         if (!working){
+            Date today = new Date();
             profesionalCB.setSelectedIndex(0);
             pacienteTF.setText("");
             horaFinTF.setText("");
             horaInicioTF.setText("");
-
+            model.setDate(today.getYear(), today.getMonth(),today.getDay());
 
         }
 
@@ -292,8 +296,9 @@ public class PanelAgregarTurno extends Panel {
     }//GEN-LAST:event_cancelarButtonMousePressed
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
+        boolean error =false;
+        String errorString="";
         Turno newTurno = new Turno();
-
         Date fecha = (Date) datePicker.getModel().getValue();
         fecha.setMinutes(0);
         fecha.setHours(0);
@@ -319,9 +324,12 @@ public class PanelAgregarTurno extends Panel {
             int hora1= Integer.parseInt(matcher1.group(1));
             int minutos1= Integer.parseInt(matcher1.group(2));
             horaInicioEnMilisegundos = ((long) hora1 * 60 * 60 * 1000) + ((long) minutos1 * 60 * 1000);
-        }else{
-            JOptionPane.showMessageDialog(null, "Inserte una hora de inicio correcta.");
+        }else {
+            // JOptionPane.showMessageDialog(null, "Inserte una hora de inicio correcta.");
+            error = true;
             horaInicioTF.setText("");
+            errorString = errorString+"Hora de inicio incorrecta.\n";
+
         }
 
         if (matcher2.matches()) {
@@ -329,8 +337,10 @@ public class PanelAgregarTurno extends Panel {
             int minutos2= Integer.parseInt(matcher2.group(2));
             horafinEnMilisegundos = ((long) hora2 * 60 * 60 * 1000) + ((long) minutos2 * 60 * 1000);
         }else{
-            JOptionPane.showMessageDialog(null, "Inserte una hora de fin correcta.");
+            //JOptionPane.showMessageDialog(null, "Inserte una hora de fin correcta.");
+            error = true;
             horaFinTF.setText("");
+            errorString = errorString+"Hora de fin incorrecta.\n";
         }
 
 

@@ -5,6 +5,7 @@
 package GUIComponents;
 
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -143,13 +144,23 @@ public class EliminarTurno extends Panel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void buscarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarButtonMousePressed
-        // TODO add your handling code here:
+        String dniString = jTextField1.getText().trim();
+        String errorString = "";
+        boolean error = false;
+        Pattern patron = Pattern.compile("^[1-9]\\d{6,7}$");
+        Matcher matcher1 = patron.matcher(dniString);
+        if (matcher1.matches()){
+            long dni1 = Long.parseLong(matcher1.group(1));
+        } else {
+            error = true;
+            jTextField1.setText("");
+            errorString = errorString + "DNI Ingresado incorrecto \n";
+        }
+
     }//GEN-LAST:event_buscarButtonMousePressed
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
-        long dni;
-        Pattern patron = Pattern.compile("^[1-9]\\d{6,7}$");
-        
+
     }//GEN-LAST:event_confirmarButtonMousePressed
 
     private void cancelarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMousePressed

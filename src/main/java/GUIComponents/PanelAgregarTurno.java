@@ -304,6 +304,7 @@ public class PanelAgregarTurno extends Panel {
         long milisegundos = fecha.getTime();
         long horaInicioEnMilisegundos=0;
         long horafinEnMilisegundos=0;
+        // trim recorta los espacios vacios adelante y atras del string
         String horaInicioString = horaInicioTF.getText().trim();
         String horaFinString = horaFinTF.getText().trim();
 

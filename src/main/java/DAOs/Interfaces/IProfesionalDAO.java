@@ -9,4 +9,5 @@ public interface IProfesionalDAO {
     public List<Profesional> obtain(Profesional profesional);
     public boolean delete(Profesional profesional);
     public boolean modify(Profesional profesional, Profesional aux);
+    public int getIdProfesional(String nombre);
 }

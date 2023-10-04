@@ -363,7 +363,7 @@ public class PanelAgregarTurno extends Panel {
         }else{
             horaInicioEnMilisegundos +=milisegundos;
             horafinEnMilisegundos +=milisegundos;
-            addTurno()
+            //addTurno()
 
         }
 

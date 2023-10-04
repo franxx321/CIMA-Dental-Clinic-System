@@ -12,4 +12,6 @@ public interface ITurnosDAO {
 
     public List<Turno> profesionalFutureApointments(String idprofesional, int week);
 
+    public List<Turno> getByPacienteId(int idPaciente);
+
 }

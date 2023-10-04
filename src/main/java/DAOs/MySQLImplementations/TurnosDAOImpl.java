@@ -127,6 +127,7 @@ public class TurnosDAOImpl implements ITurnosDAO {
             modify = true;
             pstm.close();
             con.close();
+
         } catch (SQLException e){
             System.out.println("Error: Clase TurnoDAOImpl, metodo modify. " +e.getMessage());
         }
@@ -139,4 +140,34 @@ public class TurnosDAOImpl implements ITurnosDAO {
         date.setTime(date.getTime()/86400000);
         return null;
     }
+
+    @Override
+    public List<Turno> getByPacienteId(int idPaciente) {
+        List<Turno> turnos = new ArrayList<>();
+        try {
+            DBConnection = DBConnector.getInstance();
+            con = DBConnection.getConnection();
+            PreparedStatement ptsm = con.prepareStatement("SELECT * FROM turnos where id_paciente = ? ");
+            ptsm.setInt(1,idPaciente);
+            ResultSet rs = ptsm.executeQuery();
+            while(rs.next()){
+                Turno t = new Turno();
+                t.setId(rs.getInt(1));
+                t.setHoraInicio(new Date(rs.getTimestamp(2).getTime()));
+                t.setHoraFin(new Date(rs.getTimestamp(3).getTime()));
+                t.setAsistio(rs.getBoolean(4));
+                t.setIdPaciente(rs.getInt(5));
+                t.setIdProfesional(rs.getInt(6));
+                t.setValor(rs.getFloat(7));
+                t.setDescuento(rs.getFloat(8));
+                turnos.add(t);
+            }
+            con.close();
+        }
+        catch (SQLException e){
+            System.out.printf("Fallo Turnos Dao IMPL, getByDNI"+e.getMessage());
+        }
+    }
+
+
 }

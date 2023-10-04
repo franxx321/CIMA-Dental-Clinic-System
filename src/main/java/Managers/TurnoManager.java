@@ -1,5 +1,7 @@
 package Managers;
 
+import DAOs.MySQLImplementations.TurnosDAOImpl;
+import Objetos.Monto;
 import Objetos.Paciente;
 import Objetos.Prestacion;
 import Objetos.Turno;
@@ -38,15 +40,25 @@ public class TurnoManager {
         if(idProfesional == -1){
             error = true;
             errorString = errorString + "El profesional no esta cargado";
+
+
         } else{
             turno.setIdProfesional(idProfesional);
+            Monto monto = MontoManager.getInstance().getByIds(idProfesional,prestacion.getId());
+            turno.setValor(monto.getPrecio());
         }
+        turno.setDescuento((float)0.0);
+
+
 
     }
 
     public List<Prestacion> getAllPrestaciones(){
         return PrestacionManager.getInstance().getAllPrestacion();
+    }
 
+    public List<Turno> getByPacienteId (int idPaciente){
+        return TurnosDAOImpl.getInstance().getByPacienteId(idPaciente);
     }
 
 

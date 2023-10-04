@@ -296,13 +296,13 @@ public class PanelAgregarTurno extends Panel {
         String prestacionString = servicioTF.getText();
         Pattern patron = Pattern.compile("^("+prestacionString+")$");
         somePrestacion= new ArrayList<>();
-
         for (Prestacion prestacion:allPrestacion) {
             Matcher matcher = patron.matcher(prestacion.getNombre());
             if (matcher.matches()){
                 somePrestacion.add(prestacion);
             }
         }
+
 
     }//GEN-LAST:event_servicioTFActionPerformed
 

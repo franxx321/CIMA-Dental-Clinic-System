@@ -14,4 +14,6 @@ public interface IMontoDAO {
 
     public boolean modify (Monto monto, Monto aux);
 
+    public Monto getByIds(int idProfesional, int idPrestacion);
+
 }

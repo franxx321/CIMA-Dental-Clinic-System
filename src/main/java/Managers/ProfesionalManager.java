@@ -1,4 +1,4 @@
-package DAOs.Managers;
+package Managers;
 import DAOs.MySQLImplementations.ProfesionalDAOImpl;
 
 public class ProfesionalManager {
@@ -9,8 +9,6 @@ public class ProfesionalManager {
         }
         return profesionalManager;
     }
-
-
 
     private ProfesionalManager(){
     }

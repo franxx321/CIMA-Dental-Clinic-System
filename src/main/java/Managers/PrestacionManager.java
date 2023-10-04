@@ -1,4 +1,9 @@
-package DAOs.Managers;
+package Managers;
+
+import DAOs.MySQLImplementations.PrestacionDAOImpl;
+import Objetos.Prestacion;
+
+import java.util.List;
 
 public class PrestacionManager {
 
@@ -12,6 +17,10 @@ public class PrestacionManager {
     }
 
     private PrestacionManager() {
+    }
+
+    public List<Prestacion> getAllPrestacion(){
+        return PrestacionDAOImpl.getInstance().obtain();
     }
 
    // public int idByName

@@ -1,11 +1,24 @@
-package DAOs.Managers;
+package Managers;
 
 import Objetos.Paciente;
 import Objetos.Prestacion;
 import Objetos.Turno;
 import java.util.Date;
+import java.util.List;
 
 public class TurnoManager {
+
+    private static TurnoManager turnoManager;
+
+    public static TurnoManager getInstance(){
+        if(turnoManager== null){
+            turnoManager = new TurnoManager();
+        }
+        return turnoManager;
+    }
+
+    private TurnoManager() {
+    }
 
     public void addTurno(Prestacion prestacion, String profesionalCB, long pacienteDni, long horaInicioTF, long horaFinTF, Date fecha){
         Turno turno = new Turno();
@@ -30,5 +43,11 @@ public class TurnoManager {
         }
 
     }
+
+    public List<Prestacion> getAllPrestaciones(){
+        return PrestacionManager.getInstance().getAllPrestacion();
+
+    }
+
 
 }

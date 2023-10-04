@@ -51,9 +51,8 @@ public class CalendarTableGenerator implements TableGenerator{
             if(auxDate.getDate()==1){
                 auxDate.setMonth(auxDate.getMonth()+1);
             }
-            header.add(i,Integer.toString(auxDate.getDate())+"/"+Integer.toString(auxDate.getMonth()));
+            header.add(i,Integer.toString(auxDate.getDate())+"/"+Integer.toString(auxDate.getMonth()+1));
         }
-        //data.add(header);
         int hora=8;
         int minutos=0;
         int hora2=8;

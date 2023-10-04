@@ -4,10 +4,13 @@
  */
 package GUIComponents;
 
+import Managers.TurnoManager;
+import Objetos.Prestacion;
 import Objetos.Turno;
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -37,6 +40,11 @@ public class PanelAgregarTurno extends Panel {
     private boolean working = true;
 
     private static PanelAgregarTurno panelAgregarTurno;
+
+    private List<Prestacion> allPrestacion;
+
+    private List<Prestacion> somePrestacion;
+
 
     public static PanelAgregarTurno getInstance(){
         if(panelAgregarTurno==null){
@@ -76,7 +84,7 @@ public class PanelAgregarTurno extends Panel {
             horaFinTF.setText("");
             horaInicioTF.setText("");
             model.setDate(today.getYear(), today.getMonth(),today.getDay());
-
+            allPrestacion= TurnoManager.getInstance().getAllPrestaciones();
         }
 
     }
@@ -285,14 +293,24 @@ public class PanelAgregarTurno extends Panel {
     }//GEN-LAST:event_pacienteTFActionPerformed
 
     private void servicioTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servicioTFActionPerformed
-        // TODO add your handling code here:
+        String prestacionString = servicioTF.getText();
+        Pattern patron = Pattern.compile("^("+prestacionString+")$");
+        somePrestacion= new ArrayList<>();
+
+        for (Prestacion prestacion:allPrestacion) {
+            Matcher matcher = patron.matcher(prestacion.getNombre());
+            if (matcher.matches()){
+                somePrestacion.add(prestacion);
+            }
+        }
+
     }//GEN-LAST:event_servicioTFActionPerformed
 
     private void cancelarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMousePressed
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelTurnos, null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio, null);
         working=false;
-               
+
     }//GEN-LAST:event_cancelarButtonMousePressed
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed

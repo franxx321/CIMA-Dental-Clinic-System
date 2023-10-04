@@ -1,4 +1,4 @@
-package DAOs.Managers;
+package Managers;
 
 import DAOs.MySQLImplementations.PacienteDAOImpl;
 import Objetos.Paciente;

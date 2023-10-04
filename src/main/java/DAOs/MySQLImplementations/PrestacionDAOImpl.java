@@ -12,6 +12,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PrestacionDAOImpl implements IPrestacionDAO {
+
+    private static PrestacionDAOImpl prestacionDAO;
+
+    public static PrestacionDAOImpl getInstance(){
+        if(prestacionDAO ==null){
+            prestacionDAO= new PrestacionDAOImpl();
+        }
+        return prestacionDAO;
+    }
+
+    private PrestacionDAOImpl() {
+
+    }
+
     DBConnector DBConnection ;
     Connection con = null;
     @Override
@@ -37,7 +51,7 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
     }
 
     @Override
-    public List<Prestacion> obtain(Prestacion prestacion) {
+    public List<Prestacion> obtain() {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM Prestaciones ORDER BY id";

@@ -20,7 +20,7 @@ public class TurnoManager {
     private TurnoManager() {
     }
 
-    public void addTurno(Prestacion prestacion, String profesionalCB, long pacienteDni, long horaInicioTF, long horaFinTF, Date fecha){
+    public void addTurno(Prestacion prestacion, String profesionalCB, long pacienteDni, long horaInicioTF, long horaFinTF){
         Turno turno = new Turno();
         int idProfesional = 0;
         boolean error = false;
@@ -41,6 +41,7 @@ public class TurnoManager {
         } else{
             turno.setIdProfesional(idProfesional);
         }
+
 
     }
 

@@ -314,8 +314,12 @@ public class PanelAgregarTurno extends Panel {
     }//GEN-LAST:event_cancelarButtonMousePressed
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
-        boolean error;
+        boolean error = false;
         String errorString="";
+        Prestacion prestacion;
+        String profesional;
+        long pacienteDni;
+
         Date fecha = (Date) datePicker.getModel().getValue();
         fecha.setMinutes(0);
         fecha.setHours(0);
@@ -354,8 +358,15 @@ public class PanelAgregarTurno extends Panel {
             errorString = errorString+"Hora de fin incorrecta.\n";
         }
 
-        horaInicioEnMilisegundos +=milisegundos;
-        horafinEnMilisegundos +=milisegundos;
+        if(error){
+            JOptionPane.showMessageDialog(null, "Error!\n" + errorString);
+        }else{
+            horaInicioEnMilisegundos +=milisegundos;
+            horafinEnMilisegundos +=milisegundos;
+            addTurno()
+
+        }
+
 
 
 

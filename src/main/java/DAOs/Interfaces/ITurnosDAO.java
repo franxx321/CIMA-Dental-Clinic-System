@@ -17,5 +17,7 @@ public interface ITurnosDAO {
 
     public List <Turno> getOverlappingturnos(int idProfesional , Date horaInicio, Date horaFin);
 
+    public Turno getByDateProfesional(Date horaInicio, Date HoraFin, int idProfesional);
+
 
 }

@@ -103,6 +103,8 @@ public class TurnoDAOImpl implements ITurnosDAO {
         return delete;
     }
 
+
+
     @Override
     public boolean modify(Turno turno, Turno aux) {
         boolean modify = false;
@@ -219,6 +221,43 @@ public class TurnoDAOImpl implements ITurnosDAO {
         }
         return turnoList;
     }
+
+    public Turno getByDateProfesional(Date horaInicio, Date horaFin, int idProfesional){
+        Turno turno = null;
+        try {
+            DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
+            con = DBConnection.getConnection();
+            PreparedStatement ptsm = con.prepareStatement("SELECT * " +
+                    "FROM turnos " +
+                    "where horaInicio =? and horaFin = ? and id_profesional = ?");
+            ptsm.setTimestamp(1,new Timestamp(horaInicio.getTime()));
+            ptsm.setTimestamp(2,new Timestamp(horaFin.getTime()));
+            ptsm.setInt(3,idProfesional);
+            ResultSet rs = ptsm.executeQuery();
+            turno= new Turno();
+            if(!rs.next()){
+                turno.setId(-1);
+            }
+            else{
+                turno.setId(rs.getInt(1));
+                turno.setHoraInicio(new Date(rs.getTimestamp(2).getTime()));
+                turno.setHoraInicio(new Date(rs.getTimestamp(3).getTime()));
+                turno.setAsistio(rs.getBoolean(4));
+                turno.setIdPaciente(rs.getInt(5));
+                turno.setIdProfesional(rs.getInt(6));
+                turno.setValor(rs.getFloat(7));
+                turno.setDescuento(rs.getFloat(8));
+            }
+
+        }
+        catch (SQLException e){
+            System.out.println("fallo Turnos DAO Impl get by date profesional"+ e.getMessage());
+        }
+        return turno;
+    }
+
+
 
 
 

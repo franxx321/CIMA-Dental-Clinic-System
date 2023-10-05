@@ -161,6 +161,16 @@ public class EliminarTurno extends Panel {
     }//GEN-LAST:event_buscarButtonMousePressed
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
+        int row = turnosTable.getSelectedRow();
+        String profesional = (String) turnosTable.getModel().getValueAt(row,2);
+        String fechaCompleta = (String) turnosTable.getModel().getValueAt(row,3);
+        String diaString = fechaCompleta.substring(0, fechaCompleta.indexOf("/"));
+        String aux1 = fechaCompleta.substring(fechaCompleta.indexOf("/") + 1);
+        String mesString = aux1.substring(aux1.indexOf(0), aux1.indexOf("/"));
+        aux1 = aux1.substring(aux1.indexOf("/") + 1);
+        String anioString = aux1.substring(aux1.indexOf(0), aux1.indexOf("/"));
+        aux1 = aux1.substring(aux1.indexOf("/") + 1);
+        //String
 
     }//GEN-LAST:event_confirmarButtonMousePressed
 

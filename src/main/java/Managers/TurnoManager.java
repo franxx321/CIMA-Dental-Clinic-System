@@ -54,7 +54,7 @@ public class TurnoManager {
             errorString = errorString + "\nLa prestacion no esta cargada";
         } else{
             turnoPrestacion.setIdPrestacion(idPrestacion);
-            turnoPrestacion.setIdTurno(turno.getId());
+            //turnoPrestacion.setIdTurno(turno.getId());
         }
 
 
@@ -74,12 +74,14 @@ public class TurnoManager {
         }
         else {
             TurnoDAOImpl.getInstance().register(turno);
-
+            Turno turno1= this.getByDateProfesional(turno.getHoraInicio(),turno.getHoraFin(),turno.getIdProfesional());
+            turnoPrestacion.setIdTurno(turno1.getId());
             TurnoPrestacionManager.getInstance().addTurnoPrestacion(turnoPrestacion);
         }
     }
 
-    public void deleteTurno(long dni){
+    public void deleteTurno(int id_profesional,Date horaInicio,Date horaFin){
+        TurnoDAOImpl.getInstance().delete(TurnoDAOImpl.getInstance().getByDateProfesional(horaInicio,horaFin,id_profesional));
     }
 
     public List<Prestacion> getAllPrestaciones(){
@@ -87,7 +89,12 @@ public class TurnoManager {
     }
 
     public List<Profesional> getAllProfesional(){
+
         return ProfesionalManager.getInstance().getAll();
+    }
+
+    public Turno getByDateProfesional(Date horaInicio, Date horaFin,int idProfesional){
+        return TurnoDAOImpl.getInstance().getByDateProfesional(horaInicio,horaFin,idProfesional);
     }
 
 

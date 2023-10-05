@@ -27,7 +27,7 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
     public boolean register(Cobertura cobertura) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO Cobertura(id_obrasocial, id_prestaciones, procentaje, tope,codigo) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO Coberturas(id_obrasocial, id_prestaciones, procentaje, tope,codigo) VALUES (?,?,?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             DBConnection.startConnection();
@@ -38,7 +38,7 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
             pstm.setFloat(3, cobertura.getPorcentaje());
             pstm.setFloat(4, cobertura.getTope());
             pstm.setString(5,cobertura.getCodigo());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             register = true;
             pstm.close();
             con.close();
@@ -52,7 +52,7 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
     public List<Cobertura> obtain() {
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM Cobertura ORDER BY id";
+        String sql = "SELECT * FROM Coberturas ";
         List<Cobertura> coberturaList = new ArrayList<>();
         try{
             DBConnection = DBConnector.getInstance();
@@ -82,7 +82,7 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
     public boolean delete(Cobertura cobertura) {
         boolean delete = false;
         PreparedStatement pstm = null;
-        String sql = "DELETE FROM Cobertura WHERE id_obrasocial = ? AND id_prestaciones = ?";
+        String sql = "DELETE FROM Coberturas WHERE id_obrasocial = ? AND id_prestaciones = ?";
         try{
             DBConnection = DBConnector.getInstance();
             DBConnection.startConnection();
@@ -90,7 +90,7 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, cobertura.getIdObraSocial());
             pstm.setInt(2, cobertura.getIdPrestacion());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             delete = true;
             pstm.close();
             con.close();
@@ -104,7 +104,7 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
     public boolean modify(Cobertura cobertura, Cobertura aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE Cobertura SET id_paciente = ?, id_prestaciones = ?, porcentaje = ?, tope = ?, codigo = ? WHERE id_obrasocial = ?";
+        String sql = "UPDATE Coberturas SET id_obrasocial = ?, id_prestaciones = ?, porcentaje = ?, tope = ?, codigo = ? WHERE id_obrasocial = ?";
         try{
             DBConnection = DBConnector.getInstance();
             DBConnection.startConnection();
@@ -116,7 +116,7 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
             pstm.setFloat(4, aux.getTope());
             pstm.setString(5,aux.getCodigo());
             pstm.setInt(6, cobertura.getIdObraSocial());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             modify = true;
             pstm.close();
             con.close();

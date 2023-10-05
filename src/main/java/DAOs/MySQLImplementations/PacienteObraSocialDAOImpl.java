@@ -36,7 +36,7 @@ public class PacienteObraSocialDAOImpl implements IPacienteObraSocialDAO {
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, pacienteObraSocial.getIdObraSocial());
             pstm.setInt(2, pacienteObraSocial.getIdPaciente());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             register = true;
             pstm.close();
             con.close();
@@ -86,7 +86,7 @@ public class PacienteObraSocialDAOImpl implements IPacienteObraSocialDAO {
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, pacienteObraSocial.getIdObraSocial());
             pstm.setInt(2, pacienteObraSocial.getIdPaciente());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             delete = true;
             pstm.close();
             con.close();
@@ -110,7 +110,7 @@ public class PacienteObraSocialDAOImpl implements IPacienteObraSocialDAO {
             pstm.setInt(2, aux.getIdPaciente());
             pstm.setInt(3, pacienteObraSocial.getIdObraSocial());
             pstm.setInt(4, pacienteObraSocial.getIdPaciente());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             modify = true;
             pstm.close();
             con.close();

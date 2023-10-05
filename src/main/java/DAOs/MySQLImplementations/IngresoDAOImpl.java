@@ -28,7 +28,7 @@ public class IngresoDAOImpl implements IIngresoDAO {
     public boolean register(Ingreso ingreso) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO Ingreso(fecha, monto, descripcion, id_paciente, id_profesional, id_obrasocial) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO Ingresos(fecha, monto, descripcion, id_paciente, id_profesional, id_obrasocial) VALUES (?,?,?,?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             DBConnection.startConnection();
@@ -40,7 +40,7 @@ public class IngresoDAOImpl implements IIngresoDAO {
             pstm.setInt(4, ingreso.getIdPaciente());
             pstm.setInt(5, ingreso.getIdProfesional());
             pstm.setInt(6, ingreso.getIdObraSocial());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             register = true;
             pstm.close();
             con.close();
@@ -54,7 +54,7 @@ public class IngresoDAOImpl implements IIngresoDAO {
     public List<Ingreso> obtain() {
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM Ingreso ORDER BY id";
+        String sql = "SELECT * FROM Ingresos ORDER BY id";
         List<Ingreso> ingresoList = new ArrayList<Ingreso>();
         try{
             DBConnection = DBConnector.getInstance();
@@ -87,14 +87,14 @@ public class IngresoDAOImpl implements IIngresoDAO {
     public boolean delete(Ingreso ingreso) {
         boolean delete = false;
         PreparedStatement pstm = null;
-        String sql = "DELETE FROM Ingreso WHERE id = ?";
+        String sql = "DELETE FROM Ingresos WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
             DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, ingreso.getId());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             delete = true;
             pstm.close();
             con.close();
@@ -108,7 +108,7 @@ public class IngresoDAOImpl implements IIngresoDAO {
     public boolean modify(Ingreso ingreso, Ingreso aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE Ingreso SET id = ?, fecha = ?, monto = ?, descripcion = ?, id_paciente = ?, id_profesional = ?, id_obrasocial = ? WHERE id = ?";
+        String sql = "UPDATE Ingresos SET id = ?, fecha = ?, monto = ?, descripcion = ?, id_paciente = ?, id_profesional = ?, id_obrasocial = ? WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
             DBConnection.startConnection();
@@ -122,7 +122,7 @@ public class IngresoDAOImpl implements IIngresoDAO {
             pstm.setInt(6, aux.getIdProfesional());
             pstm.setInt(7, aux.getIdObraSocial());
             pstm.setInt(8, ingreso.getId());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             modify = true;
             pstm.close();
             con.close();

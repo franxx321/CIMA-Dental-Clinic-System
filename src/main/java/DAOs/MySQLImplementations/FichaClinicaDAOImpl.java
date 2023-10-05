@@ -33,7 +33,7 @@ public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
             pstm.setDate(1, fichaClinica.getFecha());
             pstm.setString(2, fichaClinica.getDescripcion());
             pstm.setInt(3,fichaClinica.getIdPaciente());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             register = true;
             pstm.close();
             con.close();
@@ -83,7 +83,7 @@ public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, fichaClinica.getId());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             delete = true;
             pstm.close();
             con.close();
@@ -107,7 +107,7 @@ public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
             pstm.setDate(2, aux.getFecha());
             pstm.setString(3, aux.getDescripcion());
             pstm.setInt(4, fichaClinica.getId());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             modify = true;
             pstm.close();
             con.close();

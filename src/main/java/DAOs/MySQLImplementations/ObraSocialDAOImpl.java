@@ -34,7 +34,7 @@ public class ObraSocialDAOImpl implements IObraSocialDAO {
             pstm.setString(2, obraSocial.getMail());
             pstm.setString(3, obraSocial.getTelefono());
             pstm.setString(4, obraSocial.getNombreRepresentante());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             register = true;
             pstm.close();
             con.close();
@@ -86,7 +86,7 @@ public class ObraSocialDAOImpl implements IObraSocialDAO {
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, obraSocial.getId());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             delete = true;
             pstm.close();
             con.close();
@@ -111,7 +111,7 @@ public class ObraSocialDAOImpl implements IObraSocialDAO {
             pstm.setString(3, aux.getTelefono());
             pstm.setString(4, aux.getNombreRepresentante());
             pstm.setInt(5, obraSocial.getId());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             modify = true;
             pstm.close();
             con.close();

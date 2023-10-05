@@ -38,7 +38,7 @@ public class GastoDAOImpl implements IGastoDAO {
             pstm.setString(2, gasto.getDescripcion());
             pstm.setDate(3, gasto.getFecha());
             pstm.setInt(4, gasto.getIdProfesional());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             register = true;
             pstm.close();
             con.close();
@@ -90,7 +90,7 @@ public class GastoDAOImpl implements IGastoDAO {
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, gasto.getId());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             delete = true;
             pstm.close();
             con.close();
@@ -116,7 +116,7 @@ public class GastoDAOImpl implements IGastoDAO {
             pstm.setDate(4, aux.getFecha());
             pstm.setInt(5, aux.getIdProfesional());
             pstm.setInt(6, gasto.getId());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             modify = true;
             pstm.close();
             con.close();

@@ -36,7 +36,7 @@ public class IngresoTurnoDAOImpl implements IIngresoTurnoDAO {
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, ingresoTurno.getIdTurno());
             pstm.setInt(2, ingresoTurno.getIdIngreso());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             register = true;
             pstm.close();
             con.close();
@@ -86,7 +86,7 @@ public class IngresoTurnoDAOImpl implements IIngresoTurnoDAO {
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, ingresoTurno.getIdIngreso());
             pstm.setInt(2, ingresoTurno.getIdTurno());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             delete = true;
             pstm.close();
             con.close();
@@ -110,7 +110,7 @@ public class IngresoTurnoDAOImpl implements IIngresoTurnoDAO {
             pstm.setInt(2, aux.getIdIngreso());
             pstm.setInt(3, ingresoTurno.getIdTurno());
             pstm.setInt(4, ingresoTurno.getIdIngreso());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             modify = true;
             pstm.close();
             con.close();

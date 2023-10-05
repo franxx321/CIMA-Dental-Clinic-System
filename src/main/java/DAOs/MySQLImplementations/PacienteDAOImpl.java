@@ -139,8 +139,7 @@ public class PacienteDAOImpl implements IPacienteDAO {
         PreparedStatement ptsm = conn.prepareStatement("SELECT * FROM pacientes WHERE dni = ?");
         ptsm.setLong(1,dni);
         ResultSet rs = ptsm.executeQuery();
-        rs.next();
-        if(rs.getInt(1)==0){
+        if(!rs.next()){
             paciente.setDni(-1);
         }
         else {

@@ -41,7 +41,7 @@ public class ProfesionalDAOImpl implements IProfesionalDAO {
             pstm.setString(1, profesional.getNombre());
             pstm.setString(2, profesional.getTelefono());
             pstm.setString(3, profesional.getMatricula());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             register = true;
             pstm.close();
             con.close();
@@ -96,7 +96,7 @@ public class ProfesionalDAOImpl implements IProfesionalDAO {
             pstm.setString(3, profesional.getTelefono());
             pstm.setString(4, profesional.getMatricula());
             pstm.setInt(5, profesional.getId());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             pstm.close();
             con.close();
         } catch (SQLException e){
@@ -116,7 +116,7 @@ public class ProfesionalDAOImpl implements IProfesionalDAO {
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, profesional.getId());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             delete = true;
             pstm.close();
             con.close();
@@ -136,8 +136,7 @@ public class ProfesionalDAOImpl implements IProfesionalDAO {
             PreparedStatement ptsm = con.prepareStatement("SELECT id FROM profesionales WHERE nombreyapellido =  ?");
             ptsm.setString(1, nombre);
             ResultSet rs = ptsm.executeQuery();
-            rs.next();
-            if (rs.getInt(1) == 0) {
+            if(!rs.next()){
                 id = -1;
             } else{
                 id = rs.getInt(1);

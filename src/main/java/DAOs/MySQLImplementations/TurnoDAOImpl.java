@@ -36,9 +36,9 @@ public class TurnoDAOImpl implements ITurnosDAO {
             pstm.setBoolean(3, turno.isAsistio());
             pstm.setInt(4, turno.getIdPaciente());
             pstm.setInt(5, turno.getIdProfesional());
-            pstm.setFloat(4, turno.getValor());
-            pstm.setFloat(5, turno.getDescuento());
-            pstm.execute(sql);
+            pstm.setFloat(6, turno.getValor());
+            pstm.setFloat(7, turno.getDescuento());
+            pstm.executeUpdate();
             register = true;
             pstm.close();
             con.close();
@@ -93,7 +93,7 @@ public class TurnoDAOImpl implements ITurnosDAO {
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, turno.getId());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             delete = true;
             pstm.close();
             con.close();
@@ -122,7 +122,7 @@ public class TurnoDAOImpl implements ITurnosDAO {
             pstm.setFloat(7, aux.getValor());
             pstm.setFloat(8, aux.getDescuento());
             pstm.setInt(9, turno.getId());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             modify = true;
             pstm.close();
             con.close();
@@ -185,16 +185,16 @@ public class TurnoDAOImpl implements ITurnosDAO {
                         "(horaInicio < ? AND horaFin > ?) OR " +
                         " (horaInicio > ? AND horaInicio < ?) ");
             ptsm.setInt(1,idProfesional);
-            ptsm.setTimestamp(1,new Timestamp(horaInicio.getTime()));
-            ptsm.setTimestamp(2,new Timestamp( horaFin.getTime()));
-            ptsm.setTimestamp(3,new Timestamp(horaInicio.getTime()));
-            ptsm.setTimestamp(4,new Timestamp(horaFin.getTime()));
-            ptsm.setTimestamp(5,new Timestamp(horaInicio.getTime()));
-            ptsm.setTimestamp(6,new Timestamp(horaFin.getTime()));
+            ptsm.setTimestamp(2,new Timestamp(horaInicio.getTime()));
+            ptsm.setTimestamp(3,new Timestamp( horaFin.getTime()));
+            ptsm.setTimestamp(4,new Timestamp(horaInicio.getTime()));
+            ptsm.setTimestamp(5,new Timestamp(horaFin.getTime()));
+            ptsm.setTimestamp(6,new Timestamp(horaInicio.getTime()));
+            ptsm.setTimestamp(7,new Timestamp(horaFin.getTime()));
             ResultSet rs = ptsm.executeQuery();
-            rs.next();
+
             turnoList= new ArrayList<>();
-            if(rs.getInt(1)==0){
+            if(!rs.next()){
                 Turno turno = new Turno();
                 turno.setId(-1);
                 turnoList.add(turno);

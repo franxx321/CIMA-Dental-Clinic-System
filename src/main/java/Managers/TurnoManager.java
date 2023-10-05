@@ -57,8 +57,6 @@ public class TurnoManager {
             turnoPrestacion.setIdTurno(turno.getId());
         }
 
-        TurnoPrestacionManager.getInstance().addTurnoPrestacion(turnoPrestacion);
-        TurnoDAOImpl.getInstance().register(turno);
 
         List<Turno> overlappingTurnos = TurnoDAOImpl.getInstance().getOverlappingturnos(idProfesional,horaInicio,horaFin);
         if(overlappingTurnos == null){
@@ -67,15 +65,21 @@ public class TurnoManager {
             error=true;
             errorString= errorString+ "\nYa existe un turno en ese horario";
         }
+        else{
+            turno.setHoraInicio(horaInicio);
+            turno.setHoraFin(horaFin);
+        }
         if(error){
             throw new CantAddTurno(errorString);
         }
+        else {
+            TurnoDAOImpl.getInstance().register(turno);
 
-
+            TurnoPrestacionManager.getInstance().addTurnoPrestacion(turnoPrestacion);
+        }
     }
 
     public void deleteTurno(long dni){
-
     }
 
     public List<Prestacion> getAllPrestaciones(){

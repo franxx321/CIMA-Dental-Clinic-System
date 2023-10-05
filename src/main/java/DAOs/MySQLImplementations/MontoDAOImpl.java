@@ -27,7 +27,7 @@ public class MontoDAOImpl implements IMontoDAO {
     public boolean register(Monto monto) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO Montos(precio, id_prestacion, id_profesional) VALUES (?,?,?)";
+        String sql = "INSERT INTO precios(precio, id_prestacion, id_profesional) VALUES (?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             DBConnection.startConnection();
@@ -36,7 +36,7 @@ public class MontoDAOImpl implements IMontoDAO {
             pstm.setFloat(1, monto.getPrecio());
             pstm.setInt(2, monto.getIdPrestacion());
             pstm.setInt(3, monto.getIdProfesional());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             register = true;
             pstm.close();
             con.close();
@@ -50,7 +50,7 @@ public class MontoDAOImpl implements IMontoDAO {
     public List<Monto> obtain() {
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM Montos ORDER BY id";
+        String sql = "SELECT * FROM precios ORDER BY id";
         List<Monto> montoList = new ArrayList<Monto>();
         try{
             DBConnection = DBConnector.getInstance();
@@ -79,7 +79,7 @@ public class MontoDAOImpl implements IMontoDAO {
     public boolean delete(Monto monto) {
         boolean delete = false;
         PreparedStatement pstm = null;
-        String sql = "DELETE FROM Montos WHERE id_prestacion = ? AND id_profesional = ?";
+        String sql = "DELETE FROM precios WHERE id_prestacion = ? AND id_profesional = ?";
         try{
             DBConnection = DBConnector.getInstance();
             DBConnection.startConnection();
@@ -87,7 +87,7 @@ public class MontoDAOImpl implements IMontoDAO {
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, monto.getIdPrestacion());
             pstm.setInt(2, monto.getIdProfesional());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             delete = true;
             pstm.close();
             con.close();
@@ -101,7 +101,7 @@ public class MontoDAOImpl implements IMontoDAO {
     public boolean modify(Monto monto, Monto aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE Montos SET precio = ?, id_prestacion = ?, id_profesional = ? WHERE id_prestacion = ? AND id_profesional = ?";
+        String sql = "UPDATE precios SET precio = ?, id_prestacion = ?, id_profesional = ? WHERE id_prestacion = ? AND id_profesional = ?";
         try{
             DBConnection = DBConnector.getInstance();
             DBConnection.startConnection();
@@ -112,7 +112,7 @@ public class MontoDAOImpl implements IMontoDAO {
             pstm.setInt(3, aux.getIdProfesional());
             pstm.setInt(4, monto.getIdPrestacion());
             pstm.setInt(5, monto.getIdProfesional());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             modify = true;
             pstm.close();
             con.close();

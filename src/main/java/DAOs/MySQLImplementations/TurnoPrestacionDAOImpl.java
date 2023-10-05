@@ -28,15 +28,15 @@ public class TurnoPrestacionDAOImpl implements ITurnoPrestacionDAO {
     public boolean register(TurnoPrestacion turnoPrestacion) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO TurnosPrestaciones(id_turno, id_prestacion) VALUES (?,?)";
+        String sql = "INSERT INTO TurnosPrestaciones(id_turno, id_prestacion) VALUES(?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             DBConnection.startConnection();
             con = DBConnection.getConnection();
-            pstm = con.prepareStatement(sql);
+            pstm = con.prepareStatement("INSERT INTO turnosprestaciones (id_turno, id_prestacion) Values (?,?)");
             pstm.setInt(1, turnoPrestacion.getIdTurno());
             pstm.setInt(2, turnoPrestacion.getIdPrestacion());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             register = true;
             pstm.close();
             con.close();

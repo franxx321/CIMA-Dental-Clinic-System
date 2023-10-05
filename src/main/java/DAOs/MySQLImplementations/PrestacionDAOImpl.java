@@ -36,7 +36,7 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
             pstm.setString(1, prestacion.getNombre());
             pstm.setBoolean(2, prestacion.isBien());
             pstm.setString(3, prestacion.getDescripcion());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             register = true;
             pstm.close();
             con.close();
@@ -87,7 +87,7 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, prestacion.getId());
-            pstm.execute(sql);
+            pstm.executeUpdate();
             delete = true;
             pstm.close();
             con.close();
@@ -112,7 +112,7 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
                 pstm.setBoolean(3, aux.isBien());
                 pstm.setString(4, aux.getDescripcion());
                 pstm.setInt(5, aux.getId());
-                pstm.execute(sql);
+                pstm.executeUpdate();
                 modify = true;
                 pstm.close();
                 con.close();
@@ -129,11 +129,10 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
             DBConnection = DBConnector.getInstance();
             DBConnection.startConnection();
             con = DBConnection.getConnection();
-            PreparedStatement ptsm = con.prepareStatement("SELECT id FROM prestacion WHERE nombre = ?");
+            PreparedStatement ptsm = con.prepareStatement("SELECT id FROM prestaciones WHERE nombre = ?");
             ptsm.setString(1, nombre);
             ResultSet rs = ptsm.executeQuery();
-            rs.next();
-            if(rs.getInt(1)== 0){
+            if(!rs.next()){
                 id = -1;
             }else{
                 id = rs.getInt(1);

@@ -74,7 +74,7 @@ public class PanelAgregarTurno extends Panel {
         p.put("text.month", "Month");
         p.put("text.year", "Year");
         Date today = new Date();
-        model.setDate(today.getYear(), today.getMonth(),today.getDay());
+        model.setDate(today.getYear()+1900, today.getMonth(),today.getDay());
         datePanel=new JDatePanelImpl(model,p);
         datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());
         datePickerPanel.add(datePicker);
@@ -311,6 +311,7 @@ public class PanelAgregarTurno extends Panel {
     }//GEN-LAST:event_pacienteTFActionPerformed
 
     private void servicioTFActionPerformed(java.awt.event.ActionEvent evt) {
+
                                                  
     }                                          
 
@@ -331,6 +332,7 @@ public class PanelAgregarTurno extends Panel {
         long pacienteDni = Long.parseLong(pacienteTF.getText());
 
         Date fecha = (Date) datePicker.getModel().getValue();
+
         fecha.setMinutes(0);
         fecha.setHours(0);
         fecha.setSeconds(0);
@@ -402,12 +404,12 @@ public class PanelAgregarTurno extends Panel {
             JPopupMenu popupMenu = new JPopupMenu();
             popupMenu.setFocusable(false);  // Asegúrate de que el menú emergente no tome el foco
             popupMenu.removeAll();
-            Pattern patron = Pattern.compile("^("+prestacionString+")$");
+            Pattern patron = Pattern.compile("("+prestacionString+")");
             somePrestacion= new ArrayList<>();
 
             for (Prestacion prestacion:allPrestacion) {
                 Matcher matcher = patron.matcher(prestacion.getNombre());
-                if (matcher.matches()){
+                if (matcher.find()){
                     somePrestacion.add(prestacion);
                 }
             }

@@ -12,6 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoberturaDAOImpl implements ICoberturaDAO {
+    private static CoberturaDAOImpl coberturaDAO;
+    public static CoberturaDAOImpl getInstance(){
+        if(coberturaDAO == null){
+            coberturaDAO = new CoberturaDAOImpl();
+        }
+        return coberturaDAO;
+    }
+    private CoberturaDAOImpl(){
+    }
     DBConnector DBConnection ;
     Connection con = null;
     @Override
@@ -21,6 +30,7 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
         String sql = "INSERT INTO Cobertura(id_obrasocial, id_prestaciones, procentaje, tope,codigo) VALUES (?,?,?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, cobertura.getIdObraSocial());
@@ -39,13 +49,14 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
     }
 
     @Override
-    public List<Cobertura> obtain(Cobertura cobertura) {
+    public List<Cobertura> obtain() {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM Cobertura ORDER BY id";
         List<Cobertura> coberturaList = new ArrayList<>();
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             rs = pstm.executeQuery(sql);
@@ -74,6 +85,7 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
         String sql = "DELETE FROM Cobertura WHERE id_obrasocial = ? AND id_prestaciones = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, cobertura.getIdObraSocial());
@@ -95,6 +107,7 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
         String sql = "UPDATE Cobertura SET id_paciente = ?, id_prestaciones = ?, porcentaje = ?, tope = ?, codigo = ? WHERE id_obrasocial = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, aux.getIdObraSocial());

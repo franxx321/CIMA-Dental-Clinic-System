@@ -9,6 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
+    private static FichaClinicaDAOImpl fichaClinicaDAO;
+    public static FichaClinicaDAOImpl getInstance(){
+        if (fichaClinicaDAO == null){
+            fichaClinicaDAO = new FichaClinicaDAOImpl();
+        }
+        return fichaClinicaDAO;
+    }
+    private FichaClinicaDAOImpl(){
+    }
     DBConnector DBConnection ;
     Connection con = null;
     @Override
@@ -18,6 +27,7 @@ public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
         String sql = "INSERT INTO FichasClinicas (fecha, descripcion,id_paciente) VALUES (?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setDate(1, fichaClinica.getFecha());
@@ -34,13 +44,14 @@ public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
     }
 
     @Override
-    public List<FichaClinica> obtain(FichaClinica fichaClinica) {
+    public List<FichaClinica> obtain() {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM FichasClinicas ORDER BY id";
         List<FichaClinica> fichaClinicaList = new ArrayList<>();
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             rs = pstm.executeQuery(sql);
@@ -68,6 +79,7 @@ public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
         String sql = "DELETE FROM FichasClinicas WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, fichaClinica.getId());
@@ -88,6 +100,7 @@ public class FichaClinicaDAOImpl implements IFichaClinicaDAO {
         String sql = "UPDATE FichasClinicas SET id = ?, fecha = ?, descripcion = ? WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, aux.getId());

@@ -12,20 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PrestacionDAOImpl implements IPrestacionDAO {
-
     private static PrestacionDAOImpl prestacionDAO;
-
     public static PrestacionDAOImpl getInstance(){
         if(prestacionDAO ==null){
             prestacionDAO= new PrestacionDAOImpl();
         }
         return prestacionDAO;
     }
-
     private PrestacionDAOImpl() {
-
     }
-
     DBConnector DBConnection ;
     Connection con = null;
     @Override
@@ -35,6 +30,7 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
         String sql = "INSERT INTO Prestaciones(nombre, bien, descripcion) VALUES (?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setString(1, prestacion.getNombre());
@@ -58,6 +54,7 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
         List<Prestacion> prestacionList = new ArrayList<Prestacion>();
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             rs = pstm.executeQuery(sql);
@@ -86,6 +83,7 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
         String sql = "DELETE FROM Prestaciones WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, prestacion.getId());
@@ -106,6 +104,7 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
             String sql = "UPDATE Prestaciones SET id = ?, nombre = ?, bien = ?, descripcion = ? WHERE id = ?";
             try{
                 DBConnection = DBConnector.getInstance();
+                DBConnection.startConnection();
                 con = DBConnection.getConnection();
                 pstm = con.prepareStatement(sql);
                 pstm.setInt(1, aux.getId());
@@ -122,4 +121,28 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
             }
             return modify;
         }
+
+    @Override
+    public int idByName(String nombre) {
+        int id = 0;
+        try{
+            DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
+            con = DBConnection.getConnection();
+            PreparedStatement ptsm = con.prepareStatement("SELECT id FROM prestacion WHERE nombre = ?");
+            ptsm.setString(1, nombre);
+            ResultSet rs = ptsm.executeQuery();
+            rs.next();
+            if(rs.getInt(1)== 0){
+                id = -1;
+            }else{
+                id = rs.getInt(1);
+            }
+            con.close();
+        } catch (SQLException e){
+            System.out.println("Error: Clase PrestacionDAOImpl, metodo idByName" + e.getMessage()
+            );
+        }
+        return id;
     }
+}

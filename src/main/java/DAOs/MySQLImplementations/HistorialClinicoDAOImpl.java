@@ -12,6 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HistorialClinicoDAOImpl implements IHistorialClinicoDAO {
+    private static HistorialClinicoDAOImpl historialClinicoDAO;
+    public static HistorialClinicoDAOImpl getInstance(){
+        if(historialClinicoDAO == null){
+            historialClinicoDAO = new HistorialClinicoDAOImpl();
+        }
+        return historialClinicoDAO;
+    }
+    private HistorialClinicoDAOImpl(){
+    }
     DBConnector DBConnection ;
     Connection con = null;
     @Override
@@ -21,6 +30,7 @@ public class HistorialClinicoDAOImpl implements IHistorialClinicoDAO {
         String sql = "INSERT INTO HistorialClinico(id_paciente, id_fichasclinicas) VALUES (?,?)";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, historialClinico.getIdPaciente());
@@ -36,13 +46,14 @@ public class HistorialClinicoDAOImpl implements IHistorialClinicoDAO {
     }
 
     @Override
-    public List<HistorialClinico> obtain(HistorialClinico historialClinico) {
+    public List<HistorialClinico> obtain() {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM HistorialClinico ORDER BY id";
         List<HistorialClinico> historialClinicoList = new ArrayList<HistorialClinico>();
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             rs = pstm.executeQuery(sql);
@@ -69,6 +80,7 @@ public class HistorialClinicoDAOImpl implements IHistorialClinicoDAO {
         String sql = "DELETE FROM HistorialClinico WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, historialClinico.getIdPaciente());
@@ -90,6 +102,7 @@ public class HistorialClinicoDAOImpl implements IHistorialClinicoDAO {
         String sql = "UPDATE HistorialClinico SET id_paciente = ?, id_fichasclinica = ? WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, aux.getIdPaciente());

@@ -9,7 +9,7 @@ public interface ITurnoPrestacionDAO {
 
     public boolean register(TurnoPrestacion turnoPrestacion);
 
-    public List<TurnoPrestacion> obtain(TurnoPrestacion turnoPrestacion);
+    public List<TurnoPrestacion> obtain();
 
     public boolean delete(TurnoPrestacion turnoPrestacion);
 

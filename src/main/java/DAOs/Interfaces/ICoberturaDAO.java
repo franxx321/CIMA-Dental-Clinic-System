@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ICoberturaDAO {
     public boolean register(Cobertura cobertura);
-    public List<Cobertura> obtain(Cobertura cobertura);
+    public List<Cobertura> obtain();
     public boolean delete(Cobertura cobertura);
     public boolean modify(Cobertura cobertura, Cobertura aux);
 }

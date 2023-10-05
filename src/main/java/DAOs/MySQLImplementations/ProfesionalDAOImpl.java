@@ -28,25 +28,19 @@ public class ProfesionalDAOImpl implements IProfesionalDAO {
 
     }
 
-
-
-
-
-
-
     @Override
     public boolean register(Profesional profesional) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO Profesionales (nombre, apellido, telefono, matricula) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO Profesionales (nombreyapellido, telefono, matricula) VALUES (?,?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setString(1, profesional.getNombre());
-            pstm.setString(2, profesional.getApellido());
-            pstm.setString(3, profesional.getTelefono());
-            pstm.setString(4, profesional.getMatricula());
+            pstm.setString(2, profesional.getTelefono());
+            pstm.setString(3, profesional.getMatricula());
             pstm.execute(sql);
             register = true;
             pstm.close();
@@ -58,13 +52,14 @@ public class ProfesionalDAOImpl implements IProfesionalDAO {
     }
 
     @Override
-    public List<Profesional> obtain(Profesional profesional) {
+    public List<Profesional> obtain() {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM Profesionales ORDER BY id";
         List<Profesional> profesionalList = new ArrayList<Profesional>();
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             rs = pstm.executeQuery(sql);
@@ -72,9 +67,8 @@ public class ProfesionalDAOImpl implements IProfesionalDAO {
                 Profesional p = new Profesional();
                 p.setId(rs.getInt(1));
                 p.setNombre(rs.getString(2));
-                p.setApellido(rs.getString(3));
-                p.setTelefono(rs.getString(4));
-                p.setMatricula(rs.getString(5));
+                p.setTelefono(rs.getString(3));
+                p.setMatricula(rs.getString(4));
                 profesionalList.add(p);
             }
             pstm.close();
@@ -91,17 +85,17 @@ public class ProfesionalDAOImpl implements IProfesionalDAO {
     public boolean modify(Profesional profesional, Profesional aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE Profesionales SET id = ?, nombre = ?, apellido = ?, telefono = ?, matricula = ? WHERE id = ?";
+        String sql = "UPDATE Profesionales SET id = ?, nombreyapellido = ?,  telefono = ?, matricula = ? WHERE id = ?";
         try {
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, profesional.getId());
             pstm.setString(2, profesional.getNombre());
-            pstm.setString(3, profesional.getApellido());
-            pstm.setString(4, profesional.getTelefono());
-            pstm.setString(5, profesional.getMatricula());
-            pstm.setInt(6, profesional.getId());
+            pstm.setString(3, profesional.getTelefono());
+            pstm.setString(4, profesional.getMatricula());
+            pstm.setInt(5, profesional.getId());
             pstm.execute(sql);
             pstm.close();
             con.close();
@@ -118,6 +112,7 @@ public class ProfesionalDAOImpl implements IProfesionalDAO {
         String sql = "DELETE FROM Profesionales WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, profesional.getId());

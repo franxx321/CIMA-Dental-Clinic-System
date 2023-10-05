@@ -10,7 +10,6 @@ public class Profesional {
 
      private String nombre;
 
-     private String apellido;
 
      private String telefono;
 
@@ -41,13 +40,7 @@ public class Profesional {
         this.matricula = matricula;
     }
 
-    public String getApellido() {
-        return apellido;
-    }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
 
     public int getId() {
         return id;

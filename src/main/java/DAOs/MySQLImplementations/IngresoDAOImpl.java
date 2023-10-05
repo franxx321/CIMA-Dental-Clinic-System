@@ -12,6 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IngresoDAOImpl implements IIngresoDAO {
+    private IngresoDAOImpl ingresoDAO;
+    public IngresoDAOImpl getInstance(){
+        if(ingresoDAO == null){
+            ingresoDAO = new IngresoDAOImpl();
+        }
+        return ingresoDAO;
+    }
+    private IngresoDAOImpl(){
+    }
+
     DBConnector DBConnection ;
     Connection con = null;
     @Override
@@ -21,6 +31,7 @@ public class IngresoDAOImpl implements IIngresoDAO {
         String sql = "INSERT INTO Ingreso(fecha, monto, descripcion, id_paciente, id_profesional, id_obrasocial) VALUES (?,?,?,?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setDate(1, ingreso.getFecha());
@@ -40,13 +51,14 @@ public class IngresoDAOImpl implements IIngresoDAO {
     }
 
     @Override
-    public List<Ingreso> obtain(Ingreso ingreso) {
+    public List<Ingreso> obtain() {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM Ingreso ORDER BY id";
         List<Ingreso> ingresoList = new ArrayList<Ingreso>();
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             rs = pstm.executeQuery(sql);
@@ -78,6 +90,7 @@ public class IngresoDAOImpl implements IIngresoDAO {
         String sql = "DELETE FROM Ingreso WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, ingreso.getId());
@@ -98,6 +111,7 @@ public class IngresoDAOImpl implements IIngresoDAO {
         String sql = "UPDATE Ingreso SET id = ?, fecha = ?, monto = ?, descripcion = ?, id_paciente = ?, id_profesional = ?, id_obrasocial = ? WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             //pstm.setInt(1, aux.getId());

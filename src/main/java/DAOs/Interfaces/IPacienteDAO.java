@@ -5,9 +5,7 @@ import Objetos.Paciente;
 import java.util.List;
 
 public interface IPacienteDAO {
-    public List<Paciente> obtain(Paciente paciente);
-
-    // Ver fecha
+    public List<Paciente> obtain();
     boolean register(Paciente paciente);
 
     public boolean delete(Paciente paciente);

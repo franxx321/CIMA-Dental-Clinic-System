@@ -9,4 +9,5 @@ public interface IPrestacionDAO {
     public List<Prestacion> obtain();
     public boolean delete(Prestacion prestacion);
     public boolean modify(Prestacion prestacion, Prestacion aux);
+    public int idByName(String Nombre);
 }

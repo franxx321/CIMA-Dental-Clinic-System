@@ -12,28 +12,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MontoDAOImpl implements IMontoDAO {
-
-    private static MontoDAOImpl montoDAO;
-
-    public static MontoDAOImpl getInstance(){
-        if(montoDAO== null){
+    private MontoDAOImpl montoDAO;
+    public MontoDAOImpl getInstance(){
+        if(montoDAO == null){
             montoDAO = new MontoDAOImpl();
         }
         return montoDAO;
     }
-
-    private MontoDAOImpl() {
+    private MontoDAOImpl(){
     }
-
     DBConnector DBConnection ;
     Connection con = null;
     @Override
     public boolean register(Monto monto) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO precios(precio, id_prestacion, id_profesional) VALUES (?,?,?)";
+        String sql = "INSERT INTO Montos(precio, id_prestacion, id_profesional) VALUES (?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setFloat(1, monto.getPrecio());
@@ -50,13 +47,14 @@ public class MontoDAOImpl implements IMontoDAO {
     }
 
     @Override
-    public List<Monto> obtain(Monto monto) {
+    public List<Monto> obtain() {
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM precios";
+        String sql = "SELECT * FROM Montos ORDER BY id";
         List<Monto> montoList = new ArrayList<Monto>();
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             rs = pstm.executeQuery(sql);
@@ -81,9 +79,10 @@ public class MontoDAOImpl implements IMontoDAO {
     public boolean delete(Monto monto) {
         boolean delete = false;
         PreparedStatement pstm = null;
-        String sql = "DELETE FROM precios WHERE id_prestacion = ? AND id_profesional = ?";
+        String sql = "DELETE FROM Montos WHERE id_prestacion = ? AND id_profesional = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, monto.getIdPrestacion());
@@ -98,33 +97,14 @@ public class MontoDAOImpl implements IMontoDAO {
         return delete;
     }
 
-    public Monto getByIds(int idProfesional, int idPrestacion){
-        Monto  monto = new Monto();
-
-        try {
-            DBConnector.getInstance().startConnection();
-            con = DBConnection.getConnection();
-            PreparedStatement ptsm = con.prepareStatement("SELECT * FROM precios WHERE id_prestacion = ? AND id_profesional = ? ");
-            ptsm.setInt(1,idPrestacion);
-            ptsm.setInt(2,idProfesional);
-            ResultSet rs = ptsm.executeQuery();
-            rs.next();
-            monto.setIdPrestacion(rs.getInt(2));
-            monto.setIdProfesional(rs.getInt(3));
-            monto.setPrecio(rs.getInt(1));
-        } catch (SQLException e) {
-            System.out.printf("Fallo Monto DAO impl"+e.getMessage());
-        }
-        return monto;
-    }
-
     @Override
     public boolean modify(Monto monto, Monto aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE precios SET precio = ?, id_prestacion = ?, id_profesional = ? WHERE id_prestacion = ? AND id_profesional = ?";
+        String sql = "UPDATE Montos SET precio = ?, id_prestacion = ?, id_profesional = ? WHERE id_prestacion = ? AND id_profesional = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setFloat(1, aux.getPrecio());
@@ -141,5 +121,4 @@ public class MontoDAOImpl implements IMontoDAO {
         }
         return modify;
     }
-
 }

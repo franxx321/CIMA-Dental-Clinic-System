@@ -158,6 +158,11 @@ public class PanelAgregarTurno extends Panel {
                 servicioTFActionPerformed(evt);
             }
         });
+        servicioTF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                servicioTFKeyPressed(evt);
+            }
+        });
 
         jLabel4.setText("Hora de inicio:");
 
@@ -306,44 +311,8 @@ public class PanelAgregarTurno extends Panel {
     }//GEN-LAST:event_pacienteTFActionPerformed
 
     private void servicioTFActionPerformed(java.awt.event.ActionEvent evt) {
-        //GEN-FIRST:event_servicioTFActionPerform
-        servicioTF.addKeyListener(new KeyAdapter() {
-            public void keyReleased(KeyEvent e) {
-                String prestacionString = servicioTF.getText();
-                Pattern patron = Pattern.compile("^("+prestacionString+")$");
-                somePrestacion= new ArrayList<>();
-
-                for (Prestacion prestacion:allPrestacion) {
-                    Matcher matcher = patron.matcher(prestacion.getNombre());
-                    if (matcher.matches()){
-                        somePrestacion.add(prestacion);
-                    }
-                }
-
-
-                JPopupMenu popupMenu = new JPopupMenu();
-                popupMenu.setFocusable(false);  // Asegúrate de que el menú emergente no tome el foco
-                popupMenu.removeAll();
-
-
-                for (Prestacion opc : somePrestacion) {
-
-                        JMenuItem item = new JMenuItem(opc.getNombre());
-                        item.addActionListener(new ActionListener() {
-                            public void actionPerformed(ActionEvent e) {
-                                servicioTF.setText(e.getActionCommand());
-                            }
-                        });
-                        popupMenu.add(item);
-                }
-
-                if (popupMenu.getComponentCount() > 0) {
-                    popupMenu.show(servicioTF, 0, servicioTF.getHeight());
-                }
-            }
-        });
-
-    }//GEN-LAST:event_servicioTFActionPerformed
+                                                 
+    }                                          
 
     private void cancelarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMousePressed
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelTurnos, null);
@@ -425,6 +394,42 @@ public class PanelAgregarTurno extends Panel {
     private void flechaIzqButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_flechaIzqButtonMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_flechaIzqButtonMousePressed
+
+    private void servicioTFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_servicioTFKeyPressed
+        servicioTF.addKeyListener(new KeyAdapter() {
+        public void keyReleased(KeyEvent e) {
+            String prestacionString = servicioTF.getText();
+            JPopupMenu popupMenu = new JPopupMenu();
+            popupMenu.setFocusable(false);  // Asegúrate de que el menú emergente no tome el foco
+            popupMenu.removeAll();
+            Pattern patron = Pattern.compile("^("+prestacionString+")$");
+            somePrestacion= new ArrayList<>();
+
+            for (Prestacion prestacion:allPrestacion) {
+                Matcher matcher = patron.matcher(prestacion.getNombre());
+                if (matcher.matches()){
+                    somePrestacion.add(prestacion);
+                }
+            }
+            
+
+            for (Prestacion option : somePrestacion) {
+                    JMenuItem item = new JMenuItem(option.getNombre());
+                    item.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            servicioTF.setText(e.getActionCommand());
+                        }
+                    });
+                    popupMenu.add(item);
+                
+            }
+
+            if (popupMenu.getComponentCount() > 0) {
+                popupMenu.show(servicioTF, 0, servicioTF.getHeight());
+            }
+        }
+    });
+    }//GEN-LAST:event_servicioTFKeyPressed
 
 
 

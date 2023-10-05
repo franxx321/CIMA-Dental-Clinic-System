@@ -27,7 +27,7 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
     public boolean register(Cobertura cobertura) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO Coberturas(id_obrasocial, id_prestaciones, procentaje, tope,codigo) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO Coberturas(id_obrasocial, id_prestaciones, porcentaje, tope,codigo) VALUES (?,?,?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             DBConnection.startConnection();

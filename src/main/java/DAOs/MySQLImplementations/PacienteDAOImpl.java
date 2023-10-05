@@ -151,7 +151,7 @@ public class PacienteDAOImpl implements IPacienteDAO {
             paciente.setEmail(rs.getString(5));
             paciente.setSexo(rs.getString(6).charAt(0));
         }
-        con.close();
+        conn.close();
         }
         catch  (SQLException e){
             System.out.println("fallo paciente Dao"+e.getMessage());

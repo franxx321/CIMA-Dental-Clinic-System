@@ -5,7 +5,7 @@ import Objetos.Profesional;
 import java.util.List;
 
 public class ProfesionalManager {
-    public static ProfesionalManager profesionalManager;
+    private static ProfesionalManager profesionalManager;
     public static ProfesionalManager getInstance(){
         if(profesionalManager == null){
             profesionalManager = new ProfesionalManager();

@@ -8,7 +8,9 @@ import Managers.PacienteManager;
 import Managers.TurnoManager;
 import Objetos.Paciente;
 import Objetos.Prestacion;
+import Objetos.Profesional;
 import Objetos.Turno;
+import Utils.Exceptions.CantAddTurno;
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
 
@@ -22,9 +24,7 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.swing.JOptionPane;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
+import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
@@ -67,7 +67,6 @@ public class PanelAgregarTurno extends Panel {
     private PanelAgregarTurno() {
         initComponents();
         model= new UtilDateModel();
-
         //IMPORTANTE a partir de la version 1.3.4 de JDatePicker se necesita darle properties al DatePanel
         // link: https://stackoverflow.com/questions/26794698/how-do-i-implement-jdatepicker
         Properties p = new Properties();
@@ -79,6 +78,12 @@ public class PanelAgregarTurno extends Panel {
         datePanel=new JDatePanelImpl(model,p);
         datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());
         datePickerPanel.add(datePicker);
+        List<Profesional>profesionales = TurnoManager.getInstance().getAllProfesional();
+        allPrestacion= TurnoManager.getInstance().getAllPrestaciones();
+        profesionalCB.insertItemAt("Seleccione una opcion",0);
+        for (int i=1;i<=profesionales.size();i++) {
+            profesionalCB.insertItemAt(profesionales.get(i-1).getNombre(),i);
+        }
 
     }
 
@@ -356,8 +361,6 @@ public class PanelAgregarTurno extends Panel {
         String profesional = profesionalCB.getSelectedItem().toString();
         long pacienteDni = Long.parseLong(pacienteTF.getText());
 
-
-
         Date fecha = (Date) datePicker.getModel().getValue();
         fecha.setMinutes(0);
         fecha.setHours(0);
@@ -390,7 +393,7 @@ public class PanelAgregarTurno extends Panel {
             int minutos2= Integer.parseInt(matcher2.group(2));
             horafinEnMilisegundos = ((long) hora2 * 60 * 60 * 1000) + ((long) minutos2 * 60 * 1000);
         }else{
-            //JOptionPane.showMessageDialog(null, "Inserte una hora de fin correcta.");
+
             error = true;
             horaFinTF.setText("");
             errorString = errorString+"Hora de fin incorrecta.\n";
@@ -401,8 +404,17 @@ public class PanelAgregarTurno extends Panel {
         }else{
             horaInicioEnMilisegundos +=milisegundos;
             horafinEnMilisegundos +=milisegundos;
-            TurnoManager.getInstance().addTurno(ptcn,profesional,pacienteDni,horaInicioEnMilisegundos,horafinEnMilisegundos);
+            try{
+                TurnoManager.getInstance().addTurno(ptcn,profesional,pacienteDni,horaInicioEnMilisegundos,horafinEnMilisegundos);
+                JOptionPane.showMessageDialog(null, "El turno fue agendado correctamente");
+                PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelTurnos,null);
+                SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
+            }
+            catch (CantAddTurno e){
+                JOptionPane.showMessageDialog(null, "Error!\n" + e.getErrors());
+            }
         }
+
 
     }//GEN-LAST:event_confirmarButtonMousePressed
 

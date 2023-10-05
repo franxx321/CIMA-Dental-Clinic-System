@@ -1,10 +1,8 @@
 package Managers;
 
 import DAOs.MySQLImplementations.TurnoDAOImpl;
-import Objetos.Paciente;
-import Objetos.Prestacion;
-import Objetos.Turno;
-import Objetos.TurnoPrestacion;
+import Objetos.*;
+import Utils.Exceptions.CantAddTurno;
 
 import java.util.Date;
 import java.util.List;
@@ -36,7 +34,7 @@ public class TurnoManager {
         Paciente paciente = PacienteManager.getInstance().getPatientByDni(pacienteDni);
         if(paciente.getId()==-1){
             error = true;
-            errorString= "El paciente no esta cargado";
+            errorString= "\nEl paciente no esta cargado";
         }
         else{
             turno.setIdPaciente(paciente.getId());
@@ -45,7 +43,7 @@ public class TurnoManager {
         idProfesional = ProfesionalManager.getInstance().getIdProfesionalManager(profesionalCB);
         if(idProfesional == -1){
             error = true;
-            errorString = errorString + "El profesional no esta cargado";
+            errorString = errorString + "\nEl profesional no esta cargado";
         } else{
             turno.setIdProfesional(idProfesional);
         }
@@ -53,7 +51,7 @@ public class TurnoManager {
         idPrestacion = PrestacionManager.getInstance().idByName(prestacion.getNombre());
         if(idPrestacion == -1){
             error = true;
-            errorString = errorString + "La prestacion no esta cargada";
+            errorString = errorString + "\nLa prestacion no esta cargada";
         } else{
             turnoPrestacion.setIdPrestacion(idPrestacion);
             turnoPrestacion.setIdTurno(turno.getId());
@@ -65,8 +63,12 @@ public class TurnoManager {
         List<Turno> overlappingTurnos = TurnoDAOImpl.getInstance().getOverlappingturnos(idProfesional,horaInicio,horaFin);
         if(overlappingTurnos == null){
             //TODO si llegamos aca es por que hubo una excepcion, hay que ver que hacemos
-        } else if (overlappingTurnos.get(0).getId()==-1) {
-            //OK para agregar el turno
+        } else if (overlappingTurnos.get(0).getId()!=-1) {
+            error=true;
+            errorString= errorString+ "\nYa existe un turno en ese horario";
+        }
+        if(error){
+            throw new CantAddTurno(errorString);
         }
 
 
@@ -78,7 +80,11 @@ public class TurnoManager {
 
     public List<Prestacion> getAllPrestaciones(){
         return PrestacionManager.getInstance().getAllPrestacion();
-
     }
+
+    public List<Profesional> getAllProfesional(){
+        return ProfesionalManager.getInstance().getAll();
+    }
+
 
 }

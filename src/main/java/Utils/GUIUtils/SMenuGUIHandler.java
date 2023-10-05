@@ -15,7 +15,7 @@ public class SMenuGUIHandler implements GUIHandler{
 
     public static String menuSecundarioVacio ="MSV", menuSecundarioTurnos ="MST";
 
-    public HashMap<String, Panel> panels;
+    private HashMap<String, Panel> panels;
 
     public static SMenuGUIHandler getInstance(){
         if(sMenuGUIHandler ==null){

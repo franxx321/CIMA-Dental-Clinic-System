@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MontoDAOImpl implements IMontoDAO {
-    private MontoDAOImpl montoDAO;
-    public MontoDAOImpl getInstance(){
+    private static MontoDAOImpl montoDAO;
+    public static MontoDAOImpl getInstance(){
         if(montoDAO == null){
             montoDAO = new MontoDAOImpl();
         }
@@ -120,5 +120,10 @@ public class MontoDAOImpl implements IMontoDAO {
             System.out.println("Error: Clase MontoDAOImpl, metodo modify. " +e.getMessage());
         }
         return modify;
+    }
+
+    @Override
+    public Monto getByIds(int idProfesional, int idPrestacion) {
+        return null;
     }
 }

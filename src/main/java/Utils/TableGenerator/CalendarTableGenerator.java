@@ -8,6 +8,8 @@ import java.util.*;
 
 public class CalendarTableGenerator {
 
+
+
     private static CalendarTableGenerator calendarTableGenerator;
 
     private CalendarTableGenerator() {
@@ -24,14 +26,12 @@ public class CalendarTableGenerator {
     public JTable generateTable(List<Turno> turnosList, int week) {
         JTable table = new JTable();
         DefaultTableModel tm;
-
-
         Date auxDate = new Date();
-
         auxDate.setHours(0);
         auxDate.setMinutes(0);
         auxDate.setSeconds(0);
-        //todayDate.setDate();
+        auxDate.setTime(auxDate.getTime()+(week*604800000));
+        Date firstDate = new Date(auxDate.getTime());
         Vector<Vector<String>> data = new Vector<>();
         Vector<String> header = new Vector<>();
         header.add(0,"");
@@ -41,7 +41,10 @@ public class CalendarTableGenerator {
             if(auxDate.getDate()==1){
                 auxDate.setMonth(auxDate.getMonth()+1);
             }
-            header.add(i,Integer.toString(auxDate.getDate())+"/"+Integer.toString(auxDate.getMonth()+1));
+            if(auxDate.getMonth()==0){
+                auxDate.setYear(auxDate.getYear()+1);
+            }
+            header.add(i,Integer.toString(auxDate.getDate())+"/"+Integer.toString(auxDate.getMonth()+1)+"/"+ Integer.toString(auxDate.getYear()+1900));
         }
         int hora=8;
         int minutos=0;
@@ -52,8 +55,6 @@ public class CalendarTableGenerator {
             vector.add(Integer.toString(hora) + ":" + Integer.toString(minutos) + "-" + Integer.toString(hora2) + ":" + Integer.toString(minutos2));
             for (int j = 1; i <= 7; i++) {
                 vector.add("");
-                int dia = Integer.parseInt(header.get(i).substring(0,header.get(1).indexOf("/")));
-                int mes = Integer.parseInt(header.get(i).substring(header.get(1).indexOf("/")+1));
             }
             if (minutos == 0) {
                 minutos = 30;
@@ -69,6 +70,33 @@ public class CalendarTableGenerator {
             }
             data.add(vector);
         }
+        tm = new DefaultTableModel(data,header);
+        table.setModel(tm);
+        HashMap<Integer,HashMap<Integer,Boolean>> hashMap = new HashMap<>();
+        for(int i= 0; i<=7;i++){
+            HashMap<Integer,Boolean> hs = new HashMap<>();
+            hashMap.put(i,hs);
+        }
+        long firstDay = firstDate.getTime()/86400000;
+        AppointmentCellRenderer cellRenderer = null;
+        if(turnosList!=null){
+            for (Turno turno : turnosList){
+                Date hi= turno.getHoraInicio();
+                Date hf=turno.getHoraFin();
+                long day = hi.getTime()/86400000;
+                int column = (int)(firstDay-day+1);
+                int startrow= ((hi.getHours()-8)*2)+(hi.getMinutes()/30);
+                int endrow = ((hf.getHours()-8)*2)+(hi.getMinutes()/30);
+                for(int i =startrow; i<=endrow;i++){
+                    hashMap.get(i).put(column,true);
+                }
+            }
+        }
+
+
+
+        cellRenderer= new AppointmentCellRenderer(hashMap);
+        table.setDefaultRenderer(Object.class,cellRenderer);
         return table;
     }
 

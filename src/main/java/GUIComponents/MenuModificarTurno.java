@@ -66,15 +66,9 @@ public class MenuModificarTurno extends Panel {
 
     @Override
     public void setup(List<Object> arguments) {
-        //calendarTable.setModel(CalendarTableGenerator.getInstance().resultToTable());
-        calendarTable= CalendarTableGenerator.getInstance().generateTable(null);
-        jScrollPane1.removeAll();
-        jScrollPane1.add(calendarTable);
-        jScrollPane1.repaint();
-        jScrollPane1.revalidate();
-
-
-
+        JTable table = CalendarTableGenerator.getInstance().generateTable(null ,0);
+        calendarTable.setModel(table.getModel());
+        calendarTable.setDefaultRenderer(Object.class,table.getDefaultRenderer(Object.class));
 
     }
 

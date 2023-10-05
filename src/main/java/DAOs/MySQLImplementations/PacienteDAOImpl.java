@@ -30,6 +30,7 @@ public class PacienteDAOImpl implements IPacienteDAO {
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
+            DBConnection.startConnection();
             pstm = con.prepareStatement(sql);
             pstm.setString(1,paciente.getNombre());
             pstm.setLong(2, paciente.getDni());
@@ -53,6 +54,7 @@ public class PacienteDAOImpl implements IPacienteDAO {
         String sql = "DELETE FROM Pacientes WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, paciente.getId());
@@ -73,6 +75,7 @@ public class PacienteDAOImpl implements IPacienteDAO {
         String sql = "UPDATE Pacientes SET nombreyapellido = ?, id = ?, dni = ?, fechaNac = ?, direccion = ?, sexo = ? WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setString(1,aux.getNombre());
@@ -94,13 +97,14 @@ public class PacienteDAOImpl implements IPacienteDAO {
 
     //Look for PreparedStatement instead of Statement
     @Override
-    public List<Paciente> obtain(Paciente paciente) {
+    public List<Paciente> obtain() {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM Pacientes ORDER BY id";
         List<Paciente> pacienteList = new ArrayList<Paciente>();
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             rs = pstm.executeQuery(sql);

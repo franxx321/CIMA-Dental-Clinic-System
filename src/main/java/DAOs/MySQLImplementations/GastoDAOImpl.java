@@ -12,10 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GastoDAOImpl implements IGastoDAO {
+    private static GastoDAOImpl gastoDAO;
+    public static GastoDAOImpl getInstance(){
+        if(gastoDAO == null){
+            gastoDAO = new GastoDAOImpl();
+        }
+        return gastoDAO;
+    }
+    private GastoDAOImpl(){
+    }
+
     DBConnector DBConnection ;
     Connection con = null;
-
-
     @Override
     public boolean register(Gasto gasto) {
         boolean register = false;
@@ -23,6 +31,7 @@ public class GastoDAOImpl implements IGastoDAO {
         String sql = "INSERT INTO Gastos (monto, descripcion, fecha, id_profesional) VALUES (?,?,?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setFloat(1, gasto.getMonto());
@@ -40,13 +49,14 @@ public class GastoDAOImpl implements IGastoDAO {
     }
 
     @Override
-    public List<Gasto> obtain(Gasto gasto) {
+    public List<Gasto> obtain() {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM Gastos ORDER BY id";
         List<Gasto> gastoList = new ArrayList<>();
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             rs = pstm.executeQuery(sql);
@@ -76,6 +86,7 @@ public class GastoDAOImpl implements IGastoDAO {
         String sql = "DELETE FROM Gastos WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, gasto.getId());
@@ -96,6 +107,7 @@ public class GastoDAOImpl implements IGastoDAO {
         String sql = "UPDATE Gastos SET id = ?, monto = ?, descripcion = ?, fecha = ?, id_profesional = ? WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, aux.getId());

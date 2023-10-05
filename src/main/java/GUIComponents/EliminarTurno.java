@@ -157,6 +157,7 @@ public class EliminarTurno extends Panel {
             errorString = errorString + "DNI Ingresado incorrecto \n";
         }
 
+
     }//GEN-LAST:event_buscarButtonMousePressed
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed

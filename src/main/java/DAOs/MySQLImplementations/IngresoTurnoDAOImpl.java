@@ -13,6 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IngresoTurnoDAOImpl implements IIngresoTurnoDAO {
+    private IngresoTurnoDAOImpl ingresoTurnoDAO;
+    public IngresoTurnoDAOImpl getInstance(){
+        if(ingresoTurnoDAO == null){
+            ingresoTurnoDAO = new IngresoTurnoDAOImpl();
+        }
+        return ingresoTurnoDAO;
+    }
+    private IngresoTurnoDAOImpl(){
+    }
     DBConnector DBConnection ;
     Connection con = null;
     @Override
@@ -22,6 +31,7 @@ public class IngresoTurnoDAOImpl implements IIngresoTurnoDAO {
         String sql = "INSERT INTO IngresoTurno(id_turno, id_ingreso) VALUES (?,?)";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, ingresoTurno.getIdTurno());
@@ -37,13 +47,14 @@ public class IngresoTurnoDAOImpl implements IIngresoTurnoDAO {
     }
 
     @Override
-    public List<IngresoTurno> obtain(IngresoTurno ingresoTurno) {
+    public List<IngresoTurno> obtain() {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM IngresoTurno ORDER BY id_ingreso";
         List<IngresoTurno> ingresoTurnoList = new ArrayList<IngresoTurno>();
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             rs = pstm.executeQuery(sql);
@@ -70,6 +81,7 @@ public class IngresoTurnoDAOImpl implements IIngresoTurnoDAO {
         String sql = "DELETE FROM IngresoTurno WHERE id_ingreso = ? AND id_turno = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, ingresoTurno.getIdIngreso());
@@ -91,6 +103,7 @@ public class IngresoTurnoDAOImpl implements IIngresoTurnoDAO {
         String sql = "UPDATE IngresoTurno SET id_turno = ?, id_ingreso = ? WHERE id_turno = ? AND id_ingreso = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, aux.getIdTurno());

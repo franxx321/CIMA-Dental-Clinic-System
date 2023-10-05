@@ -4,7 +4,9 @@
  */
 package GUIComponents;
 
+import Managers.PacienteManager;
 import Managers.TurnoManager;
+import Objetos.Paciente;
 import Objetos.Prestacion;
 import Objetos.Turno;
 import Utils.GUIUtils.PanelGUIHandler;
@@ -21,6 +23,12 @@ import org.jdatepicker.impl.UtilDateModel;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 /**
  *
  * @author franc
@@ -292,17 +300,43 @@ public class PanelAgregarTurno extends Panel {
         // TODO add your handling code here:
     }//GEN-LAST:event_pacienteTFActionPerformed
 
-    private void servicioTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servicioTFActionPerformed
-        String prestacionString = servicioTF.getText();
-        Pattern patron = Pattern.compile("^("+prestacionString+")$");
-        somePrestacion= new ArrayList<>();
+    private void servicioTFActionPerformed(java.awt.event.ActionEvent evt) {
+        //GEN-FIRST:event_servicioTFActionPerform
+        servicioTF.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent e) {
+                String prestacionString = servicioTF.getText();
+                Pattern patron = Pattern.compile("^("+prestacionString+")$");
+                somePrestacion= new ArrayList<>();
 
-        for (Prestacion prestacion:allPrestacion) {
-            Matcher matcher = patron.matcher(prestacion.getNombre());
-            if (matcher.matches()){
-                somePrestacion.add(prestacion);
+                for (Prestacion prestacion:allPrestacion) {
+                    Matcher matcher = patron.matcher(prestacion.getNombre());
+                    if (matcher.matches()){
+                        somePrestacion.add(prestacion);
+                    }
+                }
+
+
+                JPopupMenu popupMenu = new JPopupMenu();
+                popupMenu.setFocusable(false);  // Asegúrate de que el menú emergente no tome el foco
+                popupMenu.removeAll();
+
+
+                for (Prestacion opc : somePrestacion) {
+
+                        JMenuItem item = new JMenuItem(opc.getNombre());
+                        item.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                servicioTF.setText(e.getActionCommand());
+                            }
+                        });
+                        popupMenu.add(item);
+                }
+
+                if (popupMenu.getComponentCount() > 0) {
+                    popupMenu.show(servicioTF, 0, servicioTF.getHeight());
+                }
             }
-        }
+        });
 
     }//GEN-LAST:event_servicioTFActionPerformed
 
@@ -316,9 +350,13 @@ public class PanelAgregarTurno extends Panel {
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
         boolean error = false;
         String errorString="";
-        Prestacion prestacion;
-        String profesional;
-        long pacienteDni;
+        Turno turno = new Turno();
+        Prestacion ptcn = new Prestacion();
+        ptcn.setNombre(servicioTF.getText());
+        String profesional = profesionalCB.getSelectedItem().toString();
+        long pacienteDni = Long.parseLong(pacienteTF.getText());
+
+
 
         Date fecha = (Date) datePicker.getModel().getValue();
         fecha.setMinutes(0);
@@ -363,13 +401,8 @@ public class PanelAgregarTurno extends Panel {
         }else{
             horaInicioEnMilisegundos +=milisegundos;
             horafinEnMilisegundos +=milisegundos;
-            //addTurno()
-
+            TurnoManager.getInstance().addTurno(ptcn,profesional,pacienteDni,horaInicioEnMilisegundos,horafinEnMilisegundos);
         }
-
-
-
-
 
     }//GEN-LAST:event_confirmarButtonMousePressed
 

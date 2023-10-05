@@ -19,7 +19,6 @@ public class PacienteManager {
 
     public Paciente getPatientByDni(long dni){
         return PacienteDAOImpl.getInstance().getByDni(dni);
-
     }
 
 

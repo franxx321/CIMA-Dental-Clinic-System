@@ -9,6 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ObraSocialDAOImpl implements IObraSocialDAO {
+    private ObraSocialDAOImpl obraSocialDAO;
+    public ObraSocialDAOImpl getInstance(){
+        if(obraSocialDAO == null){
+            obraSocialDAO = new ObraSocialDAOImpl();
+        }
+        return obraSocialDAO;
+    }
+    private ObraSocialDAOImpl(){
+    }
     DBConnector DBConnection ;
     Connection con = null;
     @Override
@@ -18,6 +27,7 @@ public class ObraSocialDAOImpl implements IObraSocialDAO {
         String sql = "INSERT INTO ObrasSociales (nombre, mail, telefono, nombrerep) VALUES (?,?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setString(1, obraSocial.getNombre());
@@ -35,13 +45,14 @@ public class ObraSocialDAOImpl implements IObraSocialDAO {
     }
 
     @Override
-    public List<ObraSocial> obtain(ObraSocial obraSocial) {
+    public List<ObraSocial> obtain() {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM ObrasSociales ORDER BY id";
         List<ObraSocial> obraSocialList = new ArrayList<ObraSocial>();
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             rs = pstm.executeQuery(sql);
@@ -71,6 +82,7 @@ public class ObraSocialDAOImpl implements IObraSocialDAO {
         String sql = "DELETE FROM ObrasSociales WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, obraSocial.getId());
@@ -91,6 +103,7 @@ public class ObraSocialDAOImpl implements IObraSocialDAO {
         String sql = "UPDATE ObrasSociales SET id = ?, nombre = ?, mail = ?, telefono = ?, nombrerep = ? WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, aux.getId());

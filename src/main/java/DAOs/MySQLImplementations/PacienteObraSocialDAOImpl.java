@@ -13,6 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PacienteObraSocialDAOImpl implements IPacienteObraSocialDAO {
+    private PacienteObraSocialDAOImpl pacienteObraSocialDAO;
+    public PacienteObraSocialDAOImpl getInstance(){
+        if(pacienteObraSocialDAO == null){
+            pacienteObraSocialDAO = new PacienteObraSocialDAOImpl();
+        }
+        return pacienteObraSocialDAO;
+    }
+    private PacienteObraSocialDAOImpl(){
+    }
     DBConnector DBConnection ;
     Connection con = null;
     @Override
@@ -22,6 +31,7 @@ public class PacienteObraSocialDAOImpl implements IPacienteObraSocialDAO {
         String sql = "INSERT INTO PacienteObraSocial(id_ObraSocial, id_Paciente) VALUES (?,?)";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, pacienteObraSocial.getIdObraSocial());
@@ -37,13 +47,14 @@ public class PacienteObraSocialDAOImpl implements IPacienteObraSocialDAO {
     }
 
     @Override
-    public List<PacienteObraSocial> obtain(PacienteObraSocial pacienteObraSocial) {
+    public List<PacienteObraSocial> obtain() {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM PacienteObraSocial ORDER BY id_obrasocial";
         List<PacienteObraSocial> pacienteObraSocialList = new ArrayList<PacienteObraSocial>();
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             rs = pstm.executeQuery(sql);
@@ -70,6 +81,7 @@ public class PacienteObraSocialDAOImpl implements IPacienteObraSocialDAO {
         String sql = "DELETE FROM PacienteObraSocial WHERE id_ObraSocial = ? AND id_Paciente = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, pacienteObraSocial.getIdObraSocial());
@@ -91,6 +103,7 @@ public class PacienteObraSocialDAOImpl implements IPacienteObraSocialDAO {
         String sql = "UPDATE PacienteObraSocial SET id_ObraSocial = ?, id_Paciente = ? WHERE id_ObraSocial = ? AND id_Paciente = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, aux.getIdObraSocial());

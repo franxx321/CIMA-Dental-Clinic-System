@@ -1,6 +1,7 @@
 package DAOs.MySQLImplementations;
 
 import DAOs.Interfaces.ITurnoPrestacionDAO;
+import Objetos.Turno;
 import Objetos.TurnoPrestacion;
 import Utils.DBUtils.DBConnector;
 
@@ -12,6 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TurnoPrestacionDAOImpl implements ITurnoPrestacionDAO {
+    public static TurnoPrestacionDAOImpl turnoPrestacionDAO;
+    public static TurnoPrestacionDAOImpl getInstance(){
+        if(turnoPrestacionDAO == null){
+            turnoPrestacionDAO = new TurnoPrestacionDAOImpl();
+        }
+        return turnoPrestacionDAO;
+    }
+    private TurnoPrestacionDAOImpl(){
+    }
     DBConnector DBConnection ;
     Connection con = null;
     @Override
@@ -21,6 +31,7 @@ public class TurnoPrestacionDAOImpl implements ITurnoPrestacionDAO {
         String sql = "INSERT INTO TurnosPrestaciones(id_turno, id_prestacion) VALUES (?,?)";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, turnoPrestacion.getIdTurno());
@@ -36,13 +47,14 @@ public class TurnoPrestacionDAOImpl implements ITurnoPrestacionDAO {
     }
 
     @Override
-    public List<TurnoPrestacion> obtain(TurnoPrestacion turnoPrestacion) {
+    public List<TurnoPrestacion> obtain() {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM TurnosPrestaciones ORDER BY id";
         List<TurnoPrestacion> turnoPrestacionList = new ArrayList<TurnoPrestacion>();
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             rs = pstm.executeQuery(sql);
@@ -70,6 +82,7 @@ public class TurnoPrestacionDAOImpl implements ITurnoPrestacionDAO {
         String sql = "DELETE FROM TurnosPrestaciones WHERE id = ? ";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, turnoPrestacion.getId());
@@ -90,6 +103,7 @@ public class TurnoPrestacionDAOImpl implements ITurnoPrestacionDAO {
         String sql = "UPDATE TurnosPrestaciones SET id_turno = ?, id_prestacion = ? WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, aux.getIdTurno());

@@ -12,6 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MontoDAOImpl implements IMontoDAO {
+    private MontoDAOImpl montoDAO;
+    public MontoDAOImpl getInstance(){
+        if(montoDAO == null){
+            montoDAO = new MontoDAOImpl();
+        }
+        return montoDAO;
+    }
+    private MontoDAOImpl(){
+    }
     DBConnector DBConnection ;
     Connection con = null;
     @Override
@@ -21,6 +30,7 @@ public class MontoDAOImpl implements IMontoDAO {
         String sql = "INSERT INTO Montos(precio, id_prestacion, id_profesional) VALUES (?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setFloat(1, monto.getPrecio());
@@ -37,13 +47,14 @@ public class MontoDAOImpl implements IMontoDAO {
     }
 
     @Override
-    public List<Monto> obtain(Monto monto) {
+    public List<Monto> obtain() {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM Montos ORDER BY id";
         List<Monto> montoList = new ArrayList<Monto>();
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             rs = pstm.executeQuery(sql);
@@ -71,6 +82,7 @@ public class MontoDAOImpl implements IMontoDAO {
         String sql = "DELETE FROM Montos WHERE id_prestacion = ? AND id_profesional = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, monto.getIdPrestacion());
@@ -92,6 +104,7 @@ public class MontoDAOImpl implements IMontoDAO {
         String sql = "UPDATE Montos SET precio = ?, id_prestacion = ?, id_profesional = ? WHERE id_prestacion = ? AND id_profesional = ?";
         try{
             DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
             pstm.setFloat(1, aux.getPrecio());

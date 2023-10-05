@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IGastoDAO {
     public boolean register(Gasto gasto);
-    public List<Gasto> obtain(Gasto gasto);
+    public List<Gasto> obtain();
     public boolean delete(Gasto gasto);
     public boolean modify(Gasto gasto, Gasto aux);
 }

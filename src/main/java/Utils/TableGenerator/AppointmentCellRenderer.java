@@ -7,7 +7,6 @@ import java.util.HashMap;
 
 public class AppointmentCellRenderer extends DefaultTableCellRenderer {
 
-
     //IMPORTANTE Las claves del HS son row, column
      private HashMap <Integer,HashMap<Integer,Boolean>> paintedcell;
 

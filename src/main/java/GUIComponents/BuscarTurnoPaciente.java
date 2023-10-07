@@ -4,7 +4,13 @@
  */
 package GUIComponents;
 
+import Managers.TurnoManager;
 import Utils.GUIUtils.PanelGUIHandler;
+import Utils.GUIUtils.SMenuGUIHandler;
+
+import javax.swing.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -128,11 +134,23 @@ public class BuscarTurnoPaciente extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void buscarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarButtonMousePressed
-        // TODO add your handling code here:
+        String dniString = jTextField1.getText().trim();
+        String errorString = "";
+        boolean error = false;
+        Pattern patron = Pattern.compile("^[1-9]\\d{6,7}$");
+        Matcher matcher1 = patron.matcher(dniString);
+        if (matcher1.matches()){
+            JTable auxTable = TurnoManager.getInstance().getFuturePatientAppointments(Long.parseLong(dniString));
+        } else {
+            error = true;
+            jTextField1.setText("");
+            errorString = errorString + "DNI Ingresado incorrecto \n";
+        }
     }//GEN-LAST:event_buscarButtonMousePressed
 
     private void cancelarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMousePressed
-        // TODO add your handling code here:
+        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelTurnos,null);
+        SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
     }//GEN-LAST:event_cancelarButtonMousePressed
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed

@@ -90,9 +90,10 @@ public class CalendarTableGenerator {
                 for(int i =startrow; i<=endrow;i++){
                     hashMap.get(i).put(column,true);
                 }
+
+
             }
         }
-
 
 
         cellRenderer= new AppointmentCellRenderer(hashMap);

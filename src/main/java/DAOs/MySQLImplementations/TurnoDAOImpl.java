@@ -135,10 +135,45 @@ public class TurnoDAOImpl implements ITurnosDAO {
     }
 
     @Override
-    public List<Turno> profesionalFutureApointments(String idprofesional, int week) {
+    public List<Turno> profesionalFutureApointments(int idprofesional, int week) {
+        List<Turno> turnosList = null;
         Date date = new Date();
-        date.setTime(date.getTime()/86400000);
-        return null;
+        date.setHours(0);
+        date.setMinutes(0);
+        date.setSeconds(0);
+        try{
+            DBConnection=DBConnector.getInstance();
+            DBConnection.startConnection();
+            con=DBConnection.getConnection();
+            PreparedStatement ptsm = con.prepareStatement("SELECT * " +
+                    "FROM turnos " +
+                    "where id_profesional = ? " +
+                    "and horaInicio > ? " +
+                    "and horaInicio < ?");
+            ptsm.setInt(1,idprofesional);
+            ptsm.setTimestamp(2,new Timestamp(date.getTime()+(long)week*604800000));
+            ptsm.setTimestamp(3,new Timestamp(date.getTime()+(long)(week+1)*604800000));
+            ResultSet rs = ptsm.executeQuery();
+            if(rs.next()){
+                turnosList= new ArrayList<>();
+                do {
+                    Turno t = new Turno();
+                    t.setId(rs.getInt(1));
+                    t.setHoraInicio(new Date(rs.getTimestamp(2).getTime()));
+                    t.setHoraFin(new Date(rs.getTimestamp(3).getTime()));
+                    t.setAsistio(rs.getBoolean(4));
+                    t.setIdPaciente(rs.getInt(5));
+                    t.setIdProfesional(rs.getInt(6));
+                    t.setValor(rs.getFloat(7));
+                    t.setDescuento(rs.getFloat(8));
+                    turnosList.add(t);
+                }while (rs.next());
+            }
+        }
+        catch (SQLException e){
+            System.out.println("Fallo profesional future apointments en Turno Dao IMPL"+e.getMessage());
+        }
+        return turnosList;
     }
 
     @Override
@@ -257,8 +292,47 @@ public class TurnoDAOImpl implements ITurnosDAO {
         return turno;
     }
 
+    @Override
+    public List<Turno> getPatientFutureApointments(int idPaciente) {
+        List<Turno> turnoList = null;
+        Date today = new Date();
+        today.setHours(0);
+        today.setMinutes(0);
+        today.setSeconds(0);
+        try {
+            DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
+            con = DBConnection.getConnection();
+            PreparedStatement ptsm = con.prepareStatement("SELECT * " +
+                    "FROM turnos " +
+                    "WHERE horaInicio > ?" +
+                    "and id_paciente =?" +
+                    "ORDER BY horaInicio");
+            ptsm.setTimestamp(1, new Timestamp(today.getTime()));
+            ptsm.setInt(2,idPaciente);
+            ResultSet rs = ptsm.executeQuery();
+            if (rs.next()){
+                turnoList= new ArrayList<>();
+                do {
+                    Turno turno = new Turno();
+                    turno.setId(rs.getInt(1));
+                    turno.setHoraInicio(new Date(rs.getTimestamp(2).getTime()));
+                    turno.setHoraInicio(new Date(rs.getTimestamp(3).getTime()));
+                    turno.setAsistio(rs.getBoolean(4));
+                    turno.setIdPaciente(rs.getInt(5));
+                    turno.setIdProfesional(rs.getInt(6));
+                    turno.setValor(rs.getFloat(7));
+                    turno.setDescuento(rs.getFloat(8));
+                    turnoList.add(turno);
+                } while (rs.next());
+            }
+        }
+        catch (SQLException e){
+            System.out.println("Error en get Patient Future Appointments Turno DAO IMPL"+e.getMessage());
+        }
 
-
+        return null;
+    }
 
 
 }

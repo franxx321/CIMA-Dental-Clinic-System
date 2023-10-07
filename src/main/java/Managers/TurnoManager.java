@@ -3,7 +3,10 @@ package Managers;
 import DAOs.MySQLImplementations.TurnoDAOImpl;
 import Objetos.*;
 import Utils.Exceptions.CantAddTurno;
+import Utils.TableGenerator.CalendarTableGenerator;
+import Utils.TableGenerator.TurnosbyPacienteTableGenerator;
 
+import javax.swing.*;
 import java.util.Date;
 import java.util.List;
 
@@ -96,6 +99,28 @@ public class TurnoManager {
     public Turno getByDateProfesional(Date horaInicio, Date horaFin,int idProfesional){
         return TurnoDAOImpl.getInstance().getByDateProfesional(horaInicio,horaFin,idProfesional);
     }
+
+    public JTable getCalendar (String nombreProfesional, int week){
+        List<Turno> turnosList= null;
+        if (nombreProfesional != null){
+            int profesionalId = ProfesionalManager.getInstance().getIdProfesionalManager(nombreProfesional);
+            turnosList = TurnoDAOImpl.getInstance().profesionalFutureApointments(profesionalId ,week);
+        }
+        return CalendarTableGenerator.getInstance().generateTable(turnosList,week);
+    }
+
+    public JTable getFuturePatientAppointments(long dniPaciente){
+        List<Turno> turnoList = null;
+        Paciente paciente = null;
+        if(dniPaciente!=-1){
+            paciente = PacienteManager.getInstance().getPatientByDni(dniPaciente);
+            turnoList = TurnoDAOImpl.getInstance().getPatientFutureApointments(paciente.getId());
+        }
+        return TurnosbyPacienteTableGenerator.getInstance().generateTable(turnoList,paciente);
+
+    }
+
+
 
 
 }

@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+
+import Utils.TableGenerator.CalendarTableGenerator;
 import org.jdatepicker.impl.DateComponentFormatter;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -45,13 +47,15 @@ public class PanelAgregarTurno extends Panel {
 
     private UtilDateModel model;
 
-    private boolean working = true;
+    private boolean working = false;
 
     private static PanelAgregarTurno panelAgregarTurno;
 
     private List<Prestacion> allPrestacion;
 
     private List<Prestacion> somePrestacion;
+
+    int week=0;
 
 
     public static PanelAgregarTurno getInstance(){
@@ -84,20 +88,27 @@ public class PanelAgregarTurno extends Panel {
         for (int i=1;i<=profesionales.size();i++) {
             profesionalCB.insertItemAt(profesionales.get(i-1).getNombre(),i);
         }
-
     }
 
 
     @Override
     public void setup(List<Object> arguments) {
         if (!working){
+            week =0;
             Date today = new Date();
             profesionalCB.setSelectedIndex(0);
             pacienteTF.setText("");
             horaFinTF.setText("");
             horaInicioTF.setText("");
-            model.setDate(today.getYear(), today.getMonth(),today.getDay());
+            servicioTF.setText("");
+            model.setDate(today.getYear()+1900, today.getMonth(),today.getDay());
             allPrestacion= TurnoManager.getInstance().getAllPrestaciones();
+            JTable auxTable= TurnoManager.getInstance().getCalendar(null,0);
+            calendarTable.setModel(auxTable.getModel());
+            calendarTable.setDefaultRenderer(Object.class,auxTable.getDefaultRenderer(Object.class));
+
+
+            working=true;
         }
 
     }
@@ -302,12 +313,29 @@ public class PanelAgregarTurno extends Panel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+
+
+    private void changeCalendar (){
+        String idProfesional;
+        if(profesionalCB.getSelectedIndex()==0){
+            idProfesional=null;
+        }
+        else {
+            idProfesional = profesionalCB.getItemAt(profesionalCB.getSelectedIndex());
+        }
+
+        JTable auxTable = TurnoManager.getInstance().getCalendar(idProfesional,week);
+        calendarTable.setModel(auxTable.getModel());
+        calendarTable.setDefaultRenderer(Object.class,auxTable.getDefaultRenderer(Object.class));
+    }
+
     private void profesionalCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profesionalCBActionPerformed
-        // TODO add your handling code here:
+        this.changeCalendar();
+
     }//GEN-LAST:event_profesionalCBActionPerformed
 
     private void pacienteTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pacienteTFActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_pacienteTFActionPerformed
 
     private void servicioTFActionPerformed(java.awt.event.ActionEvent evt) {
@@ -387,14 +415,20 @@ public class PanelAgregarTurno extends Panel {
         }
 
 
+
+        working=false;
     }//GEN-LAST:event_confirmarButtonMousePressed
 
     private void flechaDerButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_flechaDerButtonMousePressed
-        // TODO add your handling code here:
+        week++;
+        this.changeCalendar();
     }//GEN-LAST:event_flechaDerButtonMousePressed
 
     private void flechaIzqButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_flechaIzqButtonMousePressed
-        // TODO add your handling code here:
+        if (week<0){
+            week--;
+        }
+        this.changeCalendar();
     }//GEN-LAST:event_flechaIzqButtonMousePressed
 
     private void servicioTFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_servicioTFKeyPressed

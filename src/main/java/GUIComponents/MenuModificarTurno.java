@@ -70,6 +70,7 @@ public class MenuModificarTurno extends Panel {
         calendarTable.setModel(table.getModel());
         calendarTable.setDefaultRenderer(Object.class,table.getDefaultRenderer(Object.class));
 
+
     }
 
     /**

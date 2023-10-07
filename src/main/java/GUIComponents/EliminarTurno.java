@@ -4,6 +4,12 @@
  */
 package GUIComponents;
 
+import DAOs.MySQLImplementations.TurnoDAOImpl;
+import Managers.TurnoManager;
+import Utils.GUIUtils.PanelGUIHandler;
+import Utils.GUIUtils.SMenuGUIHandler;
+
+import javax.swing.*;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -150,12 +156,13 @@ public class EliminarTurno extends Panel {
         Pattern patron = Pattern.compile("^[1-9]\\d{6,7}$");
         Matcher matcher1 = patron.matcher(dniString);
         if (matcher1.matches()){
-            long dni1 = Long.parseLong(matcher1.group(1));
+            JTable auxTable = TurnoManager.getInstance().getFuturePatientAppointments(Long.parseLong(dniString));
         } else {
             error = true;
             jTextField1.setText("");
             errorString = errorString + "DNI Ingresado incorrecto \n";
         }
+
 
 
     }//GEN-LAST:event_buscarButtonMousePressed
@@ -175,7 +182,9 @@ public class EliminarTurno extends Panel {
     }//GEN-LAST:event_confirmarButtonMousePressed
 
     private void cancelarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMousePressed
-        // TODO add your handling code here:
+        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelTurnos,null);
+        SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
+
     }//GEN-LAST:event_cancelarButtonMousePressed
 
 

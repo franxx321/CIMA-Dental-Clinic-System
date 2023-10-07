@@ -6,10 +6,14 @@ package GUIComponents;
 
 import DAOs.MySQLImplementations.TurnoDAOImpl;
 import Managers.TurnoManager;
+import Objetos.Profesional;
+import Objetos.Turno;
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
+import Utils.String2Date;
 
 import javax.swing.*;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -168,23 +172,37 @@ public class EliminarTurno extends Panel {
     }//GEN-LAST:event_buscarButtonMousePressed
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
+        Object[] options = {"Sí", "No"};
+        int resp = JOptionPane.showOptionDialog(null,
+                "Usted esta a punto de eliminar el turno, no se podra recuperar.\n"+"¿Esta seguro?",
+                "Alerta!",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null,
+                options,
+                options[0]);
+
+        if(resp == 0){
+            // code for yes response
+        }else{
+            //code respuesta no
+        }
         int row = turnosTable.getSelectedRow();
         String profesional = (String) turnosTable.getModel().getValueAt(row,2);
         String fechaCompleta = (String) turnosTable.getModel().getValueAt(row,3);
-        String diaString = fechaCompleta.substring(0, fechaCompleta.indexOf("/"));
-        String aux1 = fechaCompleta.substring(fechaCompleta.indexOf("/") + 1);
-        String mesString = aux1.substring(aux1.indexOf(0), aux1.indexOf("/"));
-        aux1 = aux1.substring(aux1.indexOf("/") + 1);
-        String anioString = aux1.substring(aux1.indexOf(0), aux1.indexOf("/"));
-        aux1 = aux1.substring(aux1.indexOf("/") + 1);
-        //String
+        Date horaInicio = String2Date.string2Date(fechaCompleta);
+        fechaCompleta = (String) turnosTable.getModel().getValueAt(row,4);
+        Date horaFin = String2Date.string2Date(fechaCompleta);
 
+        int idProfesional = TurnoManager.getInstance().getProfesionalIdByName(profesional);
+        Turno turno = TurnoManager.getInstance().getByDateProfesional(horaInicio,horaFin,idProfesional);
+
+        TurnoManager.getInstance().deleteTurno(turno);
     }//GEN-LAST:event_confirmarButtonMousePressed
 
     private void cancelarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMousePressed
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelTurnos,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
-
     }//GEN-LAST:event_cancelarButtonMousePressed
 
 

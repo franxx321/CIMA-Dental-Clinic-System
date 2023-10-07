@@ -11,6 +11,7 @@ import Objetos.Prestacion;
 import Objetos.Profesional;
 import Objetos.Turno;
 import Utils.Exceptions.CantAddTurno;
+import Utils.FormatedDate;
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
 
@@ -355,17 +356,13 @@ public class PanelAgregarTurno extends Panel {
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
         boolean error = false;
         String errorString="";
-        Turno turno = new Turno();
         Prestacion ptcn = new Prestacion();
         ptcn.setNombre(servicioTF.getText());
         String profesional = profesionalCB.getSelectedItem().toString();
         long pacienteDni = Long.parseLong(pacienteTF.getText());
 
-        Date fecha = (Date) datePicker.getModel().getValue();
+        Date fecha = FormatedDate.formatedDate((Date) datePicker.getModel().getValue());
 
-        fecha.setMinutes(0);
-        fecha.setHours(0);
-        fecha.setSeconds(0);
         String horaInicioString = horaInicioTF.getText().trim();
         String horaFinString = horaFinTF.getText().trim();
         long milisegundos = fecha.getTime();

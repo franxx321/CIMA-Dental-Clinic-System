@@ -4,6 +4,8 @@
  */
 package GUIComponents;
 
+import Managers.TurnoManager;
+import Utils.Exceptions.CantAddTurno;
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
 import Utils.TableGenerator.CalendarTableGenerator;
@@ -14,8 +16,11 @@ import org.jdatepicker.impl.UtilDateModel;
 
 
 import javax.swing.*;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -310,6 +315,66 @@ public class MenuModificarTurno extends Panel {
     }//GEN-LAST:event_cancelarButtonMousePressed
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
+        boolean asistio = asistioCheckBox.isSelected();
+        float descuento;
+        boolean error = false;
+        String errorString ="";
+        Date fecha = (Date) datePicker.getModel().getValue();
+        fecha.setMinutes(0);
+        fecha.setHours(0);
+        fecha.setSeconds(0);
+        String horaInicioString = horaInicioTF.getText().trim();
+        String horaFinString = horaFinTF.getText().trim();
+        long milisegundos = fecha.getTime();
+        long horaInicioEnMilisegundos=0;
+        long horafinEnMilisegundos=0;
+
+        Pattern patron = Pattern.compile("^([01]?[0-9]|2[0-3]):([0-5][0-9])$");
+
+
+        Matcher matcher1 = patron.matcher(horaInicioString);
+        if (matcher1.matches()) {
+            int hora1= Integer.parseInt(matcher1.group(1));
+            int minutos1= Integer.parseInt(matcher1.group(2));
+            horaInicioEnMilisegundos = ((long) hora1 * 60 * 60 * 1000) + ((long) minutos1 * 60 * 1000);
+        }else {
+            // JOptionPane.showMessageDialog(null, "Inserte una hora de inicio correcta.");
+            error = true;
+            horaInicioTF.setText("");
+            errorString = errorString+"Hora de inicio incorrecta.\n";
+        }
+
+        Matcher matcher2 = patron.matcher(horaFinString);
+        if (matcher2.matches()) {
+            int hora2= Integer.parseInt(matcher2.group(1));
+            int minutos2= Integer.parseInt(matcher2.group(2));
+            horafinEnMilisegundos = ((long) hora2 * 60 * 60 * 1000) + ((long) minutos2 * 60 * 1000);
+        }else{
+
+            error = true;
+            horaFinTF.setText("");
+            errorString = errorString+"Hora de fin incorrecta.\n";
+        }
+
+        if(error){
+            JOptionPane.showMessageDialog(null, "Error!\n" + errorString);
+        }else{
+            horaInicioEnMilisegundos +=milisegundos;
+            horafinEnMilisegundos +=milisegundos;
+            try{
+
+                JOptionPane.showMessageDialog(null, "El turno fue modificado correctamente");
+                PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelTurnos,null);
+                SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
+            }
+            catch (CantAddTurno e){
+                JOptionPane.showMessageDialog(null, "Error!\n" + e.getErrors());
+            }
+        }
+
+
+
+
 
     }//GEN-LAST:event_confirmarButtonMousePressed
 

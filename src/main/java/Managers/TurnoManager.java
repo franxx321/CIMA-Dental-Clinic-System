@@ -84,8 +84,12 @@ public class TurnoManager {
         }
     }
 
-    public void deleteTurno(int id_profesional,Date horaInicio,Date horaFin){
-        TurnoDAOImpl.getInstance().delete(TurnoDAOImpl.getInstance().getByDateProfesional(horaInicio,horaFin,id_profesional));
+    public void modifyTurno(Turno turno){
+
+    }
+
+    public void deleteTurno(Turno turno){
+        TurnoDAOImpl.getInstance().delete(turno);
     }
 
     public List<Prestacion> getAllPrestaciones(){
@@ -122,6 +126,10 @@ public class TurnoManager {
 
     public JTable getPrestacionesByTurno(Turno turno){
         return PrestacionesByTurnoTableGenerator.getInstance().generateTable(turno);
+    }
+
+    public int getProfesionalIdByName(String profesional){
+        return ProfesionalManager.getInstance().getIdProfesionalManager(profesional);
     }
 
 

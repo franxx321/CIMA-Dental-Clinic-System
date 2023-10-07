@@ -6,10 +6,18 @@ package GUIComponents;
 
 import Managers.TurnoManager;
 import Managers.TurnoPrestacionManager;
+import Objetos.Prestacion;
 import Objetos.Turno;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -18,6 +26,10 @@ import java.util.List;
  public class MenuModificarPrestaciones extends Panel {
 
      Turno turno;
+
+     List<Prestacion> allPrestacion;
+
+     List<Prestacion> somePrestacion;
 
      private static MenuModificarPrestaciones menuModificarPrestaciones;
 
@@ -40,6 +52,7 @@ import java.util.List;
         turno= (Turno)arguments.get(0);
         JTable auxTable = TurnoManager.getInstance().getPrestacionesByTurno(turno);
         prestacionesTable.setModel(auxTable.getModel());
+        allPrestacion = TurnoManager.getInstance().getAllPrestaciones();
     }
 
 
@@ -169,7 +182,41 @@ import java.util.List;
     }//GEN-LAST:event_eliminarButtonMousePressed
 
     private void prestacionesTFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_prestacionesTFKeyPressed
-        // TODO add your handling code here:
+
+        prestacionesTF.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent e) {
+                String prestacionString = prestacionesTF.getText();
+                JPopupMenu popupMenu = new JPopupMenu();
+                popupMenu.setFocusable(false);  // Asegúrate de que el menú emergente no tome el foco
+                popupMenu.removeAll();
+                Pattern patron = Pattern.compile("("+prestacionString+")");
+                somePrestacion= new ArrayList<>();
+
+                for (Prestacion prestacion:allPrestacion) {
+                    Matcher matcher = patron.matcher(prestacion.getNombre());
+                    if (matcher.find()){
+                        somePrestacion.add(prestacion);
+                    }
+                }
+
+
+                for (Prestacion option : somePrestacion) {
+                    JMenuItem item = new JMenuItem(option.getNombre());
+                    item.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            prestacionesTF.setText(e.getActionCommand());
+                        }
+                    });
+                    popupMenu.add(item);
+
+                }
+
+                if (popupMenu.getComponentCount() > 0) {
+                    popupMenu.show(prestacionesTF, 0, prestacionesTF.getHeight());
+                }
+            }
+        });
+
     }//GEN-LAST:event_prestacionesTFKeyPressed
 
 

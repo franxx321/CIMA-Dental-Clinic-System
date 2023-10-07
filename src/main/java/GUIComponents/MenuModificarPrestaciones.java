@@ -58,7 +58,7 @@ import java.util.List;
         prestacionesTF = new javax.swing.JTextField();
         confirmarButton = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        eliminarButton = new javax.swing.JLabel();
         volverButton = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(223, 246, 255));
@@ -81,16 +81,37 @@ import java.util.List;
 
         jLabel1.setText("Nueva Prestacion");
 
+        prestacionesTF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                prestacionesTFKeyPressed(evt);
+            }
+        });
+
         confirmarButton.setText("Confirmar");
         confirmarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        confirmarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                confirmarButtonMousePressed(evt);
+            }
+        });
 
         jLabel3.setText("Prestaciones Activas");
 
-        jLabel4.setText("Eliminar");
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        eliminarButton.setText("Eliminar");
+        eliminarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        eliminarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                eliminarButtonMousePressed(evt);
+            }
+        });
 
         volverButton.setText("Volver");
         volverButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        volverButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                volverButtonMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -112,7 +133,7 @@ import java.util.List;
                                 .addComponent(volverButton))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(385, 385, 385)
-                        .addComponent(jLabel4)))
+                        .addComponent(eliminarButton)))
                 .addGap(145, 145, 145))
         );
         layout.setVerticalGroup(
@@ -130,22 +151,36 @@ import java.util.List;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4)
+                .addComponent(eliminarButton)
                 .addGap(26, 26, 26))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void volverButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volverButtonMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_volverButtonMousePressed
+
+    private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_confirmarButtonMousePressed
+
+    private void eliminarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarButtonMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eliminarButtonMousePressed
+
+    private void prestacionesTFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_prestacionesTFKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_prestacionesTFKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel confirmarButton;
+    private javax.swing.JLabel eliminarButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField prestacionesTF;
     private javax.swing.JTable prestacionesTable;
     private javax.swing.JLabel volverButton;
-
-
     // End of variables declaration//GEN-END:variables
 }

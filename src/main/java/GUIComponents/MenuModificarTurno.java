@@ -4,8 +4,13 @@
  */
 package GUIComponents;
 
+import Managers.PacienteManager;
 import Managers.TurnoManager;
+import Objetos.Paciente;
+import Objetos.Profesional;
+import Objetos.Turno;
 import Utils.Exceptions.CantAddTurno;
+import Utils.FormatedDate;
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
 import Utils.TableGenerator.CalendarTableGenerator;
@@ -34,6 +39,9 @@ public class MenuModificarTurno extends Panel {
     private JDatePickerImpl datePicker;
     private JDatePanelImpl datePanel;
     private UtilDateModel model;
+    private int week =0;
+    private Turno turno;
+    Profesional profesional = null;
     
     
 
@@ -45,6 +53,14 @@ public class MenuModificarTurno extends Panel {
         }
         return modificarTurno;
     }
+
+    private void modifyCalendar(){
+        JTable table = TurnoManager.getInstance().getCalendar(profesional.getNombre(),week);
+        calendarTable.setModel(table.getModel());
+        calendarTable.setDefaultRenderer(Object.class,table.getDefaultRenderer(Object.class));
+        this.repaint();
+        this.revalidate();
+    }
     
     
 
@@ -53,8 +69,6 @@ public class MenuModificarTurno extends Panel {
      */
     private MenuModificarTurno() {
         initComponents();
-
-
         model= new UtilDateModel();
         //IMPORTANTE a partir de la version 1.3.4 de JDatePicker se necesita darle properties al DatePanel
         // link: https://stackoverflow.com/questions/26794698/how-do-i-implement-jdatepicker
@@ -71,9 +85,27 @@ public class MenuModificarTurno extends Panel {
 
     @Override
     public void setup(List<Object> arguments) {
-        JTable table = CalendarTableGenerator.getInstance().generateTable(null ,0);
-        calendarTable.setModel(table.getModel());
-        calendarTable.setDefaultRenderer(Object.class,table.getDefaultRenderer(Object.class));
+        week =0;
+        turno= (Turno) arguments.get(0);
+        List<Profesional> allProfesional = TurnoManager.getInstance().getAllProfesional();
+        List<Paciente> allPaciente = PacienteManager.getInstance().getAll();
+        for (Profesional profesional1 : allProfesional){
+            if (profesional1.getId() == turno.getIdProfesional()){
+                profesional = profesional1;
+                break;
+            }
+        }
+        for (Paciente paciente1 : allPaciente){
+            if (paciente1.getId() == turno.getIdPaciente()){
+                pacienteLabel.setText(paciente1.getNombre());
+                break;
+            }
+        }
+
+        profesionalLabel.setText(profesional.getNombre());
+        horaFinTF.setText(turno.getHoraFin().getHours()+ ":"+ turno.getHoraFin().getMinutes());
+        horaInicioTF.setText(turno.getHoraInicio().getHours()+ ":"+ turno.getHoraInicio().getMinutes());
+        descuentoTF.setText(String.valueOf(turno.getDescuento()));
 
 
     }
@@ -315,19 +347,27 @@ public class MenuModificarTurno extends Panel {
     }//GEN-LAST:event_cancelarButtonMousePressed
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
+        Turno newTurno = new Turno();
         boolean asistio = asistioCheckBox.isSelected();
-        float descuento;
+        float descuento = Float.parseFloat(descuentoTF.getText());
         boolean error = false;
+        //float valor = Float.parseFloat(valorTF.getText());
         String errorString ="";
-        Date fecha = (Date) datePicker.getModel().getValue();
-        fecha.setMinutes(0);
-        fecha.setHours(0);
-        fecha.setSeconds(0);
+        Date fecha = FormatedDate.formatedDate((Date) datePicker.getModel().getValue());
         String horaInicioString = horaInicioTF.getText().trim();
         String horaFinString = horaFinTF.getText().trim();
         long milisegundos = fecha.getTime();
         long horaInicioEnMilisegundos=0;
         long horafinEnMilisegundos=0;
+        if(descuento < 0 ){
+            error = true;
+            descuentoTF.setText("");
+            errorString = errorString+"No se puede aplicar un descuento negativo.\n";
+        }else if(descuento > 100){
+            error = true;
+            descuentoTF.setText("");
+            errorString = errorString+"No se puede aplicar un descuento mayor a 100.\n";
+        }
 
         Pattern patron = Pattern.compile("^([01]?[0-9]|2[0-3]):([0-5][0-9])$");
 
@@ -361,8 +401,15 @@ public class MenuModificarTurno extends Panel {
         }else{
             horaInicioEnMilisegundos +=milisegundos;
             horafinEnMilisegundos +=milisegundos;
+            Date horaInicio = new Date(horaInicioEnMilisegundos);
+            Date horaFin = new Date(horafinEnMilisegundos);
+            newTurno.setAsistio(asistio);
+            newTurno.setHoraInicio(horaInicio);
+            newTurno.setHoraFin(horaFin);
+            newTurno.setDescuento(descuento);
+            //newTurno.setValor(valor);
             try{
-
+                TurnoManager.getInstance().modifyTurno(turno,newTurno);
                 JOptionPane.showMessageDialog(null, "El turno fue modificado correctamente");
                 PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelTurnos,null);
                 SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
@@ -371,23 +418,23 @@ public class MenuModificarTurno extends Panel {
                 JOptionPane.showMessageDialog(null, "Error!\n" + e.getErrors());
             }
         }
-
-
-
-
-
     }//GEN-LAST:event_confirmarButtonMousePressed
 
     private void flechaDerechaButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_flechaDerechaButtonMousePressed
-        // TODO add your handling code here:
+        week++;
+        this.modifyCalendar();
+
     }//GEN-LAST:event_flechaDerechaButtonMousePressed
 
     private void flechaIzqButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_flechaIzqButtonMousePressed
-        // TODO add your handling code here:
+        if (week >0){
+            week--;
+            this.modifyCalendar();
+        }
     }//GEN-LAST:event_flechaIzqButtonMousePressed
 
     private void asistioCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asistioCheckBoxActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_asistioCheckBoxActionPerformed
 
 

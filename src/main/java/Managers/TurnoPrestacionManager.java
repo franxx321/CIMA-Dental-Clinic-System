@@ -26,5 +26,11 @@ public class TurnoPrestacionManager {
         return TurnoPrestacionManager.turnoPrestacionManager.getByTurnoId(turnoId);
     }
 
+    public void deleteByTurno (Turno turno){
+        TurnoPrestacionDAOImpl.getInstance().deleteByTurno(turno.getId());
+    }
+
+
+
 
 }

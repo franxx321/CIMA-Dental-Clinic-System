@@ -8,14 +8,20 @@ import Managers.TurnoManager;
 import Managers.TurnoPrestacionManager;
 import Objetos.Prestacion;
 import Objetos.Turno;
+import Objetos.TurnoPrestacion;
+import Utils.GUIUtils.PanelGUIHandler;
+import Utils.GUIUtils.SMenuGUIHandler;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,7 +56,7 @@ import java.util.regex.Pattern;
     @Override
     public void setup(List<Object> arguments) {
         turno= (Turno)arguments.get(0);
-        JTable auxTable = TurnoManager.getInstance().getPrestacionesByTurno(turno);
+        JTable auxTable = TurnoManager.getInstance().getPrestacionesByTurnoTable(turno);
         prestacionesTable.setModel(auxTable.getModel());
         allPrestacion = TurnoManager.getInstance().getAllPrestaciones();
     }
@@ -170,14 +176,58 @@ import java.util.regex.Pattern;
     }// </editor-fold>//GEN-END:initComponents
 
     private void volverButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volverButtonMousePressed
-        // TODO add your handling code here:
+        TurnoManager.getInstance().deleteTurnoPrestacionByTurno(turno);
+        DefaultTableModel tm = (DefaultTableModel) prestacionesTable.getModel();
+        List<TurnoPrestacion> turnoPrestacionList = new ArrayList<>();
+        for (int i= 0; i<tm.getColumnCount();i++){
+            for (Prestacion prestacion: allPrestacion){
+                if(prestacion.getNombre().equals((String)tm.getValueAt(i,0))){
+                    TurnoPrestacion turnoPrestacion = new TurnoPrestacion();
+                    turnoPrestacion.setIdTurno(turno.getId());
+                    turnoPrestacion.setIdPrestacion(prestacion.getId());
+                    turnoPrestacionList.add(turnoPrestacion);
+                }
+            }
+        }
+        TurnoManager turnoManager = TurnoManager.getInstance();
+        for (TurnoPrestacion turnoPrestacion: turnoPrestacionList){
+            turnoManager.addTurnoPrestacion(turnoPrestacion);
+        }
+        List<Object>arguments = new ArrayList<>();
+        arguments.add(turno);
+        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.modificarTurno,arguments);
+        SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioTurnos,null);
+
     }//GEN-LAST:event_volverButtonMousePressed
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
-        // TODO add your handling code here:
+        Prestacion prestacion = null;
+        String prestacionString = prestacionesTF.getText().trim();
+        Pattern patron = Pattern.compile("("+prestacionString+")");
+        for (Prestacion prestacion1: somePrestacion){
+            Matcher matcher = patron.matcher(prestacion1.getNombre());
+            if (matcher.find()){
+                prestacion = prestacion1;
+                break;
+            }
+        }
+        DefaultTableModel tm = (DefaultTableModel) prestacionesTable.getModel();
+        if(prestacion!=null){
+        Vector<String> vector = new Vector<>();
+        vector.add(prestacion.getNombre());
+        vector.add(prestacion.getDescripcion());
+        tm.addRow(vector);
+        }
+        this.repaint();
+        this.revalidate();
     }//GEN-LAST:event_confirmarButtonMousePressed
 
     private void eliminarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarButtonMousePressed
+        int row = prestacionesTable.getSelectedRow();
+        DefaultTableModel tm = (DefaultTableModel) prestacionesTable.getModel();
+        tm.removeRow(row);
+        this.repaint();
+        this.revalidate();
         // TODO add your handling code here:
     }//GEN-LAST:event_eliminarButtonMousePressed
 
@@ -198,7 +248,6 @@ import java.util.regex.Pattern;
                         somePrestacion.add(prestacion);
                     }
                 }
-
 
                 for (Prestacion option : somePrestacion) {
                     JMenuItem item = new JMenuItem(option.getNombre());

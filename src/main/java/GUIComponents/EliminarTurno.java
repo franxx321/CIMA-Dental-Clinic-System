@@ -4,7 +4,6 @@
  */
 package GUIComponents;
 
-import DAOs.MySQLImplementations.TurnoDAOImpl;
 import Managers.TurnoManager;
 import Objetos.Profesional;
 import Objetos.Turno;
@@ -173,31 +172,38 @@ public class EliminarTurno extends Panel {
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
         Object[] options = {"Sí", "No"};
+
+        String[] optionsStr = new String[options.length];
+        for (int i = 0; i < options.length; i++) {
+            optionsStr[i] = options[i].toString();
+        }
+
         int resp = JOptionPane.showOptionDialog(null,
-                "Usted esta a punto de eliminar el turno, no se podra recuperar.\n"+"¿Esta seguro?",
+                "Usted esta a punto de eliminar el turno.\n"+"¿Esta seguro?",
                 "Alerta!",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.WARNING_MESSAGE,
                 null,
-                options,
-                options[0]);
+                optionsStr,
+                optionsStr[1]);
 
         if(resp == 0){
             // code for yes response
+            int row = turnosTable.getSelectedRow();
+            String profesional = (String) turnosTable.getModel().getValueAt(row,2);
+            String fechaCompleta = (String) turnosTable.getModel().getValueAt(row,3);
+            Date horaInicio = String2Date.string2Date(fechaCompleta);
+            fechaCompleta = (String) turnosTable.getModel().getValueAt(row,4);
+            Date horaFin = String2Date.string2Date(fechaCompleta);
+
+            Profesional profesional1 = TurnoManager.getInstance().getProfesionalByName(profesional);
+            int idProfesional = profesional1.getId();
+            Turno turno = TurnoManager.getInstance().getByDateProfesional(horaInicio,horaFin,idProfesional);
+            TurnoManager.getInstance().deleteTurno(turno);
         }else{
             //code respuesta no
         }
-        int row = turnosTable.getSelectedRow();
-        String profesional = (String) turnosTable.getModel().getValueAt(row,2);
-        String fechaCompleta = (String) turnosTable.getModel().getValueAt(row,3);
-        Date horaInicio = String2Date.string2Date(fechaCompleta);
-        fechaCompleta = (String) turnosTable.getModel().getValueAt(row,4);
-        Date horaFin = String2Date.string2Date(fechaCompleta);
 
-        int idProfesional = TurnoManager.getInstance().getProfesionalIdByName(profesional);
-        Turno turno = TurnoManager.getInstance().getByDateProfesional(horaInicio,horaFin,idProfesional);
-
-        TurnoManager.getInstance().deleteTurno(turno);
     }//GEN-LAST:event_confirmarButtonMousePressed
 
     private void cancelarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMousePressed

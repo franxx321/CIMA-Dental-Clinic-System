@@ -44,7 +44,8 @@ public class TurnoManager {
             turno.setIdPaciente(paciente.getId());
         }
 
-        idProfesional = ProfesionalManager.getInstance().getIdProfesionalManager(profesionalCB);
+        Profesional profesional = ProfesionalManager.getInstance().getProfesionalByName(profesionalCB);
+        idProfesional= profesional.getId();
         if(idProfesional == -1){
             error = true;
             errorString = errorString + "\nEl profesional no esta cargado";
@@ -84,8 +85,8 @@ public class TurnoManager {
         }
     }
 
-    public void modifyTurno(Turno turno){
-
+    public void modifyTurno(Turno turno, Turno aux){
+        TurnoDAOImpl.getInstance().modify(turno, aux);
     }
 
     public void deleteTurno(Turno turno){
@@ -99,6 +100,7 @@ public class TurnoManager {
     public List<Profesional> getAllProfesional(){
 
         return ProfesionalManager.getInstance().getAll();
+
     }
 
     public Turno getByDateProfesional(Date horaInicio, Date horaFin,int idProfesional){
@@ -108,8 +110,8 @@ public class TurnoManager {
     public JTable getCalendar (String nombreProfesional, int week){
         List<Turno> turnosList= null;
         if (nombreProfesional != null){
-            int profesionalId = ProfesionalManager.getInstance().getIdProfesionalManager(nombreProfesional);
-            turnosList = TurnoDAOImpl.getInstance().profesionalFutureApointments(profesionalId ,week);
+            Profesional profesional = ProfesionalManager.getInstance().getProfesionalByName(nombreProfesional);
+            turnosList = TurnoDAOImpl.getInstance().profesionalFutureApointments(profesional.getId() ,week);
         }
         return CalendarTableGenerator.getInstance().generateTable(turnosList,week);
     }
@@ -124,12 +126,24 @@ public class TurnoManager {
         return TurnosbyPacienteTableGenerator.getInstance().generateTable(turnoList,paciente);
     }
 
-    public JTable getPrestacionesByTurno(Turno turno){
+    public JTable getPrestacionesByTurnoTable(Turno turno){
         return PrestacionesByTurnoTableGenerator.getInstance().generateTable(turno);
     }
 
-    public int getProfesionalIdByName(String profesional){
-        return ProfesionalManager.getInstance().getIdProfesionalManager(profesional);
+    public Profesional getProfesionalByName(String profesional){
+        return ProfesionalManager.getInstance().getProfesionalByName(profesional);
+    }
+
+    public List<TurnoPrestacion> getPrestacionesByTurno(Turno turno){
+        return TurnoPrestacionManager.getInstance().getByTurnoId(turno.getId());
+    }
+
+    public  void deleteTurnoPrestacionByTurno(Turno turno){
+        TurnoPrestacionManager.getInstance().deleteByTurno(turno);
+    }
+
+    public void addTurnoPrestacion(TurnoPrestacion turnoPrestacion){
+        TurnoPrestacionManager.getInstance().addTurnoPrestacion(turnoPrestacion);
     }
 
 

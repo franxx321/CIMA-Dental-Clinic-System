@@ -15,8 +15,9 @@ public class ProfesionalManager {
 
     private ProfesionalManager(){
     }
-    public int getIdProfesionalManager(String profesional){
-        return ProfesionalDAOImpl.getInstance().getIdProfesional(profesional);
+
+    public Profesional getProfesionalByName(String profesional){
+        return ProfesionalDAOImpl.getInstance().getProfesionalByName(profesional);
     }
 
     public List<Profesional> getAll(){

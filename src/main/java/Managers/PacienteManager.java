@@ -1,7 +1,11 @@
 package Managers;
 
 import DAOs.MySQLImplementations.PacienteDAOImpl;
+import DAOs.MySQLImplementations.ProfesionalDAOImpl;
 import Objetos.Paciente;
+import Objetos.Profesional;
+
+import java.util.List;
 
 public class PacienteManager {
 
@@ -21,5 +25,8 @@ public class PacienteManager {
         return PacienteDAOImpl.getInstance().getByDni(dni);
     }
 
+    public List<Paciente> getAll(){
+        return PacienteDAOImpl.getInstance().obtain();
+    }
 
 }

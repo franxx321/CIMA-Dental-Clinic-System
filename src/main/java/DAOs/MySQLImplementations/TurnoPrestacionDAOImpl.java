@@ -149,4 +149,24 @@ public class TurnoPrestacionDAOImpl implements ITurnoPrestacionDAO {
         }
         return turnoPrestacionList;
     }
+
+    public boolean deleteByTurno (int turnoId){
+        boolean delete= true;
+        try{
+            DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
+            con = DBConnection.getConnection();
+            PreparedStatement ptsm = con.prepareStatement("DELETE FROM turnosprestaciones " +
+                    "WHERE id_turno = ?");
+            ptsm.setInt(1,turnoId);
+            ptsm.executeUpdate();
+            con.close();
+            delete=true;
+        }
+        catch (SQLException e){
+            System.out.println("fallo delete By Turno TurnoPrestacionDAO IMPL "+ e.getMessage());
+        }
+
+        return delete;
+    }
 }

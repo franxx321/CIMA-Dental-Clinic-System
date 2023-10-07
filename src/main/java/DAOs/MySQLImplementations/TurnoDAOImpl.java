@@ -109,7 +109,7 @@ public class TurnoDAOImpl implements ITurnosDAO {
     public boolean modify(Turno turno, Turno aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE Turnos SET  horainicio = ?, horafin = ?, asistio = ?, id_paciente = ?, id_profesional = ?, valor = ?, descuento = ? WHERE id = ?";
+        String sql = "UPDATE Turnos SET  horainicio = ?, horafin = ?, asistio = ?, valor = ?, descuento = ? WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
             DBConnection.startConnection();
@@ -118,11 +118,9 @@ public class TurnoDAOImpl implements ITurnosDAO {
             pstm.setTimestamp(1, new Timestamp(aux.getHoraInicio().getTime()) );
             pstm.setTimestamp(2, new Timestamp(aux.getHoraFin().getTime()) );
             pstm.setBoolean(3, aux.isAsistio());
-            pstm.setInt(4, aux.getIdPaciente());
-            pstm.setInt(5, aux.getIdProfesional());
-            pstm.setFloat(6, aux.getValor());
-            pstm.setFloat(7, aux.getDescuento());
-            pstm.setInt(8, turno.getId());
+            pstm.setFloat(4, aux.getValor());
+            pstm.setFloat(5, aux.getDescuento());
+            pstm.setInt(6, turno.getId());
             pstm.executeUpdate();
             modify = true;
             pstm.close();

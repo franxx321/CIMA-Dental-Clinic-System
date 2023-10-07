@@ -326,10 +326,11 @@ public class PanelAgregarTurno extends Panel {
         else {
             idProfesional = profesionalCB.getItemAt(profesionalCB.getSelectedIndex());
         }
-
         JTable auxTable = TurnoManager.getInstance().getCalendar(idProfesional,week);
         calendarTable.setModel(auxTable.getModel());
         calendarTable.setDefaultRenderer(Object.class,auxTable.getDefaultRenderer(Object.class));
+        this.repaint();
+        this.revalidate();
     }
 
     private void profesionalCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profesionalCBActionPerformed
@@ -426,8 +427,9 @@ public class PanelAgregarTurno extends Panel {
     private void flechaIzqButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_flechaIzqButtonMousePressed
         if (week<0){
             week--;
+            this.changeCalendar();
         }
-        this.changeCalendar();
+
     }//GEN-LAST:event_flechaIzqButtonMousePressed
 
     private void servicioTFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_servicioTFKeyPressed

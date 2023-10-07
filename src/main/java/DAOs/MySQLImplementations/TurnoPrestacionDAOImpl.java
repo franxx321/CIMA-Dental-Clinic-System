@@ -1,6 +1,7 @@
 package DAOs.MySQLImplementations;
 
 import DAOs.Interfaces.ITurnoPrestacionDAO;
+import Objetos.Prestacion;
 import Objetos.Turno;
 import Objetos.TurnoPrestacion;
 import Utils.DBUtils.DBConnector;
@@ -117,5 +118,35 @@ public class TurnoPrestacionDAOImpl implements ITurnoPrestacionDAO {
             System.out.println("Error: Clase TurnoPrestacionDAOImpl, metodo modify. " +e.getMessage());
         }
         return modify;
+    }
+
+    @Override
+    public List<TurnoPrestacion> getByTurnoId(int turnoId) {
+        List <TurnoPrestacion>  turnoPrestacionList= null;
+        try {
+            DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
+            con = DBConnection.getConnection();
+            PreparedStatement ptsm = con.prepareStatement("SELECT * " +
+                    "from turnosprestaciones" +
+                    " where id_turno =? " +
+                    "ORDER BY id_prestacion");
+            ptsm.setInt(1,turnoId);
+            ResultSet rs = ptsm.executeQuery();
+            if(rs.next()){
+                turnoPrestacionList= new ArrayList<>();
+                do{
+                    TurnoPrestacion turnoPrestacion = new TurnoPrestacion();
+                    turnoPrestacion.setId(rs.getInt(1));
+                    turnoPrestacion.setIdTurno(rs.getInt(2));
+                    turnoPrestacion.setIdPrestacion(rs.getInt(3));
+                    turnoPrestacionList.add(turnoPrestacion);
+                }while (rs.next());
+            }
+        }
+        catch (SQLException e){
+            System.out.println("fallo get by turno id TurnoPrestacionDAOIMPL "+ e.getMessage());
+        }
+        return turnoPrestacionList;
     }
 }

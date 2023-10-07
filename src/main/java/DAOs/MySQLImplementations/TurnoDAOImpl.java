@@ -199,8 +199,7 @@ public class TurnoDAOImpl implements ITurnosDAO {
                 t.setDescuento(rs.getFloat(8));
                 turnoList.add(t);
             }
-
-
+            con.close();
         }
         catch (SQLException e){
             System.out.println("Fallo Turno DAO IMPL get by id profesional"+e.getMessage());
@@ -250,6 +249,7 @@ public class TurnoDAOImpl implements ITurnosDAO {
                 turnoList.add(t);
                 } while (rs.next());
             }
+            con.close();
         }
         catch (SQLException e){
             System.out.println("Fallo Turnos DAO Impl get Overlapping turnos"+e.getMessage());
@@ -284,12 +284,14 @@ public class TurnoDAOImpl implements ITurnosDAO {
                 turno.setValor(rs.getFloat(7));
                 turno.setDescuento(rs.getFloat(8));
             }
-
+            con.close();
         }
+
         catch (SQLException e){
             System.out.println("fallo Turnos DAO Impl get by date profesional"+ e.getMessage());
         }
         return turno;
+
     }
 
     @Override
@@ -326,6 +328,7 @@ public class TurnoDAOImpl implements ITurnosDAO {
                     turnoList.add(turno);
                 } while (rs.next());
             }
+            con.close();
         }
         catch (SQLException e){
             System.out.println("Error en get Patient Future Appointments Turno DAO IMPL"+e.getMessage());

@@ -29,7 +29,7 @@
               </Group>
               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
               <Component id="buscarButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="566" max="32767" attributes="0"/>
+              <EmptySpace pref="542" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="241" max="-2" attributes="0"/>
@@ -66,7 +66,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ingrese el nombre del paciente"/>
+        <Property name="text" type="java.lang.String" value="Ingrese el documento del paciente"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField1">

@@ -14,4 +14,9 @@ public interface ITurnoPrestacionDAO {
     public boolean delete(TurnoPrestacion turnoPrestacion);
 
     public boolean modify (TurnoPrestacion turnoPrestacion, TurnoPrestacion aux);
+
+
+    public List<TurnoPrestacion> getByTurnoId(int turnoId);
+
+
 }

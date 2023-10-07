@@ -88,7 +88,7 @@ public class BuscarTurnoPaciente extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setText("Ingrese el nombre del paciente");
+        jLabel1.setText("Ingrese el documento del paciente");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -101,7 +101,7 @@ public class BuscarTurnoPaciente extends javax.swing.JPanel {
                     .addComponent(jTextField1))
                 .addGap(46, 46, 46)
                 .addComponent(buscarButton)
-                .addContainerGap(566, Short.MAX_VALUE))
+                .addContainerGap(542, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(241, 241, 241)
                 .addComponent(cancelarButton)

@@ -143,7 +143,7 @@ public class PanelAgregarTurno extends Panel {
         setBackground(new java.awt.Color(223, 246, 255));
         setPreferredSize(new java.awt.Dimension(907, 652));
 
-        profesionalCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una opcion", "Item 2", "Item 3", "Item 4" }));
+        profesionalCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una opcion" }));
         profesionalCB.setPreferredSize(new java.awt.Dimension(200, 29));
         profesionalCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,7 +153,7 @@ public class PanelAgregarTurno extends Panel {
 
         jLabel1.setText("Profesional: ");
 
-        jLabel2.setText("Paciente:");
+        jLabel2.setText("Dni paciente:");
 
         pacienteTF.setPreferredSize(new java.awt.Dimension(200, 29));
         pacienteTF.addActionListener(new java.awt.event.ActionListener() {
@@ -196,6 +196,8 @@ public class PanelAgregarTurno extends Panel {
                 confirmarButtonMousePressed(evt);
             }
         });
+
+        jScrollPane1.setBackground(new java.awt.Color(223, 246, 255));
 
         calendarTable.setBackground(new java.awt.Color(223, 244, 255));
         calendarTable.setModel(new javax.swing.table.DefaultTableModel(

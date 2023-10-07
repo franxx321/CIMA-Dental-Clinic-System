@@ -60,7 +60,7 @@ public class EliminarTurno extends Panel {
 
         setBackground(new java.awt.Color(223, 246, 255));
 
-        jLabel1.setText("Ingrese el nombre del paciente");
+        jLabel1.setText("Ingrese el documento del paciente");
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,7 +117,7 @@ public class EliminarTurno extends Panel {
                     .addComponent(jTextField1))
                 .addGap(46, 46, 46)
                 .addComponent(buscarButton)
-                .addContainerGap(566, Short.MAX_VALUE))
+                .addContainerGap(542, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(241, 241, 241)
                 .addComponent(cancelarButton)

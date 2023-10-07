@@ -4,18 +4,44 @@
  */
 package GUIComponents;
 
+import Managers.TurnoManager;
+import Managers.TurnoPrestacionManager;
+import Objetos.Turno;
+
+import javax.swing.*;
+import java.util.List;
+
 /**
  *
  * @author franc
  */
-public class MenuModificarPrestaciones extends javax.swing.JPanel {
+ public class MenuModificarPrestaciones extends Panel {
+
+     Turno turno;
+
+     private static MenuModificarPrestaciones menuModificarPrestaciones;
+
+     public static MenuModificarPrestaciones getInstance(){
+         if (menuModificarPrestaciones ==null){
+             menuModificarPrestaciones= new MenuModificarPrestaciones();
+         }
+         return menuModificarPrestaciones;
+     }
 
     /**
      * Creates new form MenuPrestaciones
      */
-    public MenuModificarPrestaciones() {
+    private MenuModificarPrestaciones() {
         initComponents();
     }
+
+    @Override
+    public void setup(List<Object> arguments) {
+        turno= (Turno)arguments.get(0);
+        JTable auxTable = TurnoManager.getInstance().getPrestacionesByTurno(turno);
+        prestacionesTable.setModel(auxTable.getModel());
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,13 +55,15 @@ public class MenuModificarPrestaciones extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         prestacionesTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        prestacionesTF = new javax.swing.JTextField();
+        confirmarButton = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        volverButton = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(223, 246, 255));
+
+        jScrollPane1.setBackground(new java.awt.Color(223, 246, 255));
 
         prestacionesTable.setBackground(new java.awt.Color(223, 244, 255));
         prestacionesTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -53,13 +81,16 @@ public class MenuModificarPrestaciones extends javax.swing.JPanel {
 
         jLabel1.setText("Nueva Prestacion");
 
-        jLabel2.setText("Confirmar");
+        confirmarButton.setText("Confirmar");
+        confirmarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel3.setText("Prestaciones Activas");
 
         jLabel4.setText("Eliminar");
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jLabel5.setText("Volver");
+        volverButton.setText("Volver");
+        volverButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -74,11 +105,11 @@ public class MenuModificarPrestaciones extends javax.swing.JPanel {
                             .addComponent(jLabel3)
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(prestacionesTF, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(65, 65, 65)
-                                .addComponent(jLabel2)
+                                .addComponent(confirmarButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 350, Short.MAX_VALUE)
-                                .addComponent(jLabel5))))
+                                .addComponent(volverButton))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(385, 385, 385)
                         .addComponent(jLabel4)))
@@ -91,9 +122,9 @@ public class MenuModificarPrestaciones extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5))
+                    .addComponent(prestacionesTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(confirmarButton)
+                    .addComponent(volverButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -106,13 +137,15 @@ public class MenuModificarPrestaciones extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel confirmarButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField prestacionesTF;
     private javax.swing.JTable prestacionesTable;
+    private javax.swing.JLabel volverButton;
+
+
     // End of variables declaration//GEN-END:variables
 }

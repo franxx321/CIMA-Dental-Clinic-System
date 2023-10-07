@@ -4,6 +4,7 @@ import DAOs.MySQLImplementations.TurnoDAOImpl;
 import Objetos.*;
 import Utils.Exceptions.CantAddTurno;
 import Utils.TableGenerator.CalendarTableGenerator;
+import Utils.TableGenerator.PrestacionesByTurnoTableGenerator;
 import Utils.TableGenerator.TurnosbyPacienteTableGenerator;
 
 import javax.swing.*;
@@ -117,7 +118,10 @@ public class TurnoManager {
             turnoList = TurnoDAOImpl.getInstance().getPatientFutureApointments(paciente.getId());
         }
         return TurnosbyPacienteTableGenerator.getInstance().generateTable(turnoList,paciente);
+    }
 
+    public JTable getPrestacionesByTurno(Turno turno){
+        return PrestacionesByTurnoTableGenerator.getInstance().generateTable(turno);
     }
 
 

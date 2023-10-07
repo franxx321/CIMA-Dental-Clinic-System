@@ -108,6 +108,8 @@ public class MenuModificarTurno extends Panel {
 
         setBackground(new java.awt.Color(223, 246, 255));
 
+        jScrollPane1.setBackground(new java.awt.Color(223, 246, 255));
+
         calendarTable.setBackground(new java.awt.Color(223, 244, 255));
         calendarTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -124,7 +126,7 @@ public class MenuModificarTurno extends Panel {
 
         jLabel1.setText("Profesional: ");
 
-        jLabel2.setText("Paciente:");
+        jLabel2.setText("Dni paciente:");
 
         jLabel6.setText("Fecha: ");
 
@@ -207,7 +209,7 @@ public class MenuModificarTurno extends Panel {
                     .addComponent(jLabel2)
                     .addComponent(asistioCheckBox)
                     .addComponent(pacienteLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)

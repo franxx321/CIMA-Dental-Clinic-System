@@ -102,7 +102,7 @@ public class MenuModificarTurno extends Panel {
                 break;
             }
         }
-
+        model.setDate(turno.getHoraFin().getYear(), turno.getHoraFin().getMonth(),turno.getHoraFin().getDay());
         profesionalLabel.setText(profesional.getNombre());
         horaFinTF.setText(turno.getHoraFin().getHours()+ ":"+ turno.getHoraFin().getMinutes());
         horaInicioTF.setText(turno.getHoraInicio().getHours()+ ":"+ turno.getHoraInicio().getMinutes());

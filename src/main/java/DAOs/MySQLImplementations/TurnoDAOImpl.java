@@ -274,7 +274,7 @@ public class TurnoDAOImpl implements ITurnosDAO {
             else{
                 turno.setId(rs.getInt(1));
                 turno.setHoraInicio(new Date(rs.getTimestamp(2).getTime()));
-                turno.setHoraInicio(new Date(rs.getTimestamp(3).getTime()));
+                turno.setHoraFin(new Date(rs.getTimestamp(3).getTime()));
                 turno.setAsistio(rs.getBoolean(4));
                 turno.setIdPaciente(rs.getInt(5));
                 turno.setIdProfesional(rs.getInt(6));
@@ -305,8 +305,7 @@ public class TurnoDAOImpl implements ITurnosDAO {
             PreparedStatement ptsm = con.prepareStatement("SELECT * " +
                     "FROM turnos " +
                     "WHERE horaInicio > ?" +
-                    "and id_paciente =?" +
-                    "ORDER BY horaInicio");
+                    "and id_paciente =?");
             ptsm.setTimestamp(1, new Timestamp(today.getTime()));
             ptsm.setInt(2,idPaciente);
             ResultSet rs = ptsm.executeQuery();
@@ -316,7 +315,7 @@ public class TurnoDAOImpl implements ITurnosDAO {
                     Turno turno = new Turno();
                     turno.setId(rs.getInt(1));
                     turno.setHoraInicio(new Date(rs.getTimestamp(2).getTime()));
-                    turno.setHoraInicio(new Date(rs.getTimestamp(3).getTime()));
+                    turno.setHoraFin(new Date(rs.getTimestamp(3).getTime()));
                     turno.setAsistio(rs.getBoolean(4));
                     turno.setIdPaciente(rs.getInt(5));
                     turno.setIdProfesional(rs.getInt(6));
@@ -331,7 +330,7 @@ public class TurnoDAOImpl implements ITurnosDAO {
             System.out.println("Error en get Patient Future Appointments Turno DAO IMPL"+e.getMessage());
         }
 
-        return null;
+        return turnoList;
     }
 
 

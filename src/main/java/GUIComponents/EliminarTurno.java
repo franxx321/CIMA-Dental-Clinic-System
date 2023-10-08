@@ -156,10 +156,11 @@ public class EliminarTurno extends Panel {
         String dniString = jTextField1.getText().trim();
         String errorString = "";
         boolean error = false;
-        Pattern patron = Pattern.compile("^[1-9]\\d{6,7}$");
+        Pattern patron = Pattern.compile("^[1-9]\\d{6,9}$");
         Matcher matcher1 = patron.matcher(dniString);
         if (matcher1.matches()){
             JTable auxTable = TurnoManager.getInstance().getFuturePatientAppointments(Long.parseLong(dniString));
+            turnosTable.setModel(auxTable.getModel());
         } else {
             error = true;
             jTextField1.setText("");
@@ -200,6 +201,8 @@ public class EliminarTurno extends Panel {
             int idProfesional = profesional1.getId();
             Turno turno = TurnoManager.getInstance().getByDateProfesional(horaInicio,horaFin,idProfesional);
             TurnoManager.getInstance().deleteTurno(turno);
+            PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelTurnos,null);
+            SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
         }else{
             //code respuesta no
         }

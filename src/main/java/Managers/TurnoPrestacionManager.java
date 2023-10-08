@@ -23,7 +23,7 @@ public class TurnoPrestacionManager {
     }
 
     public List<TurnoPrestacion> getByTurnoId(int turnoId){
-        return TurnoPrestacionManager.turnoPrestacionManager.getByTurnoId(turnoId);
+        return TurnoPrestacionDAOImpl.getInstance().getByTurnoId(turnoId);
     }
 
     public void deleteByTurno (Turno turno){

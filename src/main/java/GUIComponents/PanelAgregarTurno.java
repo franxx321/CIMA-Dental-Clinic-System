@@ -94,21 +94,19 @@ public class PanelAgregarTurno extends Panel {
 
     @Override
     public void setup(List<Object> arguments) {
+        Date today = new Date();
+        model.setDate(today.getYear()+1900, today.getMonth(),today.getDay());
         if (!working){
             week =0;
-            Date today = new Date();
             profesionalCB.setSelectedIndex(0);
             pacienteTF.setText("");
             horaFinTF.setText("");
             horaInicioTF.setText("");
             servicioTF.setText("");
-            model.setDate(today.getYear()+1900, today.getMonth(),today.getDay());
             allPrestacion= TurnoManager.getInstance().getAllPrestaciones();
             JTable auxTable= TurnoManager.getInstance().getCalendar(null,0);
             calendarTable.setModel(auxTable.getModel());
             calendarTable.setDefaultRenderer(Object.class,auxTable.getDefaultRenderer(Object.class));
-
-
             working=true;
         }
 
@@ -329,8 +327,8 @@ public class PanelAgregarTurno extends Panel {
         JTable auxTable = TurnoManager.getInstance().getCalendar(idProfesional,week);
         calendarTable.setModel(auxTable.getModel());
         calendarTable.setDefaultRenderer(Object.class,auxTable.getDefaultRenderer(Object.class));
-        this.repaint();
-        this.revalidate();
+        Frame.getInstance().repaint();
+        Frame.getInstance().revalidate();
     }
 
     private void profesionalCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profesionalCBActionPerformed
@@ -361,7 +359,6 @@ public class PanelAgregarTurno extends Panel {
         ptcn.setNombre(servicioTF.getText());
         String profesional = profesionalCB.getSelectedItem().toString();
         long pacienteDni = Long.parseLong(pacienteTF.getText());
-
         Date fecha = FormatedDate.formatedDate((Date) datePicker.getModel().getValue());
 
         String horaInicioString = horaInicioTF.getText().trim();
@@ -425,7 +422,7 @@ public class PanelAgregarTurno extends Panel {
     }//GEN-LAST:event_flechaDerButtonMousePressed
 
     private void flechaIzqButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_flechaIzqButtonMousePressed
-        if (week<0){
+        if (week>0){
             week--;
             this.changeCalendar();
         }

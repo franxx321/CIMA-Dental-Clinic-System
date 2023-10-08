@@ -21,6 +21,7 @@ import org.jdatepicker.impl.UtilDateModel;
 
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -338,7 +339,9 @@ public class MenuModificarTurno extends Panel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void configurarPrestacionesButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_configurarPrestacionesButtonMousePressed
-        // TODO add your handling code here:
+        List<Object> arguments = new ArrayList<>();
+        arguments.add(turno);
+        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.modificarPrestacion,arguments);
     }//GEN-LAST:event_configurarPrestacionesButtonMousePressed
 
     private void cancelarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMousePressed

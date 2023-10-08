@@ -13,7 +13,7 @@ public class String2Date {
         String aux1 = fechaCompleta.substring(fechaCompleta.indexOf("/") + 1);
         String mesString = aux1.substring(0, aux1.indexOf("/"));
         aux1 = aux1.substring(aux1.indexOf("/") + 1);
-        String anioString = aux1.substring(0,5);
+        String anioString = aux1.substring(0,4);
         aux1 = aux1.substring(5);
         String horaString = aux1.substring(0, aux1.indexOf(":"));
         aux1 = aux1.substring(aux1.indexOf(":") + 1);

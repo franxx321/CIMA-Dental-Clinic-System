@@ -4,11 +4,18 @@
  */
 package GUIComponents;
 
+import DAOs.MySQLImplementations.PrestacionDAOImpl;
 import Managers.TurnoManager;
+import Objetos.Profesional;
+import Objetos.Turno;
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
+import Utils.String2Date;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,12 +23,21 @@ import java.util.regex.Pattern;
  *
  * @author franc
  */
-public class BuscarTurnoPaciente extends javax.swing.JPanel {
+public class BuscarTurnoPaciente extends Panel {
+
+    private static BuscarTurnoPaciente buscarTurnoPaciente;
+
+    public static BuscarTurnoPaciente getInstance(){
+        if(buscarTurnoPaciente==null){
+            buscarTurnoPaciente = new BuscarTurnoPaciente();
+        }
+        return buscarTurnoPaciente;
+    }
 
     /**
      * Creates new form BuscarTurnoPaciente
      */
-    public BuscarTurnoPaciente() {
+    private BuscarTurnoPaciente() {
         initComponents();
     }
 
@@ -137,10 +153,11 @@ public class BuscarTurnoPaciente extends javax.swing.JPanel {
         String dniString = jTextField1.getText().trim();
         String errorString = "";
         boolean error = false;
-        Pattern patron = Pattern.compile("^[1-9]\\d{6,7}$");
+        Pattern patron = Pattern.compile("^[1-9]\\d{6,9}$");
         Matcher matcher1 = patron.matcher(dniString);
         if (matcher1.matches()){
             JTable auxTable = TurnoManager.getInstance().getFuturePatientAppointments(Long.parseLong(dniString));
+            turnosTable.setModel(auxTable.getModel());
         } else {
             error = true;
             jTextField1.setText("");
@@ -154,7 +171,18 @@ public class BuscarTurnoPaciente extends javax.swing.JPanel {
     }//GEN-LAST:event_cancelarButtonMousePressed
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
-        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.modificarTurno,null);
+        int row = turnosTable.getSelectedRow();
+        String profesional = (String) turnosTable.getModel().getValueAt(row,2);
+        String fechaCompleta = (String) turnosTable.getModel().getValueAt(row,3);
+        Date horaInicio = String2Date.string2Date(fechaCompleta);
+        fechaCompleta = (String) turnosTable.getModel().getValueAt(row,4);
+        Date horaFin = String2Date.string2Date(fechaCompleta);
+        Profesional profesional1 = TurnoManager.getInstance().getProfesionalByName(profesional);
+        int idProfesional = profesional1.getId();
+        Turno turno = TurnoManager.getInstance().getByDateProfesional(horaInicio,horaFin,idProfesional);
+        List<Object> arguments = new ArrayList<>();
+        arguments.add(turno);
+        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.modificarTurno,arguments);
     }//GEN-LAST:event_confirmarButtonMousePressed
 
 
@@ -166,5 +194,10 @@ public class BuscarTurnoPaciente extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTable turnosTable;
+
+    @Override
+    public void setup(List<Object> arguments) {
+
+    }
     // End of variables declaration//GEN-END:variables
 }

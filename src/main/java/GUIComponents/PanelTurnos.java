@@ -116,7 +116,7 @@ public class PanelTurnos extends Panel {
     }//GEN-LAST:event_agregarTurnoButtonMousePressed
 
     private void modificarTurnoButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarTurnoButtonMousePressed
-        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.modificarTurno,null);
+        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.buscarPaciente,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioTurnos,null);
     }//GEN-LAST:event_modificarTurnoButtonMousePressed
 

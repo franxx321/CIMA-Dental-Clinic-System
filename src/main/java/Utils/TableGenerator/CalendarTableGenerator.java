@@ -84,11 +84,16 @@ public class CalendarTableGenerator {
                 Date hi= turno.getHoraInicio();
                 Date hf=turno.getHoraFin();
                 long day = hi.getTime()/86400000;
-                int column = (int)(firstDay-day+1);
+                int column = (int)(day-firstDay+1);
                 int startrow= ((hi.getHours()-8)*2)+(hi.getMinutes()/30);
                 int endrow = ((hf.getHours()-8)*2)+(hi.getMinutes()/30);
                 for(int i =startrow; i<=endrow;i++){
+                    try{
                     hashMap.get(i).put(column,true);
+                    }
+                    catch (NullPointerException e){
+
+                    }
                 }
 
 

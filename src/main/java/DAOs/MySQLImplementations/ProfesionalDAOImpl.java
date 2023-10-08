@@ -134,7 +134,7 @@ public class ProfesionalDAOImpl implements IProfesionalDAO {
             DBConnection = DBConnector.getInstance();
             DBConnection.startConnection();
             con = DBConnection.getConnection();
-            PreparedStatement ptsm = con.prepareStatement("SELECT id FROM profesionales WHERE nombreyapellido =  ?");
+            PreparedStatement ptsm = con.prepareStatement("SELECT * FROM profesionales WHERE nombreyapellido =  ?");
             ptsm.setString(1, nombre);
             ResultSet rs = ptsm.executeQuery();
             profesional = new Profesional();

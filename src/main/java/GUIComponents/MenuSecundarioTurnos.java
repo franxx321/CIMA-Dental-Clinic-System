@@ -105,7 +105,7 @@ public class MenuSecundarioTurnos extends Panel {
     }//GEN-LAST:event_agregarTurnoMousePressed
 
     private void modificarTurnoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarTurnoMousePressed
-        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.modificarTurno,null);
+        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.buscarPaciente,null);
     }//GEN-LAST:event_modificarTurnoMousePressed
 
     private void eliminarTurnoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarTurnoMousePressed

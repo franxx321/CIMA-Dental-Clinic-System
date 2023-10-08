@@ -49,8 +49,8 @@ public class TurnosbyPacienteTableGenerator {
                 }
                 Date horaInicio = turno.getHoraInicio();
                 Date horaFin = turno.getHoraFin();
-                vector.add(Integer.toString(horaInicio.getDate())+"/"+Integer.toString(horaInicio.getMonth()+1)+"/"+horaInicio.getYear()+1900+" "+Integer.toString(horaInicio.getHours())+":"+Integer.toString(horaInicio.getMinutes()));
-                vector.add(Integer.toString(horaFin.getDate())+"/"+Integer.toString(horaFin.getMonth()+1) +"/"+horaInicio.getYear()+1900+" "+ Integer.toString(horaFin.getHours())+":"+Integer.toString(horaFin.getMinutes()));
+                vector.add(Integer.toString(horaInicio.getDate())+"/"+Integer.toString(horaInicio.getMonth()+1)+"/"+Integer.toString(horaInicio.getYear()+1900)+" "+Integer.toString(horaInicio.getHours())+":"+Integer.toString(horaInicio.getMinutes()));
+                vector.add(Integer.toString(horaFin.getDate())+"/"+Integer.toString(horaFin.getMonth()+1) +"/"+Integer.toString(horaFin.getYear()+1900)+" "+ Integer.toString(horaFin.getHours())+":"+Integer.toString(horaFin.getMinutes()));
                 data.add(vector);
             }
         }

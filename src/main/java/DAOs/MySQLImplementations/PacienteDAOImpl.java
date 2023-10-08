@@ -110,9 +110,9 @@ public class PacienteDAOImpl implements IPacienteDAO {
             rs = pstm.executeQuery(sql);
             while(rs.next()){
                 Paciente p = new Paciente();
-                p.setNombre(rs.getString(1));
-                p.setDni(rs.getInt(2));
-                p.setNombre(rs.getString(3));
+                p.setId(1);
+                p.setNombre(rs.getString(2));
+                p.setDni(rs.getInt(3));
                 p.setFechaNacimiento(rs.getDate(4));
                 p.setEmail(rs.getString(5));
                 p.setSexo(rs.getString(6).charAt(0));

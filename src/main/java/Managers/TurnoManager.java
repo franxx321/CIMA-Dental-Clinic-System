@@ -90,6 +90,7 @@ public class TurnoManager {
     }
 
     public void deleteTurno(Turno turno){
+        TurnoPrestacionManager.getInstance().deleteByTurno(turno);
         TurnoDAOImpl.getInstance().delete(turno);
     }
 

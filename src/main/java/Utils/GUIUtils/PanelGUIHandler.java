@@ -12,7 +12,8 @@ public class PanelGUIHandler  implements  GUIHandler{
 
     private static PanelGUIHandler panelGUIHandler;
 
-    public static String panelInicio ="Panel Inicio",panelTurnos="Panel Turnos",agregarTurno= "Agregar Turno",modificarTurno="Modificar Turno",modificarPrestacion = "ModificarPrestaciones",eliminarTurno= "eliminarTurno",buscarPaciente = "BuscarPaciente";
+    public static String panelInicio ="Panel Inicio",panelTurnos="Panel Turnos",agregarTurno= "Agregar Turno",modificarTurno="Modificar Turno",modificarPrestacion = "ModificarPrestaciones"
+            ,eliminarTurno= "eliminarTurno",buscarPaciente = "BuscarPaciente",finanzas="FinanzasPanel",agregarGasto="agregarGasto";
 
     private HashMap<String, Panel> panels;
 
@@ -34,6 +35,8 @@ public class PanelGUIHandler  implements  GUIHandler{
         panels.put(eliminarTurno,EliminarTurno.getInstance());
         panels.put(buscarPaciente,BuscarTurnoPaciente.getInstance());
         panels.put(modificarPrestacion,MenuModificarPrestaciones.getInstance());
+        panels.put(finanzas,FinanzasPanel.getInstance());
+        panels.put(agregarGasto,AgregarGastoPanel.getInstance());
     }
 
     @Override

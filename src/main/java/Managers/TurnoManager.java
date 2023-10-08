@@ -59,9 +59,7 @@ public class TurnoManager {
             errorString = errorString + "\nLa prestacion no esta cargada";
         } else{
             turnoPrestacion.setIdPrestacion(idPrestacion);
-            //turnoPrestacion.setIdTurno(turno.getId());
         }
-
 
         List<Turno> overlappingTurnos = TurnoDAOImpl.getInstance().getOverlappingturnos(idProfesional,horaInicio,horaFin);
         if(overlappingTurnos == null){

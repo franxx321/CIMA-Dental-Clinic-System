@@ -17,7 +17,6 @@ public class Paciente {
 
     private String email;
 
-    private int idHistorialClinico;
 
     public String getNombre() {
         return nombre;
@@ -36,13 +35,6 @@ public class Paciente {
         this.dni = dni;
     }
 
-    public int getIdHistorialClinico() {
-        return idHistorialClinico;
-    }
-
-    public void setIdHistorialClinico(int idHistorialClinico) {
-        this.idHistorialClinico = idHistorialClinico;
-    }
 
     public char getSexo() {
         return sexo;

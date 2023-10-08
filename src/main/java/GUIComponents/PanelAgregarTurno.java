@@ -333,7 +333,6 @@ public class PanelAgregarTurno extends Panel {
 
     private void profesionalCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profesionalCBActionPerformed
         this.changeCalendar();
-
     }//GEN-LAST:event_profesionalCBActionPerformed
 
     private void pacienteTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pacienteTFActionPerformed
@@ -410,9 +409,6 @@ public class PanelAgregarTurno extends Panel {
                 JOptionPane.showMessageDialog(null, "Error!\n" + e.getErrors());
             }
         }
-
-
-
         working=false;
     }//GEN-LAST:event_confirmarButtonMousePressed
 

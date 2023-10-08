@@ -1,9 +1,6 @@
 package Utils.GUIUtils;
 
-import GUIComponents.Frame;
-import GUIComponents.MenuSecundarioTurnos;
-import GUIComponents.MenuSecundarioVacio;
-import GUIComponents.Panel;
+import GUIComponents.*;
 
 import javax.swing.*;
 import java.util.HashMap;
@@ -13,7 +10,7 @@ public class SMenuGUIHandler implements GUIHandler{
 
     private static SMenuGUIHandler sMenuGUIHandler;
 
-    public static String menuSecundarioVacio ="MSV", menuSecundarioTurnos ="MST";
+    public static String menuSecundarioVacio ="MSV", menuSecundarioTurnos ="MST",menuSecundarioFinanzas="msf";
 
     private HashMap<String, Panel> panels;
 
@@ -28,6 +25,7 @@ public class SMenuGUIHandler implements GUIHandler{
         panels= new HashMap<>();
         panels.put(menuSecundarioTurnos, MenuSecundarioTurnos.getInstance());
         panels.put(menuSecundarioVacio, MenuSecundarioVacio.getInstance());
+        panels.put(menuSecundarioFinanzas, MenuSecundarioFinanzas.getInstance());
 
     }
     @Override

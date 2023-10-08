@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TurnoPrestacionDAOImpl implements ITurnoPrestacionDAO {
-    public static TurnoPrestacionDAOImpl turnoPrestacionDAO;
+    private static TurnoPrestacionDAOImpl turnoPrestacionDAO;
     public static TurnoPrestacionDAOImpl getInstance(){
         if(turnoPrestacionDAO == null){
             turnoPrestacionDAO = new TurnoPrestacionDAOImpl();

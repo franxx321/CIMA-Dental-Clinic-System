@@ -5,6 +5,8 @@
 package GUIComponents;
 
 import Managers.GastoManager;
+import Objetos.Profesional;
+import Utils.FormatedDate;
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
 import org.jdatepicker.impl.DateComponentFormatter;
@@ -29,20 +31,23 @@ public class AgregarGastoPanel extends Panel {
 
     private static AgregarGastoPanel agregarGastoPanel;
 
+    private boolean working = true;
+
     public static  AgregarGastoPanel getInstance(){
         if(agregarGastoPanel==null){
             agregarGastoPanel= new AgregarGastoPanel();
         }
         return agregarGastoPanel;
     }
-
+    
     /**
      * Creates new form AgregarGastoPanel
      */
     private AgregarGastoPanel() {
         initComponents();
+        Date date = FormatedDate.formatedDate(new Date());
         model = new UtilDateModel();
-
+        model.setDate(date.getYear()+1900,date.getMonth()+1,date.getDate());
         Properties p = new Properties();
         p.put("text.today", "Today");
         p.put("text.month", "Month");
@@ -50,6 +55,10 @@ public class AgregarGastoPanel extends Panel {
         datePanel=new JDatePanelImpl(model,p);
         datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());
         jPanel1.add(datePicker);
+        List<Profesional> allProfesional = GastoManager.getInstance().getAllProfesional();
+        for (Profesional profesional: allProfesional){
+            profesionalCB.addItem(profesional.getNombre());
+        }
 
     }
 
@@ -190,7 +199,7 @@ public class AgregarGastoPanel extends Panel {
 
         String descripcion = descripcionTF.getText();
         float monto = Float.parseFloat(precioTF.getText());
-        String profesional = profesionalCB.getSelectedItem().toString();
+        String profesional = profesionalCB.getItemAt(profesionalCB.getSelectedIndex());
         java.sql.Date fecha = (java.sql.Date) datePicker.getModel().getValue();
         GastoManager.getInstance().addGasto(monto, descripcion, fecha, profesional);
         JOptionPane.showMessageDialog(null, "El gasto fue cargado correctamente");
@@ -199,7 +208,6 @@ public class AgregarGastoPanel extends Panel {
     }//GEN-LAST:event_confirmarButtonMousePressed
 
     private void cancelarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMousePressed
-
 
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.finanzas,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
@@ -221,6 +229,12 @@ public class AgregarGastoPanel extends Panel {
 
     @Override
     public void setup(List<Object> arguments) {
+        if (!working){
+            Date date = FormatedDate.formatedDate(new Date());
+            model = new UtilDateModel();
+            precioTF.setText("");
+            descripcionTF.setText("");
+        }
         
     }
 }

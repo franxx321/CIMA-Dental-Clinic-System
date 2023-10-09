@@ -8,6 +8,7 @@ import Utils.Exceptions.CantAddGasto;
 import Utils.Exceptions.CantAddTurno;
 
 import java.util.Date;
+import java.util.List;
 
 public class GastoManager {
     private static GastoManager gastoManager;
@@ -50,5 +51,9 @@ public class GastoManager {
             GastoDAOImpl.getInstance().register(gasto);
         }
 
+    }
+
+    public List<Profesional> getAllProfesional(){
+        return ProfesionalManager.getInstance().getAll();
     }
 }

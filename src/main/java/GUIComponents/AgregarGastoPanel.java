@@ -102,17 +102,7 @@ public class AgregarGastoPanel extends Panel {
 
         jPanel1.setBackground(new java.awt.Color(223, 246, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(202, 29));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 202, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 29, Short.MAX_VALUE)
-        );
+        jPanel1.setLayout(new java.awt.CardLayout());
 
         cancelarButton.setText("Cancelar");
         cancelarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -196,11 +186,11 @@ public class AgregarGastoPanel extends Panel {
     }//GEN-LAST:event_confirmarButtonMouseExited
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
-
         String descripcion = descripcionTF.getText();
         float monto = Float.parseFloat(precioTF.getText());
         String profesional = profesionalCB.getItemAt(profesionalCB.getSelectedIndex());
-        java.sql.Date fecha = (java.sql.Date) datePicker.getModel().getValue();
+        Date auxfecha= (Date) datePicker.getModel().getValue();
+        java.sql.Date fecha = new java.sql.Date(auxfecha.getTime());
         GastoManager.getInstance().addGasto(monto, descripcion, fecha, profesional);
         JOptionPane.showMessageDialog(null, "El gasto fue cargado correctamente");
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.finanzas,null);
@@ -231,7 +221,7 @@ public class AgregarGastoPanel extends Panel {
     public void setup(List<Object> arguments) {
         if (!working){
             Date date = FormatedDate.formatedDate(new Date());
-            model = new UtilDateModel();
+            profesionalCB.setSelectedIndex(0);
             precioTF.setText("");
             descripcionTF.setText("");
         }

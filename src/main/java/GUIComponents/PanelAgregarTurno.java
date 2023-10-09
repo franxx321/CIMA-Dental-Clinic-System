@@ -78,7 +78,7 @@ public class PanelAgregarTurno extends Panel {
         p.put("text.today", "Today");
         p.put("text.month", "Month");
         p.put("text.year", "Year");
-        Date today = new Date();
+        Date today = FormatedDate.formatedDate(new Date());
         model.setDate(today.getYear()+1900, today.getMonth(),today.getDay());
         datePanel=new JDatePanelImpl(model,p);
         datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());
@@ -94,8 +94,9 @@ public class PanelAgregarTurno extends Panel {
 
     @Override
     public void setup(List<Object> arguments) {
-        Date today = new Date();
+        Date today = FormatedDate.formatedDate(new Date());
         model.setDate(today.getYear()+1900, today.getMonth(),today.getDay());
+        model.setSelected(true);
         if (!working){
             week =0;
             profesionalCB.setSelectedIndex(0);
@@ -345,10 +346,9 @@ public class PanelAgregarTurno extends Panel {
     }                                          
 
     private void cancelarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMousePressed
+        working=false;
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelTurnos, null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio, null);
-        working=false;
-
     }//GEN-LAST:event_cancelarButtonMousePressed
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
@@ -357,9 +357,9 @@ public class PanelAgregarTurno extends Panel {
         Prestacion ptcn = new Prestacion();
         ptcn.setNombre(servicioTF.getText());
         String profesional = profesionalCB.getSelectedItem().toString();
-        long pacienteDni = Long.parseLong(pacienteTF.getText());
+        String pacienteDniString =pacienteTF.getText();
+        long pacienteDni=0;
         Date fecha = FormatedDate.formatedDate((Date) datePicker.getModel().getValue());
-
         String horaInicioString = horaInicioTF.getText().trim();
         String horaFinString = horaFinTF.getText().trim();
         long milisegundos = fecha.getTime();
@@ -371,27 +371,55 @@ public class PanelAgregarTurno extends Panel {
         Matcher matcher1 = patron.matcher(horaInicioString);
         Matcher matcher2 = patron.matcher(horaFinString);
 
-        if (matcher1.matches()) {
-            int hora1= Integer.parseInt(matcher1.group(1));
-            int minutos1= Integer.parseInt(matcher1.group(2));
-            horaInicioEnMilisegundos = ((long) hora1 * 60 * 60 * 1000) + ((long) minutos1 * 60 * 1000);
-        }else {
-            // JOptionPane.showMessageDialog(null, "Inserte una hora de inicio correcta.");
-            error = true;
-            horaInicioTF.setText("");
-            errorString = errorString+"Hora de inicio incorrecta.\n";
+        if(horaInicioString.isBlank()){
+            error=true;
+            errorString= errorString+ "Ingrese una hora de inicio\n";
+        }
+        else{
+            if (matcher1.matches()) {
+                int hora1= Integer.parseInt(matcher1.group(1));
+                int minutos1= Integer.parseInt(matcher1.group(2));
+                horaInicioEnMilisegundos = ((long) hora1 * 60 * 60 * 1000) + ((long) minutos1 * 60 * 1000);
+            }else {
+                // JOptionPane.showMessageDialog(null, "Inserte una hora de inicio correcta.");
+                error = true;
+                horaInicioTF.setText("");
+                errorString = errorString+"Hora de inicio incorrecta.\n";
+
+            }
 
         }
+        if (horaFinString.isBlank()){
+            error=true;
+            errorString= errorString+ "Ingrese una hora de fin\n";
+        }
+        else {
+            if (matcher2.matches()) {
+                int hora2= Integer.parseInt(matcher2.group(1));
+                int minutos2= Integer.parseInt(matcher2.group(2));
+                horafinEnMilisegundos = ((long) hora2 * 60 * 60 * 1000) + ((long) minutos2 * 60 * 1000);
+            }else{
 
-        if (matcher2.matches()) {
-            int hora2= Integer.parseInt(matcher2.group(1));
-            int minutos2= Integer.parseInt(matcher2.group(2));
-            horafinEnMilisegundos = ((long) hora2 * 60 * 60 * 1000) + ((long) minutos2 * 60 * 1000);
-        }else{
+                error = true;
+                horaFinTF.setText("");
+                errorString = errorString+"Hora de fin incorrecta.\n";
+            }
+        }
 
-            error = true;
-            horaFinTF.setText("");
-            errorString = errorString+"Hora de fin incorrecta.\n";
+        if (pacienteDniString.isBlank()){
+            error=true;
+            errorString= errorString+ "Ingrese un paciente\n";
+        }
+        else {
+            Pattern patron1 = Pattern.compile("^[1-9]\\d{6,10}$");
+            Matcher matcher3 = patron1.matcher(pacienteDniString);
+            if (matcher3.matches()){
+                pacienteDni= Long.parseLong(pacienteDniString);
+            }
+            else {
+                error=true;
+                errorString = errorString + "DNI invalido";
+            }
         }
 
         if(error){

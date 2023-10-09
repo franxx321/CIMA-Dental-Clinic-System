@@ -173,7 +173,8 @@ public class Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_turnosButtonMousePressed
 
     private void finanzasButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_finanzasButtonMousePressed
-        // TODO add your handling code here:
+        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.finanzas,null);
+        SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
     }//GEN-LAST:event_finanzasButtonMousePressed
 
     /**

@@ -1,6 +1,7 @@
 package Utils.TableGenerator;
 
 import Objetos.Turno;
+import Utils.FormatedDate;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -23,27 +24,24 @@ public class CalendarTableGenerator {
     }
 
 
-    public JTable generateTable(List<Turno> turnosList, int week) {
+    public JTable generateTable(List<Turno> turnosList, long week) {
         JTable table = new JTable();
         DefaultTableModel tm;
-        Date auxDate = new Date();
-        auxDate.setHours(0);
-        auxDate.setMinutes(0);
-        auxDate.setSeconds(0);
+        Date auxDate = FormatedDate.formatedDate(new Date());
         auxDate.setTime(auxDate.getTime()+(week*604800000));
         Date firstDate = new Date(auxDate.getTime());
         Vector<Vector<String>> data = new Vector<>();
         Vector<String> header = new Vector<>();
         header.add(0,"");
-        header.add(1, Integer.toString(auxDate.getDate())+"/"+Integer.toString(auxDate.getMonth()+1));
+        header.add(1, Integer.toString(auxDate.getDate())+"/"+Integer.toString(auxDate.getMonth()+1)+"/"+Integer.toString(auxDate.getYear()+1900));
         for (int i=2; i<=7; i++){
             auxDate.setDate(auxDate.getDate()+1);
-            if(auxDate.getDate()==1){
-                auxDate.setMonth(auxDate.getMonth()+1);
-            }
-            if(auxDate.getMonth()==0){
-                auxDate.setYear(auxDate.getYear()+1);
-            }
+           // if(auxDate.getDate()==1){
+           //     auxDate.setMonth(auxDate.getMonth()+1);
+           // }
+           // if(auxDate.getMonth()==0){
+           //     auxDate.setYear(auxDate.getYear()+1);
+           // }
             header.add(i,Integer.toString(auxDate.getDate())+"/"+Integer.toString(auxDate.getMonth()+1)+"/"+ Integer.toString(auxDate.getYear()+1900));
         }
         int hora=8;
@@ -85,8 +83,8 @@ public class CalendarTableGenerator {
                 Date hf=turno.getHoraFin();
                 long day = hi.getTime()/86400000;
                 int column = (int)(day-firstDay+1);
-                int startrow= ((hi.getHours()-8)*2)+(hi.getMinutes()/30);
-                int endrow = ((hf.getHours()-8)*2)+(hi.getMinutes()/30);
+                int startrow= ((hi.getHours()-8)*2)+(hi.getMinutes()/31);
+                int endrow = ((hf.getHours()-8)*2)+(hi.getMinutes()/31);
                 for(int i =startrow; i<=endrow;i++){
                     try{
                     hashMap.get(i).put(column,true);

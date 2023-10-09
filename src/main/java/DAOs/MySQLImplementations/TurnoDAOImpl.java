@@ -214,9 +214,9 @@ public class TurnoDAOImpl implements ITurnosDAO {
             PreparedStatement ptsm = con.prepareStatement("SELECT * " +
                     "FROM turnos " +
                         "where id_profesional = ? AND" +
-                        " (horaInicio < ? AND horaInicio > ?) OR " +
-                        "(horaInicio < ? AND horaFin > ?) OR " +
-                        " (horaInicio > ? AND horaInicio < ?) ");
+                        " (horaInicio <= ? AND horaInicio >= ?) OR " +
+                        "(horaInicio <= ? AND horaFin >= ?) OR " +
+                        " (horaInicio >= ? AND horaInicio <= ?) ");
             ptsm.setInt(1,idProfesional);
             ptsm.setTimestamp(2,new Timestamp(horaInicio.getTime()));
             ptsm.setTimestamp(3,new Timestamp( horaFin.getTime()));

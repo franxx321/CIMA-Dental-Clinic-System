@@ -4,16 +4,27 @@
  */
 package GUIComponents;
 
+import Managers.GastoManager;
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
+import org.jdatepicker.impl.DateComponentFormatter;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 /**
  *
  * @author franc
  */
 public class AgregarGastoPanel extends Panel {
+    private JDatePickerImpl datePicker;
+    private JDatePanelImpl datePanel;
+    private UtilDateModel model;
+
 
     private static AgregarGastoPanel agregarGastoPanel;
 
@@ -29,6 +40,16 @@ public class AgregarGastoPanel extends Panel {
      */
     private AgregarGastoPanel() {
         initComponents();
+        model = new UtilDateModel();
+
+        Properties p = new Properties();
+        p.put("text.today", "Today");
+        p.put("text.month", "Month");
+        p.put("text.year", "Year");
+        datePanel=new JDatePanelImpl(model,p);
+        datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());
+        jPanel1.add(datePicker);
+
     }
 
     /**
@@ -166,6 +187,11 @@ public class AgregarGastoPanel extends Panel {
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
 
+        String descripcion = descripcionTF.getText();
+        float monto = Float.parseFloat(precioTF.getText());
+        String profesional = profesionalCB.getSelectedItem().toString();
+        java.sql.Date fecha = (java.sql.Date) datePicker.getModel().getValue();
+        GastoManager.getInstance().addGasto(monto, descripcion, fecha, profesional);
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.finanzas,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
     }//GEN-LAST:event_confirmarButtonMousePressed

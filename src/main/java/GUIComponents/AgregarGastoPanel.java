@@ -9,6 +9,7 @@ import Objetos.Profesional;
 import Utils.FormatedDate;
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
+import java.awt.Color;
 import org.jdatepicker.impl.DateComponentFormatter;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -87,6 +88,7 @@ public class AgregarGastoPanel extends Panel {
         jLabel1.setText("Profesional:");
 
         profesionalCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una opcion", " " }));
+        profesionalCB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel2.setText("Cantidad: ");
 
@@ -104,17 +106,31 @@ public class AgregarGastoPanel extends Panel {
         jPanel1.setPreferredSize(new java.awt.Dimension(202, 29));
         jPanel1.setLayout(new java.awt.CardLayout());
 
+        cancelarButton.setBackground(new java.awt.Color(223, 246, 255));
+        cancelarButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cancelarButton.setText("Cancelar");
+        cancelarButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         cancelarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cancelarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cancelarButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cancelarButtonMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 cancelarButtonMousePressed(evt);
             }
         });
 
+        confirmarButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         confirmarButton.setText("Confirmar");
+        confirmarButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         confirmarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         confirmarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                confirmarButtonMouseEntered(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 confirmarButtonMouseExited(evt);
             }
@@ -144,10 +160,10 @@ public class AgregarGastoPanel extends Panel {
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(266, 266, 266)
-                        .addComponent(cancelarButton)
+                        .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(260, 260, 260)
-                        .addComponent(confirmarButton)))
-                .addContainerGap(222, Short.MAX_VALUE))
+                        .addComponent(confirmarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(218, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,10 +185,10 @@ public class AgregarGastoPanel extends Panel {
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(descripcionTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelarButton)
-                    .addComponent(confirmarButton))
+                    .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(confirmarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(119, 119, 119))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -182,7 +198,7 @@ public class AgregarGastoPanel extends Panel {
     }//GEN-LAST:event_precioTFActionPerformed
 
     private void confirmarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMouseExited
-        // TODO add your handling code here:
+        cancelarButton.setBackground(new Color (223, 246, 255) );
     }//GEN-LAST:event_confirmarButtonMouseExited
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
@@ -202,6 +218,18 @@ public class AgregarGastoPanel extends Panel {
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.finanzas,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
     }//GEN-LAST:event_cancelarButtonMousePressed
+
+    private void cancelarButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMouseEntered
+        cancelarButton.setBackground(new Color (168, 190, 198) );  
+    }//GEN-LAST:event_cancelarButtonMouseEntered
+
+    private void cancelarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMouseExited
+        cancelarButton.setBackground(new Color (223, 246, 255) );  
+    }//GEN-LAST:event_cancelarButtonMouseExited
+
+    private void confirmarButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMouseEntered
+        cancelarButton.setBackground(new Color (168, 190, 198) );
+    }//GEN-LAST:event_confirmarButtonMouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

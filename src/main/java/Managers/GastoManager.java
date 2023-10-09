@@ -4,6 +4,8 @@ import DAOs.MySQLImplementations.GastoDAOImpl;
 import DAOs.MySQLImplementations.TurnoDAOImpl;
 import Objetos.Gasto;
 import Objetos.Profesional;
+import Utils.Exceptions.CantAddGasto;
+import Utils.Exceptions.CantAddTurno;
 
 import java.util.Date;
 
@@ -25,7 +27,7 @@ public class GastoManager {
         int idProfesional = 0;
         if(monto < 0){
             error = true;
-            errorString = "El monto no puede ser negativo.";
+            errorString = "El monto es invalido.";
         }else{
             gasto.setMonto(monto);
         }
@@ -42,8 +44,11 @@ public class GastoManager {
             gasto.setIdProfesional(idProfesional);
         }
 
-        GastoDAOImpl.getInstance().register(gasto);
+        if(error){
+            throw new CantAddGasto(errorString);
+        }else{
+            GastoDAOImpl.getInstance().register(gasto);
+        }
+
     }
-
-
 }

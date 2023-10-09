@@ -12,6 +12,7 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
+import javax.swing.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -192,6 +193,7 @@ public class AgregarGastoPanel extends Panel {
         String profesional = profesionalCB.getSelectedItem().toString();
         java.sql.Date fecha = (java.sql.Date) datePicker.getModel().getValue();
         GastoManager.getInstance().addGasto(monto, descripcion, fecha, profesional);
+        JOptionPane.showMessageDialog(null, "El gasto fue cargado correctamente");
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.finanzas,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
     }//GEN-LAST:event_confirmarButtonMousePressed

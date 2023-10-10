@@ -100,7 +100,7 @@ public class AgregarGastoPanel extends Panel {
 
         jLabel3.setText("Descripcion: ");
 
-        jLabel4.setText("Fecha");
+        jLabel4.setText("Fecha:");
 
         jPanel1.setBackground(new java.awt.Color(223, 246, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(202, 29));
@@ -220,7 +220,8 @@ public class AgregarGastoPanel extends Panel {
     }//GEN-LAST:event_cancelarButtonMousePressed
 
     private void cancelarButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMouseEntered
-        cancelarButton.setBackground(new Color (168, 190, 198) );  
+        cancelarButton.setOpaque(true);
+        cancelarButton.setBackground(new Color (255, 105, 97) );  
     }//GEN-LAST:event_cancelarButtonMouseEntered
 
     private void cancelarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMouseExited
@@ -228,7 +229,8 @@ public class AgregarGastoPanel extends Panel {
     }//GEN-LAST:event_cancelarButtonMouseExited
 
     private void confirmarButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMouseEntered
-        cancelarButton.setBackground(new Color (168, 190, 198) );
+        cancelarButton.setOpaque(true);
+        cancelarButton.setBackground(new Color (152, 251, 152) );
     }//GEN-LAST:event_confirmarButtonMouseEntered
 
 

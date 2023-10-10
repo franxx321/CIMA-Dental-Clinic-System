@@ -14,6 +14,7 @@ import Utils.FormatedDate;
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
 import Utils.TableGenerator.CalendarTableGenerator;
+import java.awt.Color;
 import org.jdatepicker.impl.DateComponentFormatter;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -192,17 +193,33 @@ public class MenuModificarTurno extends Panel {
             }
         });
 
+        cancelarButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cancelarButton.setText("Cancelar");
+        cancelarButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         cancelarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cancelarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cancelarButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cancelarButtonMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 cancelarButtonMousePressed(evt);
             }
         });
 
+        confirmarButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         confirmarButton.setText("Confirmar");
+        confirmarButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         confirmarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         confirmarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                confirmarButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                confirmarButtonMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 confirmarButtonMousePressed(evt);
             }
@@ -239,51 +256,56 @@ public class MenuModificarTurno extends Panel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(profesionalLabel)
-                    .addComponent(jLabel2)
-                    .addComponent(asistioCheckBox)
-                    .addComponent(pacienteLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(88, 88, 88)
-                                .addComponent(jLabel10))
-                            .addComponent(jLabel6)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(configurarPrestacionesButton))
-                            .addComponent(datePickerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(129, 129, 129)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(horaFinTF, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(horaInicioTF, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(precioLabel)
-                        .addGap(90, 90, 90)
-                        .addComponent(descuentoTF, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)))
-                .addGap(93, 93, 93))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(flechaIzqButton)
-                .addGap(212, 212, 212)
-                .addComponent(cancelarButton)
-                .addGap(168, 168, 168)
-                .addComponent(confirmarButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(flechaDerechaButton)
-                .addContainerGap())
             .addComponent(jScrollPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(profesionalLabel)
+                            .addComponent(jLabel2)
+                            .addComponent(asistioCheckBox)
+                            .addComponent(pacienteLabel)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(flechaIzqButton)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(88, 88, 88)
+                                        .addComponent(jLabel10))
+                                    .addComponent(jLabel6)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(15, 15, 15)
+                                        .addComponent(configurarPrestacionesButton))
+                                    .addComponent(datePickerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(129, 129, 129)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(horaFinTF, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(horaInicioTF, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(precioLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(88, 88, 88)
+                                .addComponent(descuentoTF, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel7)))
+                        .addGap(93, 93, 93))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(144, 144, 144)
+                        .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(93, 93, 93)
+                        .addComponent(confirmarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(flechaDerechaButton)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,22 +339,22 @@ public class MenuModificarTurno extends Panel {
                                     .addComponent(jLabel10)
                                     .addComponent(jLabel3))))
                         .addGap(18, 18, 18)
-                        .addComponent(asistioCheckBox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(asistioCheckBox)
+                            .addComponent(precioLabel)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(descuentoTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel7)))
+                        .addGap(18, 32, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(flechaIzqButton, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(flechaDerechaButton)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
+                        .addGap(115, 115, 115)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(descuentoTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(precioLabel)
-                            .addComponent(jLabel7))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cancelarButton)
-                            .addComponent(confirmarButton))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(confirmarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 2, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -439,6 +461,24 @@ public class MenuModificarTurno extends Panel {
     private void asistioCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asistioCheckBoxActionPerformed
 
     }//GEN-LAST:event_asistioCheckBoxActionPerformed
+
+    private void cancelarButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMouseEntered
+       cancelarButton.setOpaque(true);
+       cancelarButton.setBackground(new Color (255, 105, 97) ); 
+    }//GEN-LAST:event_cancelarButtonMouseEntered
+
+    private void cancelarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMouseExited
+        cancelarButton.setBackground(new Color (223, 246, 255) ); 
+    }//GEN-LAST:event_cancelarButtonMouseExited
+
+    private void confirmarButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMouseEntered
+        confirmarButton.setOpaque(true);
+        confirmarButton.setBackground(new Color (152, 251, 152) ); 
+    }//GEN-LAST:event_confirmarButtonMouseEntered
+
+    private void confirmarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMouseExited
+       confirmarButton.setBackground(new Color (223, 246, 255) );
+    }//GEN-LAST:event_confirmarButtonMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Properties;
 
 import Utils.TableGenerator.CalendarTableGenerator;
+import java.awt.Color;
 import org.jdatepicker.impl.DateComponentFormatter;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -181,17 +182,33 @@ public class PanelAgregarTurno extends Panel {
 
         jLabel6.setText("Fecha: ");
 
+        cancelarButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cancelarButton.setText("Cancelar");
+        cancelarButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         cancelarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cancelarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cancelarButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cancelarButtonMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 cancelarButtonMousePressed(evt);
             }
         });
 
+        confirmarButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         confirmarButton.setText("Confirmar");
+        confirmarButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         confirmarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         confirmarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                confirmarButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                confirmarButtonMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 confirmarButtonMousePressed(evt);
             }
@@ -261,9 +278,9 @@ public class PanelAgregarTurno extends Panel {
                 .addGap(23, 23, 23)
                 .addComponent(flechaIzqButton)
                 .addGap(201, 201, 201)
-                .addComponent(cancelarButton)
+                .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(214, 214, 214)
-                .addComponent(confirmarButton)
+                .addComponent(confirmarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(flechaDerButton)
                 .addGap(23, 23, 23))
@@ -309,8 +326,8 @@ public class PanelAgregarTurno extends Panel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cancelarButton)
-                            .addComponent(confirmarButton))
+                            .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(confirmarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -488,6 +505,24 @@ public class PanelAgregarTurno extends Panel {
         }
     });
     }//GEN-LAST:event_servicioTFKeyPressed
+
+    private void cancelarButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMouseEntered
+        cancelarButton.setOpaque(true);
+        cancelarButton.setBackground(new Color (255, 105, 97) ); 
+    }//GEN-LAST:event_cancelarButtonMouseEntered
+
+    private void cancelarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMouseExited
+       cancelarButton.setBackground(new Color (223, 246, 255) );  
+    }//GEN-LAST:event_cancelarButtonMouseExited
+
+    private void confirmarButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMouseEntered
+        confirmarButton.setOpaque(true);
+        confirmarButton.setBackground(new Color (152, 251, 152) );
+    }//GEN-LAST:event_confirmarButtonMouseEntered
+
+    private void confirmarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMouseExited
+        confirmarButton.setBackground(new Color (223, 246, 255) );
+    }//GEN-LAST:event_confirmarButtonMouseExited
 
 
 

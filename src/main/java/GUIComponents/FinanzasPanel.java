@@ -6,6 +6,7 @@ package GUIComponents;
 
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
+import java.awt.Color;
 
 import java.util.List;
 
@@ -42,20 +43,38 @@ public class FinanzasPanel extends Panel {
     private void initComponents() {
 
         agregarGastoButton = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        agregarIngresoButton = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(223, 246, 255));
 
+        agregarGastoButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         agregarGastoButton.setText("Agregar Gasto");
+        agregarGastoButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         agregarGastoButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         agregarGastoButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                agregarGastoButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                agregarGastoButtonMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 agregarGastoButtonMousePressed(evt);
             }
         });
 
-        jLabel2.setText("Agregar Ingreso");
-        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        agregarIngresoButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        agregarIngresoButton.setText("Agregar Ingreso");
+        agregarIngresoButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        agregarIngresoButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        agregarIngresoButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                agregarIngresoButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                agregarIngresoButtonMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -63,9 +82,9 @@ public class FinanzasPanel extends Panel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(198, 198, 198)
-                .addComponent(agregarGastoButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 243, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addComponent(agregarGastoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
+                .addComponent(agregarIngresoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(263, 263, 263))
         );
         layout.setVerticalGroup(
@@ -73,9 +92,9 @@ public class FinanzasPanel extends Panel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(282, 282, 282)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(agregarGastoButton)
-                    .addComponent(jLabel2))
-                .addContainerGap(349, Short.MAX_VALUE))
+                    .addComponent(agregarGastoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(agregarIngresoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(345, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -85,10 +104,28 @@ public class FinanzasPanel extends Panel {
         
     }//GEN-LAST:event_agregarGastoButtonMousePressed
 
+    private void agregarGastoButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarGastoButtonMouseEntered
+       agregarGastoButton.setOpaque(true);
+        agregarGastoButton.setBackground(new Color (150, 231, 255) ); 
+    }//GEN-LAST:event_agregarGastoButtonMouseEntered
+
+    private void agregarGastoButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarGastoButtonMouseExited
+        agregarGastoButton.setBackground(new Color (223, 246, 255) );
+    }//GEN-LAST:event_agregarGastoButtonMouseExited
+
+    private void agregarIngresoButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarIngresoButtonMouseEntered
+        agregarIngresoButton.setOpaque(true);
+        agregarIngresoButton.setBackground(new Color (150, 231, 255) ); 
+    }//GEN-LAST:event_agregarIngresoButtonMouseEntered
+
+    private void agregarIngresoButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarIngresoButtonMouseExited
+        agregarIngresoButton.setBackground(new Color (223, 246, 255) );
+    }//GEN-LAST:event_agregarIngresoButtonMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel agregarGastoButton;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel agregarIngresoButton;
     // End of variables declaration//GEN-END:variables
 
     @Override

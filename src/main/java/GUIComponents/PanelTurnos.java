@@ -6,6 +6,7 @@ package GUIComponents;
 
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
+import java.awt.Color;
 
 import java.util.List;
 
@@ -55,25 +56,49 @@ public class PanelTurnos extends Panel {
         JLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         JLabel1.setText("Seleccione una opcion");
 
+        agregarTurnoButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         agregarTurnoButton.setText("Agregar Turno");
+        agregarTurnoButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         agregarTurnoButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         agregarTurnoButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                agregarTurnoButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                agregarTurnoButtonMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 agregarTurnoButtonMousePressed(evt);
             }
         });
 
+        modificarTurnoButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         modificarTurnoButton.setText("Modificar Turno");
+        modificarTurnoButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         modificarTurnoButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         modificarTurnoButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                modificarTurnoButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                modificarTurnoButtonMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 modificarTurnoButtonMousePressed(evt);
             }
         });
 
+        eliminarTurnoButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         eliminarTurnoButton.setText("Eliminar Turno");
+        eliminarTurnoButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         eliminarTurnoButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         eliminarTurnoButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                eliminarTurnoButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                eliminarTurnoButtonMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 eliminarTurnoButtonMousePressed(evt);
             }
@@ -84,29 +109,29 @@ public class PanelTurnos extends Panel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(118, 118, 118)
-                .addComponent(agregarTurnoButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
-                .addComponent(modificarTurnoButton)
-                .addGap(161, 161, 161)
-                .addComponent(eliminarTurnoButton)
-                .addGap(155, 155, 155))
+                .addGap(123, 123, 123)
+                .addComponent(agregarTurnoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(109, 109, 109)
+                .addComponent(modificarTurnoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                .addComponent(eliminarTurnoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(131, 131, 131))
             .addGroup(layout.createSequentialGroup()
-                .addGap(353, 353, 353)
+                .addGap(318, 318, 318)
                 .addComponent(JLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(125, 125, 125)
+                .addGap(117, 117, 117)
                 .addComponent(JLabel1)
-                .addGap(161, 161, 161)
+                .addGap(169, 169, 169)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(agregarTurnoButton)
-                    .addComponent(modificarTurnoButton)
-                    .addComponent(eliminarTurnoButton))
-                .addContainerGap(320, Short.MAX_VALUE))
+                    .addComponent(agregarTurnoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(modificarTurnoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(eliminarTurnoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(316, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -124,6 +149,33 @@ public class PanelTurnos extends Panel {
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.eliminarTurno,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioTurnos,null);
     }//GEN-LAST:event_eliminarTurnoButtonMousePressed
+
+    private void agregarTurnoButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarTurnoButtonMouseEntered
+        agregarTurnoButton.setOpaque(true);
+        agregarTurnoButton.setBackground(new Color (150, 231, 255) ); 
+    }//GEN-LAST:event_agregarTurnoButtonMouseEntered
+
+    private void agregarTurnoButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarTurnoButtonMouseExited
+        agregarTurnoButton.setBackground(new Color (223, 246, 255) );
+    }//GEN-LAST:event_agregarTurnoButtonMouseExited
+
+    private void modificarTurnoButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarTurnoButtonMouseEntered
+        modificarTurnoButton.setOpaque(true);
+        modificarTurnoButton.setBackground(new Color (150, 231, 255) );
+    }//GEN-LAST:event_modificarTurnoButtonMouseEntered
+
+    private void modificarTurnoButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarTurnoButtonMouseExited
+       modificarTurnoButton.setBackground(new Color (223, 246, 255) );
+    }//GEN-LAST:event_modificarTurnoButtonMouseExited
+
+    private void eliminarTurnoButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarTurnoButtonMouseEntered
+        eliminarTurnoButton.setOpaque(true);
+        eliminarTurnoButton.setBackground(new Color (150, 231, 255) );
+    }//GEN-LAST:event_eliminarTurnoButtonMouseEntered
+
+    private void eliminarTurnoButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarTurnoButtonMouseExited
+         eliminarTurnoButton.setBackground(new Color (223, 246, 255) );
+    }//GEN-LAST:event_eliminarTurnoButtonMouseExited
 
 
 

@@ -11,6 +11,7 @@ import Objetos.Turno;
 import Objetos.TurnoPrestacion;
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
+import java.awt.Color;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -106,9 +107,17 @@ import java.util.regex.Pattern;
             }
         });
 
+        confirmarButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         confirmarButton.setText("Confirmar");
+        confirmarButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         confirmarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         confirmarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                confirmarButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                confirmarButtonMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 confirmarButtonMousePressed(evt);
             }
@@ -116,17 +125,33 @@ import java.util.regex.Pattern;
 
         jLabel3.setText("Prestaciones Activas");
 
+        eliminarButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         eliminarButton.setText("Eliminar");
+        eliminarButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         eliminarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         eliminarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                eliminarButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                eliminarButtonMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 eliminarButtonMousePressed(evt);
             }
         });
 
+        volverButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         volverButton.setText("Volver");
+        volverButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         volverButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         volverButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                volverButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                volverButtonMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 volverButtonMousePressed(evt);
             }
@@ -138,22 +163,21 @@ import java.util.regex.Pattern;
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(prestacionesTF, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(65, 65, 65)
-                                .addComponent(confirmarButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 350, Short.MAX_VALUE)
-                                .addComponent(volverButton))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(385, 385, 385)
-                        .addComponent(eliminarButton)))
-                .addGap(145, 145, 145))
+                        .addComponent(prestacionesTF, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addComponent(confirmarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 243, Short.MAX_VALUE)
+                        .addComponent(volverButton, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(170, 170, 170))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(383, 383, 383)
+                .addComponent(eliminarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,14 +187,14 @@ import java.util.regex.Pattern;
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(prestacionesTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(confirmarButton)
-                    .addComponent(volverButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                    .addComponent(confirmarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(volverButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(eliminarButton)
+                .addComponent(eliminarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -267,6 +291,33 @@ import java.util.regex.Pattern;
         });
 
     }//GEN-LAST:event_prestacionesTFKeyPressed
+
+    private void confirmarButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMouseEntered
+        confirmarButton.setOpaque(true);
+        confirmarButton.setBackground(new Color (152, 251, 152) ); 
+    }//GEN-LAST:event_confirmarButtonMouseEntered
+
+    private void confirmarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMouseExited
+        confirmarButton.setBackground(new Color (223, 246, 255) );
+    }//GEN-LAST:event_confirmarButtonMouseExited
+
+    private void volverButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volverButtonMouseEntered
+        volverButton.setOpaque(true);
+        volverButton.setBackground(new Color (150, 231, 255) ); 
+    }//GEN-LAST:event_volverButtonMouseEntered
+
+    private void volverButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volverButtonMouseExited
+        volverButton.setBackground(new Color (223, 246, 255) );
+    }//GEN-LAST:event_volverButtonMouseExited
+
+    private void eliminarButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarButtonMouseEntered
+        eliminarButton.setOpaque(true);
+        eliminarButton.setBackground(new Color (255, 105, 97) ); 
+    }//GEN-LAST:event_eliminarButtonMouseEntered
+
+    private void eliminarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarButtonMouseExited
+        eliminarButton.setBackground(new Color (223, 246, 255) );
+    }//GEN-LAST:event_eliminarButtonMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

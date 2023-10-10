@@ -10,6 +10,7 @@ import Objetos.Turno;
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
 import Utils.String2Date;
+import java.awt.Color;
 
 import javax.swing.*;
 import java.util.Date;
@@ -71,9 +72,17 @@ public class EliminarTurno extends Panel {
             }
         });
 
+        buscarButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         buscarButton.setText("Buscar");
+        buscarButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         buscarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buscarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buscarButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buscarButtonMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 buscarButtonMousePressed(evt);
             }
@@ -93,17 +102,33 @@ public class EliminarTurno extends Panel {
         ));
         jScrollPane1.setViewportView(turnosTable);
 
+        cancelarButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cancelarButton.setText("Cancelar");
+        cancelarButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         cancelarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cancelarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cancelarButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cancelarButtonMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 cancelarButtonMousePressed(evt);
             }
         });
 
+        confirmarButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         confirmarButton.setText("Confirmar");
+        confirmarButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         confirmarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         confirmarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                confirmarButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                confirmarButtonMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 confirmarButtonMousePressed(evt);
             }
@@ -118,14 +143,14 @@ public class EliminarTurno extends Panel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextField1))
-                .addGap(46, 46, 46)
-                .addComponent(buscarButton)
-                .addContainerGap(542, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(buscarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(241, 241, 241)
-                .addComponent(cancelarButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 295, Short.MAX_VALUE)
-                .addComponent(confirmarButton)
+                .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
+                .addComponent(confirmarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(248, 248, 248))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
@@ -137,14 +162,14 @@ public class EliminarTurno extends Panel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buscarButton))
+                    .addComponent(buscarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelarButton)
-                    .addComponent(confirmarButton))
-                .addContainerGap(30, Short.MAX_VALUE))
+                    .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(confirmarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -213,6 +238,33 @@ public class EliminarTurno extends Panel {
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelTurnos,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
     }//GEN-LAST:event_cancelarButtonMousePressed
+
+    private void cancelarButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMouseEntered
+        cancelarButton.setOpaque(true);
+        cancelarButton.setBackground(new Color (255, 105, 97) ); 
+    }//GEN-LAST:event_cancelarButtonMouseEntered
+
+    private void cancelarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMouseExited
+         cancelarButton.setBackground(new Color (223, 246, 255) );  
+    }//GEN-LAST:event_cancelarButtonMouseExited
+
+    private void buscarButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarButtonMouseEntered
+        buscarButton.setOpaque(true);
+        buscarButton.setBackground(new Color (150, 231, 255) ); 
+    }//GEN-LAST:event_buscarButtonMouseEntered
+
+    private void buscarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarButtonMouseExited
+        buscarButton.setBackground(new Color (223, 246, 255) );
+    }//GEN-LAST:event_buscarButtonMouseExited
+
+    private void confirmarButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMouseEntered
+        confirmarButton.setOpaque(true);
+        confirmarButton.setBackground(new Color (152, 251, 152) ); 
+    }//GEN-LAST:event_confirmarButtonMouseEntered
+
+    private void confirmarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMouseExited
+        confirmarButton.setBackground(new Color (223, 246, 255) );
+    }//GEN-LAST:event_confirmarButtonMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

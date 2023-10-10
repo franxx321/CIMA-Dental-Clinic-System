@@ -19,6 +19,7 @@ public class GastoManager {
         return gastoManager;
     }
     private GastoManager(){
+
     }
 
     public void addGasto(float monto, String descripcion, java.sql.Date fecha, String profesionalCB){

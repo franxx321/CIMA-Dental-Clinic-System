@@ -211,9 +211,11 @@ public class AgregarGastoPanel extends Panel {
         JOptionPane.showMessageDialog(null, "El gasto fue cargado correctamente");
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.finanzas,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
+        working=false;
     }//GEN-LAST:event_confirmarButtonMousePressed
 
     private void cancelarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMousePressed
+        working=false;
 
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.finanzas,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
@@ -249,8 +251,9 @@ public class AgregarGastoPanel extends Panel {
 
     @Override
     public void setup(List<Object> arguments) {
+        Date date = FormatedDate.formatedDate(new Date());
+        model.setDate(date.getYear()+1900,date.getMonth()+1,date.getDate());
         if (!working){
-            Date date = FormatedDate.formatedDate(new Date());
             profesionalCB.setSelectedIndex(0);
             precioTF.setText("");
             descripcionTF.setText("");

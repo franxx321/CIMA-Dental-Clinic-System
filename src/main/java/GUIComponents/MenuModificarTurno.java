@@ -166,7 +166,7 @@ public class MenuModificarTurno extends Panel {
 
         jLabel1.setText("Profesional: ");
 
-        jLabel2.setText("Dni paciente:");
+        jLabel2.setText("Paciente:");
 
         jLabel6.setText("Fecha: ");
 
@@ -274,7 +274,7 @@ public class MenuModificarTurno extends Panel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3)

@@ -108,7 +108,7 @@ public class MenuModificarTurno extends Panel {
         horaFinTF.setText(turno.getHoraFin().getHours()+ ":"+ turno.getHoraFin().getMinutes());
         horaInicioTF.setText(turno.getHoraInicio().getHours()+ ":"+ turno.getHoraInicio().getMinutes());
         descuentoTF.setText(String.valueOf(turno.getDescuento()));
-
+        precioTextField.setText(String.valueOf(turno.getValor()));
 
     }
 
@@ -374,7 +374,7 @@ public class MenuModificarTurno extends Panel {
         boolean asistio = asistioCheckBox.isSelected();
         float descuento = Float.parseFloat(descuentoTF.getText());
         boolean error = false;
-        //float valor = Float.parseFloat(valorTF.getText());
+        float valor = Float.parseFloat(precioTextField.getText());
         String errorString ="";
         Date fecha = FormatedDate.formatedDate((Date) datePicker.getModel().getValue());
         String horaInicioString = horaInicioTF.getText().trim();
@@ -430,7 +430,7 @@ public class MenuModificarTurno extends Panel {
             newTurno.setHoraInicio(horaInicio);
             newTurno.setHoraFin(horaFin);
             newTurno.setDescuento(descuento);
-            //newTurno.setValor(valor);
+            newTurno.setValor(valor);
             try{
                 TurnoManager.getInstance().modifyTurno(turno,newTurno);
                 JOptionPane.showMessageDialog(null, "El turno fue modificado correctamente");

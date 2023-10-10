@@ -198,7 +198,7 @@ public class AgregarGastoPanel extends Panel {
     }//GEN-LAST:event_precioTFActionPerformed
 
     private void confirmarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMouseExited
-        cancelarButton.setBackground(new Color (223, 246, 255) );
+        confirmarButton.setBackground(new Color (223, 246, 255) );
     }//GEN-LAST:event_confirmarButtonMouseExited
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
@@ -231,8 +231,8 @@ public class AgregarGastoPanel extends Panel {
     }//GEN-LAST:event_cancelarButtonMouseExited
 
     private void confirmarButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMouseEntered
-        cancelarButton.setOpaque(true);
-        cancelarButton.setBackground(new Color (152, 251, 152) );
+        confirmarButton.setOpaque(true);
+        confirmarButton.setBackground(new Color (152, 251, 152) );
     }//GEN-LAST:event_confirmarButtonMouseEntered
 
 

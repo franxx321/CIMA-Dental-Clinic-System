@@ -60,9 +60,9 @@ public class MenuSecundarioFinanzas extends Panel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(139, 139, 139)
+                .addContainerGap(253, Short.MAX_VALUE)
                 .addComponent(agregarGastoButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 310, Short.MAX_VALUE)
+                .addGap(196, 196, 196)
                 .addComponent(agregarIngresoButton)
                 .addGap(255, 255, 255))
         );

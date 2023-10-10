@@ -22,33 +22,33 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
-              <Component id="agregarTurnoButton" min="-2" pref="120" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
-              <Component id="modificarTurnoButton" min="-2" pref="120" max="-2" attributes="0"/>
-              <EmptySpace pref="124" max="32767" attributes="0"/>
-              <Component id="eliminarTurnoButton" min="-2" pref="120" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="318" max="-2" attributes="0"/>
-              <Component id="JLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="agregarTurnoButton" min="-2" pref="120" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="modificarTurnoButton" min="-2" pref="120" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <Component id="eliminarTurnoButton" min="-2" pref="120" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="JLabel1" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="338" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
               <Component id="JLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="169" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="agregarTurnoButton" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                   <Component id="modificarTurnoButton" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                   <Component id="eliminarTurnoButton" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="316" max="32767" attributes="0"/>
+              <EmptySpace pref="530" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

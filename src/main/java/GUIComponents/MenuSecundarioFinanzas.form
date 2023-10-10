@@ -22,9 +22,9 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
+              <EmptySpace pref="253" max="32767" attributes="0"/>
               <Component id="agregarGastoButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="310" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="196" max="-2" attributes="0"/>
               <Component id="agregarIngresoButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="255" max="-2" attributes="0"/>
           </Group>

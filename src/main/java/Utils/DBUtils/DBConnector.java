@@ -15,8 +15,8 @@ import java.sql.Statement;
 
 public  class  DBConnector  {
     
-    private static final String user = "prueba";
-    private static final String pass = "Holamundo1";
+    private static final String user = "root";
+    private static final String pass = "Goku2010.";
     private java.sql.Statement s;
     private ResultSet result = null;
     private Connection connection = null;
@@ -29,7 +29,7 @@ public  class  DBConnector  {
     public void startConnection()throws SQLException {
         try{
             
-        this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bd_is", user, pass);
+        this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tpmids1", user, pass);
         
         if (connection != null) {
                 System.out.println("Conexion a base de datos:  ... Ok");

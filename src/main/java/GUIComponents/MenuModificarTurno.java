@@ -109,7 +109,8 @@ public class MenuModificarTurno extends Panel {
         horaInicioTF.setText(turno.getHoraInicio().getHours()+ ":"+ turno.getHoraInicio().getMinutes());
         descuentoTF.setText(String.valueOf(turno.getDescuento()));
         precioTextField.setText(String.valueOf(turno.getValor()));
-
+        this.modifyCalendar();
+        asistioCheckBox.setSelected(turno.isAsistio());
     }
 
     /**
@@ -377,6 +378,7 @@ public class MenuModificarTurno extends Panel {
         float valor = Float.parseFloat(precioTextField.getText());
         String errorString ="";
         Date fecha = FormatedDate.formatedDate((Date) datePicker.getModel().getValue());
+        fecha.setYear(fecha.getYear()+1900);
         String horaInicioString = horaInicioTF.getText().trim();
         String horaFinString = horaFinTF.getText().trim();
         long milisegundos = fecha.getTime();

@@ -84,7 +84,22 @@ public class TurnoManager {
     }
 
     public void modifyTurno(Turno turno, Turno aux){
-        TurnoDAOImpl.getInstance().modify(turno, aux);
+        String errString = "";
+        boolean error= false;
+        List<Turno> turnos= TurnoDAOImpl.getInstance().getOverlappingturnos(turno.getIdProfesional(),aux.getHoraInicio(),aux.getHoraFin());
+        if(turnos==null){
+            //Exepcion
+        }
+        else if(turnos.get(0).getId()==-1){
+            errString= errString + "Ya existe un turno en esa fecha \n";
+            error=true;
+        }
+        if(error){
+            throw new CantAddTurno(errString);
+        }
+        else {
+            TurnoDAOImpl.getInstance().modify(turno, aux);
+        }
     }
 
     public void deleteTurno(Turno turno){

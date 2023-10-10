@@ -138,12 +138,12 @@ public class MenuModificarTurno extends Panel {
         confirmarButton = new javax.swing.JLabel();
         flechaDerechaButton = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        precioLabel = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         descuentoTF = new javax.swing.JTextField();
         asistioCheckBox = new javax.swing.JCheckBox();
         jLabel7 = new javax.swing.JLabel();
         datePickerPanel = new javax.swing.JPanel();
+        precioTextField = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(223, 246, 255));
 
@@ -235,8 +235,6 @@ public class MenuModificarTurno extends Panel {
 
         jLabel3.setText("Precio:");
 
-        precioLabel.setText("precio");
-
         jLabel10.setText("Descuento:");
 
         asistioCheckBox.setText("Asistio");
@@ -270,11 +268,12 @@ public class MenuModificarTurno extends Panel {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(flechaIzqButton)))
+                .addGap(144, 144, 144)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3)
@@ -292,14 +291,13 @@ public class MenuModificarTurno extends Panel {
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel5)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(precioLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(88, 88, 88)
+                                .addComponent(precioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
                                 .addComponent(descuentoTF, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel7)))
                         .addGap(93, 93, 93))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(144, 144, 144)
                         .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(93, 93, 93)
                         .addComponent(confirmarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -324,25 +322,24 @@ public class MenuModificarTurno extends Panel {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(pacienteLabel))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(configurarPrestacionesButton))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(horaFinTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel3))))
+                        .addComponent(jLabel2)
                         .addGap(18, 18, 18)
+                        .addComponent(pacienteLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(configurarPrestacionesButton))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(horaFinTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel3))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(asistioCheckBox)
-                            .addComponent(precioLabel)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(descuentoTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel7)))
                         .addGap(18, 32, Short.MAX_VALUE)
@@ -350,11 +347,12 @@ public class MenuModificarTurno extends Panel {
                             .addComponent(flechaIzqButton, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(flechaDerechaButton)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(115, 115, 115)
+                        .addComponent(precioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(confirmarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 2, Short.MAX_VALUE)))
+                        .addGap(0, 9, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -503,7 +501,7 @@ public class MenuModificarTurno extends Panel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel pacienteLabel;
-    private javax.swing.JLabel precioLabel;
+    private javax.swing.JTextField precioTextField;
     private javax.swing.JLabel profesionalLabel;
     // End of variables declaration//GEN-END:variables
 }

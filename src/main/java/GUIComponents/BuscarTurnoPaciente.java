@@ -200,7 +200,6 @@ public class BuscarTurnoPaciente extends Panel {
         jTextField1.setText("");
         JTable auxTable = TurnoManager.getInstance().getFuturePatientAppointments(-1);
         turnosTable.setModel(auxTable.getModel());
-
     }
     // End of variables declaration//GEN-END:variables
 }

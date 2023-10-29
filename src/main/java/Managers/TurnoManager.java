@@ -160,6 +160,12 @@ public class TurnoManager {
         TurnoPrestacionManager.getInstance().addTurnoPrestacion(turnoPrestacion);
     }
 
+    public List<Turno> getByProfesional(int idProfesional){
+        return TurnoDAOImpl.getInstance().getByIdProfesional(idProfesional);
+    }
+
+
+
 
 
 

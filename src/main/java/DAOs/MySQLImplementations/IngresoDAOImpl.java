@@ -4,10 +4,7 @@ import DAOs.Interfaces.IIngresoDAO;
 import Objetos.Ingreso;
 import Utils.DBUtils.DBConnector;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +36,12 @@ public class IngresoDAOImpl implements IIngresoDAO {
             pstm.setString(3, ingreso.getDescripcion());
             pstm.setInt(4, ingreso.getIdPaciente());
             pstm.setInt(5, ingreso.getIdProfesional());
-            pstm.setInt(6, ingreso.getIdObraSocial());
+            if(ingreso.getIdObraSocial() !=-1){
+                pstm.setInt(6, ingreso.getIdObraSocial());
+            }
+            else{
+                pstm.setNull(6,Types.INTEGER);
+            }
             pstm.setInt(7,ingreso.getIdTurno());
             pstm.executeUpdate();
             register = true;

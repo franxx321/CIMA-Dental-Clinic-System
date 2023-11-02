@@ -1,5 +1,6 @@
 package Managers;
 
+import DAOs.MySQLImplementations.IngresoDAOImpl;
 import Objetos.*;
 import Utils.TableGenerator.TurnosByProfesionalTableGenerator;
 
@@ -47,6 +48,18 @@ public class IngresoManager {
             }
         }
         return obraSocialList;
+    }
+
+    public void add(java.sql.Date fecha,int idPaciente,int idProfesional, int idTurno, int idObraSocial, float monto, String descripcion){
+        Ingreso ingreso = new Ingreso();
+        ingreso.setFecha(fecha);
+        ingreso.setDescripcion(descripcion);
+        ingreso.setIdPaciente(idPaciente);
+        ingreso.setIdObraSocial(idObraSocial);
+        ingreso.setIdProfesional(idProfesional);
+        ingreso.setIdTurno(idTurno);
+        ingreso.setMonto(monto);
+        IngresoDAOImpl.getInstance().register(ingreso);
     }
 
 }

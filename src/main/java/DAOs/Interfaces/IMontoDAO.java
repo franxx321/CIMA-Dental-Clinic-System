@@ -16,4 +16,6 @@ public interface IMontoDAO {
 
     public Monto getByIds(int idProfesional, int idPrestacion);
 
+    public List <Monto> getMontoByIdProfesional(int profesionalId);
+
 }

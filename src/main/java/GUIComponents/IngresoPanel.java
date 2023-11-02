@@ -10,6 +10,8 @@ import Objetos.Paciente;
 import Objetos.Profesional;
 import Objetos.Turno;
 import Utils.FormatedDate;
+import Utils.GUIUtils.PanelGUIHandler;
+import Utils.GUIUtils.SMenuGUIHandler;
 import org.jdatepicker.impl.DateComponentFormatter;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -234,11 +236,13 @@ public class IngresoPanel extends Panel {
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
         boolean error = false;
         String errStr = "";
-        float monto;
-
+        float monto =0;
+        String descripcion = jTextArea1.getText();
+        Date auxFecha = FormatedDate.formatedDate((Date) datePicker.getModel().getValue());
+        java.sql.Date fecha = new java.sql.Date(auxFecha.getTime());
         if (montoTF.getText().isBlank()){
             error = true;
-            errStr = errStr+"\n ingrese un numero";
+            errStr = errStr+"\n Ingrese un numero";
         }
         else {
             try {
@@ -246,11 +250,31 @@ public class IngresoPanel extends Panel {
             }
             catch (NumberFormatException e){
                 error= true;
-                errStr=errStr+"\n ingrese un numero";
+                errStr=errStr+"\n Ingrese un numero";
             }
         }
-        Date auxFecha = FormatedDate.formatedDate((Date) datePicker.getModel().getValue());
-        java.sql.Date fecha = new java.sql.Date(auxFecha.getTime());
+        if(jComboBox1.getSelectedIndex() ==0){
+            error = true;
+            errStr = errStr+"\n Seleccione una obra social";
+        }
+        if(error){
+            //TODO tirar el popup
+        }
+        else {
+            ObraSocial obraSocial = null;
+            if(jComboBox1.getSelectedIndex()!=1){
+                 obraSocial = obraSocialList.get(jComboBox1.getSelectedIndex()-2);
+            }
+            else {
+                obraSocial = new ObraSocial();
+                obraSocial.setId(-1);
+            }
+            IngresoManager.getInstance().add(fecha,p.getId(),pr.getId(),turno.getId(),obraSocial.getId(),monto, descripcion);
+            PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.finanzas,null);
+            SMenuGUIHandler.getInstance().changePanel();
+        }
+
+
 
 
     }//GEN-LAST:event_confirmarButtonMousePressed

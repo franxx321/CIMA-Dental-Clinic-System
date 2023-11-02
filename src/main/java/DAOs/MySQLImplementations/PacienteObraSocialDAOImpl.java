@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PacienteObraSocialDAOImpl implements IPacienteObraSocialDAO {
-    private PacienteObraSocialDAOImpl pacienteObraSocialDAO;
-    public PacienteObraSocialDAOImpl getInstance(){
+    private static PacienteObraSocialDAOImpl pacienteObraSocialDAO;
+    public static PacienteObraSocialDAOImpl getInstance(){
         if(pacienteObraSocialDAO == null){
             pacienteObraSocialDAO = new PacienteObraSocialDAOImpl();
         }

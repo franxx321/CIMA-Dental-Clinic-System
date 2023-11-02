@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ObraSocialDAOImpl implements IObraSocialDAO {
-    private ObraSocialDAOImpl obraSocialDAO;
-    public ObraSocialDAOImpl getInstance(){
+    private static ObraSocialDAOImpl obraSocialDAO;
+    public static ObraSocialDAOImpl getInstance(){
         if(obraSocialDAO == null){
             obraSocialDAO = new ObraSocialDAOImpl();
         }
@@ -100,13 +100,12 @@ public class ObraSocialDAOImpl implements IObraSocialDAO {
     public boolean modify(ObraSocial obraSocial, ObraSocial aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE ObrasSociales SET id = ?, nombre = ?, mail = ?, telefono = ?, nombrerep = ? WHERE id = ?";
+        String sql = "UPDATE ObrasSociales SET  nombre = ?, mail = ?, telefono = ?, nombrerep = ? WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
             DBConnection.startConnection();
             con = DBConnection.getConnection();
             pstm = con.prepareStatement(sql);
-            pstm.setInt(1, aux.getId());
             pstm.setString(2, aux.getMail());
             pstm.setString(3, aux.getTelefono());
             pstm.setString(4, aux.getNombreRepresentante());
@@ -119,5 +118,12 @@ public class ObraSocialDAOImpl implements IObraSocialDAO {
             System.out.println("Error: Clase ObraSocialDAOImpl, metodo modify. " +e.getMessage());
         }
         return modify;
+    }
+
+    @Override
+    public ObraSocial getByName(ObraSocial oS) {
+        ObraSocial obraSocial = null;
+
+        return null;
     }
 }

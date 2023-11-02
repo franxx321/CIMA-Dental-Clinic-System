@@ -10,4 +10,6 @@ public interface IProfesionalDAO {
     public boolean delete(Profesional profesional);
     public boolean modify(Profesional profesional, Profesional aux);
     public Profesional getProfesionalByName(String nombre);
+
+    public Profesional getProfesionalById(Profesional profesional);
 }

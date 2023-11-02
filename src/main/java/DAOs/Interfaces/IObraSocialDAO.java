@@ -9,4 +9,6 @@ public interface IObraSocialDAO {
     public List<ObraSocial> obtain();
     public boolean delete(ObraSocial obraSocial);
     public boolean modify(ObraSocial obraSocial, ObraSocial aux);
+
+    public ObraSocial getByName(ObraSocial oS);
 }

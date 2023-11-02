@@ -20,6 +20,12 @@ public class ProfesionalManager {
         return ProfesionalDAOImpl.getInstance().getProfesionalByName(profesional);
     }
 
+    public Profesional getProfesionalById(int profesionalId){
+        Profesional pr = new Profesional();
+        pr.setId(profesionalId);
+        return ProfesionalDAOImpl.getInstance().getProfesionalById(pr);
+    }
+
     public List<Profesional> getAll(){
         return ProfesionalDAOImpl.getInstance().obtain();
     }

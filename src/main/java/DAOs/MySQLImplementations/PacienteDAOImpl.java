@@ -110,7 +110,7 @@ public class PacienteDAOImpl implements IPacienteDAO {
             rs = pstm.executeQuery(sql);
             while(rs.next()){
                 Paciente p = new Paciente();
-                p.setId(1);
+                p.setId(rs.getInt(1));
                 p.setNombre(rs.getString(2));
                 p.setDni(rs.getInt(3));
                 p.setFechaNacimiento(rs.getDate(4));
@@ -157,5 +157,35 @@ public class PacienteDAOImpl implements IPacienteDAO {
         }
 
         return paciente;
+    }
+
+    @Override
+    public Paciente getById(Paciente paciente) {
+        Paciente paciente1 = null;
+        try{
+            DBConnector connector = DBConnector.getInstance();
+            connector.startConnection();
+            Connection conn = connector.getConnection();
+            PreparedStatement ptsm = conn.prepareStatement("SELECT * FROM pacientes WHERE id = ?");
+            ptsm.setInt(1,paciente.getId());
+            ResultSet rs = ptsm.executeQuery();
+            paciente1 = new Paciente();
+            if(!rs.next()){
+                paciente1.setDni(-1);
+            }
+            else {
+                paciente1.setId(rs.getInt(1));
+                paciente1.setNombre(rs.getString(2));
+                paciente1.setDni(rs.getLong(3));
+                paciente1.setFechaNacimiento(rs.getDate(4));
+                paciente1.setEmail(rs.getString(5));
+                paciente1.setSexo(rs.getString(6).charAt(0));
+            }
+            conn.close();
+        }
+        catch  (SQLException e){
+            System.out.println("fallo paciente Dao"+e.getMessage());
+        }
+        return paciente1 ;
     }
 }

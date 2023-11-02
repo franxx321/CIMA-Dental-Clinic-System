@@ -29,4 +29,10 @@ public class PacienteManager {
         return PacienteDAOImpl.getInstance().obtain();
     }
 
+    public Paciente getPacienteById(int pacienteId){
+        Paciente p = new Paciente();
+        p.setId(pacienteId);
+        return PacienteDAOImpl.getInstance().getById(p);
+    }
+
 }

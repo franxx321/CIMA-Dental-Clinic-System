@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IngresoDAOImpl implements IIngresoDAO {
-    private IngresoDAOImpl ingresoDAO;
-    public IngresoDAOImpl getInstance(){
+    private static IngresoDAOImpl ingresoDAO;
+    public static IngresoDAOImpl getInstance(){
         if(ingresoDAO == null){
             ingresoDAO = new IngresoDAOImpl();
         }
@@ -28,7 +28,7 @@ public class IngresoDAOImpl implements IIngresoDAO {
     public boolean register(Ingreso ingreso) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO Ingresos(fecha, monto, descripcion, id_paciente, id_profesional, id_obrasocial) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO Ingresos(fecha, monto, descripcion, id_paciente, id_profesional, id_obrasocial,id_turno) VALUES (?,?,?,?,?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             DBConnection.startConnection();
@@ -40,6 +40,7 @@ public class IngresoDAOImpl implements IIngresoDAO {
             pstm.setInt(4, ingreso.getIdPaciente());
             pstm.setInt(5, ingreso.getIdProfesional());
             pstm.setInt(6, ingreso.getIdObraSocial());
+            pstm.setInt(7,ingreso.getIdTurno());
             pstm.executeUpdate();
             register = true;
             pstm.close();

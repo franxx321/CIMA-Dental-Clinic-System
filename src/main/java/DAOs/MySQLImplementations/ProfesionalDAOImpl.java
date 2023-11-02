@@ -152,4 +152,31 @@ public class ProfesionalDAOImpl implements IProfesionalDAO {
         }
         return profesional;
     }
+
+    @Override
+    public Profesional getProfesionalById(Profesional profesional) {
+        Profesional profesional1= null;
+        try{
+            DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
+            con = DBConnection.getConnection();
+            PreparedStatement ptsm = con.prepareStatement("SELECT * FROM profesionales WHERE id =  ?");
+            ptsm.setInt(1, profesional.getId());
+            ResultSet rs = ptsm.executeQuery();
+            profesional1 = new Profesional();
+            if(!rs.next()){
+                profesional1.setId(-1);
+            } else{
+                profesional1.setId(rs.getInt(1));
+                profesional1.setNombre(rs.getString(2));
+                profesional1.setTelefono(rs.getString(3));
+                profesional1.setMatricula(rs.getString(4));
+            }
+            con.close();
+        } catch (SQLException e){
+            System.out.println("Error: Clase ProfesionalDAOImpl, metodo getProfesionalByName" + e.getMessage());
+        }
+
+        return profesional1;
+    }
 }

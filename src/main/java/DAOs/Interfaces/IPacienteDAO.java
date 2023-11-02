@@ -13,4 +13,6 @@ public interface IPacienteDAO {
     public boolean modify(Paciente paciente, Paciente aux);
 
     public Paciente getByDni(long dni);
+
+    public Paciente getById(Paciente paciente);
 }

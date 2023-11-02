@@ -4,7 +4,19 @@
  */
 package GUIComponents;
 
+import Managers.IngresoManager;
+import Objetos.Paciente;
+import Objetos.Profesional;
+import Objetos.Turno;
+import Utils.FormatedDate;
+import org.jdatepicker.impl.DateComponentFormatter;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
+import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 /**
  *
@@ -12,8 +24,24 @@ import java.util.List;
  */
 public class IngresoPanel extends Panel {
 
+    private Turno turno;
+    private Profesional pr;
+
+    private  Paciente p;
+    private JDatePickerImpl datePicker;
+    private JDatePanelImpl datePanel;
+
+    private UtilDateModel model;
+
     @Override
     public void setup(List<Object> arguments) {
+        turno = (Turno)arguments.get(0);
+        pr = IngresoManager.getInstance().getProfesionalById(turno.getIdProfesional());
+        p = IngresoManager.getInstance().getPacienteById(turno.getIdPaciente());
+        profesionalLabel.setText(pr.getNombre());
+        pacienteLabel.setText(p.getNombre());
+        Date today = FormatedDate.formatedDate(new Date());
+        model.setDate(today.getYear()+1900, today.getMonth(),today.getDay());
 
     }
     private static IngresoPanel ingresoPanel;
@@ -31,6 +59,18 @@ public class IngresoPanel extends Panel {
      */
     private IngresoPanel() {
         initComponents();
+        model= new UtilDateModel();
+        //IMPORTANTE a partir de la version 1.3.4 de JDatePicker se necesita darle properties al DatePanel
+        // link: https://stackoverflow.com/questions/26794698/how-do-i-implement-jdatepicker
+        Properties p = new Properties();
+        p.put("text.today", "Today");
+        p.put("text.month", "Month");
+        p.put("text.year", "Year");
+        Date today = FormatedDate.formatedDate(new Date());
+        model.setDate(today.getYear()+1900, today.getMonth(),today.getDay());
+        datePanel=new JDatePanelImpl(model,p);
+        datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());
+        datePickerPanel.add(datePicker);
     }
 
     /**
@@ -196,7 +236,27 @@ public class IngresoPanel extends Panel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
-        // TODO add your handling code here:
+        boolean error = false;
+        String errStr = "";
+        float monto;
+
+        if (montoTF.getText().isBlank()){
+            error = true;
+            errStr = errStr+"\n ingrese un numero";
+        }
+        else {
+            try {
+                monto=Float.parseFloat(montoTF.getText());
+            }
+            catch (NumberFormatException e){
+                error= true;
+                errStr=errStr+"\n ingrese un numero";
+            }
+        }
+        Date auxFecha = FormatedDate.formatedDate((Date) datePicker.getModel().getValue());
+        java.sql.Date fecha = new java.sql.Date(auxFecha.getTime());
+
+
     }//GEN-LAST:event_confirmarButtonMousePressed
 
     private void cancelarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMouseExited

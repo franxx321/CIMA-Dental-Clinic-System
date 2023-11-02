@@ -1,5 +1,6 @@
 package Managers;
 
+import Objetos.Paciente;
 import Objetos.Profesional;
 import Objetos.Turno;
 import Objetos.TurnoPrestacion;
@@ -29,5 +30,12 @@ public class IngresoManager {
         Profesional auxprofesional =ProfesionalManager.getInstance().getProfesionalByName(profesional);
         List<Turno> turnos = TurnoManager.getInstance().getByProfesional(auxprofesional.getId());
         return TurnosByProfesionalTableGenerator.getInstance().generateTable(turnos,auxprofesional);
+    }
+
+    public Profesional getProfesionalById(int profesionalId){
+        return ProfesionalManager.getInstance().getProfesionalById(profesionalId);
+    }
+    public Paciente getPacienteById(int pacienteId){
+        return PacienteManager.getInstance().getPacienteById(pacienteId);
     }
 }

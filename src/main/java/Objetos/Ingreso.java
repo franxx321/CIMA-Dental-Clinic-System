@@ -18,6 +18,16 @@ public class  Ingreso {
 
     private int idObraSocial;
 
+    private int idTurno;
+
+    public int getIdTurno() {
+        return idTurno;
+    }
+
+    public void setIdTurno(int idTurno) {
+        this.idTurno = idTurno;
+    }
+
     public float getMonto() {
         return monto;
     }

@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IngresoTurnoDAOImpl implements IIngresoTurnoDAO {
-    private IngresoTurnoDAOImpl ingresoTurnoDAO;
-    public IngresoTurnoDAOImpl getInstance(){
+    private static IngresoTurnoDAOImpl ingresoTurnoDAO;
+    public static IngresoTurnoDAOImpl getInstance(){
         if(ingresoTurnoDAO == null){
             ingresoTurnoDAO = new IngresoTurnoDAOImpl();
         }

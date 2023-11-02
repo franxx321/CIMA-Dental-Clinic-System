@@ -10,6 +10,7 @@ import Objetos.Profesional;
 import Objetos.Turno;
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.String2Date;
+import java.awt.Color;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
@@ -91,9 +92,15 @@ public class TurnoIngresoPanel extends Panel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        confirmarButton.setText("Confirmar");
+        confirmarButton.setText("  Confirmar");
         confirmarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         confirmarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                confirmarButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                confirmarButtonMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 confirmarButtonMousePressed(evt);
             }
@@ -116,8 +123,8 @@ public class TurnoIngresoPanel extends Panel {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(384, 384, 384)
-                .addComponent(confirmarButton)
+                .addGap(388, 388, 388)
+                .addComponent(confirmarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -129,9 +136,9 @@ public class TurnoIngresoPanel extends Panel {
                 .addComponent(profesionalCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(confirmarButton)
-                .addGap(23, 23, 23))
+                .addGap(18, 18, 18)
+                .addComponent(confirmarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -175,6 +182,16 @@ public class TurnoIngresoPanel extends Panel {
             this.revalidate();
         }
     }//GEN-LAST:event_profesionalCBActionPerformed
+
+    private void confirmarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMouseExited
+       confirmarButton.setBackground(new Color (223, 246, 255) );
+    }//GEN-LAST:event_confirmarButtonMouseExited
+
+    private void confirmarButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMouseEntered
+        // TODO add your handling code here:
+        confirmarButton.setOpaque(true);
+        confirmarButton.setBackground(new Color (152, 251, 152));
+    }//GEN-LAST:event_confirmarButtonMouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

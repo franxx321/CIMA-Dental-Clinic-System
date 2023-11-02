@@ -48,12 +48,29 @@ public class MenuSecundarioFinanzas extends Panel {
         agregarGastoButton.setText("Agregar Gasto");
         agregarGastoButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         agregarGastoButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                agregarGastoButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                agregarGastoButtonMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 agregarGastoButtonMousePressed(evt);
             }
         });
 
         agregarIngresoButton.setText("Agregar Ingreso");
+        agregarIngresoButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                agregarIngresoButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                agregarIngresoButtonMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                agregarIngresoButtonMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -81,6 +98,26 @@ public class MenuSecundarioFinanzas extends Panel {
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.agregarGasto,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioFinanzas,null);
     }//GEN-LAST:event_agregarGastoButtonMousePressed
+
+    private void agregarIngresoButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarIngresoButtonMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_agregarIngresoButtonMousePressed
+
+    private void agregarIngresoButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarIngresoButtonMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_agregarIngresoButtonMouseEntered
+
+    private void agregarIngresoButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarIngresoButtonMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_agregarIngresoButtonMouseExited
+
+    private void agregarGastoButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarGastoButtonMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_agregarGastoButtonMouseEntered
+
+    private void agregarGastoButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarGastoButtonMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_agregarGastoButtonMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

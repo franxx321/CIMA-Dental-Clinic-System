@@ -12,6 +12,7 @@ import Objetos.Turno;
 import Utils.FormatedDate;
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
+import java.awt.Color;
 import org.jdatepicker.impl.DateComponentFormatter;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -135,17 +136,28 @@ public class IngresoPanel extends Panel {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        confirmarButton.setText("Confirmar");
+        confirmarButton.setText(" Confirmar");
+        confirmarButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         confirmarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         confirmarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                confirmarButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                confirmarButtonMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 confirmarButtonMousePressed(evt);
             }
         });
 
-        cancelarButton.setText("Cancelar");
+        cancelarButton.setText(" Cancelar");
+        cancelarButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         cancelarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cancelarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cancelarButtonMouseEntered(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 cancelarButtonMouseExited(evt);
             }
@@ -194,10 +206,10 @@ public class IngresoPanel extends Panel {
                 .addContainerGap(34, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(214, 214, 214)
-                .addComponent(cancelarButton)
+                .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(confirmarButton)
-                .addGap(249, 249, 249))
+                .addComponent(confirmarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(244, 244, 244))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,9 +241,9 @@ public class IngresoPanel extends Panel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(confirmarButton)
-                    .addComponent(cancelarButton))
-                .addContainerGap(40, Short.MAX_VALUE))
+                    .addComponent(confirmarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -274,21 +286,37 @@ public class IngresoPanel extends Panel {
             IngresoManager.getInstance().add(fecha,p.getId(),pr.getId(),turno.getId(),obraSocial.getId(),monto, descripcion);
             PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.finanzas,null);
             SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
+            confirmarButton.setBackground(new Color (152, 251, 152));
         }
-
 
 
 
     }//GEN-LAST:event_confirmarButtonMousePressed
 
     private void cancelarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMouseExited
-        // TODO add your handling code here:
+        confirmarButton.setBackground(new Color (223, 246, 255) );
     }//GEN-LAST:event_cancelarButtonMouseExited
 
     private void cancelarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMousePressed
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.finanzas,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
+        cancelarButton.setBackground(new Color (223, 246, 255) );
     }//GEN-LAST:event_cancelarButtonMousePressed
+
+    private void cancelarButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMouseEntered
+        cancelarButton.setOpaque(true);
+        cancelarButton.setBackground(new Color (255, 105, 97) ); 
+    }//GEN-LAST:event_cancelarButtonMouseEntered
+
+    private void confirmarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMouseExited
+        confirmarButton.setBackground(new Color (223, 246, 255) );
+    }//GEN-LAST:event_confirmarButtonMouseExited
+
+    private void confirmarButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMouseEntered
+        // TODO add your handling code here:
+        confirmarButton.setOpaque(true);
+        confirmarButton.setBackground(new Color (152, 251, 152));
+    }//GEN-LAST:event_confirmarButtonMouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

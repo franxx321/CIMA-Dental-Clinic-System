@@ -113,12 +113,12 @@ public class FinanzasPanel extends Panel {
     private void agregarGastoButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarGastoButtonMousePressed
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.agregarGasto,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioFinanzas,null);
-        
+        agregarGastoButton.setBackground(new Color (223, 246, 255) );
     }//GEN-LAST:event_agregarGastoButtonMousePressed
 
     private void agregarGastoButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarGastoButtonMouseEntered
        agregarGastoButton.setOpaque(true);
-        agregarGastoButton.setBackground(new Color (150, 231, 255) ); 
+       agregarGastoButton.setBackground(new Color (150, 231, 255) ); 
     }//GEN-LAST:event_agregarGastoButtonMouseEntered
 
     private void agregarGastoButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarGastoButtonMouseExited
@@ -138,6 +138,7 @@ public class FinanzasPanel extends Panel {
         // TODO add your handling code here:
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.turnoIngreso,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioFinanzas,null);
+         agregarIngresoButton.setBackground(new Color (223, 246, 255));
     }//GEN-LAST:event_agregarIngresoButtonMousePressed
 
 

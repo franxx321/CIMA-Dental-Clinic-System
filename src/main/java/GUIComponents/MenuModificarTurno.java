@@ -174,9 +174,16 @@ public class MenuModificarTurno extends Panel {
 
         jLabel5.setText("Hora de fin:");
 
-        configurarPrestacionesButton.setText("Configurar prestaciones");
+        configurarPrestacionesButton.setText("  Configurar prestaciones");
+        configurarPrestacionesButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         configurarPrestacionesButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         configurarPrestacionesButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                configurarPrestacionesButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                configurarPrestacionesButtonMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 configurarPrestacionesButtonMousePressed(evt);
             }
@@ -274,18 +281,20 @@ public class MenuModificarTurno extends Panel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(88, 88, 88)
-                                        .addComponent(jLabel10))
-                                    .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel3)
+                                                .addGap(88, 88, 88)
+                                                .addComponent(jLabel10))
+                                            .addComponent(jLabel6)
+                                            .addComponent(datePickerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(129, 129, 129))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(15, 15, 15)
-                                        .addComponent(configurarPrestacionesButton))
-                                    .addComponent(datePickerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(129, 129, 129)
+                                        .addComponent(configurarPrestacionesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(162, 162, 162)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(horaFinTF, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(horaInicioTF, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -329,7 +338,7 @@ public class MenuModificarTurno extends Panel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(configurarPrestacionesButton))
+                            .addComponent(configurarPrestacionesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(horaFinTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -343,7 +352,7 @@ public class MenuModificarTurno extends Panel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(descuentoTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel7)))
-                        .addGap(18, 32, Short.MAX_VALUE)
+                        .addGap(18, 18, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(flechaIzqButton, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(flechaDerechaButton)))
@@ -353,7 +362,7 @@ public class MenuModificarTurno extends Panel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(confirmarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 9, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -479,6 +488,14 @@ public class MenuModificarTurno extends Panel {
     private void confirmarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMouseExited
        confirmarButton.setBackground(new Color (223, 246, 255) );
     }//GEN-LAST:event_confirmarButtonMouseExited
+
+    private void configurarPrestacionesButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_configurarPrestacionesButtonMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_configurarPrestacionesButtonMouseEntered
+
+    private void configurarPrestacionesButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_configurarPrestacionesButtonMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_configurarPrestacionesButtonMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

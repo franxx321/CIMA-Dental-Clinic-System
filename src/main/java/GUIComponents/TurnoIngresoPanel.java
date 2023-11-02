@@ -141,6 +141,7 @@ public class TurnoIngresoPanel extends Panel {
         if(profesionalCB.getSelectedIndex()==0){
             error= true;
             errString= "\n seleccione un profesional";
+            System.out.println("error");
         }
         else if(jTable1.getSelectedRow() ==-1){
             error = true;
@@ -148,6 +149,7 @@ public class TurnoIngresoPanel extends Panel {
         }
         if(error){
             //TODO tirar el popup
+            System.out.println("error");
         }
         else {
             int row = jTable1.getSelectedRow();
@@ -161,7 +163,7 @@ public class TurnoIngresoPanel extends Panel {
             Turno turno = TurnoManager.getInstance().getByDateProfesional(horaInicio,horaFin,idProfesional);
             List<Object> arguments = new ArrayList<>();
             arguments.add(turno);
-            PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.turnoIngreso,arguments);
+            PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.agregarIngreso,arguments);
         }
     }//GEN-LAST:event_confirmarButtonMousePressed
 

@@ -75,6 +75,9 @@ public class FinanzasPanel extends Panel {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 agregarIngresoButtonMouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                agregarIngresoButtonMousePressed(evt);
+            }
         });
 
         JLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -130,6 +133,12 @@ public class FinanzasPanel extends Panel {
     private void agregarIngresoButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarIngresoButtonMouseExited
         agregarIngresoButton.setBackground(new Color (223, 246, 255) );
     }//GEN-LAST:event_agregarIngresoButtonMouseExited
+
+    private void agregarIngresoButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarIngresoButtonMousePressed
+        // TODO add your handling code here:
+        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.turnoIngreso,null);
+        SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioFinanzas,null);
+    }//GEN-LAST:event_agregarIngresoButtonMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

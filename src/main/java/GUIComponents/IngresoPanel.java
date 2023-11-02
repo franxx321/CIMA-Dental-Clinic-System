@@ -116,17 +116,7 @@ public class IngresoPanel extends Panel {
         pacienteLabel.setText("aca va el Paciente");
 
         datePickerPanel.setBackground(new java.awt.Color(223, 246, 255));
-
-        javax.swing.GroupLayout datePickerPanelLayout = new javax.swing.GroupLayout(datePickerPanel);
-        datePickerPanel.setLayout(datePickerPanelLayout);
-        datePickerPanelLayout.setHorizontalGroup(
-            datePickerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        datePickerPanelLayout.setVerticalGroup(
-            datePickerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 29, Short.MAX_VALUE)
-        );
+        datePickerPanel.setLayout(new java.awt.CardLayout());
 
         jLabel3.setText("Fecha:");
 
@@ -162,7 +152,7 @@ public class IngresoPanel extends Panel {
 
         jLabel6.setText("ObraSocial:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una opcion", " " }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una opcion", "Ninguna" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -290,6 +280,5 @@ public class IngresoPanel extends Panel {
     private javax.swing.JTextField montoTF;
     private javax.swing.JLabel pacienteLabel;
     private javax.swing.JLabel profesionalLabel;
-
     // End of variables declaration//GEN-END:variables
 }

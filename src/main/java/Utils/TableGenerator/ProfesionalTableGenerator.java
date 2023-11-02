@@ -1,12 +1,15 @@
 package Utils.TableGenerator;
 
 import Managers.MontoManager;
+import Managers.PrestacionManager;
 import Objetos.*;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 import Objetos.Monto;
 import java.util.List;
+import java.util.Vector;
 
 public class ProfesionalTableGenerator {
     private static ProfesionalTableGenerator profesionalTableGenerator;
@@ -22,15 +25,32 @@ public class ProfesionalTableGenerator {
 
     }
 
+    public JTable generateTable(Profesional profesional) {
+        JTable table = new JTable();
+        Vector<Vector<String>> data = new Vector<>();
+        Vector<String> header = new Vector<>();
+        List<Monto> montoList = MontoManager.getInstance().getMontoByIdProfesional(profesional.getId());
+        List<Prestacion> prestacionList = PrestacionManager.getInstance().getAllPrestacion();
 
+        header.add(0, "Prestacion");
+        header.add(1, "Monto");
 
-    public List <Monto> getMontoByIdProfesional(int idProfesional){
+        if (montoList != null) {
 
-        List <Monto> montoList = MontoManager.getInstance().getMontoByIdProfesional(idProfesional);
-
-        return montoList;
-
+            for (Monto monto : montoList) {
+                Vector<String> vector = new Vector<>();
+                for (Prestacion prestacion : prestacionList) {
+                    if (monto.getIdPrestacion() == prestacion.getId()) {
+                        vector.add(0, prestacion.getNombre());
+                        vector.add(1,"" + monto.getPrecio());
+                        break;
+                    }
+                }
+                data.add(vector);
+            }
+        }
+        DefaultTableModel tm = new DefaultTableModel(data,header);
+        table.setModel(tm);
+        return table;
     }
-
-    
-    }
+}

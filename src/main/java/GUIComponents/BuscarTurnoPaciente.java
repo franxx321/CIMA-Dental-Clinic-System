@@ -206,7 +206,8 @@ public class BuscarTurnoPaciente extends Panel {
     private void cancelarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMousePressed
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelTurnos,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
-        cancelarButton.setBackground(new Color (223, 246, 255) ); 
+        cancelarButton.setBackground(new Color (223, 246, 255) );
+        int a =1+1;
     }//GEN-LAST:event_cancelarButtonMousePressed
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed

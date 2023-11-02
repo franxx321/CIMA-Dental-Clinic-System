@@ -17,6 +17,7 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
+import javax.swing.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -47,6 +48,7 @@ public class IngresoPanel extends Panel {
         pacienteLabel.setText(p.getNombre());
         Date today = FormatedDate.formatedDate(new Date());
         model.setDate(today.getYear()+1900, today.getMonth(),today.getDay());
+        model.setSelected(true);
         obraSocialList=IngresoManager.getInstance().getObraSocialByIdPaciente(p.getId());
         for (ObraSocial obraSocial: obraSocialList){
             jComboBox1.addItem(obraSocial.getNombre());
@@ -258,7 +260,7 @@ public class IngresoPanel extends Panel {
             errStr = errStr+"\n Seleccione una obra social";
         }
         if(error){
-            //TODO tirar el popup
+            JOptionPane.showMessageDialog(null, "Error!\n" + errStr);
         }
         else {
             ObraSocial obraSocial = null;
@@ -271,7 +273,7 @@ public class IngresoPanel extends Panel {
             }
             IngresoManager.getInstance().add(fecha,p.getId(),pr.getId(),turno.getId(),obraSocial.getId(),monto, descripcion);
             PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.finanzas,null);
-            SMenuGUIHandler.getInstance().changePanel();
+            SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
         }
 
 
@@ -284,7 +286,8 @@ public class IngresoPanel extends Panel {
     }//GEN-LAST:event_cancelarButtonMouseExited
 
     private void cancelarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMousePressed
-        // TODO add your handling code here:
+        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.finanzas,null);
+        SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
     }//GEN-LAST:event_cancelarButtonMousePressed
 
 

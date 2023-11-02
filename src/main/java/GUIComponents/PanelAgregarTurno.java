@@ -366,6 +366,7 @@ public class PanelAgregarTurno extends Panel {
         working=false;
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelTurnos, null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio, null);
+        cancelarButton.setBackground(new Color (223, 246, 255) );
     }//GEN-LAST:event_cancelarButtonMousePressed
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
@@ -449,6 +450,7 @@ public class PanelAgregarTurno extends Panel {
                 JOptionPane.showMessageDialog(null, "El turno fue agendado correctamente");
                 PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelTurnos,null);
                 SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
+                confirmarButton.setBackground(new Color (223, 246, 255) );
             }
             catch (CantAddTurno e){
                 JOptionPane.showMessageDialog(null, "Error!\n" + e.getErrors());

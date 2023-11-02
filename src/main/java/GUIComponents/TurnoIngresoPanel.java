@@ -148,8 +148,8 @@ public class TurnoIngresoPanel extends Panel {
             errString = "\n Seleccione un turno";
         }
         if(error){
-            //TODO tirar el popup
-            System.out.println("error");
+            JOptionPane.showMessageDialog(null, "Error!\n" + errString);
+
         }
         else {
             int row = jTable1.getSelectedRow();

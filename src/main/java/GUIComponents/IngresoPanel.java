@@ -5,6 +5,7 @@
 package GUIComponents;
 
 import Managers.IngresoManager;
+import Objetos.ObraSocial;
 import Objetos.Paciente;
 import Objetos.Profesional;
 import Objetos.Turno;
@@ -33,6 +34,8 @@ public class IngresoPanel extends Panel {
 
     private UtilDateModel model;
 
+    private List<ObraSocial> obraSocialList;
+
     @Override
     public void setup(List<Object> arguments) {
         turno = (Turno)arguments.get(0);
@@ -42,7 +45,10 @@ public class IngresoPanel extends Panel {
         pacienteLabel.setText(p.getNombre());
         Date today = FormatedDate.formatedDate(new Date());
         model.setDate(today.getYear()+1900, today.getMonth(),today.getDay());
-
+        obraSocialList=IngresoManager.getInstance().getObraSocialByIdPaciente(p.getId());
+        for (ObraSocial obraSocial: obraSocialList){
+            jComboBox1.addItem(obraSocial.getNombre());
+        }
     }
     private static IngresoPanel ingresoPanel;
 

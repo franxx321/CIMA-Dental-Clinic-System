@@ -11,4 +11,6 @@ public interface IObraSocialDAO {
     public boolean modify(ObraSocial obraSocial, ObraSocial aux);
 
     public ObraSocial getByName(ObraSocial oS);
+
+    public ObraSocial getById(ObraSocial oS);
 }

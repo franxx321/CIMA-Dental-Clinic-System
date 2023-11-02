@@ -119,4 +119,39 @@ public class PacienteObraSocialDAOImpl implements IPacienteObraSocialDAO {
         }
         return modify;
     }
+
+    public List<PacienteObraSocial> getByPacienteId(PacienteObraSocial pacienteObraSocial){
+        List<PacienteObraSocial> pacienteObraSocialList= null;
+        PreparedStatement pstm = null;
+        try{
+            DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
+            con = DBConnection.getConnection();
+            pstm = con.prepareStatement("SELECT  * " +
+                    "FROM pacienteobrasocial " +
+                    "WHERE id_paciente = ? ");
+            pstm.setInt(1,pacienteObraSocial.getIdPaciente());
+            ResultSet rs = pstm.executeQuery();
+            pacienteObraSocialList = new ArrayList<>();
+            PacienteObraSocial p = new PacienteObraSocial();
+            if(rs.next()) {
+                do {
+                    p.setIdObraSocial(rs.getInt(1));
+                    p.setIdPaciente(rs.getInt(2));
+                    pacienteObraSocialList.add(p);
+                    p= new PacienteObraSocial();
+                }while (rs.next());
+            }
+            else {
+                p.setIdObraSocial(-1);
+                pacienteObraSocialList.add(p);
+            }
+            pstm.close();
+            con.close();
+        } catch (SQLException e){
+            System.out.println("Error: Clase PacienteObraSocialDAOImpl, metodo getByIdPaciente. " +e.getMessage());
+        }
+        return pacienteObraSocialList;
+    }
+
 }

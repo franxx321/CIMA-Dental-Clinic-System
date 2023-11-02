@@ -9,5 +9,5 @@ public interface IPacienteObraSocialDAO {
     public List<PacienteObraSocial> obtain();
     public boolean delete(PacienteObraSocial pacienteObraSocial);
     public boolean modify(PacienteObraSocial pacienteObraSocial, PacienteObraSocial aux);
-
+    public List<PacienteObraSocial> getByPacienteId(PacienteObraSocial pacienteObraSocial);
 }

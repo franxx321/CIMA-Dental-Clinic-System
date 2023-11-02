@@ -1,12 +1,10 @@
 package Managers;
 
-import Objetos.Paciente;
-import Objetos.Profesional;
-import Objetos.Turno;
-import Objetos.TurnoPrestacion;
+import Objetos.*;
 import Utils.TableGenerator.TurnosByProfesionalTableGenerator;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class IngresoManager {
@@ -38,4 +36,17 @@ public class IngresoManager {
     public Paciente getPacienteById(int pacienteId){
         return PacienteManager.getInstance().getPacienteById(pacienteId);
     }
+
+    public List<ObraSocial> getObraSocialByIdPaciente(int idPaciente){
+        List<PacienteObraSocial> pacienteObraSocialList = PacienteObraSocialManager.getInstance().getByIdPaciente(idPaciente);
+        List<ObraSocial> obraSocialList = new ArrayList<>();
+        for (PacienteObraSocial pos: pacienteObraSocialList) {
+            ObraSocial oS = ObraSocialManager.getInstance().getById(pos.getIdObraSocial());
+            if(oS.getId()!=-1){
+                obraSocialList.add(oS);
+            }
+        }
+        return obraSocialList;
+    }
+
 }

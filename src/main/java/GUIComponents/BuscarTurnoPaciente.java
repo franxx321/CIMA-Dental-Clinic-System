@@ -189,10 +189,17 @@ public class BuscarTurnoPaciente extends Panel {
         if (matcher1.matches()){
             JTable auxTable = TurnoManager.getInstance().getFuturePatientAppointments(Long.parseLong(dniString));
             turnosTable.setModel(auxTable.getModel());
+            if(turnosTable.getRowCount()==0){
+                error = true;
+                errorString = errorString + "No existe un turno futuro para ese paciente \n";
+            }
         } else {
             error = true;
             jTextField1.setText("");
             errorString = errorString + "DNI Ingresado incorrecto \n";
+        }
+        if (error){
+            JOptionPane.showMessageDialog(null, "Error!\n" + errorString);
         }
     }//GEN-LAST:event_buscarButtonMousePressed
 
@@ -204,6 +211,7 @@ public class BuscarTurnoPaciente extends Panel {
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
         int row = turnosTable.getSelectedRow();
+        if(row != -1){
         String profesional = (String) turnosTable.getModel().getValueAt(row,2);
         String fechaCompleta = (String) turnosTable.getModel().getValueAt(row,3);
         Date horaInicio = String2Date.string2Date(fechaCompleta);
@@ -216,10 +224,14 @@ public class BuscarTurnoPaciente extends Panel {
         arguments.add(turno);
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.modificarTurno,arguments);
         confirmarButton.setBackground(new Color (223, 246, 255) );
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Error!\n Seleccione un turno");
+        }
     }//GEN-LAST:event_confirmarButtonMousePressed
 
     private void buscarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarButtonMouseExited
-        confirmarButton.setBackground(new Color (223, 246, 255) );
+        buscarButton.setBackground(new Color (223, 246, 255) );
     }//GEN-LAST:event_buscarButtonMouseExited
 
     private void buscarButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarButtonMouseEntered

@@ -188,10 +188,17 @@ public class EliminarTurno extends Panel {
         if (matcher1.matches()){
             JTable auxTable = TurnoManager.getInstance().getFuturePatientAppointments(Long.parseLong(dniString));
             turnosTable.setModel(auxTable.getModel());
+            if(turnosTable.getRowCount()==0){
+                error = true;
+                errorString = errorString + "No existe un turno futuro para ese paciente \n";
+            }
         } else {
             error = true;
             jTextField1.setText("");
             errorString = errorString + "DNI Ingresado incorrecto \n";
+        }
+        if (error){
+            JOptionPane.showMessageDialog(null, "Error!\n" + errorString);
         }
 
 

@@ -135,13 +135,13 @@ public class MontoDAOImpl implements IMontoDAO {
             DBConnection=DBConnector.getInstance();
             DBConnection.startConnection();
             con=DBConnection.getConnection();
-            PreparedStatement ptsm = con.prepareStatement("SELECT * FROM precios Where id_prestacion = ?");
+            PreparedStatement ptsm = con.prepareStatement("SELECT * FROM precios Where id_profesional = ?");
             ptsm.setInt(1,profesionalId);
             ResultSet rs = ptsm.executeQuery();
             montoList= new ArrayList<>();
             while(rs.next()){
                 Monto m = new Monto();
-                m.setPrecio(rs.getInt(1));
+                m.setPrecio(rs.getFloat(1));
                 m.setIdPrestacion(rs.getInt(2));
                 m.setIdProfesional(rs.getInt(3));
                 montoList.add(m);

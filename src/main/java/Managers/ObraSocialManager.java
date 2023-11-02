@@ -1,7 +1,11 @@
 package Managers;
 
 import DAOs.MySQLImplementations.ObraSocialDAOImpl;
+import DAOs.MySQLImplementations.ProfesionalDAOImpl;
 import Objetos.ObraSocial;
+import Objetos.Profesional;
+
+import java.util.List;
 
 public class ObraSocialManager {
 
@@ -20,5 +24,9 @@ public class ObraSocialManager {
         ObraSocial obraSocial= new ObraSocial();
         obraSocial.setId(idOs);
         return ObraSocialDAOImpl.getInstance().getById(obraSocial);
+    }
+
+    public List<ObraSocial> getAll(){
+        return ObraSocialDAOImpl.getInstance().obtain();
     }
 }

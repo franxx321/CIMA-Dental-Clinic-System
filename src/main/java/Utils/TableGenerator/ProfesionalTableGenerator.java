@@ -49,8 +49,8 @@ public class ProfesionalTableGenerator {
                 data.add(vector);
             }
         }
-        DefaultTableModel tm = new DefaultTableModel(data,header);
-        table.setModel(tm);
+        DefaultTableModel tableProfesional = new DefaultTableModel(data,header);
+        table.setModel(tableProfesional);
         return table;
     }
 }

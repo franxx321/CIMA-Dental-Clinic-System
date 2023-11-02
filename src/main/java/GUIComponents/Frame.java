@@ -60,6 +60,7 @@ public class Frame extends javax.swing.JFrame {
         menuPrincipal = new javax.swing.JPanel();
         turnosButton = new javax.swing.JLabel();
         finanzasButton = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         panelPrincipal = new javax.swing.JPanel();
         panelPrincipalInit = new javax.swing.JPanel();
 
@@ -102,6 +103,9 @@ public class Frame extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/stadisticsIcon.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+
         javax.swing.GroupLayout menuPrincipalLayout = new javax.swing.GroupLayout(menuPrincipal);
         menuPrincipal.setLayout(menuPrincipalLayout);
         menuPrincipalLayout.setHorizontalGroup(
@@ -109,6 +113,7 @@ public class Frame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPrincipalLayout.createSequentialGroup()
                 .addContainerGap(25, Short.MAX_VALUE)
                 .addGroup(menuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(turnosButton)
                     .addComponent(finanzasButton))
                 .addGap(24, 24, 24))
@@ -116,10 +121,12 @@ public class Frame extends javax.swing.JFrame {
         menuPrincipalLayout.setVerticalGroup(
             menuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuPrincipalLayout.createSequentialGroup()
-                .addGap(241, 241, 241)
+                .addGap(147, 147, 147)
                 .addComponent(turnosButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(18, 18, 18)
                 .addComponent(finanzasButton)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -220,6 +227,7 @@ public class Frame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel finanzasButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel menuPrincipal;
     private javax.swing.JPanel menuSecundario;
     private javax.swing.JPanel menuSecundarioInit;

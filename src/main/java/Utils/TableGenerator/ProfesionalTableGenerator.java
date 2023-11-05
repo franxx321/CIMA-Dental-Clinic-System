@@ -49,8 +49,16 @@ public class ProfesionalTableGenerator {
                 data.add(vector);
             }
         }
-        DefaultTableModel tableProfesional = new DefaultTableModel(data,header);
-        table.setModel(tableProfesional);
+        
+        DefaultTableModel tableModel = new DefaultTableModel(data, header) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            // Hace que la columna "Prestacion" no sea editable
+            return column != 0;
+            }
+        };
+
+        table.setModel(tableModel);
         return table;
     }
 }

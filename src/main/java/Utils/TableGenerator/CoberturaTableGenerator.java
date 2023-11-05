@@ -26,14 +26,14 @@ public class CoberturaTableGenerator {
 
     }
 
-    public JTable generateTable(Profesional profesional) {
+    public JTable generateTable(ObraSocial obrasocial) {
         JTable table = new JTable();
         Vector<Vector<String>> data = new Vector<>();
         Vector<String> header = new Vector<>();
-        List<Cobertura> coberturaList = CoberturaManager.getInstance().getCoberturaByIdProfesional(profesional.getId());
+        List<Cobertura> coberturaList = CoberturaManager.getInstance().getCoberturaByIdObraSocial(obrasocial.getId());
         List<ObraSocial> obraSocialList = ObraSocialManager.getInstance().getAll();
 
-        header.add(0, "Obra Social");
+        header.add(0, "Prestacion");
         header.add(1, "Porcentaje");
         header.add(2,"Tope");
         header.add(3,"Codigo");
@@ -44,7 +44,7 @@ public class CoberturaTableGenerator {
                 Vector<String> vector = new Vector<>();
                 for (ObraSocial obraSocial : obraSocialList) {
                     if (cobertura.getIdObraSocial() == obraSocial.getId()) {
-                        vector.add(0, obraSocial.getNombre());
+                        vector.add(0, PrestacionManager.getInstance().nameById(cobertura.getIdPrestacion()));
                         vector.add(1,"" + cobertura.getPorcentaje());
                         vector.add(1,"" + cobertura.getTope());
                         vector.add(1,cobertura.getCodigo());
@@ -54,8 +54,16 @@ public class CoberturaTableGenerator {
                 data.add(vector);
             }
         }
-        DefaultTableModel tableCobertura = new DefaultTableModel(data,header);
-        table.setModel(tableCobertura);
+        
+        DefaultTableModel tableModel = new DefaultTableModel(data, header) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            // Hace que las columnas "Prestacion" (columna 0) y "Codigo" (columna 3) no sean editables
+            return column != 0 && column != 3;
+        }
+        };
+
+        table.setModel(tableModel);
         return table;
     }
 }

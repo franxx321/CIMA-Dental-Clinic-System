@@ -124,8 +124,34 @@ public class ObraSocialDAOImpl implements IObraSocialDAO {
     public ObraSocial getByName(ObraSocial oS) {
         //TOIMPLEMENT
         ObraSocial obraSocial = null;
-
-        return oS;
+        PreparedStatement ptsm = null;
+        
+        try{
+            DBConnection= DBConnector.getInstance();
+            DBConnection.startConnection();
+            con = DBConnection.getConnection();
+            ptsm = con.prepareStatement("SELECT * " +
+                    "FROM obrassociales " +
+                    "WHERE  nombre = ?");
+            ptsm.setString(1,oS.getNombre());
+            ResultSet rs = ptsm.executeQuery();
+            obraSocial= new ObraSocial();
+            if(rs.next()){
+                obraSocial.setId(rs.getInt(1));
+                obraSocial.setNombre(rs.getString(2));
+                obraSocial.setMail(rs.getString(3));
+                obraSocial.setTelefono(rs.getString(4));
+                obraSocial.setNombreRepresentante(rs.getString(5));
+            }
+            else {
+                obraSocial.setId(-1);
+            }
+        }
+        catch (SQLException e){
+            System.out.println("Error en ObraSocialDAOImpl metodo getById "+ e.getMessage());
+        }
+        
+        return obraSocial;
     }
 
     @Override

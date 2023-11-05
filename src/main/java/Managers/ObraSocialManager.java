@@ -29,4 +29,9 @@ public class ObraSocialManager {
     public List<ObraSocial> getAll(){
         return ObraSocialDAOImpl.getInstance().obtain();
     }
+    
+    
+   public ObraSocial getByName(ObraSocial obrasocial){
+       return ObraSocialDAOImpl.getInstance().getByName(obrasocial);
+   }
 }

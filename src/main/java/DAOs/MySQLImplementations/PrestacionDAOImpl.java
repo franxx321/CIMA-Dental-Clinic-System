@@ -144,4 +144,26 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
         }
         return id;
     }
+    
+    public String nameById(int id){
+        String name = "";
+        try{
+            DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
+            con = DBConnection.getConnection();
+            PreparedStatement ptsm = con.prepareStatement("SELECT nombre FROM prestaciones WHERE id = ?");
+            ptsm.setInt(1, id);
+            ResultSet rs = ptsm.executeQuery();
+            if(!rs.next()){
+                name = "";
+            }else{
+                name = rs.getString(1);
+            }
+            con.close();
+        } catch (SQLException e){
+            System.out.println("Error: Clase PrestacionDAOImpl, metodo nameById" + e.getMessage()
+            );
+        }
+        return name;
+    }
 }

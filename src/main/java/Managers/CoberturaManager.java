@@ -25,6 +25,11 @@ public class CoberturaManager {
         return CoberturaDAOImpl.getInstance().getCoberturaByIdProfesional(profesionalId);
 
     }
+    
+    public List<Cobertura> getCoberturaByIdObraSocial(int obrasocialId){
 
+        return CoberturaDAOImpl.getInstance().getCoberturaByIdObraSocial(obrasocialId);
+
+    }
 
 }

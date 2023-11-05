@@ -156,4 +156,35 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
         return coberturaList ;
 
     }
+    
+    public List <Cobertura> getCoberturaByIdObraSocial(int obrasocialId){
+
+        List <Cobertura> coberturaList = null;
+        
+        try{
+            DBConnection=DBConnector.getInstance();
+            DBConnection.startConnection();
+            con=DBConnection.getConnection();
+            PreparedStatement ptsm = con.prepareStatement("SELECT * FROM coberturas Where id_obrasocial = ?");
+            ptsm.setInt(1,obrasocialId);
+            ResultSet rs = ptsm.executeQuery();
+            coberturaList = new ArrayList<>();
+            while(rs.next()){
+                Cobertura c = new Cobertura();
+                c.setIdObraSocial(rs.getInt(1));
+                c.setIdPrestacion(rs.getInt(2));
+                c.setPorcentaje(rs.getInt(3));
+                c.setTope(rs.getInt(4));
+                c.setCodigo(rs.getString(5));
+                coberturaList.add(c);
+            }
+            con.close();
+        }
+        catch (SQLException e){
+            System.out.println("Fallo Cobertura DAO IMPL get by id obra social"+e.getMessage());
+        }
+
+        return coberturaList ;
+
+    }
 }

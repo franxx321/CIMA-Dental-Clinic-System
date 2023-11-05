@@ -26,5 +26,9 @@ public class PrestacionManager {
    public int idByName(String prestacion){
         return PrestacionDAOImpl.getInstance().idByName(prestacion);
    }
+   
+   public String nameById(int id){
+       return PrestacionDAOImpl.getInstance().nameById(id);
+   }
 
 }

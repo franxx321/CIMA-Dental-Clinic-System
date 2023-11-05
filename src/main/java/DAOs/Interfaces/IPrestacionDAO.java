@@ -10,4 +10,5 @@ public interface IPrestacionDAO {
     public boolean delete(Prestacion prestacion);
     public boolean modify(Prestacion prestacion, Prestacion aux);
     public int idByName(String Nombre);
+    public String nameById(int id);
 }

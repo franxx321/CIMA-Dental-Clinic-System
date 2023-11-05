@@ -3,7 +3,6 @@ package Utils.GUIUtils;
 import GUIComponents.*;
 import Managers.TurnoPrestacionManager;
 import Objetos.TurnoPrestacion;
-
 import javax.swing.*;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +12,7 @@ public class PanelGUIHandler  implements  GUIHandler{
     private static PanelGUIHandler panelGUIHandler;
 
     public static String panelInicio ="Panel Inicio",panelTurnos="Panel Turnos",agregarTurno= "Agregar Turno",modificarTurno="Modificar Turno",modificarPrestacion = "ModificarPrestaciones"
-            ,eliminarTurno= "eliminarTurno",buscarPaciente = "BuscarPaciente",finanzas="FinanzasPanel",agregarGasto="agregarGasto",turnoIngreso ="Turno Ingreso", agregarIngreso = "Agregar Ingreso";
+            ,eliminarTurno= "eliminarTurno",buscarPaciente = "BuscarPaciente",finanzas="FinanzasPanel",agregarGasto="agregarGasto",turnoIngreso ="Turno Ingreso", agregarIngreso = "Agregar Ingreso",actualizarPrecios="Actualizar Precios",actualizarPreciosProfesional="Actualizar Precios Profesional",actualizaros="Actualizar Precios Obra Social" ;
 
     private HashMap<String, Panel> panels;
 
@@ -39,7 +38,11 @@ public class PanelGUIHandler  implements  GUIHandler{
         panels.put(agregarGasto,AgregarGastoPanel.getInstance());
         panels.put(agregarIngreso,IngresoPanel.getInstance());
         panels.put(turnoIngreso,TurnoIngresoPanel.getInstance());
+        panels.put(actualizarPrecios, ActualizarPreciosPanel.getInstance());
+        panels.put(actualizarPreciosProfesional,ActualizarPreciosProfesional.getInstance());
+        panels.put(actualizaros,ActualizarPreciosOS.getInstance());
     }
+    
 
     @Override
     public void changePanel(String panelKey, List <Object> objects) {

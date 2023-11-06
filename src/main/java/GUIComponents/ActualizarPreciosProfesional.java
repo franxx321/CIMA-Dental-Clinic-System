@@ -5,8 +5,11 @@
 package GUIComponents;
 
 import Managers.GastoManager;
+import Managers.MontoManager;
+import Managers.PrestacionManager;
 import Managers.TurnoManager;
 import Managers.ProfesionalManager;
+import Objetos.Monto;
 import Objetos.Profesional;
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
@@ -183,13 +186,37 @@ public class ActualizarPreciosProfesional extends Panel {
     
             // Obtén los valores de la fila seleccionada
             String montoStr = modelo.getValueAt(filaSeleccionada, 1).toString();
-            
+            String prestacion = modelo.getValueAt(filaSeleccionada, 0).toString();
             String regex = "^[0-9]+(\\.[0-9]{1,2})?$";
 
         if (montoStr.matches(regex)) {
-            float monto = Float.parseFloat(montoStr);
+            float precio = Float.parseFloat(montoStr);
+            Monto monto = new Monto();
+            Monto newMonto = new Monto();
             
-    
+            monto.setIdPrestacion(PrestacionManager.getInstance().idByName(prestacion));
+            newMonto.setIdPrestacion(PrestacionManager.getInstance().idByName(prestacion));
+            Profesional p = new Profesional();
+            p = ProfesionalManager.getInstance().getProfesionalByName(profesionalCB.getSelectedItem().toString());
+            monto.setIdProfesional(p.getId());
+            newMonto.setIdProfesional(p.getId());
+            newMonto.setPrecio(precio);
+            boolean result = MontoManager.getInstance().modify(monto, newMonto);
+            if(result){
+                DefaultTableModel tableModel = (DefaultTableModel) profesionalJT.getModel();
+                tableModel.setRowCount(0); // Elimina todos los datos de la tabla
+
+                // Agrega nuevos datos a la tabla según la opción seleccionada en el JComboBox
+                String selectedOption = profesionalCB.getSelectedItem().toString();
+                Profesional profesional = ProfesionalManager.getInstance().getProfesionalByName(selectedOption);
+                
+                JTable auxTable = ProfesionalTableGenerator.getInstance().generateTable(profesional);
+                profesionalJT.setModel(auxTable.getModel());
+                JOptionPane.showMessageDialog(null, "Se modifico el monto correctamente.");
+            }else{
+                JOptionPane.showMessageDialog(null, "Ocurrio un error intentando modificar el monto.");
+            }
+                
         } else {
             JOptionPane.showMessageDialog(null, "El monto introducido no tiene un formato válido.\nDebe ser un número flotante con hasta dos decimales (por ejemplo, 123.45).");
         }

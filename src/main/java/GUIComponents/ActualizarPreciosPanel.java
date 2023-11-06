@@ -28,7 +28,7 @@ public class ActualizarPreciosPanel extends Panel {
     /**
      * Creates new form ActualizarPreciosPanel
      */
-    public ActualizarPreciosPanel() {
+    private ActualizarPreciosPanel() {
         initComponents();
     }
 

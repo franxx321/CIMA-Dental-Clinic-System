@@ -37,7 +37,7 @@ public class ActualizarPreciosOS extends Panel {
     /**
      * Creates new form ActualizarPreciosOS
      */
-    public ActualizarPreciosOS() {
+    private ActualizarPreciosOS() {
         initComponents();
         
         //carga de combobox

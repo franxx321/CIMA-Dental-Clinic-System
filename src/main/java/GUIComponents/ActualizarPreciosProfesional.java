@@ -35,7 +35,7 @@ public class ActualizarPreciosProfesional extends Panel {
     /**
      * Creates new form ActualizarListaPrecios
      */
-    public ActualizarPreciosProfesional() {
+    private ActualizarPreciosProfesional() {
         initComponents();
         //carga de combobox
         List<Profesional> allProfesional = ProfesionalManager.getInstance().getAll();

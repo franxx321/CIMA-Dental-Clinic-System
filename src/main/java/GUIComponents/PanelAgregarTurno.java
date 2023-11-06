@@ -15,10 +15,7 @@ import Utils.FormatedDate;
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 import Utils.TableGenerator.CalendarTableGenerator;
 import java.awt.Color;

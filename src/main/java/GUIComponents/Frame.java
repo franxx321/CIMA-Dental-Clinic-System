@@ -61,6 +61,7 @@ public class Frame extends javax.swing.JFrame {
         turnosButton = new javax.swing.JLabel();
         finanzasButton = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         panelPrincipal = new javax.swing.JPanel();
         panelPrincipalInit = new javax.swing.JPanel();
 
@@ -106,16 +107,25 @@ public class Frame extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/stadisticsIcon.png"))); // NOI18N
         jLabel1.setText("jLabel1");
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/price-icon-7328.png"))); // NOI18N
+        jLabel2.setText("jLabel1");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel2MousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuPrincipalLayout = new javax.swing.GroupLayout(menuPrincipal);
         menuPrincipal.setLayout(menuPrincipalLayout);
         menuPrincipalLayout.setHorizontalGroup(
             menuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPrincipalLayout.createSequentialGroup()
                 .addContainerGap(25, Short.MAX_VALUE)
-                .addGroup(menuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(menuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(turnosButton)
-                    .addComponent(finanzasButton))
+                    .addComponent(turnosButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(finanzasButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(24, 24, 24))
         );
         menuPrincipalLayout.setVerticalGroup(
@@ -127,6 +137,8 @@ public class Frame extends javax.swing.JFrame {
                 .addComponent(finanzasButton)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
+                .addGap(28, 28, 28)
+                .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -184,6 +196,11 @@ public class Frame extends javax.swing.JFrame {
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
     }//GEN-LAST:event_finanzasButtonMousePressed
 
+    private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
+        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.actualizarPrecios,null);
+        SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
+    }//GEN-LAST:event_jLabel2MousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -228,6 +245,7 @@ public class Frame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel finanzasButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel menuPrincipal;
     private javax.swing.JPanel menuSecundario;
     private javax.swing.JPanel menuSecundarioInit;

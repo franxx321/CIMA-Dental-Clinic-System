@@ -17,6 +17,10 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import Utils.TableGenerator.ProfesionalTableGenerator;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -100,6 +104,11 @@ public class ActualizarPreciosProfesional extends Panel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        profesionalJT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                profesionalJTKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(profesionalJT);
 
         volverButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -161,6 +170,40 @@ public class ActualizarPreciosProfesional extends Panel {
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.actualizarPrecios,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
     }//GEN-LAST:event_volverButtonMousePressed
+
+    private void profesionalJTKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_profesionalJTKeyTyped
+        
+        if(evt.getKeyChar() == '\n'){
+        
+            int filaSeleccionada = profesionalJT.getSelectedRow() - 1;
+            
+        if (filaSeleccionada != -2) { 
+            // Verifica si se ha seleccionado una fila
+            DefaultTableModel modelo = (DefaultTableModel) profesionalJT.getModel();
+    
+            // Obtén los valores de la fila seleccionada
+            String montoStr = modelo.getValueAt(filaSeleccionada, 1).toString();
+            
+            String regex = "^[0-9]+(\\.[0-9]{1,2})?$";
+
+        if (montoStr.matches(regex)) {
+            float monto = Float.parseFloat(montoStr);
+            
+    
+        } else {
+            JOptionPane.showMessageDialog(null, "El monto introducido no tiene un formato válido.\nDebe ser un número flotante con hasta dos decimales (por ejemplo, 123.45).");
+        }
+    
+                
+            
+            
+            
+            
+        }else{
+
+        }
+        }
+    }//GEN-LAST:event_profesionalJTKeyTyped
 
     @Override
     public void setup(List<Object> arguments) {

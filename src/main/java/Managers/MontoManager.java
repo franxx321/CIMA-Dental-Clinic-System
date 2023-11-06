@@ -29,6 +29,10 @@ public class MontoManager {
         return MontoDAOImpl.getInstance().getMontoByIdProfesional(profesionalId);
 
     }
+    
+    public boolean modify(Monto monto, Monto aux){
+        return MontoDAOImpl.getInstance().modify(monto, aux);
+    }
 
 
 }

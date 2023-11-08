@@ -31,5 +31,9 @@ public class CoberturaManager {
         return CoberturaDAOImpl.getInstance().getCoberturaByIdObraSocial(obrasocialId);
 
     }
+    
+    public boolean modify(Cobertura cobertura, Cobertura aux){
+        return CoberturaDAOImpl.getInstance().modify(cobertura, aux);
+    }
 
 }

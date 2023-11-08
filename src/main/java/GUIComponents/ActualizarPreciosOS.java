@@ -4,8 +4,13 @@
  */
 package GUIComponents;
 
+import Managers.CoberturaManager;
+import Managers.MontoManager;
 import Managers.ObraSocialManager;
+import Managers.PrestacionManager;
 import Managers.ProfesionalManager;
+import Objetos.Cobertura;
+import Objetos.Monto;
 import Objetos.ObraSocial;
 import Objetos.Profesional;
 import Utils.GUIUtils.PanelGUIHandler;
@@ -16,6 +21,9 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -102,6 +110,11 @@ public class ActualizarPreciosOS extends Panel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        obraSocialJT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                obraSocialJTKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(obraSocialJT);
 
         volverButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -166,6 +179,91 @@ public class ActualizarPreciosOS extends Panel {
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.actualizarPrecios,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
     }//GEN-LAST:event_volverButtonMousePressed
+
+    private void obraSocialJTKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_obraSocialJTKeyTyped
+        
+        if(evt.getKeyChar() == '\n'){
+        
+            int filaSeleccionada = obraSocialJT.getSelectedRow() - 1;
+            
+        if (filaSeleccionada != -2) { 
+            // Verifica si se ha seleccionado una fila
+            DefaultTableModel modelo = (DefaultTableModel) obraSocialJT.getModel();
+    
+            // Obtén los valores de la fila seleccionada
+            String porcentajeStr = modelo.getValueAt(filaSeleccionada, 1).toString();
+            String prestacion = modelo.getValueAt(filaSeleccionada, 0).toString();
+            String topeStr = modelo.getValueAt(filaSeleccionada, 2).toString();
+            String codigo = modelo.getValueAt(filaSeleccionada, 3).toString();
+            
+            //Control con E.R
+            String regex1 = "^(0|[1-9]\\d?|100)$";
+            String regex2 = "^[1-9]\\d*$";
+            
+            
+        if (porcentajeStr.matches(regex1)) {
+            int porcentaje = Integer.parseInt(porcentajeStr);
+            
+            if(topeStr.matches(regex2)){
+            int tope = Integer.parseInt(topeStr);
+                
+            Cobertura cobertura = new Cobertura();
+            Cobertura aux = new Cobertura();
+            
+            aux.setCodigo(codigo);
+            aux.setTope(tope);
+            aux.setPorcentaje(porcentaje);
+            ObraSocial os = new ObraSocial();
+            os.setNombre(ObraSocialCB.getSelectedItem().toString());
+            os = ObraSocialManager.getInstance().getByName(os);
+            aux.setIdObraSocial(os.getId());
+            cobertura.setIdObraSocial(os.getId());
+            aux.setIdPrestacion(PrestacionManager.getInstance().idByName(prestacion));
+            
+            
+            boolean result = CoberturaManager.getInstance().modify(cobertura, aux);
+            if(result){
+                DefaultTableModel tableModel = (DefaultTableModel) obraSocialJT.getModel();
+                tableModel.setRowCount(0); // Elimina todos los datos de la tabla
+
+                // Agrega nuevos datos a la tabla según la opción seleccionada en el JComboBox
+                
+                String selectedOption = ObraSocialCB.getSelectedItem().toString();
+                ObraSocial a = new ObraSocial();
+                a.setNombre(selectedOption);
+                ObraSocial obrasocial = ObraSocialManager.getInstance().getByName(a);
+                
+                JTable auxTable = CoberturaTableGenerator.getInstance().generateTable(obrasocial);
+                obraSocialJT.setModel(auxTable.getModel());
+                JOptionPane.showMessageDialog(null, "Se modifico la cobertura correctamente.");
+            }else{
+                JOptionPane.showMessageDialog(null, "Ocurrio un error intentando modificar la cobertura.");
+            }
+                
+            }
+                
+            }else{
+                JOptionPane.showMessageDialog(null, "El Tope introducido es incorrecto.\n Debe ser un numero entero mayor o igual a 0.");
+            }
+            
+            
+                
+        } else {
+            JOptionPane.showMessageDialog(null, "El porcentaje introducido es incorrecto.\n Debe ser un numero entero mayor o igual a 0 y menor o igual a 100.");
+        }
+    
+                
+            
+            
+            
+            
+        }else{
+
+        }
+        
+        
+        
+    }//GEN-LAST:event_obraSocialJTKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

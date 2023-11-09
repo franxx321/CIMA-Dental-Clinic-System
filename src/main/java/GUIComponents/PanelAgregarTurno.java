@@ -84,7 +84,6 @@ public class PanelAgregarTurno extends Panel {
         datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());
         datePickerPanel.add(datePicker);
         allPrestacion= TurnoManager.getInstance().getAllPrestaciones();
-        profesionalCB.insertItemAt("Seleccione una opcion",0);
     }
 
 
@@ -93,6 +92,10 @@ public class PanelAgregarTurno extends Panel {
         Date today = FormatedDate.formatedDate(new Date());
         model.setDate(today.getYear()+1900, today.getMonth(),today.getDay());
         model.setSelected(true);
+        profesionalList = TurnoManager.getInstance().getAllProfesional();
+        ComboBoxModel<String> cb = new DefaultComboBoxModel<>();
+        profesionalCB.setModel(cb);
+        profesionalCB.addItem("Ingrese una opcion");
         for (int i=1;i<=profesionalList.size();i++) {
             profesionalCB.insertItemAt(profesionalList.get(i-1).getNombre(),i);
         }

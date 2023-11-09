@@ -43,7 +43,9 @@ public class TurnoIngresoPanel extends Panel {
 
     @Override
     public void setup(List<Object> arguments) {
+        //TODO modificar la eleccion de profesional como en agregar turno
         List<Profesional> profesionales = IngresoManager.getInstance().getAllProfesional();
+
         for (Profesional profesional: profesionales) {
             profesionalCB.addItem(profesional.getNombre());
         }

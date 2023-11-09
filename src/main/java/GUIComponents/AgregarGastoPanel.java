@@ -5,6 +5,7 @@
 package GUIComponents;
 
 import Managers.GastoManager;
+import Managers.TurnoManager;
 import Objetos.Profesional;
 import Utils.FormatedDate;
 import Utils.GUIUtils.PanelGUIHandler;
@@ -248,7 +249,10 @@ public class AgregarGastoPanel extends Panel {
 
     @Override
     public void setup(List<Object> arguments) {
-        profesionalList = GastoManager.getInstance().getAllProfesional();
+        profesionalList = TurnoManager.getInstance().getAllProfesional();
+        ComboBoxModel<String> cb = new DefaultComboBoxModel<>();
+        profesionalCB.setModel(cb);
+        profesionalCB.addItem("Ingrese una opcion");
         for (Profesional profesional: profesionalList){
             profesionalCB.addItem(profesional.getNombre());
         }

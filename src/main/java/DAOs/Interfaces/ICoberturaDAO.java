@@ -11,7 +11,7 @@ public interface ICoberturaDAO {
     public boolean delete(Cobertura cobertura);
     public boolean modify(Cobertura cobertura, Cobertura aux);
 
-    public List <Cobertura> getCoberturaByIdProfesional(int profesionalId);
+
     
-    public List <Cobertura> getCoberturaByIdObraSocial(int obrasocialId);
+    public List <Cobertura> getCoberturaByIdObraSocial(Cobertura cobertura);
 }

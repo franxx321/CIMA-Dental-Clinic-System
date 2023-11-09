@@ -56,6 +56,8 @@ public class PanelAgregarTurno extends Panel {
 
     int week=0;
 
+    private List<Profesional> profesionalList;
+
 
     public static PanelAgregarTurno getInstance(){
         if(panelAgregarTurno==null){
@@ -81,12 +83,8 @@ public class PanelAgregarTurno extends Panel {
         datePanel=new JDatePanelImpl(model,p);
         datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());
         datePickerPanel.add(datePicker);
-        List<Profesional>profesionales = TurnoManager.getInstance().getAllProfesional();
         allPrestacion= TurnoManager.getInstance().getAllPrestaciones();
         profesionalCB.insertItemAt("Seleccione una opcion",0);
-        for (int i=1;i<=profesionales.size();i++) {
-            profesionalCB.insertItemAt(profesionales.get(i-1).getNombre(),i);
-        }
     }
 
 
@@ -95,6 +93,9 @@ public class PanelAgregarTurno extends Panel {
         Date today = FormatedDate.formatedDate(new Date());
         model.setDate(today.getYear()+1900, today.getMonth(),today.getDay());
         model.setSelected(true);
+        for (int i=1;i<=profesionalList.size();i++) {
+            profesionalCB.insertItemAt(profesionalList.get(i-1).getNombre(),i);
+        }
         if (!working){
             week =0;
             profesionalCB.setSelectedIndex(0);
@@ -371,7 +372,7 @@ public class PanelAgregarTurno extends Panel {
         String errorString="";
         Prestacion ptcn = new Prestacion();
         ptcn.setNombre(servicioTF.getText());
-        String profesional = profesionalCB.getSelectedItem().toString();
+        Profesional profesional = profesionalList.get(profesionalCB.getSelectedIndex()-1);
         String pacienteDniString =pacienteTF.getText();
         long pacienteDni=0;
         Date fecha = FormatedDate.formatedDate((Date) datePicker.getModel().getValue());

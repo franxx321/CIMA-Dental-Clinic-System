@@ -26,7 +26,7 @@ public class PacienteDAOImpl implements IPacienteDAO {
     public boolean register(Paciente paciente) {
         boolean register = false;
         PreparedStatement pstm = null;
-        String sql = "INSERT INTO Pacientes(nombreyapellido,dni, fechanac, direccion, sexo) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO Pacientes(nombreyapellido,dni, fechanac, mail, sexo) VALUES (?,?,?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
             con = DBConnection.getConnection();
@@ -72,7 +72,7 @@ public class PacienteDAOImpl implements IPacienteDAO {
     public boolean modify(Paciente paciente, Paciente aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE Pacientes SET nombreyapellido = ?, id = ?, dni = ?, fechaNac = ?, direccion = ?, sexo = ? WHERE id = ?";
+        String sql = "UPDATE Pacientes SET nombreyapellido = ?, id = ?, dni = ?, fechaNac = ?, mail = ?, sexo = ? WHERE id = ?";
         try{
             DBConnection = DBConnector.getInstance();
             DBConnection.startConnection();
@@ -130,14 +130,14 @@ public class PacienteDAOImpl implements IPacienteDAO {
 
 
     @Override
-    public Paciente getByDni(long dni){
-        Paciente paciente = new Paciente();
+    public Paciente getByDni(Paciente paciente){
+        Paciente paciente1 = new Paciente();
         try{
         DBConnector connector = DBConnector.getInstance();
         connector.startConnection();
         Connection conn = connector.getConnection();
         PreparedStatement ptsm = conn.prepareStatement("SELECT * FROM pacientes WHERE dni = ?");
-        ptsm.setLong(1,dni);
+        ptsm.setLong(1,paciente.getDni());
         ResultSet rs = ptsm.executeQuery();
         if(!rs.next()){
             paciente.setDni(-1);

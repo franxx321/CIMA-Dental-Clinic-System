@@ -29,6 +29,7 @@ public class AgregarGastoPanel extends Panel {
     private JDatePanelImpl datePanel;
     private UtilDateModel model;
 
+    private List <Profesional> profesionalList;
 
     private static AgregarGastoPanel agregarGastoPanel;
 
@@ -56,10 +57,6 @@ public class AgregarGastoPanel extends Panel {
         datePanel=new JDatePanelImpl(model,p);
         datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());
         jPanel1.add(datePicker);
-        List<Profesional> allProfesional = GastoManager.getInstance().getAllProfesional();
-        for (Profesional profesional: allProfesional){
-            profesionalCB.addItem(profesional.getNombre());
-        }
 
     }
 
@@ -204,7 +201,7 @@ public class AgregarGastoPanel extends Panel {
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
         String descripcion = descripcionTF.getText();
         float monto = Float.parseFloat(precioTF.getText());
-        String profesional = profesionalCB.getItemAt(profesionalCB.getSelectedIndex());
+        Profesional  profesional = profesionalList.get(profesionalCB.getSelectedIndex()+1);
         Date auxfecha= (Date) datePicker.getModel().getValue();
         java.sql.Date fecha = new java.sql.Date(auxfecha.getTime());
         GastoManager.getInstance().addGasto(monto, descripcion, fecha, profesional);
@@ -251,12 +248,17 @@ public class AgregarGastoPanel extends Panel {
 
     @Override
     public void setup(List<Object> arguments) {
-        Date date = FormatedDate.formatedDate(new Date());
-        model.setDate(date.getYear()+1900,date.getMonth()+1,date.getDate());
+        profesionalList = GastoManager.getInstance().getAllProfesional();
+        for (Profesional profesional: profesionalList){
+            profesionalCB.addItem(profesional.getNombre());
+        }
         if (!working){
+            Date date = FormatedDate.formatedDate(new Date());
+            model.setDate(date.getYear()+1900,date.getMonth()+1,date.getDate());
             profesionalCB.setSelectedIndex(0);
             precioTF.setText("");
             descripcionTF.setText("");
+            working = true;
         }
         
     }

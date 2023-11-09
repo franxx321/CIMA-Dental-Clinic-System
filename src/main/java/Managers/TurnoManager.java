@@ -26,7 +26,7 @@ public class TurnoManager {
 
     }
 
-    public void addTurno(Prestacion prestacion, String profesionalCB, long pacienteDni, long horaInicioLong, long horaFinLong){
+    public void addTurno(Prestacion prestacion, Profesional profesional, long pacienteDni, long horaInicioLong, long horaFinLong){
         Turno turno = new Turno();
         TurnoPrestacion turnoPrestacion = new TurnoPrestacion();
         Date horaInicio = new Date(horaInicioLong);
@@ -44,14 +44,7 @@ public class TurnoManager {
             turno.setIdPaciente(paciente.getId());
         }
 
-        Profesional profesional = ProfesionalManager.getInstance().getProfesionalByName(profesionalCB);
-        idProfesional= profesional.getId();
-        if(idProfesional == -1){
-            error = true;
-            errorString = errorString + "\nEl profesional no esta cargado";
-        } else{
-            turno.setIdProfesional(idProfesional);
-        }
+        turno.setIdProfesional(idProfesional);
 
         idPrestacion = PrestacionManager.getInstance().idByName(prestacion.getNombre());
         if(idPrestacion == -1){

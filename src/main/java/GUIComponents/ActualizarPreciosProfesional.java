@@ -178,9 +178,9 @@ public class ActualizarPreciosProfesional extends Panel {
         
         if(evt.getKeyChar() == '\n'){
         
-            int filaSeleccionada = profesionalJT.getSelectedRow() - 1;
+            int filaSeleccionada = profesionalJT.getSelectedRow();
             
-        if (filaSeleccionada != -2) { 
+        if (filaSeleccionada != -1) {
             // Verifica si se ha seleccionado una fila
             DefaultTableModel modelo = (DefaultTableModel) profesionalJT.getModel();
     

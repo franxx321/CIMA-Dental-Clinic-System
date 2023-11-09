@@ -22,7 +22,7 @@ public class GastoManager {
 
     }
 
-    public void addGasto(float monto, String descripcion, java.sql.Date fecha, String profesionalCB){
+    public void addGasto(float monto, String descripcion, java.sql.Date fecha, Profesional profesional){
         Gasto gasto = new Gasto();
         boolean error = false;
         String errorString = "";
@@ -37,7 +37,6 @@ public class GastoManager {
         gasto.setDescripcion(descripcion);
         gasto.setFecha(fecha);
 
-        Profesional profesional = ProfesionalManager.getInstance().getProfesionalByName(profesionalCB);
         idProfesional = profesional.getId();
         if (idProfesional == -1) {
             error = true;

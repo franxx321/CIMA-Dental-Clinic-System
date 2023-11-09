@@ -127,15 +127,15 @@ public class ProfesionalDAOImpl implements IProfesionalDAO {
     }
 
     @Override
-    public Profesional getProfesionalByName(String nombre) {
+    public Profesional getProfesionalByName(Profesional profesional) {
         int id = 0;
-        Profesional profesional= null;
+        Profesional profesional1= null;
         try{
             DBConnection = DBConnector.getInstance();
             DBConnection.startConnection();
             con = DBConnection.getConnection();
             PreparedStatement ptsm = con.prepareStatement("SELECT * FROM profesionales WHERE nombreyapellido =  ?");
-            ptsm.setString(1, nombre);
+            ptsm.setString(1, profesional.getNombre());
             ResultSet rs = ptsm.executeQuery();
             profesional = new Profesional();
             if(!rs.next()){
@@ -174,9 +174,8 @@ public class ProfesionalDAOImpl implements IProfesionalDAO {
             }
             con.close();
         } catch (SQLException e){
-            System.out.println("Error: Clase ProfesionalDAOImpl, metodo getProfesionalByName" + e.getMessage());
+            System.out.println("Error: Clase ProfesionalDAOImpl, metodo getProfesionalById" + e.getMessage());
         }
-
         return profesional1;
     }
 }

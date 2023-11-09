@@ -22,7 +22,9 @@ public class PacienteManager {
     }
 
     public Paciente getPatientByDni(long dni){
-        return PacienteDAOImpl.getInstance().getByDni(dni);
+        Paciente paciente = new Paciente();
+        paciente.setDni(dni);
+        return PacienteDAOImpl.getInstance().getByDni(paciente);
     }
 
     public List<Paciente> getAll(){

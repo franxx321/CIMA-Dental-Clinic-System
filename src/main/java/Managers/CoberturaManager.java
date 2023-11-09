@@ -20,15 +20,13 @@ public class CoberturaManager {
 
     }
 
-    public List<Cobertura> getCoberturaByIdProfesional(int profesionalId){
 
-        return CoberturaDAOImpl.getInstance().getCoberturaByIdProfesional(profesionalId);
-
-    }
     
     public List<Cobertura> getCoberturaByIdObraSocial(int obrasocialId){
+        Cobertura c = new Cobertura();
+        c.setIdObraSocial(obrasocialId);
 
-        return CoberturaDAOImpl.getInstance().getCoberturaByIdObraSocial(obrasocialId);
+        return CoberturaDAOImpl.getInstance().getCoberturaByIdObraSocial(c);
 
     }
     

@@ -375,7 +375,14 @@ public class PanelAgregarTurno extends Panel {
         String errorString="";
         Prestacion ptcn = new Prestacion();
         ptcn.setNombre(servicioTF.getText());
-        Profesional profesional = profesionalList.get(profesionalCB.getSelectedIndex()-1);
+        Profesional profesional = null;
+        if(profesionalCB.getSelectedIndex()==0){
+            error = true;
+            errorString= errorString+"Seleccione un profesional\n";
+        }
+        else{
+            profesional = profesionalList.get(profesionalCB.getSelectedIndex()-1);
+        }
         String pacienteDniString =pacienteTF.getText();
         long pacienteDni=0;
         Date fecha = FormatedDate.formatedDate((Date) datePicker.getModel().getValue());

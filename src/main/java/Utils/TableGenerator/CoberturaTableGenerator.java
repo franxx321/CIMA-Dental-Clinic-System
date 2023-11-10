@@ -30,8 +30,12 @@ public class CoberturaTableGenerator {
         JTable table = new JTable();
         Vector<Vector<String>> data = new Vector<>();
         Vector<String> header = new Vector<>();
-        List<Cobertura> coberturaList = CoberturaManager.getInstance().getCoberturaByIdObraSocial(obrasocial.getId());
-        List<ObraSocial> obraSocialList = ObraSocialManager.getInstance().getAll();
+        List<Cobertura> coberturaList = null;
+        List<ObraSocial> obraSocialList = null;
+        if (obrasocial!= null){
+        coberturaList = CoberturaManager.getInstance().getCoberturaByIdObraSocial(obrasocial.getId());
+        obraSocialList = ObraSocialManager.getInstance().getAll();
+        }
 
         header.add(0, "Prestacion");
         header.add(1, "Porcentaje");

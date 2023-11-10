@@ -122,8 +122,9 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
             return modify;
         }
 
-    @Override
-    public int idByName(String nombre) {
+    
+    public Prestacion idByName(String nombre) {
+        Prestacion p = new Prestacion();
         int id = 0;
         try{
             DBConnection = DBConnector.getInstance();
@@ -142,10 +143,13 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
             System.out.println("Error: Clase PrestacionDAOImpl, metodo idByName" + e.getMessage()
             );
         }
-        return id;
+        p.setId(id);
+        return p;
     }
     
-    public String nameById(int id){
+    @Override
+    public Prestacion nameById(int id){
+        Prestacion p = new Prestacion();
         String name = "";
         try{
             DBConnection = DBConnector.getInstance();
@@ -164,6 +168,7 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
             System.out.println("Error: Clase PrestacionDAOImpl, metodo nameById" + e.getMessage()
             );
         }
-        return name;
+        p.setNombre(name);
+        return p;
     }
 }

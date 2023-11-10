@@ -23,11 +23,11 @@ public class PrestacionManager {
         return PrestacionDAOImpl.getInstance().obtain();
     }
 
-   public int idByName(String prestacion){
+   public Prestacion idByName(String prestacion){
         return PrestacionDAOImpl.getInstance().idByName(prestacion);
    }
    
-   public String nameById(int id){
+   public Prestacion nameById(int id){
        return PrestacionDAOImpl.getInstance().nameById(id);
    }
 

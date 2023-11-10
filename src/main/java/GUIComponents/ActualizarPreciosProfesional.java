@@ -20,10 +20,14 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import Utils.TableGenerator.ProfesionalTableGenerator;
 import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -67,6 +71,7 @@ public class ActualizarPreciosProfesional extends Panel {
             }
         });
         
+        leerTablaProfesional();
         
         
     }
@@ -176,62 +181,63 @@ public class ActualizarPreciosProfesional extends Panel {
 
     private void profesionalJTKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_profesionalJTKeyTyped
         
-        if(evt.getKeyChar() == '\n'){
-        
-            int filaSeleccionada = profesionalJT.getSelectedRow();
-            
-        if (filaSeleccionada != -1) {
-            // Verifica si se ha seleccionado una fila
-            DefaultTableModel modelo = (DefaultTableModel) profesionalJT.getModel();
-    
-            // Obtén los valores de la fila seleccionada
-            String montoStr = modelo.getValueAt(filaSeleccionada, 1).toString();
-            String prestacion = modelo.getValueAt(filaSeleccionada, 0).toString();
-            String regex = "^[0-9]+(\\.[0-9]{1,2})?$";
-
-        if (montoStr.matches(regex)) {
-            float precio = Float.parseFloat(montoStr);
-            Monto monto = new Monto();
-            Monto newMonto = new Monto();
-            
-            monto.setIdPrestacion(PrestacionManager.getInstance().idByName(prestacion));
-            newMonto.setIdPrestacion(PrestacionManager.getInstance().idByName(prestacion));
-            Profesional p = new Profesional();
-            p = ProfesionalManager.getInstance().getProfesionalByName(profesionalCB.getSelectedItem().toString());
-            monto.setIdProfesional(p.getId());
-            newMonto.setIdProfesional(p.getId());
-            newMonto.setPrecio(precio);
-            boolean result = MontoManager.getInstance().modify(monto, newMonto);
-            if(result){
-                DefaultTableModel tableModel = (DefaultTableModel) profesionalJT.getModel();
-                tableModel.setRowCount(0); // Elimina todos los datos de la tabla
-
-                // Agrega nuevos datos a la tabla según la opción seleccionada en el JComboBox
-                String selectedOption = profesionalCB.getSelectedItem().toString();
-                Profesional profesional = ProfesionalManager.getInstance().getProfesionalByName(selectedOption);
-                
-                JTable auxTable = ProfesionalTableGenerator.getInstance().generateTable(profesional);
-                profesionalJT.setModel(auxTable.getModel());
-                JOptionPane.showMessageDialog(null, "Se modifico el monto correctamente.");
-            }else{
-                JOptionPane.showMessageDialog(null, "Ocurrio un error intentando modificar el monto.");
-            }
-                
-        } else {
-            JOptionPane.showMessageDialog(null, "El monto introducido no tiene un formato válido.\nDebe ser un número flotante con hasta dos decimales (por ejemplo, 123.45).");
-        }
-    
-                
-            
-            
-            
-            
-        }else{
-
-        }
-        }
     }//GEN-LAST:event_profesionalJTKeyTyped
+    
+        private void leerTablaProfesional(){
+            profesionalJT.setDefaultEditor(Object.class, new DefaultCellEditor(new JTextField()) {
+        {
+            getComponent().addKeyListener(new KeyAdapter() {
+                public void keyPressed(KeyEvent e) {
+                    if (e.getKeyChar() == '\n') {
+                        int filaSeleccionada = profesionalJT.getEditingRow();
 
+                        if (filaSeleccionada != -1) {
+                            // Verifica si se ha seleccionado una fila
+                            DefaultTableModel modelo = (DefaultTableModel) profesionalJT.getModel();
+
+                            // Obtén los valores de la fila seleccionada
+                            String montoStr = modelo.getValueAt(filaSeleccionada, 1).toString();
+                            String prestacion = modelo.getValueAt(filaSeleccionada, 0).toString();
+                            String regex = "^[0-9]+(\\.[0-9]{1,2})?$";
+
+                        if (montoStr.matches(regex)) {
+                            float precio = Float.parseFloat(montoStr);
+                            Monto monto = new Monto();
+                            Monto newMonto = new Monto();
+
+                            monto.setIdPrestacion(PrestacionManager.getInstance().idByName(prestacion).getId());
+                            newMonto.setIdPrestacion(PrestacionManager.getInstance().idByName(prestacion).getId());
+                            Profesional p = new Profesional();
+                            p = ProfesionalManager.getInstance().getProfesionalByName(profesionalCB.getSelectedItem().toString());
+                            monto.setIdProfesional(p.getId());
+                            newMonto.setIdProfesional(p.getId());
+                            newMonto.setPrecio(precio);
+                            boolean result = MontoManager.getInstance().modify(monto, newMonto);
+                            if(result){
+                                DefaultTableModel tableModel = (DefaultTableModel) profesionalJT.getModel();
+                                tableModel.setRowCount(0); // Elimina todos los datos de la tabla
+
+                                // Agrega nuevos datos a la tabla según la opción seleccionada en el JComboBox
+                                String selectedOption = profesionalCB.getSelectedItem().toString();
+                                Profesional profesional = ProfesionalManager.getInstance().getProfesionalByName(selectedOption);
+
+                                JTable auxTable = ProfesionalTableGenerator.getInstance().generateTable(profesional);
+                                profesionalJT.setModel(auxTable.getModel());
+                            }else{
+                                JOptionPane.showMessageDialog(null, "Ocurrio un error intentando modificar el monto.");
+                            }
+
+                        } else {
+                            JOptionPane.showMessageDialog(null, "El monto introducido no tiene un formato válido.\nDebe ser un número con hasta dos decimales (por ejemplo, 123.45).");
+                        }
+                        }
+                    }
+                }
+            });
+        }
+    });
+        }
+    
     @Override
     public void setup(List<Object> arguments) {
         

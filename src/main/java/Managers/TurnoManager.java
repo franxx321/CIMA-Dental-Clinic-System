@@ -46,7 +46,7 @@ public class TurnoManager {
 
         turno.setIdProfesional(idProfesional);
 
-        idPrestacion = PrestacionManager.getInstance().idByName(prestacion.getNombre());
+        idPrestacion = PrestacionManager.getInstance().idByName(prestacion.getNombre()).getId();
         if(idPrestacion == -1){
             error = true;
             errorString = errorString + "\nLa prestacion no esta cargada";

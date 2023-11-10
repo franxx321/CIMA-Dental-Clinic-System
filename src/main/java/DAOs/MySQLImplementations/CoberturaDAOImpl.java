@@ -105,7 +105,7 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
     public boolean modify(Cobertura cobertura, Cobertura aux) {
         boolean modify = false;
         PreparedStatement pstm = null;
-        String sql = "UPDATE Coberturas SET id_obrasocial = ?, id_prestaciones = ?, porcentaje = ?, tope = ?, codigo = ? WHERE id_obrasocial = ?";
+        String sql = "UPDATE Coberturas SET id_obrasocial = ?, id_prestaciones = ?, porcentaje = ?, tope = ?, codigo = ? WHERE id_obrasocial = ? AND id_prestaciones =?";
         try{
             DBConnection = DBConnector.getInstance();
             DBConnection.startConnection();
@@ -117,6 +117,7 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
             pstm.setFloat(4, aux.getTope());
             pstm.setString(5,aux.getCodigo());
             pstm.setInt(6, cobertura.getIdObraSocial());
+            pstm.setInt(7,cobertura.getIdPrestacion());
             pstm.executeUpdate();
             modify = true;
             pstm.close();

@@ -48,7 +48,7 @@ public class CalendarTableGenerator {
         int minutos=0;
         int hora2=8;
         int minutos2=30;
-        for(int i = 0; i <= 21; i++) {
+        for(int i = 0; i <= 31; i++) {
             Vector<String> vector = new Vector<>();
             vector.add(Integer.toString(hora) + ":" + Integer.toString(minutos) + "-" + Integer.toString(hora2) + ":" + Integer.toString(minutos2));
             for (int j = 1; i <= 7; i++) {

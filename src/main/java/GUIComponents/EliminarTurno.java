@@ -13,6 +13,8 @@ import Utils.String2Date;
 import java.awt.Color;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.TableColumn;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -23,6 +25,8 @@ import java.util.regex.Pattern;
  * @author franc
  */
 public class EliminarTurno extends Panel {
+
+    private TableColumn idsTurnos;
 
     private static EliminarTurno eliminarTurno;
 
@@ -45,6 +49,7 @@ public class EliminarTurno extends Panel {
         jTextField1.setText("");
         JTable auxTable = TurnoManager.getInstance().getFuturePatientAppointments(-1);
         turnosTable.setModel(auxTable.getModel());
+        this.removeColumn();
     }
 
     /**
@@ -188,6 +193,7 @@ public class EliminarTurno extends Panel {
         if (matcher1.matches()){
             JTable auxTable = TurnoManager.getInstance().getFuturePatientAppointments(Long.parseLong(dniString));
             turnosTable.setModel(auxTable.getModel());
+            this.removeColumn();
             if(turnosTable.getRowCount()==0){
                 error = true;
                 errorString = errorString + "No existe un turno futuro para ese paciente \n";
@@ -195,7 +201,7 @@ public class EliminarTurno extends Panel {
         } else {
             error = true;
             jTextField1.setText("");
-            errorString = errorString + "DNI Ingresado incorrecto \n";
+            errorString = errorString + "DNI Ingresado invalido \n";
         }
         if (error){
             JOptionPane.showMessageDialog(null, "Error!\n" + errorString);
@@ -274,6 +280,12 @@ public class EliminarTurno extends Panel {
     private void confirmarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMouseExited
         confirmarButton.setBackground(new Color (223, 246, 255) );
     }//GEN-LAST:event_confirmarButtonMouseExited
+
+    private void removeColumn(){
+        DefaultTableColumnModel tcm = (DefaultTableColumnModel)turnosTable.getColumnModel();
+        idsTurnos = tcm.getColumn(5);
+        tcm.removeColumn(tcm.getColumn(5));
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

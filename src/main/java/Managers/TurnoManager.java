@@ -26,12 +26,18 @@ public class TurnoManager {
 
     }
 
+    public Turno getById(int idTurno){
+        Turno turno = new Turno();
+        turno.setId(idTurno);
+        return TurnoDAOImpl.getInstance().getById(turno);
+    }
+
     public void addTurno(Prestacion prestacion, Profesional profesional, long pacienteDni, long horaInicioLong, long horaFinLong){
         Turno turno = new Turno();
         TurnoPrestacion turnoPrestacion = new TurnoPrestacion();
         Date horaInicio = new Date(horaInicioLong);
         Date horaFin = new Date(horaFinLong);
-        int idProfesional = 0;
+        int idProfesional = profesional.getId();
         int idPrestacion = 0;
         boolean error = false;
         String errorString = "";

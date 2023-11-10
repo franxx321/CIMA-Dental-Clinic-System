@@ -46,8 +46,8 @@ public class CoberturaTableGenerator {
                     if (cobertura.getIdObraSocial() == obraSocial.getId()) {
                         vector.add(0, PrestacionManager.getInstance().nameById(cobertura.getIdPrestacion()).getNombre());
                         vector.add(1,"" + cobertura.getPorcentaje());
-                        vector.add(1,"" + cobertura.getTope());
-                        vector.add(1,cobertura.getCodigo());
+                        vector.add(2,"" + cobertura.getTope());
+                        vector.add(3,cobertura.getCodigo());
                         break;
                     }
                 }

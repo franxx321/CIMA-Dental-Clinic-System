@@ -21,6 +21,8 @@ public interface ITurnosDAO {
 
     public List<Turno> getPatientFutureApointments(int idPaciente);
 
+    public Turno getById(Turno t);
+
 
 
 

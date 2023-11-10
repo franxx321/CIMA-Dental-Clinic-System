@@ -37,6 +37,7 @@ public class TurnosbyPacienteTableGenerator {
         header.add(2,"Profesional");
         header.add(3, "Hora de Inicio");
         header.add(4, "Hora de Fin");
+        header.add(5,"idTurno");
         if(turnos != null){
             for (Turno turno:turnos) {
                 Vector<String> vector = new Vector<>();
@@ -51,6 +52,7 @@ public class TurnosbyPacienteTableGenerator {
                 Date horaFin = turno.getHoraFin();
                 vector.add(Integer.toString(horaInicio.getDate())+"/"+Integer.toString(horaInicio.getMonth()+1)+"/"+Integer.toString(horaInicio.getYear()+1900)+" "+Integer.toString(horaInicio.getHours())+":"+Integer.toString(horaInicio.getMinutes()));
                 vector.add(Integer.toString(horaFin.getDate())+"/"+Integer.toString(horaFin.getMonth()+1) +"/"+Integer.toString(horaFin.getYear()+1900)+" "+ Integer.toString(horaFin.getHours())+":"+Integer.toString(horaFin.getMinutes()));
+                vector.add(Integer.toString(turno.getId()));
                 data.add(vector);
             }
         }
@@ -59,9 +61,6 @@ public class TurnosbyPacienteTableGenerator {
         return table;
     }
 
-    /*public DefaultTableModel resultToTable(){
 
-        return null;
-    }*/
 
 }

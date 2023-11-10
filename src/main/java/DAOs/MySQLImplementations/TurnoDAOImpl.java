@@ -3,6 +3,7 @@ package DAOs.MySQLImplementations;
 import DAOs.Interfaces.ITurnosDAO;
 import Objetos.Turno;
 import Utils.DBUtils.DBConnector;
+import Utils.FormatedDate;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -294,10 +295,7 @@ public class TurnoDAOImpl implements ITurnosDAO {
     @Override
     public List<Turno> getPatientFutureApointments(int idPaciente) {
         List<Turno> turnoList = null;
-        Date today = new Date();
-        today.setHours(0);
-        today.setMinutes(0);
-        today.setSeconds(0);
+        Date today = FormatedDate.formatedDate(new Date());
         try {
             DBConnection = DBConnector.getInstance();
             DBConnection.startConnection();
@@ -331,6 +329,12 @@ public class TurnoDAOImpl implements ITurnosDAO {
         }
 
         return turnoList;
+    }
+
+    @Override
+    public Turno getById(Turno t) {
+
+        return null;
     }
 
 

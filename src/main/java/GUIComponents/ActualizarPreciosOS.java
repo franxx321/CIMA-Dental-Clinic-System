@@ -9,10 +9,7 @@ import Managers.MontoManager;
 import Managers.ObraSocialManager;
 import Managers.PrestacionManager;
 import Managers.ProfesionalManager;
-import Objetos.Cobertura;
-import Objetos.Monto;
-import Objetos.ObraSocial;
-import Objetos.Profesional;
+import Objetos.*;
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
 import Utils.TableGenerator.CoberturaTableGenerator;
@@ -195,8 +192,10 @@ public class ActualizarPreciosOS extends Panel {
         getComponent().addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyChar() == '\n') {
-                    
-                    int filaSeleccionada = obraSocialJT.getEditingRow();
+                    if (obraSocialJT.isEditing()) {
+                        obraSocialJT.getCellEditor().stopCellEditing();
+                    }
+                    int filaSeleccionada = obraSocialJT.getSelectedRow();
             
                     if (filaSeleccionada != -1) { 
                     // Verifica si se ha seleccionado una fila
@@ -230,7 +229,10 @@ public class ActualizarPreciosOS extends Panel {
                             os = ObraSocialManager.getInstance().getByName(os);
                             aux.setIdObraSocial(os.getId());
                             cobertura.setIdObraSocial(os.getId());
-                            aux.setIdPrestacion(PrestacionManager.getInstance().idByName(prestacion).getId());
+                            Prestacion pr = PrestacionManager.getInstance().idByName(prestacion);
+                            aux.setIdPrestacion(pr.getId());
+                            cobertura.setIdPrestacion(pr.getId());
+
 
 
                             boolean result = CoberturaManager.getInstance().modify(cobertura, aux);

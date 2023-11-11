@@ -20,8 +20,8 @@ public class TurnoDAOImpl implements ITurnosDAO {
     }
     private TurnoDAOImpl() {
     }
-    DBConnector DBConnection ;
-    Connection con = null;
+    private DBConnector DBConnection ;
+    private Connection con = null;
     @Override
     public boolean register(Turno turno) {
         boolean register = false;

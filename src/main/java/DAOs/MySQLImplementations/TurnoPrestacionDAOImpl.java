@@ -23,8 +23,8 @@ public class TurnoPrestacionDAOImpl implements ITurnoPrestacionDAO {
     }
     private TurnoPrestacionDAOImpl(){
     }
-    DBConnector DBConnection ;
-    Connection con = null;
+    private DBConnector DBConnection ;
+    private Connection con = null;
     @Override
     public boolean register(TurnoPrestacion turnoPrestacion) {
         boolean register = false;

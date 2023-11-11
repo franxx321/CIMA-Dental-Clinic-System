@@ -21,8 +21,8 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
     }
     private PrestacionDAOImpl() {
     }
-    DBConnector DBConnection ;
-    Connection con = null;
+    private DBConnector DBConnection ;
+    private Connection con = null;
     @Override
     public boolean register(Prestacion prestacion) {
         boolean register = false;

@@ -17,7 +17,6 @@ public  class  DBConnector  {
     
     private static final String user = "prueba";
     private static final String pass = "Holamundo1";
-    private java.sql.Statement s;
     private ResultSet result = null;
     private Connection connection = null;
     private static DBConnector instance;
@@ -40,10 +39,7 @@ public  class  DBConnector  {
         
     }
     }
-    
-    public void setConnection(Connection conn) {
-        this.connection = conn;
-    }
+
     
     public Connection getConnection() {
         return connection ;
@@ -69,26 +65,5 @@ public  class  DBConnector  {
         return instance;
         }
       
-     public void setResult(ResultSet result) {
-        this.result= result;
-    }
-     public ResultSet getResult() {
-        return result;
-    } 
-     
-     public  Statement getQuery() {
-        return query;
-    }
 
-    public  void setQuery(Statement query) {
-        this.query = query;
-    }
-    
-    public  PreparedStatement getP_query() {
-        return p_query;
-    }
-
-    public  void setP_query(PreparedStatement p_query) {
-        this.p_query = p_query;
-    }
 }

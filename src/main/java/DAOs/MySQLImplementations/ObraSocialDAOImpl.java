@@ -18,8 +18,8 @@ public class ObraSocialDAOImpl implements IObraSocialDAO {
     }
     private ObraSocialDAOImpl(){
     }
-    DBConnector DBConnection ;
-    Connection con = null;
+    private DBConnector DBConnection ;
+    private Connection con = null;
     @Override
     public boolean register(ObraSocial obraSocial) {
         boolean register = false;

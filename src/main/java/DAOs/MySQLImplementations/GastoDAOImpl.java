@@ -22,8 +22,8 @@ public class GastoDAOImpl implements IGastoDAO {
     private GastoDAOImpl(){
     }
 
-    DBConnector DBConnection ;
-    Connection con = null;
+    private DBConnector DBConnection ;
+    private Connection con = null;
     @Override
     public boolean register(Gasto gasto) {
         boolean register = false;

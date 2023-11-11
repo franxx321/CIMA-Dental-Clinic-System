@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PacienteDAOImpl implements IPacienteDAO {
-    DBConnector DBConnection ;
-    Connection con = null;
+    private DBConnector DBConnection ;
+    private Connection con = null;
 
     private static PacienteDAOImpl pacienteDAO;
 

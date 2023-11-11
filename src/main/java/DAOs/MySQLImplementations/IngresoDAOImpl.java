@@ -19,8 +19,8 @@ public class IngresoDAOImpl implements IIngresoDAO {
     private IngresoDAOImpl(){
     }
 
-    DBConnector DBConnection ;
-    Connection con = null;
+    private DBConnector DBConnection ;
+    private Connection con = null;
     @Override
     public boolean register(Ingreso ingreso) {
         boolean register = false;

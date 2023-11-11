@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProfesionalDAOImpl implements IProfesionalDAO {
-    DBConnector DBConnection;
-    Connection con = null;
+    private DBConnector DBConnection;
+    private Connection con = null;
 
     private static ProfesionalDAOImpl profesionalDAO;
 

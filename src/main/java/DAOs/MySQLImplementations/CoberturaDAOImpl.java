@@ -2,7 +2,6 @@ package DAOs.MySQLImplementations;
 
 import DAOs.Interfaces.ICoberturaDAO;
 import Objetos.Cobertura;
-import Objetos.Monto;
 import Utils.DBUtils.DBConnector;
 
 import java.sql.Connection;
@@ -22,12 +21,12 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
     }
     private CoberturaDAOImpl(){
     }
-    DBConnector DBConnection ;
-    Connection con = null;
+    private DBConnector DBConnection ;
+    private Connection con = null;
     @Override
     public boolean register(Cobertura cobertura) {
         boolean register = false;
-        PreparedStatement pstm = null;
+        PreparedStatement pstm;
         String sql = "INSERT INTO Coberturas(id_obrasocial, id_prestaciones, porcentaje, tope,codigo) VALUES (?,?,?,?,?)";
         try{
             DBConnection = DBConnector.getInstance();
@@ -51,8 +50,8 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
 
     @Override
     public List<Cobertura> obtain() {
-        PreparedStatement pstm = null;
-        ResultSet rs = null;
+        PreparedStatement pstm ;
+        ResultSet rs ;
         String sql = "SELECT * FROM Coberturas ";
         List<Cobertura> coberturaList = new ArrayList<>();
         try{
@@ -82,7 +81,7 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
     @Override
     public boolean delete(Cobertura cobertura) {
         boolean delete = false;
-        PreparedStatement pstm = null;
+        PreparedStatement pstm;
         String sql = "DELETE FROM Coberturas WHERE id_obrasocial = ? AND id_prestaciones = ?";
         try{
             DBConnection = DBConnector.getInstance();
@@ -104,7 +103,7 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
     @Override
     public boolean modify(Cobertura cobertura, Cobertura aux) {
         boolean modify = false;
-        PreparedStatement pstm = null;
+        PreparedStatement pstm;
         String sql = "UPDATE Coberturas SET id_obrasocial = ?, id_prestaciones = ?, porcentaje = ?, tope = ?, codigo = ? WHERE id_obrasocial = ? AND id_prestaciones =?";
         try{
             DBConnection = DBConnector.getInstance();

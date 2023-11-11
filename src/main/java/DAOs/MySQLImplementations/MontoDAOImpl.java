@@ -23,8 +23,8 @@ public class MontoDAOImpl implements IMontoDAO {
     }
     private MontoDAOImpl(){
     }
-    DBConnector DBConnection ;
-    Connection con = null;
+    private DBConnector DBConnection ;
+    private Connection con = null;
     @Override
     public boolean register(Monto monto) {
         boolean register = false;

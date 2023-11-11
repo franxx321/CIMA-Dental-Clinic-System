@@ -22,8 +22,8 @@ public class PacienteObraSocialDAOImpl implements IPacienteObraSocialDAO {
     }
     private PacienteObraSocialDAOImpl(){
     }
-    DBConnector DBConnection ;
-    Connection con = null;
+    private DBConnector DBConnection ;
+    private Connection con = null;
     @Override
     public boolean register(PacienteObraSocial pacienteObraSocial) {
         boolean register = false;

@@ -37,7 +37,6 @@ import java.awt.event.ActionListener;
 public class PanelAgregarTurno extends Panel {
 
 
-
     //IMPORTANTE datepicker necesita un datepanel, que necesita un datemodel, la inicializacion de los mismos esta en el constructor
     // link de instruccion : https://www.codejava.net/java-se/swing/how-to-use-jdatepicker-to-display-calendar-component
 

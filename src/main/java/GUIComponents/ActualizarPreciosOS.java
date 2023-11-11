@@ -69,6 +69,7 @@ public class ActualizarPreciosOS extends Panel {
                 
                 JTable auxTable = CoberturaTableGenerator.getInstance().generateTable(obrasocial);
                 obraSocialJT.setModel(auxTable.getModel());
+                obraSocialJT.setRowHeight(25);
             }
         });
         

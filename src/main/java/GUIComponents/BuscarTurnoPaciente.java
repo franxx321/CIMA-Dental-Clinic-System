@@ -14,6 +14,8 @@ import Utils.String2Date;
 import java.awt.Color;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.TableColumn;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,10 +27,14 @@ import java.util.regex.Pattern;
  * @author franc
  */
 public class BuscarTurnoPaciente extends Panel {
+
+    private TableColumn idsTurnos;
     
     @Override
     public void setup(List<Object> arguments) {
-        
+        JTable auxTable = TurnoManager.getInstance().getFuturePatientAppointments(-1);
+        turnosTable.setModel(auxTable.getModel());
+        this.removeColumn();
     }
 
     private static BuscarTurnoPaciente buscarTurnoPaciente;
@@ -189,6 +195,7 @@ public class BuscarTurnoPaciente extends Panel {
         if (matcher1.matches()){
             JTable auxTable = TurnoManager.getInstance().getFuturePatientAppointments(Long.parseLong(dniString));
             turnosTable.setModel(auxTable.getModel());
+            this.removeColumn();
             if(turnosTable.getRowCount()==0){
                 error = true;
                 errorString = errorString + "No existe un turno futuro para ese paciente \n";
@@ -220,7 +227,9 @@ public class BuscarTurnoPaciente extends Panel {
         Date horaFin = String2Date.string2Date(fechaCompleta);
         Profesional profesional1 = TurnoManager.getInstance().getProfesionalByName(profesional);
         int idProfesional = profesional1.getId();
-        Turno turno = TurnoManager.getInstance().getByDateProfesional(horaInicio,horaFin,idProfesional);
+        turnosTable.addColumn(idsTurnos);
+        Turno turno = TurnoManager.getInstance().getById(Integer.parseInt(turnosTable.getValueAt(row,5).toString()));
+        turnosTable.removeColumn(idsTurnos);
         List<Object> arguments = new ArrayList<>();
         arguments.add(turno);
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.modificarTurno,arguments);
@@ -257,6 +266,12 @@ public class BuscarTurnoPaciente extends Panel {
     private void confirmarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMouseExited
         confirmarButton.setBackground(new Color (223, 246, 255) );
     }//GEN-LAST:event_confirmarButtonMouseExited
+
+    private void removeColumn(){
+        DefaultTableColumnModel tcm = (DefaultTableColumnModel)turnosTable.getColumnModel();
+        idsTurnos = tcm.getColumn(5);
+        tcm.removeColumn(tcm.getColumn(5));
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

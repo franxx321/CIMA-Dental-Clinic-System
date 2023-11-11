@@ -26,10 +26,13 @@ public class IngresoManager {
         return ProfesionalManager.getInstance().getAll();
     }
 
-    public JTable getTurnosByProfesionalTable(String profesional){
-        Profesional auxprofesional =ProfesionalManager.getInstance().getProfesionalByName(profesional);
-        List<Turno> turnos = TurnoManager.getInstance().getByProfesional(auxprofesional.getId());
-        return TurnosByProfesionalTableGenerator.getInstance().generateTable(turnos,auxprofesional);
+    public JTable getTurnosByProfesionalTable(Profesional profesional){
+        List<Turno> turnos = null;
+        if(profesional !=null){
+            turnos = TurnoManager.getInstance().getByProfesional(profesional.getId());
+        }
+
+        return TurnosByProfesionalTableGenerator.getInstance().generateTable(turnos,profesional);
     }
 
     public Profesional getProfesionalById(int profesionalId){

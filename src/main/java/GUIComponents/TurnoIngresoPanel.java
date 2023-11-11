@@ -13,6 +13,8 @@ import Utils.String2Date;
 import java.awt.Color;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.TableColumn;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,6 +25,10 @@ import java.util.List;
  * @author franc
  */
 public class TurnoIngresoPanel extends Panel {
+
+    private  List<Profesional> profesionales;
+
+    private TableColumn idsTurnos;
 
 
     private static  TurnoIngresoPanel turnoIngresoPanel;
@@ -44,11 +50,16 @@ public class TurnoIngresoPanel extends Panel {
     @Override
     public void setup(List<Object> arguments) {
         //TODO modificar la eleccion de profesional como en agregar turno
-        List<Profesional> profesionales = IngresoManager.getInstance().getAllProfesional();
-
-        for (Profesional profesional: profesionales) {
-            profesionalCB.addItem(profesional.getNombre());
+        profesionales = IngresoManager.getInstance().getAllProfesional();
+        ComboBoxModel<String> cb = new DefaultComboBoxModel<>();
+        profesionalCB.setModel(cb);
+        profesionalCB.addItem("Ingrese una opcion");
+        for (int i=1;i<=profesionales.size();i++) {
+            profesionalCB.insertItemAt(profesionales.get(i-1).getNombre(),i);
         }
+        JTable auxTable = IngresoManager.getInstance().getTurnosByProfesionalTable(null);
+        jTable1.setModel(auxTable.getModel());
+        this.removeColumn();
     }
 
     /**
@@ -162,14 +173,9 @@ public class TurnoIngresoPanel extends Panel {
         }
         else {
             int row = jTable1.getSelectedRow();
-            String profesional = (String) jTable1.getModel().getValueAt(row,2);
-            String fechaCompleta = (String) jTable1.getModel().getValueAt(row,3);
-            Date horaInicio = String2Date.string2Date(fechaCompleta);
-            fechaCompleta = (String) jTable1.getModel().getValueAt(row,4);
-            Date horaFin = String2Date.string2Date(fechaCompleta);
-            Profesional profesional1 = TurnoManager.getInstance().getProfesionalByName(profesional);
-            int idProfesional = profesional1.getId();
-            Turno turno = TurnoManager.getInstance().getByDateProfesional(horaInicio,horaFin,idProfesional);
+            jTable1.addColumn(idsTurnos);
+            Turno turno = TurnoManager.getInstance().getById(Integer.parseInt(jTable1.getValueAt(row,5).toString()));
+            jTable1.removeColumn(idsTurnos);
             List<Object> arguments = new ArrayList<>();
             arguments.add(turno);
             PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.agregarIngreso,arguments);
@@ -178,8 +184,9 @@ public class TurnoIngresoPanel extends Panel {
 
     private void profesionalCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profesionalCBActionPerformed
         if (profesionalCB.getSelectedIndex() !=0){
-            JTable auxTable = IngresoManager.getInstance().getTurnosByProfesionalTable(profesionalCB.getItemAt(profesionalCB.getSelectedIndex()));
+            JTable auxTable = IngresoManager.getInstance().getTurnosByProfesionalTable(profesionales.get(profesionalCB.getSelectedIndex()-1));
             jTable1.setModel(auxTable.getModel());
+            this.removeColumn();
             this.repaint();
             this.revalidate();
         }
@@ -194,6 +201,13 @@ public class TurnoIngresoPanel extends Panel {
         confirmarButton.setOpaque(true);
         confirmarButton.setBackground(new Color (152, 251, 152));
     }//GEN-LAST:event_confirmarButtonMouseEntered
+
+    private void removeColumn(){
+        DefaultTableColumnModel tcm = (DefaultTableColumnModel)jTable1.getColumnModel();
+        idsTurnos = tcm.getColumn(5);
+        tcm.removeColumn(tcm.getColumn(5));
+    }
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -236,10 +236,11 @@ public class EliminarTurno extends Panel {
             Date horaInicio = String2Date.string2Date(fechaCompleta);
             fechaCompleta = (String) turnosTable.getModel().getValueAt(row,4);
             Date horaFin = String2Date.string2Date(fechaCompleta);
-
             Profesional profesional1 = TurnoManager.getInstance().getProfesionalByName(profesional);
             int idProfesional = profesional1.getId();
-            Turno turno = TurnoManager.getInstance().getByDateProfesional(horaInicio,horaFin,idProfesional);
+            turnosTable.addColumn(idsTurnos);
+            Turno turno = TurnoManager.getInstance().getById(Integer.parseInt(turnosTable.getValueAt(row,5).toString()));
+            turnosTable.removeColumn(idsTurnos);
             TurnoManager.getInstance().deleteTurno(turno);
             PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelTurnos,null);
             SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);

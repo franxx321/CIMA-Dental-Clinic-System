@@ -333,8 +333,40 @@ public class TurnoDAOImpl implements ITurnosDAO {
 
     @Override
     public Turno getById(Turno t) {
+        Turno turno = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        try{
+            DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
+            con = DBConnection.getConnection();
+            pstm = con.prepareStatement("SELECT  *" +
+                    "FROM  turnos " +
+                    "WHERE id = ?");
+            pstm.setInt(1,t.getId());
+            rs = pstm.executeQuery();
+            turno = new Turno();
+            if(rs.next()){
+                turno.setId(rs.getInt(1));
+                turno.setHoraInicio(new Date(rs.getTimestamp(2).getTime()));
+                turno.setHoraFin(new Date(rs.getTimestamp(3).getTime()));
+                turno.setAsistio(rs.getBoolean(4));
+                turno.setIdPaciente(rs.getInt(5));
+                turno.setIdProfesional(rs.getInt(6));
+                turno.setValor(rs.getFloat(7));
+                turno.setDescuento(rs.getFloat(8));
+            }
+            else{
+                turno.setId(-1);
+            }
 
-        return null;
+        }
+        catch (SQLException e){
+            System.out.println("Fallo TurnoDAOImpl, getById "+ e.getMessage());
+        }
+
+
+        return turno;
     }
 
     @Override

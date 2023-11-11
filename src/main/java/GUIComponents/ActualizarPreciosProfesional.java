@@ -188,6 +188,7 @@ public class ActualizarPreciosProfesional extends Panel {
         {
             getComponent().addKeyListener(new KeyAdapter() {
                 public void keyPressed(KeyEvent e) {
+                    profesionalJT.setShowGrid(true);
                     if (e.getKeyChar() == '\n') {
                         if (profesionalJT.isEditing()) {
                             profesionalJT.getCellEditor().stopCellEditing();
@@ -229,11 +230,11 @@ public class ActualizarPreciosProfesional extends Panel {
                                 JTable auxTable = ProfesionalTableGenerator.getInstance().generateTable(profesional);
                                 profesionalJT.setModel(auxTable.getModel());
                             }else{
-                                JOptionPane.showMessageDialog(null, "Ocurrio un error intentando modificar el monto.");
+                                JOptionPane.showMessageDialog(ActualizarPreciosProfesional.getInstance(), "Ocurrio un error intentando modificar el monto.");
                             }
 
                         } else {
-                            JOptionPane.showMessageDialog(null, "El monto introducido no tiene un formato válido.\nDebe ser un número con hasta dos decimales (por ejemplo, 123.45).");
+                            JOptionPane.showMessageDialog(ActualizarPreciosProfesional.getInstance(), "El monto introducido no tiene un formato válido.\nDebe ser un número con hasta dos decimales (por ejemplo, 123.45).");
                         }
                         }
                     }

@@ -168,7 +168,7 @@ public class TurnoIngresoPanel extends Panel {
             errString = "\n Seleccione un turno";
         }
         if(error){
-            JOptionPane.showMessageDialog(null, "Error!\n" + errString);
+            JOptionPane.showMessageDialog(this, "Error!\n" + errString);
 
         }
         else {
@@ -197,7 +197,6 @@ public class TurnoIngresoPanel extends Panel {
     }//GEN-LAST:event_confirmarButtonMouseExited
 
     private void confirmarButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMouseEntered
-        // TODO add your handling code here:
         confirmarButton.setOpaque(true);
         confirmarButton.setBackground(new Color (152, 251, 152));
     }//GEN-LAST:event_confirmarButtonMouseEntered

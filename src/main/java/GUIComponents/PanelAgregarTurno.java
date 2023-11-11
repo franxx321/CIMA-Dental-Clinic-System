@@ -449,19 +449,19 @@ public class PanelAgregarTurno extends Panel {
         }
 
         if(error){
-            JOptionPane.showMessageDialog(null, "Error!\n" + errorString);
+            JOptionPane.showMessageDialog(this, "Error!\n" + errorString);
         }else{
             horaInicioEnMilisegundos +=milisegundos;
             horafinEnMilisegundos +=milisegundos;
             try{
                 TurnoManager.getInstance().addTurno(ptcn,profesional,pacienteDni,horaInicioEnMilisegundos,horafinEnMilisegundos);
-                JOptionPane.showMessageDialog(null, "El turno fue agendado correctamente");
+                JOptionPane.showMessageDialog(this, "El turno fue agendado correctamente");
                 PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelTurnos,null);
                 SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
                 confirmarButton.setBackground(new Color (223, 246, 255) );
             }
             catch (CantAddTurno e){
-                JOptionPane.showMessageDialog(null, "Error!\n" + e.getErrors());
+                JOptionPane.showMessageDialog(this, "Error!\n" + e.getErrors());
             }
         }
         working=false;

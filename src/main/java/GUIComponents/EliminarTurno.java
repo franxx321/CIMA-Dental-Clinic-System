@@ -219,7 +219,7 @@ public class EliminarTurno extends Panel {
             optionsStr[i] = options[i].toString();
         }
 
-        int resp = JOptionPane.showOptionDialog(null,
+        int resp = JOptionPane.showOptionDialog(this,
                 "Usted esta a punto de eliminar el turno.\n"+"¿Esta seguro?",
                 "Alerta!",
                 JOptionPane.DEFAULT_OPTION,

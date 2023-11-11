@@ -412,7 +412,6 @@ public class MenuModificarTurno extends Panel {
             int minutos1= Integer.parseInt(matcher1.group(2));
             horaInicioEnMilisegundos = ((long) hora1 * 60 * 60 * 1000) + ((long) minutos1 * 60 * 1000);
         }else {
-            // JOptionPane.showMessageDialog(null, "Inserte una hora de inicio correcta.");
             error = true;
             horaInicioTF.setText("");
             errorString = errorString+"Hora de inicio incorrecta.\n";
@@ -431,7 +430,7 @@ public class MenuModificarTurno extends Panel {
         }
 
         if(error){
-            JOptionPane.showMessageDialog(null, "Error!\n" + errorString);
+            JOptionPane.showMessageDialog(this, "Error!\n" + errorString);
         }else{
             horaInicioEnMilisegundos +=milisegundos;
             horafinEnMilisegundos +=milisegundos;
@@ -444,12 +443,12 @@ public class MenuModificarTurno extends Panel {
             newTurno.setValor(valor);
             try{
                 TurnoManager.getInstance().modifyTurno(turno,newTurno);
-                JOptionPane.showMessageDialog(null, "El turno fue modificado correctamente");
+                JOptionPane.showMessageDialog(this, "El turno fue modificado correctamente");
                 PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelTurnos,null);
                 SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
             }
             catch (CantAddTurno e){
-                JOptionPane.showMessageDialog(null, "Error!\n" + e.getErrors());
+                JOptionPane.showMessageDialog(this, "Error!\n" + e.getErrors());
             }
         }
     }//GEN-LAST:event_confirmarButtonMousePressed

@@ -12,7 +12,6 @@ public class ObraSocial {
 
     private String nombreRepresentante;
 
-
     public String getNombre() {
         return nombre;
     }

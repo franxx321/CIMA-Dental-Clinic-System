@@ -200,21 +200,35 @@ public class AgregarGastoPanel extends Panel {
     }//GEN-LAST:event_confirmarButtonMouseExited
 
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
+        boolean error = false;
+        String errStr ="";
         String descripcion = descripcionTF.getText();
-        float monto = Float.parseFloat(precioTF.getText());
+        float monto= 0;
         Profesional  profesional = profesionalList.get(profesionalCB.getSelectedIndex()+1);
         Date auxfecha= (Date) datePicker.getModel().getValue();
         java.sql.Date fecha = new java.sql.Date(auxfecha.getTime());
-        GastoManager.getInstance().addGasto(monto, descripcion, fecha, profesional);
-        JOptionPane.showMessageDialog(null, "El gasto fue cargado correctamente");
-        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.finanzas,null);
-        SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
-        working=false;
+        try {
+            monto= Float.parseFloat(precioTF.getText());
+        }
+        catch (NumberFormatException e){
+            error= true;
+            errStr ="El numero ingresado es invalido";
+        }
+        if(error){
+            JOptionPane.showMessageDialog(this,"Error! \n"+errStr);
+        }
+        else{
+            GastoManager.getInstance().addGasto(monto, descripcion, fecha, profesional);
+            JOptionPane.showMessageDialog(this, "El gasto fue cargado correctamente");
+            PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.finanzas,null);
+            SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
+            working=false;
+        }
+
     }//GEN-LAST:event_confirmarButtonMousePressed
 
     private void cancelarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMousePressed
         working=false;
-
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.finanzas,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
     }//GEN-LAST:event_cancelarButtonMousePressed

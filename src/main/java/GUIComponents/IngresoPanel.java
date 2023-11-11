@@ -272,7 +272,7 @@ public class IngresoPanel extends Panel {
             errStr = errStr+"\n Seleccione una obra social";
         }
         if(error){
-            JOptionPane.showMessageDialog(null, "Error!\n" + errStr);
+            JOptionPane.showMessageDialog(this, "Error!\n" + errStr);
         }
         else {
             ObraSocial obraSocial = null;
@@ -284,6 +284,7 @@ public class IngresoPanel extends Panel {
                 obraSocial.setId(-1);
             }
             IngresoManager.getInstance().add(fecha,p.getId(),pr.getId(),turno.getId(),obraSocial.getId(),monto, descripcion);
+            JOptionPane.showMessageDialog(this,"El ingreso fue registrado exitosamente");
             PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.finanzas,null);
             SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
             confirmarButton.setBackground(new Color (152, 251, 152));

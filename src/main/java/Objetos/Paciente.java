@@ -7,8 +7,6 @@ public class Paciente {
 
     private String nombre;
 
-
-
     private long  dni;
 
     private char sexo;
@@ -16,8 +14,7 @@ public class Paciente {
     private Date fechaNacimiento;
 
     private String email;
-
-
+    
     public String getNombre() {
         return nombre;
     }
@@ -26,7 +23,6 @@ public class Paciente {
         this.nombre = nombre;
     }
 
-
     public long getDni() {
         return dni;
     }
@@ -34,7 +30,6 @@ public class Paciente {
     public void setDni(long dni) {
         this.dni = dni;
     }
-
 
     public char getSexo() {
         return sexo;

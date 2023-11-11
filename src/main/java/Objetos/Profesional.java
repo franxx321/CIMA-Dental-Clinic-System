@@ -40,8 +40,6 @@ public class Profesional {
         this.matricula = matricula;
     }
 
-
-
     public int getId() {
         return id;
     }

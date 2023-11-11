@@ -134,4 +134,37 @@ public class IngresoDAOImpl implements IIngresoDAO {
         }
         return modify;
     }
+
+    @Override
+    public List<Ingreso> getIngresoByProfesional(Ingreso ingreso){
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String sql = "SELECT * FROM Ingresos WHERE id_profesional = ?";
+        List<Ingreso> ingresoByProfesionalList = new ArrayList<>();
+        try{
+            DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
+            con = DBConnection.getConnection();
+            pstm = con.prepareStatement(sql);
+            pstm.setInt(1, ingreso.getIdProfesional());
+            rs = pstm.executeQuery();
+            while (rs.next()){
+                Ingreso i = new Ingreso();
+                i.setId(rs.getInt(1));
+                i.setFecha(rs.getDate(2));
+                i.setMonto(rs.getFloat(3));
+                i.setDescripcion(rs.getString(4));
+                i.setIdPaciente(rs.getInt(5));
+                i.setIdProfesional(rs.getInt(6));
+                i.setIdObraSocial(rs.getInt(7));
+                ingresoByProfesionalList.add(i);
+            }
+            pstm.close();
+            con.close();
+        }catch (SQLException e){
+            System.out.println("Error: Clase IngresoDAOImpl. metodo getIngresoByProfesional. "+ e.getMessage());
+        }
+        return ingresoByProfesionalList;
+    }
+
 }

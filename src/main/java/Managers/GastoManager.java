@@ -56,4 +56,8 @@ public class GastoManager {
     public List<Profesional> getAllProfesional(){
         return ProfesionalManager.getInstance().getAll();
     }
+
+    public List<Gasto> getGastoByProfesional(Gasto gasto){
+        return GastoDAOImpl.getInstance().getGastoByProfesional(gasto);
+    }
 }

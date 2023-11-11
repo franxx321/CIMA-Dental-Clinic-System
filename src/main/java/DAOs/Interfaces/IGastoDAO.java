@@ -9,4 +9,5 @@ public interface IGastoDAO {
     public List<Gasto> obtain();
     public boolean delete(Gasto gasto);
     public boolean modify(Gasto gasto, Gasto aux);
+    public List<Gasto> getGastoByProfesional(Gasto gasto);
 }

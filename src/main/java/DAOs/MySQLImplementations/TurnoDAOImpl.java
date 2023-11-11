@@ -337,5 +337,38 @@ public class TurnoDAOImpl implements ITurnosDAO {
         return null;
     }
 
+    @Override
+    public List<Turno> getTurnosByProfesional(Turno turno){
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String sql = "SELECT * FROM Turnos WHERE id_profesional = ?";
+        List<Turno> turnosByProfesionalList = new ArrayList<>();
+        try{
+            DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
+            con = DBConnection.getConnection();
+            pstm = con.prepareStatement(sql);
+            pstm.setInt(1, turno.getIdProfesional());
+            rs = pstm.executeQuery(sql);
+            while(rs.next()){
+                Turno t = new Turno();
+                t.setId(rs.getInt(1));
+                t.setHoraInicio(new Date(rs.getTimestamp(2).getTime()));
+                t.setHoraFin(new Date(rs.getTimestamp(3).getTime()));
+                t.setAsistio(rs.getBoolean(4));
+                t.setIdPaciente(rs.getInt(5));
+                t.setIdProfesional(rs.getInt(6));
+                t.setValor(rs.getFloat(7));
+                t.setDescuento(rs.getFloat(8));
+                turnosByProfesionalList.add(t);
+            }
+            pstm.close();
+            con.close();
+        }catch (SQLException e){
+            System.out.println("Error: Clase TurnoDAOImpl. metodo getTurnosAsistidosyNo. "+ e.getMessage());
+        }
+        return turnosByProfesionalList;
+    }
+
 
 }

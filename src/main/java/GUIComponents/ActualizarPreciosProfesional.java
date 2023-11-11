@@ -189,7 +189,11 @@ public class ActualizarPreciosProfesional extends Panel {
             getComponent().addKeyListener(new KeyAdapter() {
                 public void keyPressed(KeyEvent e) {
                     if (e.getKeyChar() == '\n') {
-                        //TODO meter If aca
+                        if (profesionalJT.isEditing()) {
+                            profesionalJT.getCellEditor().stopCellEditing();
+                        }
+
+
                         int filaSeleccionada = profesionalJT.getSelectedRow();
 
                         if (filaSeleccionada != -1) {

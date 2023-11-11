@@ -9,5 +9,6 @@ public interface IIngresoDAO {
     public List<Ingreso> obtain();
     public boolean delete(Ingreso ingreso);
     public boolean modify(Ingreso ingreso, Ingreso aux);
+    public List<Ingreso> getIngresoByProfesional(Ingreso ingreso);
 
 }

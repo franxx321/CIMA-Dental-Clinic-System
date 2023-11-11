@@ -1,6 +1,7 @@
 package Managers;
 
 import DAOs.MySQLImplementations.IngresoDAOImpl;
+import DAOs.MySQLImplementations.TurnoDAOImpl;
 import Objetos.*;
 import Utils.TableGenerator.TurnosByProfesionalTableGenerator;
 
@@ -60,6 +61,10 @@ public class IngresoManager {
         ingreso.setIdTurno(idTurno);
         ingreso.setMonto(monto);
         IngresoDAOImpl.getInstance().register(ingreso);
+    }
+
+    public List<Ingreso> getIngresoByProfesional(Ingreso ingreso){
+        return IngresoDAOImpl.getInstance().getIngresoByProfesional(ingreso);
     }
 
 }

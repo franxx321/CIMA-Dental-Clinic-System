@@ -125,4 +125,34 @@ public class GastoDAOImpl implements IGastoDAO {
         }
         return modify;
     }
+
+    @Override
+    public List<Gasto> getGastoByProfesional(Gasto gasto){
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String sql = "SELECT * FROM gastos WHERE id_profesional = ?";
+        List<Gasto> gastoByProfesionalList = new ArrayList<>();
+        try{
+            DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
+            con = DBConnection.getConnection();
+            pstm = con.prepareStatement(sql);
+            pstm.setInt(1, gasto.getIdProfesional());
+            rs = pstm.executeQuery();
+            while (rs.next()){
+                Gasto g = new Gasto();
+                g.setId(rs.getInt(1));
+                g.setMonto(rs.getInt(2));
+                g.setDescripcion(rs.getString(3));
+                g.setFecha(rs.getDate(4));
+                g.setIdProfesional(rs.getInt(5));
+                gastoByProfesionalList.add(g);
+            }
+            pstm.close();
+            con.close();
+        }catch (SQLException e){
+            System.out.println("Error: Clase GastoDAOImpl. metodo getGastoByProfesionl."+ e.getMessage());
+        }
+        return gastoByProfesionalList;
+    }
 }

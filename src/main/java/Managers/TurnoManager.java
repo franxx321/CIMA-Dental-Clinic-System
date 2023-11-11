@@ -163,9 +163,8 @@ public class TurnoManager {
         return TurnoDAOImpl.getInstance().getByIdProfesional(idProfesional);
     }
 
-
-
-
-
+    public List<Turno> getTurnosByProfesional(Turno turno){
+        return TurnoDAOImpl.getInstance().getTurnosByProfesional(turno);
+    }
 
 }

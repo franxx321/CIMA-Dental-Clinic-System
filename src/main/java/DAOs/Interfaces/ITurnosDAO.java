@@ -22,7 +22,7 @@ public interface ITurnosDAO {
     public List<Turno> getPatientFutureApointments(int idPaciente);
 
     public Turno getById(Turno t);
-
+    public List <Turno> getTurnosByProfesional(Turno turno);
 
 
 

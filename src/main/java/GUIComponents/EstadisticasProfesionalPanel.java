@@ -4,17 +4,57 @@
  */
 package GUIComponents;
 
+import Managers.EstadisticasManager;
+import Managers.ProfesionalManager;
+import Objetos.Gasto;
+import Objetos.Ingreso;
+import Objetos.Profesional;
+import Objetos.Turno;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
 /**
  *
  * @author joako
  */
-public class EstadisticasProfesionalPanel extends javax.swing.JPanel {
-
+public class EstadisticasProfesionalPanel extends Panel {
+    private static EstadisticasProfesionalPanel estadisticas;
+    public static EstadisticasProfesionalPanel getInstance(){
+        if(estadisticas == null){
+            estadisticas = new EstadisticasProfesionalPanel();
+        }
+        return estadisticas;
+    }
     /**
      * Creates new form EstadisticasProfesionalPanel
      */
     public EstadisticasProfesionalPanel() {
         initComponents();
+        List<Profesional> allProfesional = ProfesionalManager.getInstance().getAll();
+        for (Profesional profesional: allProfesional){
+            estadisticasProCB.addItem(profesional.getNombre());
+        }
+        
+        jLabel2.setVisible(false);
+        jLabel3.setVisible(false);
+        jLabel4.setVisible(false);
+        jLabel5.setVisible(false);
+        tALabel.setVisible(false);
+        turnosNoAsistidosLabel.setVisible(false);
+        cantidadDeIngresosLabel.setVisible(false);
+        cantidadDeGastosLabel.setVisible(false);
+        saldoLabel.setVisible(false);
+        tALabel30.setVisible(false);
+        turnosNoAsistidos30Label.setVisible(false);
+        cantidadDeIngresos30Label.setVisible(false);
+        cantidadDeGastos30Label.setVisible(false);
+        saldo30Label.setVisible(false);
+        jLabel6.setVisible(false);
+        jLabel7.setVisible(false);
+        jLabel8.setVisible(false);
+        jLabel9.setVisible(false);
+        jLabel10.setVisible(false);
     }
 
     /**
@@ -32,21 +72,23 @@ public class EstadisticasProfesionalPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        turnosAsitidosLabel = new javax.swing.JLabel();
+        tALabel = new javax.swing.JLabel();
         turnosNoAsistidosLabel = new javax.swing.JLabel();
         cantidadDeIngresosLabel = new javax.swing.JLabel();
         cantidadDeGastosLabel = new javax.swing.JLabel();
         saldoLabel = new javax.swing.JLabel();
-        turnosAsitidosLabel1 = new javax.swing.JLabel();
-        turnosNoAsistidosLabel1 = new javax.swing.JLabel();
-        cantidadDeIngresosLabel1 = new javax.swing.JLabel();
-        cantidadDeGastosLabel1 = new javax.swing.JLabel();
-        saldoLabel1 = new javax.swing.JLabel();
+        tALabel30 = new javax.swing.JLabel();
+        turnosNoAsistidos30Label = new javax.swing.JLabel();
+        cantidadDeIngresos30Label = new javax.swing.JLabel();
+        cantidadDeGastos30Label = new javax.swing.JLabel();
+        saldo30Label = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        estadisticasProCB = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(223, 246, 255));
 
@@ -63,7 +105,7 @@ public class EstadisticasProfesionalPanel extends javax.swing.JPanel {
 
         jLabel5.setText("Saldo:");
 
-        turnosAsitidosLabel.setText("jLabel6");
+        tALabel.setText("jLabel6");
 
         turnosNoAsistidosLabel.setText("jLabel6");
 
@@ -73,15 +115,15 @@ public class EstadisticasProfesionalPanel extends javax.swing.JPanel {
 
         saldoLabel.setText("jLabel6");
 
-        turnosAsitidosLabel1.setText("jLabel6");
+        tALabel30.setText("jLabel6");
 
-        turnosNoAsistidosLabel1.setText("jLabel6");
+        turnosNoAsistidos30Label.setText("jLabel6");
 
-        cantidadDeIngresosLabel1.setText("jLabel6");
+        cantidadDeIngresos30Label.setText("jLabel6");
 
-        cantidadDeGastosLabel1.setText("jLabel6");
+        cantidadDeGastos30Label.setText("jLabel6");
 
-        saldoLabel1.setText("jLabel6");
+        saldo30Label.setText("jLabel6");
 
         jLabel6.setText("Turnos atendidos:");
 
@@ -93,6 +135,15 @@ public class EstadisticasProfesionalPanel extends javax.swing.JPanel {
 
         jLabel10.setText("Saldo:");
 
+        estadisticasProCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una opcion", " " }));
+        estadisticasProCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                estadisticasProCBActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Ultimos 30 dias");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,14 +152,16 @@ public class EstadisticasProfesionalPanel extends javax.swing.JPanel {
                 .addGap(98, 98, 98)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(JLabel1)
-                        .addContainerGap(659, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(estadisticasProCB, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(JLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(655, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(turnosAsitidosLabel))
+                                .addComponent(tALabel))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
@@ -128,38 +181,44 @@ public class EstadisticasProfesionalPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(turnosAsitidosLabel1))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(18, 18, 18)
-                                .addComponent(turnosNoAsistidosLabel1))
+                                .addComponent(turnosNoAsistidos30Label))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addGap(18, 18, 18)
-                                .addComponent(cantidadDeIngresosLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(18, 18, 18)
-                                .addComponent(cantidadDeGastosLabel1))
+                                .addComponent(cantidadDeIngresos30Label))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addGap(18, 18, 18)
-                                .addComponent(saldoLabel1)))
-                        .addGap(183, 183, 183))))
+                                .addComponent(saldo30Label))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(18, 18, 18)
+                                .addComponent(cantidadDeGastos30Label))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(tALabel30)))
+                        .addGap(176, 176, 176))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addComponent(JLabel1)
-                .addGap(105, 105, 105)
+                .addGap(18, 18, 18)
+                .addComponent(estadisticasProCB, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(jLabel11)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(turnosAsitidosLabel))
+                            .addComponent(tALabel))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -179,36 +238,97 @@ public class EstadisticasProfesionalPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(turnosAsitidosLabel1))
+                            .addComponent(tALabel30))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(turnosNoAsistidosLabel1))
+                            .addComponent(turnosNoAsistidos30Label))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cantidadDeIngresosLabel1))
+                            .addComponent(cantidadDeIngresos30Label))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cantidadDeGastosLabel1))
+                            .addComponent(cantidadDeGastos30Label))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(saldoLabel1))))
-                .addContainerGap(275, Short.MAX_VALUE))
+                            .addComponent(saldo30Label))))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void estadisticasProCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadisticasProCBActionPerformed
+        String selectedOption = estadisticasProCB.getSelectedItem().toString();
+        Profesional profesional = ProfesionalManager.getInstance().getProfesionalByName(selectedOption);
+        Turno turno = new Turno();
+        turno.setIdProfesional(profesional.getId()); 
+        Ingreso ingreso = new Ingreso();
+        Gasto gasto = new Gasto();
+        ingreso.setIdProfesional(profesional.getId());
+        gasto.setIdProfesional(profesional.getId());
+        
+        List<Integer> turnos = new ArrayList<>();
+        List<Float> ingrGasto = new ArrayList<>();
+        
+        turnos = EstadisticasManager.getInstance().getTurnosAsistidosyNo(turno);
+        ingrGasto = EstadisticasManager.getInstance().getIngresoGastoByProfesional(ingreso, gasto);
+        
+       
+        
+        jLabel2.setVisible(true);
+        jLabel3.setVisible(true);
+        jLabel4.setVisible(true);
+        jLabel5.setVisible(true);
+        tALabel.setText(turnos.get(0).toString());
+        tALabel.setVisible(true);
+        
+        turnosNoAsistidosLabel.setVisible(true);
+        turnosNoAsistidosLabel.setText(turnos.get(1).toString());
+        
+        cantidadDeIngresosLabel.setText(ingrGasto.get(0).toString());
+        cantidadDeIngresosLabel.setVisible(true);
+        
+        cantidadDeGastosLabel.setText(ingrGasto.get(1).toString());
+        cantidadDeGastosLabel.setVisible(true);
+        
+        saldoLabel.setText(String.valueOf(ingrGasto.get(0)-ingrGasto.get(1)));
+        saldoLabel.setVisible(true);
+        
+        tALabel30.setText(turnos.get(2).toString());
+        tALabel30.setVisible(true);
+        
+        turnosNoAsistidos30Label.setText(turnos.get(3).toString());
+        turnosNoAsistidos30Label.setVisible(true);
+        
+        cantidadDeIngresos30Label.setText(ingrGasto.get(2).toString());
+        cantidadDeIngresos30Label.setVisible(true);
+        
+        cantidadDeGastos30Label.setText(ingrGasto.get(3).toString());
+        cantidadDeGastos30Label.setVisible(true);
+        
+        saldo30Label.setText(String.valueOf(ingrGasto.get(2)-ingrGasto.get(3)));
+        saldo30Label.setVisible(true);
+        
+        jLabel6.setVisible(true);
+        jLabel7.setVisible(true);
+        jLabel8.setVisible(true);
+        jLabel9.setVisible(true);
+        jLabel10.setVisible(true);
+    }//GEN-LAST:event_estadisticasProCBActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLabel1;
+    private javax.swing.JLabel cantidadDeGastos30Label;
     private javax.swing.JLabel cantidadDeGastosLabel;
-    private javax.swing.JLabel cantidadDeGastosLabel1;
+    private javax.swing.JLabel cantidadDeIngresos30Label;
     private javax.swing.JLabel cantidadDeIngresosLabel;
-    private javax.swing.JLabel cantidadDeIngresosLabel1;
+    private javax.swing.JComboBox<String> estadisticasProCB;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -217,11 +337,16 @@ public class EstadisticasProfesionalPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel saldo30Label;
     private javax.swing.JLabel saldoLabel;
-    private javax.swing.JLabel saldoLabel1;
-    private javax.swing.JLabel turnosAsitidosLabel;
-    private javax.swing.JLabel turnosAsitidosLabel1;
+    private javax.swing.JLabel tALabel;
+    private javax.swing.JLabel tALabel30;
+    private javax.swing.JLabel turnosNoAsistidos30Label;
     private javax.swing.JLabel turnosNoAsistidosLabel;
-    private javax.swing.JLabel turnosNoAsistidosLabel1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void setup(List<Object> arguments) {
+        
+    }
 }

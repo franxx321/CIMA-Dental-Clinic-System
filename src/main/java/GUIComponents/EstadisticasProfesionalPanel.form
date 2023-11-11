@@ -25,15 +25,18 @@
               <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="JLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="659" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="estadisticasProCB" alignment="0" max="32767" attributes="0"/>
+                          <Component id="JLabel1" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="655" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel1" min="-2" pref="103" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="turnosAsitidosLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="tALabel" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -59,32 +62,35 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel6" min="-2" pref="103" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="turnosAsitidosLabel1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="turnosNoAsistidosLabel1" min="-2" max="-2" attributes="0"/>
+                              <Component id="turnosNoAsistidos30Label" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="cantidadDeIngresosLabel1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="cantidadDeGastosLabel1" min="-2" max="-2" attributes="0"/>
+                              <Component id="cantidadDeIngresos30Label" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="saldoLabel1" min="-2" max="-2" attributes="0"/>
+                              <Component id="saldo30Label" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="cantidadDeGastos30Label" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="jLabel11" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLabel6" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="tALabel30" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="183" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -95,12 +101,16 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
               <Component id="JLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="estadisticasProCB" min="-2" pref="45" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+              <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                          <Component id="turnosAsitidosLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tALabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -123,34 +133,34 @@
                           <Component id="saldoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel6" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                          <Component id="turnosAsitidosLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tALabel30" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel7" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                          <Component id="turnosNoAsistidosLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="turnosNoAsistidos30Label" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel8" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                          <Component id="cantidadDeIngresosLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cantidadDeIngresos30Label" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel9" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                          <Component id="cantidadDeGastosLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cantidadDeGastos30Label" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel10" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                          <Component id="saldoLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="saldo30Label" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="275" max="32767" attributes="0"/>
+              <EmptySpace pref="244" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -189,7 +199,7 @@
         <Property name="text" type="java.lang.String" value="Saldo:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="turnosAsitidosLabel">
+    <Component class="javax.swing.JLabel" name="tALabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel6"/>
       </Properties>
@@ -214,27 +224,27 @@
         <Property name="text" type="java.lang.String" value="jLabel6"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="turnosAsitidosLabel1">
+    <Component class="javax.swing.JLabel" name="tALabel30">
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel6"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="turnosNoAsistidosLabel1">
+    <Component class="javax.swing.JLabel" name="turnosNoAsistidos30Label">
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel6"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="cantidadDeIngresosLabel1">
+    <Component class="javax.swing.JLabel" name="cantidadDeIngresos30Label">
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel6"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="cantidadDeGastosLabel1">
+    <Component class="javax.swing.JLabel" name="cantidadDeGastos30Label">
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel6"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="saldoLabel1">
+    <Component class="javax.swing.JLabel" name="saldo30Label">
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel6"/>
       </Properties>
@@ -262,6 +272,27 @@
     <Component class="javax.swing.JLabel" name="jLabel10">
       <Properties>
         <Property name="text" type="java.lang.String" value="Saldo:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="estadisticasProCB">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="2">
+            <StringItem index="0" value="Seleccione una opcion"/>
+            <StringItem index="1" value=" "/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="estadisticasProCBActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel11">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ultimos 30 dias"/>
       </Properties>
     </Component>
   </SubComponents>

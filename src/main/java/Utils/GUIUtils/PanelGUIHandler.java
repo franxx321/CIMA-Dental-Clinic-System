@@ -12,7 +12,8 @@ public class PanelGUIHandler  implements  GUIHandler{
     private static PanelGUIHandler panelGUIHandler;
 
     public static String panelInicio ="Panel Inicio",panelTurnos="Panel Turnos",agregarTurno= "Agregar Turno",modificarTurno="Modificar Turno",modificarPrestacion = "ModificarPrestaciones"
-            ,eliminarTurno= "eliminarTurno",buscarPaciente = "BuscarPaciente",finanzas="FinanzasPanel",agregarGasto="agregarGasto",turnoIngreso ="Turno Ingreso", agregarIngreso = "Agregar Ingreso",actualizarPrecios="Actualizar Precios",actualizarPreciosProfesional="Actualizar Precios Profesional",actualizaros="Actualizar Precios Obra Social" ;
+            ,eliminarTurno= "eliminarTurno",buscarPaciente = "BuscarPaciente",finanzas="FinanzasPanel",agregarGasto="agregarGasto",turnoIngreso ="Turno Ingreso", agregarIngreso = "Agregar Ingreso",actualizarPrecios="Actualizar Precios",actualizarPreciosProfesional="Actualizar Precios Profesional",actualizaros="Actualizar Precios Obra Social",
+            estadisticasPanel = "EstadisticasPanel";
 
     private HashMap<String, Panel> panels;
 
@@ -41,6 +42,8 @@ public class PanelGUIHandler  implements  GUIHandler{
         panels.put(actualizarPrecios, ActualizarPreciosPanel.getInstance());
         panels.put(actualizarPreciosProfesional,ActualizarPreciosProfesional.getInstance());
         panels.put(actualizaros,ActualizarPreciosOS.getInstance());
+        panels.put(estadisticasPanel, EstadisticasProfesionalPanel.getInstance());
+        
     }
     
 

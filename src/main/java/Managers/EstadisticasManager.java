@@ -66,8 +66,8 @@ public class EstadisticasManager {
             }
         }
         ingrGasto.add(ingresoTotal);
-        ingrGasto.add(ingresoTotal30);
         ingrGasto.add(gastoTotal);
+        ingrGasto.add(ingresoTotal30);
         ingrGasto.add(gastoTotal30);
         return ingrGasto;
     }

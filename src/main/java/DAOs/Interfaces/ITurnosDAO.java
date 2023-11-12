@@ -13,16 +13,16 @@ public interface ITurnosDAO {
 
     public List<Turno> profesionalFutureApointments(int idprofesional, int week);
 
-    public List <Turno> getByIdProfesional(int idProfesional);
+    public List <Turno> getByIdProfesional(Turno turno);
 
-    public List <Turno> getOverlappingturnos(int idProfesional , Date horaInicio, Date horaFin);
+    public List <Turno> getOverlappingturnos(Turno turno);
 
-    public Turno getByDateProfesional(Date horaInicio, Date HoraFin, int idProfesional);
+    public Turno getByDateProfesional(Turno turno);
 
-    public List<Turno> getPatientFutureApointments(int idPaciente);
+    public List<Turno> getPatientFutureApointments(Turno t);
 
     public Turno getById(Turno t);
-    public List <Turno> getTurnosByProfesional(Turno turno);
+
 
 
 

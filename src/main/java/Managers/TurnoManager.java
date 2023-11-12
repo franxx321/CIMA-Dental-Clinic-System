@@ -59,8 +59,12 @@ public class TurnoManager {
         } else{
             turnoPrestacion.setIdPrestacion(idPrestacion);
         }
-
-        List<Turno> overlappingTurnos = TurnoDAOImpl.getInstance().getOverlappingturnos(idProfesional,horaInicio,horaFin);
+        Turno t1 = new Turno();
+        t1.setIdProfesional(idProfesional);
+        t1.setHoraInicio(horaInicio);
+        t1.setHoraFin(horaFin);
+        List<Turno> overlappingTurnos = TurnoDAOImpl.getInstance().getOverlappingturnos(t1);
+        t1=null;
         if(overlappingTurnos == null){
             //TODO si llegamos aca es por que hubo una excepcion, hay que ver que hacemos
         } else if (overlappingTurnos.get(0).getId()!=-1) {
@@ -76,7 +80,7 @@ public class TurnoManager {
         }
         else {
             TurnoDAOImpl.getInstance().register(turno);
-            Turno turno1= this.getByDateProfesional(turno.getHoraInicio(),turno.getHoraFin(),turno.getIdProfesional());
+            Turno turno1= TurnoDAOImpl.getInstance().getByDateProfesional(turno);
             turnoPrestacion.setIdTurno(turno1.getId());
             TurnoPrestacionManager.getInstance().addTurnoPrestacion(turnoPrestacion);
         }
@@ -85,7 +89,8 @@ public class TurnoManager {
     public void modifyTurno(Turno turno, Turno aux){
         String errString = "";
         boolean error= false;
-        List<Turno> turnos= TurnoDAOImpl.getInstance().getOverlappingturnos(turno.getIdProfesional(),aux.getHoraInicio(),aux.getHoraFin());
+
+        List<Turno> turnos= TurnoDAOImpl.getInstance().getOverlappingturnos(turno);
         if(turnos==null){
             //Exepcion
         }
@@ -116,9 +121,6 @@ public class TurnoManager {
 
     }
 
-    public Turno getByDateProfesional(Date horaInicio, Date horaFin,int idProfesional){
-        return TurnoDAOImpl.getInstance().getByDateProfesional(horaInicio,horaFin,idProfesional);
-    }
 
     public JTable getCalendar (String nombreProfesional, int week){
         List<Turno> turnosList= null;
@@ -134,7 +136,9 @@ public class TurnoManager {
         Paciente paciente = null;
         if(dniPaciente!=-1){
             paciente = PacienteManager.getInstance().getPatientByDni(dniPaciente);
-            turnoList = TurnoDAOImpl.getInstance().getPatientFutureApointments(paciente.getId());
+            Turno t = new Turno();
+            t.setIdPaciente(paciente.getId());
+            turnoList = TurnoDAOImpl.getInstance().getPatientFutureApointments(t);
         }
         return TurnosbyPacienteTableGenerator.getInstance().generateTable(turnoList,paciente);
     }
@@ -160,11 +164,11 @@ public class TurnoManager {
     }
 
     public List<Turno> getByProfesional(int idProfesional){
-        return TurnoDAOImpl.getInstance().getByIdProfesional(idProfesional);
+        Turno turno = new Turno();
+        turno.setIdProfesional(idProfesional);
+        return TurnoDAOImpl.getInstance().getByIdProfesional(turno);
     }
 
-    public List<Turno> getTurnosByProfesional(Turno turno){
-        return TurnoDAOImpl.getInstance().getTurnosByProfesional(turno);
-    }
+
 
 }

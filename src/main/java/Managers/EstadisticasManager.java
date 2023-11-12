@@ -25,7 +25,7 @@ public class EstadisticasManager {
     }
 
     public List<Integer> getTurnosAsistidosyNo(Turno turno) {
-        List<Turno> turnosAsistList = TurnoManager.getInstance().getTurnosByProfesional(turno);
+        List<Turno> turnosAsistList = TurnoManager.getInstance().getByProfesional(turno.getIdProfesional());
         List<Integer> turnos = new ArrayList<>();
         int turnosAsistidos = 0, turnosNoAsistidos = 0, turnosAsistidos30 = 0, turnosNoAsistidos30 = 0;
         Date fechaInicio = restarDias(FormatedDate.formatedDate(new Date()), 30);

@@ -175,14 +175,14 @@ public class TurnoDAOImpl implements ITurnosDAO {
     }
 
     @Override
-    public List <Turno> getByIdProfesional(int idProfesional){
+    public List <Turno> getByIdProfesional(Turno turno){
         List <Turno> turnoList = null;
         try{
             DBConnection=DBConnector.getInstance();
             DBConnection.startConnection();
             con=DBConnection.getConnection();
             PreparedStatement ptsm = con.prepareStatement("SELECT * FROM Turnos Where id_profesional = ?");
-            ptsm.setInt(1,idProfesional);
+            ptsm.setInt(1,turno.getIdProfesional());
             ResultSet rs = ptsm.executeQuery();
             turnoList= new ArrayList<>();
             while(rs.next()){
@@ -206,7 +206,7 @@ public class TurnoDAOImpl implements ITurnosDAO {
     }
 
     @Override
-    public List<Turno> getOverlappingturnos (int idProfesional, Date horaInicio, Date horaFin){
+    public List<Turno> getOverlappingturnos (Turno turno){
         List<Turno> turnoList= null;
         try{
             DBConnection = DBConnector.getInstance();
@@ -218,20 +218,20 @@ public class TurnoDAOImpl implements ITurnosDAO {
                         " (horaInicio <= ? AND horaInicio >= ?) OR " +
                         "(horaInicio <= ? AND horaFin >= ?) OR " +
                         " (horaInicio >= ? AND horaInicio <= ?)) ");
-            ptsm.setInt(1,idProfesional);
-            ptsm.setTimestamp(2,new Timestamp(horaInicio.getTime()));
-            ptsm.setTimestamp(3,new Timestamp( horaFin.getTime()));
-            ptsm.setTimestamp(4,new Timestamp(horaInicio.getTime()));
-            ptsm.setTimestamp(5,new Timestamp(horaFin.getTime()));
-            ptsm.setTimestamp(6,new Timestamp(horaInicio.getTime()));
-            ptsm.setTimestamp(7,new Timestamp(horaFin.getTime()));
+            ptsm.setInt(1,turno.getIdProfesional());
+            ptsm.setTimestamp(2,new Timestamp(turno.getHoraInicio().getTime()));
+            ptsm.setTimestamp(3,new Timestamp(turno.getHoraFin().getTime()));
+            ptsm.setTimestamp(4,new Timestamp(turno.getHoraInicio().getTime()));
+            ptsm.setTimestamp(5,new Timestamp(turno.getHoraFin().getTime()));
+            ptsm.setTimestamp(6,new Timestamp(turno.getHoraInicio().getTime()));
+            ptsm.setTimestamp(7,new Timestamp(turno.getHoraFin().getTime()));
             ResultSet rs = ptsm.executeQuery();
 
             turnoList= new ArrayList<>();
             if(!rs.next()){
-                Turno turno = new Turno();
-                turno.setId(-1);
-                turnoList.add(turno);
+                Turno turno1 = new Turno();
+                turno1.setId(-1);
+                turnoList.add(turno1);
             }
             else {
                 do{
@@ -254,9 +254,9 @@ public class TurnoDAOImpl implements ITurnosDAO {
         }
         return turnoList;
     }
-
-    public Turno getByDateProfesional(Date horaInicio, Date horaFin, int idProfesional){
-        Turno turno = null;
+    @Override
+    public Turno getByDateProfesional(Turno turno){
+        Turno turno1 = null;
         try {
             DBConnection = DBConnector.getInstance();
             DBConnection.startConnection();
@@ -264,9 +264,9 @@ public class TurnoDAOImpl implements ITurnosDAO {
             PreparedStatement ptsm = con.prepareStatement("SELECT * " +
                     "FROM turnos " +
                     "where horaInicio =? and horaFin = ? and id_profesional = ?");
-            ptsm.setTimestamp(1,new Timestamp(horaInicio.getTime()));
-            ptsm.setTimestamp(2,new Timestamp(horaFin.getTime()));
-            ptsm.setInt(3,idProfesional);
+            ptsm.setTimestamp(1,new Timestamp(turno.getHoraInicio().getTime()));
+            ptsm.setTimestamp(2,new Timestamp(turno.getHoraFin().getTime()));
+            ptsm.setInt(3,turno.getIdProfesional());
             ResultSet rs = ptsm.executeQuery();
             turno= new Turno();
             if(!rs.next()){
@@ -293,7 +293,7 @@ public class TurnoDAOImpl implements ITurnosDAO {
     }
 
     @Override
-    public List<Turno> getPatientFutureApointments(int idPaciente) {
+    public List<Turno> getPatientFutureApointments(Turno turno) {
         List<Turno> turnoList = null;
         Date today = FormatedDate.formatedDate(new Date());
         try {
@@ -304,22 +304,22 @@ public class TurnoDAOImpl implements ITurnosDAO {
                     "FROM turnos " +
                     "WHERE horaInicio > ?" +
                     "and id_paciente =?");
-            ptsm.setTimestamp(1, new Timestamp(today.getTime()));
-            ptsm.setInt(2,idPaciente);
+            ptsm.setTimestamp(1, new Timestamp(today.getTime()-1209600000));
+            ptsm.setInt(2,turno.getIdPaciente());
             ResultSet rs = ptsm.executeQuery();
             if (rs.next()){
                 turnoList= new ArrayList<>();
                 do {
-                    Turno turno = new Turno();
-                    turno.setId(rs.getInt(1));
-                    turno.setHoraInicio(new Date(rs.getTimestamp(2).getTime()));
-                    turno.setHoraFin(new Date(rs.getTimestamp(3).getTime()));
-                    turno.setAsistio(rs.getBoolean(4));
-                    turno.setIdPaciente(rs.getInt(5));
-                    turno.setIdProfesional(rs.getInt(6));
-                    turno.setValor(rs.getFloat(7));
-                    turno.setDescuento(rs.getFloat(8));
-                    turnoList.add(turno);
+                    Turno turno1 = new Turno();
+                    turno1.setId(rs.getInt(1));
+                    turno1.setHoraInicio(new Date(rs.getTimestamp(2).getTime()));
+                    turno1.setHoraFin(new Date(rs.getTimestamp(3).getTime()));
+                    turno1.setAsistio(rs.getBoolean(4));
+                    turno1.setIdPaciente(rs.getInt(5));
+                    turno1.setIdProfesional(rs.getInt(6));
+                    turno1.setValor(rs.getFloat(7));
+                    turno1.setDescuento(rs.getFloat(8));
+                    turnoList.add(turno1);
                 } while (rs.next());
             }
             con.close();
@@ -369,38 +369,7 @@ public class TurnoDAOImpl implements ITurnosDAO {
         return turno;
     }
 
-    @Override
-    public List<Turno> getTurnosByProfesional(Turno turno){
-        PreparedStatement pstm = null;
-        ResultSet rs = null;
-        String sql = "SELECT * FROM Turnos WHERE id_profesional = ?";
-        List<Turno> turnosByProfesionalList = new ArrayList<>();
-        try{
-            DBConnection = DBConnector.getInstance();
-            DBConnection.startConnection();
-            con = DBConnection.getConnection();
-            pstm = con.prepareStatement(sql);
-            pstm.setInt(1, turno.getIdProfesional());
-            rs = pstm.executeQuery(sql);
-            while(rs.next()){
-                Turno t = new Turno();
-                t.setId(rs.getInt(1));
-                t.setHoraInicio(new Date(rs.getTimestamp(2).getTime()));
-                t.setHoraFin(new Date(rs.getTimestamp(3).getTime()));
-                t.setAsistio(rs.getBoolean(4));
-                t.setIdPaciente(rs.getInt(5));
-                t.setIdProfesional(rs.getInt(6));
-                t.setValor(rs.getFloat(7));
-                t.setDescuento(rs.getFloat(8));
-                turnosByProfesionalList.add(t);
-            }
-            pstm.close();
-            con.close();
-        }catch (SQLException e){
-            System.out.println("Error: Clase TurnoDAOImpl. metodo getTurnosAsistidosyNo. "+ e.getMessage());
-        }
-        return turnosByProfesionalList;
-    }
+
 
 
 }

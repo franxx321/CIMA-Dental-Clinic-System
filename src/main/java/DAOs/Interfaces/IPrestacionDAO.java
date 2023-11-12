@@ -11,4 +11,7 @@ public interface IPrestacionDAO {
     public boolean modify(Prestacion prestacion, Prestacion aux);
     public Prestacion idByName(String Nombre);
     public Prestacion nameById(int id);
+
+    public Prestacion getById(Prestacion p);
+
 }

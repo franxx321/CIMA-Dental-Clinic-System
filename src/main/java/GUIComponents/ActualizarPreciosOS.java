@@ -4,11 +4,7 @@
  */
 package GUIComponents;
 
-import Managers.CoberturaManager;
-import Managers.MontoManager;
-import Managers.ObraSocialManager;
-import Managers.PrestacionManager;
-import Managers.ProfesionalManager;
+import Managers.*;
 import Objetos.*;
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
@@ -24,15 +20,19 @@ import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
  * @author Juan
  */
 public class ActualizarPreciosOS extends Panel {
-    
-    
+
+    List<ObraSocial> ObraSocialList;
+    private TableColumn idsObraSocial;
+    private TableColumn idsPrestacion;
     private static ActualizarPreciosOS actualizarPreciosOS;
 
     public static ActualizarPreciosOS getInstance(){
@@ -48,31 +48,9 @@ public class ActualizarPreciosOS extends Panel {
         initComponents();
         
         //carga de combobox
-        List<ObraSocial> allObraSocial = ObraSocialManager.getInstance().getAll();
-        for (ObraSocial obrasocial: allObraSocial){
-            ObraSocialCB.addItem(obrasocial.getNombre());
-        }
-        
-        //actualizacion de tabla
-        ObraSocialCB.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-                DefaultTableModel tableModel = (DefaultTableModel) obraSocialJT.getModel();
-                tableModel.setRowCount(0); // Elimina todos los datos de la tabla
+        leeCB();
 
-                // Agrega nuevos datos a la tabla según la opción seleccionada en el JComboBox
-                String selectedOption = ObraSocialCB.getSelectedItem().toString();
-                ObraSocial aux = new ObraSocial();
-                aux.setNombre(selectedOption);
-                ObraSocial obrasocial = ObraSocialManager.getInstance().getByName(aux);
-                
-                JTable auxTable = CoberturaTableGenerator.getInstance().generateTable(obrasocial);
-                obraSocialJT.setModel(auxTable.getModel());
-                obraSocialJT.setRowHeight(25);
-            }
-        });
-        
+        //actualizacion de tabla
         leerTablaOS();
     }
 
@@ -224,12 +202,12 @@ public class ActualizarPreciosOS extends Panel {
                                         aux.setCodigo(codigo);
                                         aux.setTope(tope);
                                         aux.setPorcentaje(porcentaje);
-                                        ObraSocial os = new ObraSocial();
-                                        os.setNombre(ObraSocialCB.getSelectedItem().toString());
-                                        os = ObraSocialManager.getInstance().getByName(os);
+                                        ObraSocial os = ObraSocialList.get(ObraSocialCB.getSelectedIndex()-1);
                                         aux.setIdObraSocial(os.getId());
                                         cobertura.setIdObraSocial(os.getId());
-                                        Prestacion pr = PrestacionManager.getInstance().idByName(prestacion);
+                                        obraSocialJT.addColumn(idsPrestacion);
+                                        Prestacion pr = PrestacionManager.getInstance().getById(Integer.parseInt(obraSocialJT.getValueAt(filaSeleccionada,4).toString()));
+                                        obraSocialJT.removeColumn(idsPrestacion);
                                         aux.setIdPrestacion(pr.getId());
                                         cobertura.setIdPrestacion(pr.getId());
 
@@ -239,13 +217,11 @@ public class ActualizarPreciosOS extends Panel {
                                             tableModel.setRowCount(0); // Elimina todos los datos de la tabla
 
                                             // Agrega nuevos datos a la tabla según la opción seleccionada en el JComboBox
-                                            String selectedOption = ObraSocialCB.getSelectedItem().toString();
-                                            ObraSocial a = new ObraSocial();
-                                            a.setNombre(selectedOption);
-                                            ObraSocial obrasocial = ObraSocialManager.getInstance().getByName(a);
+                                            ObraSocial obrasocial = ObraSocialList.get(ObraSocialCB.getSelectedIndex()-1);
 
                                             JTable auxTable = CoberturaTableGenerator.getInstance().generateTable(obrasocial);
                                             obraSocialJT.setModel(auxTable.getModel());
+                                            removeColumn();
                                         } else {
                                             JOptionPane.showMessageDialog(null, "Ocurrió un error intentando modificar la cobertura.");
                                         }
@@ -267,6 +243,15 @@ public class ActualizarPreciosOS extends Panel {
         });
     }
 
+    private void removeColumn(){
+        DefaultTableColumnModel tcm = (DefaultTableColumnModel)obraSocialJT.getColumnModel();
+        idsObraSocial = tcm.getColumn(4);
+        idsPrestacion = tcm.getColumn(5);
+        tcm.removeColumn(tcm.getColumn(4));
+        tcm.removeColumn(tcm.getColumn(5));
+    }
+
+
     public class MiRenderizador extends DefaultTableCellRenderer {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -280,8 +265,48 @@ public class ActualizarPreciosOS extends Panel {
         }
     }
 
+    public void leeCB(){
+        ObraSocialCB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                DefaultTableModel tableModel = (DefaultTableModel) obraSocialJT.getModel();
+                tableModel.setRowCount(0); // Elimina todos los datos de la tabla
+
+                // Agrega nuevos datos a la tabla según la opción seleccionada en el JComboBox
+                if(ObraSocialCB.getSelectedIndex()!=0){
+                    ObraSocial obrasocial = ObraSocialList.get(ObraSocialCB.getSelectedIndex()-1);
+                    JTable auxTable = CoberturaTableGenerator.getInstance().generateTable(obrasocial);
+                    obraSocialJT.setModel(auxTable.getModel());
+                    obraSocialJT.setRowHeight(25);
 
 
+                }else{
+                    JOptionPane.showMessageDialog(null, "Debe seleccionar una obra social para cargar la tabla.");
+
+                }
+
+            }
+        });
+    }
+
+    @Override
+    public void setup(List<Object> arguments) {
+
+        ObraSocialList = ObraSocialManager.getInstance().getAll();
+        ComboBoxModel<String> cb = new DefaultComboBoxModel<>();
+        ObraSocialCB.setModel(cb);
+        ObraSocialCB.addItem("Ingrese una opcion");
+        for (int i=1;i<=ObraSocialList.size();i++) {
+            ObraSocialCB.insertItemAt(ObraSocialList.get(i-1).getNombre(),i);
+        }
+
+        JTable auxTalble = CoberturaTableGenerator.getInstance().generateTable(null);
+        obraSocialJT.setModel(auxTalble.getModel());
+        ObraSocialCB.setSelectedIndex(0);
+
+        this.removeColumn();
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -291,9 +316,5 @@ public class ActualizarPreciosOS extends Panel {
     private javax.swing.JLabel volverButton;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void setup(List<Object> arguments) {
-        JTable auxTalble = CoberturaTableGenerator.getInstance().generateTable(null);
-        obraSocialJT.setModel(auxTalble.getModel());
-    }
+
 }

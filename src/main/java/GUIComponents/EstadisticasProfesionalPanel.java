@@ -5,13 +5,12 @@
 package GUIComponents;
 
 import Managers.EstadisticasManager;
-import Managers.ProfesionalManager;
 import Objetos.Gasto;
 import Objetos.Ingreso;
 import Objetos.Profesional;
 import Objetos.Turno;
+import javax.swing.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -20,6 +19,7 @@ import java.util.List;
  */
 public class EstadisticasProfesionalPanel extends Panel {
     private static EstadisticasProfesionalPanel estadisticas;
+    private List<Profesional> profesionalList;
     public static EstadisticasProfesionalPanel getInstance(){
         if(estadisticas == null){
             estadisticas = new EstadisticasProfesionalPanel();
@@ -31,10 +31,6 @@ public class EstadisticasProfesionalPanel extends Panel {
      */
     public EstadisticasProfesionalPanel() {
         initComponents();
-        List<Profesional> allProfesional = ProfesionalManager.getInstance().getAll();
-        for (Profesional profesional: allProfesional){
-            estadisticasProCB.addItem(profesional.getNombre());
-        }
         
         jLabel2.setVisible(false);
         jLabel3.setVisible(false);
@@ -260,62 +256,88 @@ public class EstadisticasProfesionalPanel extends Panel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void estadisticasProCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadisticasProCBActionPerformed
-        String selectedOption = estadisticasProCB.getSelectedItem().toString();
-        Profesional profesional = ProfesionalManager.getInstance().getProfesionalByName(selectedOption);
-        Turno turno = new Turno();
-        turno.setIdProfesional(profesional.getId()); 
-        Ingreso ingreso = new Ingreso();
-        Gasto gasto = new Gasto();
-        ingreso.setIdProfesional(profesional.getId());
-        gasto.setIdProfesional(profesional.getId());
-        
-        List<Integer> turnos = new ArrayList<>();
-        List<Float> ingrGasto = new ArrayList<>();
-        
-        turnos = EstadisticasManager.getInstance().getTurnosAsistidosyNo(turno);
-        ingrGasto = EstadisticasManager.getInstance().getIngresoGastoByProfesional(ingreso, gasto);
-        
-       
-        
-        jLabel2.setVisible(true);
-        jLabel3.setVisible(true);
-        jLabel4.setVisible(true);
-        jLabel5.setVisible(true);
-        tALabel.setText(turnos.get(0).toString());
-        tALabel.setVisible(true);
-        
-        turnosNoAsistidosLabel.setVisible(true);
-        turnosNoAsistidosLabel.setText(turnos.get(1).toString());
-        
-        cantidadDeIngresosLabel.setText(ingrGasto.get(0).toString());
-        cantidadDeIngresosLabel.setVisible(true);
-        
-        cantidadDeGastosLabel.setText(ingrGasto.get(1).toString());
-        cantidadDeGastosLabel.setVisible(true);
-        
-        saldoLabel.setText(String.valueOf(ingrGasto.get(0)-ingrGasto.get(1)));
-        saldoLabel.setVisible(true);
-        
-        tALabel30.setText(turnos.get(2).toString());
-        tALabel30.setVisible(true);
-        
-        turnosNoAsistidos30Label.setText(turnos.get(3).toString());
-        turnosNoAsistidos30Label.setVisible(true);
-        
-        cantidadDeIngresos30Label.setText(ingrGasto.get(2).toString());
-        cantidadDeIngresos30Label.setVisible(true);
-        
-        cantidadDeGastos30Label.setText(ingrGasto.get(3).toString());
-        cantidadDeGastos30Label.setVisible(true);
-        
-        saldo30Label.setText(String.valueOf(ingrGasto.get(2)-ingrGasto.get(3)));
-        saldo30Label.setVisible(true);
-        
-        jLabel6.setVisible(true);
-        jLabel7.setVisible(true);
-        jLabel8.setVisible(true);
-        jLabel9.setVisible(true);
-        jLabel10.setVisible(true);
+        Profesional profesional = null;
+
+        if(estadisticasProCB.getSelectedIndex()==0){
+            jLabel2.setVisible(false);
+            jLabel3.setVisible(false);
+            jLabel4.setVisible(false);
+            jLabel5.setVisible(false);
+            tALabel.setVisible(false);
+            turnosNoAsistidosLabel.setVisible(false);
+            cantidadDeIngresosLabel.setVisible(false);
+            cantidadDeGastosLabel.setVisible(false);
+            saldoLabel.setVisible(false);
+            tALabel30.setVisible(false);
+            turnosNoAsistidos30Label.setVisible(false);
+            cantidadDeIngresos30Label.setVisible(false);
+            cantidadDeGastos30Label.setVisible(false);
+            saldo30Label.setVisible(false);
+            jLabel6.setVisible(false);
+            jLabel7.setVisible(false);
+            jLabel8.setVisible(false);
+            jLabel9.setVisible(false);
+            jLabel10.setVisible(false);
+        }
+        else{
+            profesional = profesionalList.get(estadisticasProCB.getSelectedIndex()-1);
+            Turno turno = new Turno();
+            turno.setIdProfesional(profesional.getId());
+            Ingreso ingreso = new Ingreso();
+            Gasto gasto = new Gasto();
+            ingreso.setIdProfesional(profesional.getId());
+            gasto.setIdProfesional(profesional.getId());
+
+            List<Integer> turnos = new ArrayList<>();
+            List<Float> ingrGasto = new ArrayList<>();
+
+            turnos = EstadisticasManager.getInstance().getTurnosAsistidosyNo(turno);
+            ingrGasto = EstadisticasManager.getInstance().getIngresoGastoByProfesional(ingreso, gasto);
+
+
+
+            jLabel2.setVisible(true);
+            jLabel3.setVisible(true);
+            jLabel4.setVisible(true);
+            jLabel5.setVisible(true);
+            tALabel.setText(turnos.get(0).toString());
+            tALabel.setVisible(true);
+
+            turnosNoAsistidosLabel.setVisible(true);
+            turnosNoAsistidosLabel.setText(turnos.get(1).toString());
+
+            cantidadDeIngresosLabel.setText(ingrGasto.get(0).toString());
+            cantidadDeIngresosLabel.setVisible(true);
+
+            cantidadDeGastosLabel.setText(ingrGasto.get(1).toString());
+            cantidadDeGastosLabel.setVisible(true);
+
+            saldoLabel.setText(String.valueOf(ingrGasto.get(0)-ingrGasto.get(1)));
+            saldoLabel.setVisible(true);
+
+            tALabel30.setText(turnos.get(2).toString());
+            tALabel30.setVisible(true);
+
+            turnosNoAsistidos30Label.setText(turnos.get(3).toString());
+            turnosNoAsistidos30Label.setVisible(true);
+
+            cantidadDeIngresos30Label.setText(ingrGasto.get(2).toString());
+            cantidadDeIngresos30Label.setVisible(true);
+
+            cantidadDeGastos30Label.setText(ingrGasto.get(3).toString());
+            cantidadDeGastos30Label.setVisible(true);
+
+            saldo30Label.setText(String.valueOf(ingrGasto.get(2)-ingrGasto.get(3)));
+            saldo30Label.setVisible(true);
+
+            jLabel6.setVisible(true);
+            jLabel7.setVisible(true);
+            jLabel8.setVisible(true);
+            jLabel9.setVisible(true);
+            jLabel10.setVisible(true);
+        }
+
+
     }//GEN-LAST:event_estadisticasProCBActionPerformed
 
 
@@ -347,6 +369,12 @@ public class EstadisticasProfesionalPanel extends Panel {
 
     @Override
     public void setup(List<Object> arguments) {
-        
+        profesionalList = EstadisticasManager.getInstance().getAllProfesional();
+        ComboBoxModel<String> cb = new DefaultComboBoxModel<>();
+        estadisticasProCB.setModel(cb);
+        estadisticasProCB.addItem("Ingrese una opcion");
+        for (int i=1;i<=profesionalList.size();i++) {
+            estadisticasProCB.insertItemAt(profesionalList.get(i-1).getNombre(),i);
+        }
     }
 }

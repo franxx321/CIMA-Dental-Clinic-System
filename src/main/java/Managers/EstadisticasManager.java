@@ -3,6 +3,7 @@ package Managers;
 import DAOs.MySQLImplementations.TurnoDAOImpl;
 import Objetos.Gasto;
 import Objetos.Ingreso;
+import Objetos.Profesional;
 import Objetos.Turno;
 import Utils.FormatedDate;
 
@@ -70,6 +71,10 @@ public class EstadisticasManager {
         ingrGasto.add(ingresoTotal30);
         ingrGasto.add(gastoTotal30);
         return ingrGasto;
+    }
+
+    public List<Profesional> getAllProfesional(){
+        return TurnoManager.getInstance().getAllProfesional();
     }
 
     private Date restarDias(Date fecha, int dias) {

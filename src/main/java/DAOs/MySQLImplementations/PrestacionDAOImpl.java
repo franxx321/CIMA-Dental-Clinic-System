@@ -2,6 +2,7 @@ package DAOs.MySQLImplementations;
 
 import DAOs.Interfaces.IPrestacionDAO;
 import Objetos.Prestacion;
+import Objetos.Turno;
 import Utils.DBUtils.DBConnector;
 
 import java.sql.Connection;
@@ -9,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PrestacionDAOImpl implements IPrestacionDAO {
@@ -171,4 +173,43 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
         p.setNombre(name);
         return p;
     }
+
+
+
+    public Prestacion getById(Prestacion p) {
+        Prestacion prestacion = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        try{
+            DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
+            con = DBConnection.getConnection();
+            pstm = con.prepareStatement("SELECT  *" +
+                    "FROM  prestaciones " +
+                    "WHERE id = ?");
+            pstm.setInt(1,p.getId());
+            rs = pstm.executeQuery();
+            prestacion = new Prestacion();
+            if(rs.next()){
+
+                prestacion.setId(rs.getInt(1));
+                prestacion.setNombre(rs.getString(2));
+                prestacion.setBien(rs.getBoolean(3));
+                prestacion.setDescripcion(rs.getString(4));
+            }
+            else{
+                prestacion.setId(-1);
+            }
+
+        }
+        catch (SQLException e){
+            System.out.println("Fallo PrestacionDAOImpl, getById "+ e.getMessage());
+        }
+
+
+        return prestacion;
+    }
+
+
+
 }

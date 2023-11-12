@@ -4,20 +4,22 @@
  */
 package GUIComponents;
 
-import Managers.GastoManager;
-import Managers.MontoManager;
-import Managers.PrestacionManager;
-import Managers.TurnoManager;
-import Managers.ProfesionalManager;
+import Managers.*;
 import Objetos.Monto;
+import Objetos.ObraSocial;
+import Objetos.Prestacion;
 import Objetos.Profesional;
 import Utils.GUIUtils.PanelGUIHandler;
 import Utils.GUIUtils.SMenuGUIHandler;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import javax.swing.JTable;
+import javax.swing.*;
+import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+
+import Utils.TableGenerator.CoberturaTableGenerator;
 import Utils.TableGenerator.ProfesionalTableGenerator;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
@@ -25,9 +27,6 @@ import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *
@@ -37,6 +36,9 @@ public class ActualizarPreciosProfesional extends Panel {
     
     private static ActualizarPreciosProfesional actualizarPreciosProfesional;
 
+    List<Profesional> ProfesionalList;
+
+    private TableColumn idsPrestacion;
     public static ActualizarPreciosProfesional getInstance(){
         if(actualizarPreciosProfesional==null){
             actualizarPreciosProfesional= new ActualizarPreciosProfesional();
@@ -48,28 +50,11 @@ public class ActualizarPreciosProfesional extends Panel {
      */
     private ActualizarPreciosProfesional() {
         initComponents();
-        //carga de combobox
-        List<Profesional> allProfesional = ProfesionalManager.getInstance().getAll();
-        for (Profesional profesional: allProfesional){
-            profesionalCB.addItem(profesional.getNombre());
-        }
+
+
         
         //actualizacion de tabla
-        profesionalCB.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-                DefaultTableModel tableModel = (DefaultTableModel) profesionalJT.getModel();
-                tableModel.setRowCount(0); // Elimina todos los datos de la tabla
-
-                // Agrega nuevos datos a la tabla según la opción seleccionada en el JComboBox
-                String selectedOption = profesionalCB.getSelectedItem().toString();
-                Profesional profesional = ProfesionalManager.getInstance().getProfesionalByName(selectedOption);
-                
-                JTable auxTable = ProfesionalTableGenerator.getInstance().generateTable(profesional);
-                profesionalJT.setModel(auxTable.getModel());
-            }
-        });
+        leeCB();
         
         leerTablaProfesional();
         
@@ -210,11 +195,12 @@ public class ActualizarPreciosProfesional extends Panel {
                             float precio = Float.parseFloat(montoStr);
                             Monto monto = new Monto();
                             Monto newMonto = new Monto();
-
-                            monto.setIdPrestacion(PrestacionManager.getInstance().idByName(prestacion).getId());
-                            newMonto.setIdPrestacion(PrestacionManager.getInstance().idByName(prestacion).getId());
-                            Profesional p = new Profesional();
-                            p = ProfesionalManager.getInstance().getProfesionalByName(profesionalCB.getSelectedItem().toString());
+                            profesionalJT.addColumn(idsPrestacion);
+                            Prestacion pr = PrestacionManager.getInstance().getById(Integer.parseInt(profesionalJT.getValueAt(filaSeleccionada,4).toString()));
+                            profesionalJT.removeColumn(idsPrestacion);
+                            monto.setIdPrestacion(pr.getId());
+                            newMonto.setIdPrestacion(pr.getId());
+                            Profesional p = ProfesionalList.get(profesionalCB.getSelectedIndex()-1);
                             monto.setIdProfesional(p.getId());
                             newMonto.setIdProfesional(p.getId());
                             newMonto.setPrecio(precio);
@@ -224,8 +210,7 @@ public class ActualizarPreciosProfesional extends Panel {
                                 tableModel.setRowCount(0); // Elimina todos los datos de la tabla
 
                                 // Agrega nuevos datos a la tabla según la opción seleccionada en el JComboBox
-                                String selectedOption = profesionalCB.getSelectedItem().toString();
-                                Profesional profesional = ProfesionalManager.getInstance().getProfesionalByName(selectedOption);
+                                Profesional profesional = ProfesionalList.get(profesionalCB.getSelectedIndex()-1);
 
                                 JTable auxTable = ProfesionalTableGenerator.getInstance().generateTable(profesional);
                                 profesionalJT.setModel(auxTable.getModel());
@@ -243,12 +228,62 @@ public class ActualizarPreciosProfesional extends Panel {
         }
     });
         }
-    
+
+    public void leeCB(){
+        profesionalCB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                DefaultTableModel tableModel = (DefaultTableModel) profesionalJT.getModel();
+                tableModel.setRowCount(0); // Elimina todos los datos de la tabla
+
+                // Agrega nuevos datos a la tabla según la opción seleccionada en el JComboBox
+                if(profesionalCB.getSelectedIndex()!=0){
+
+                    Profesional profesional = ProfesionalList.get(profesionalCB.getSelectedIndex()-1);
+                    JTable auxTable = ProfesionalTableGenerator.getInstance().generateTable(profesional);
+                    profesionalJT.setModel(auxTable.getModel());
+                    profesionalJT.setRowHeight(25);
+
+
+                }else{
+                    JOptionPane.showMessageDialog(null, "Debe seleccionar una obra social para cargar la tabla.");
+
+                }
+
+            }
+        });
+    }
+
+    public void removeColumn(){
+        DefaultTableColumnModel tcm = (DefaultTableColumnModel)profesionalJT.getColumnModel();
+        idsPrestacion = tcm.getColumn(4);
+        tcm.removeColumn(tcm.getColumn(4));
+
+    }
+
     @Override
     public void setup(List<Object> arguments) {
-        
+        //carga de combobox
+
+
+        ProfesionalList = ProfesionalManager.getInstance().getAll();
+        ComboBoxModel<String> cb = new DefaultComboBoxModel<>();
+        profesionalCB.setModel(cb);
+        profesionalCB.addItem("Ingrese una opcion");
+
+        for (int i=1;i<=ProfesionalList.size();i++) {
+            profesionalCB.insertItemAt(ProfesionalList.get(i-1).getNombre(),i);
+        }
+
+        JTable auxTalble = ProfesionalTableGenerator.getInstance().generateTable(null);
+        profesionalJT.setModel(auxTalble.getModel());
+        profesionalCB.setSelectedIndex(0);
+
+        this.removeColumn();
     }
     
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

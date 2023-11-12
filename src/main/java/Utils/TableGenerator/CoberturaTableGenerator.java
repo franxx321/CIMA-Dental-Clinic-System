@@ -41,6 +41,8 @@ public class CoberturaTableGenerator {
         header.add(1, "Porcentaje");
         header.add(2,"Tope");
         header.add(3,"Codigo");
+        header.add(4,"idObraSocial");
+        header.add(5,"idPrestacion");
 
         if (coberturaList != null) {
 
@@ -52,6 +54,8 @@ public class CoberturaTableGenerator {
                         vector.add(1,"" + cobertura.getPorcentaje());
                         vector.add(2,"" + cobertura.getTope());
                         vector.add(3,cobertura.getCodigo());
+                        vector.add(4,"" + cobertura.getIdObraSocial());
+                        vector.add(5,""+ cobertura.getIdPrestacion());
                         break;
                     }
                 }

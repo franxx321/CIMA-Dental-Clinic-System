@@ -34,6 +34,7 @@ public class ProfesionalTableGenerator {
 
         header.add(0, "Prestacion");
         header.add(1, "Monto");
+        header.add(2, "idPrestacion");
 
         if (montoList != null) {
 
@@ -43,6 +44,7 @@ public class ProfesionalTableGenerator {
                     if (monto.getIdPrestacion() == prestacion.getId()) {
                         vector.add(0, prestacion.getNombre());
                         vector.add(1,"" + monto.getPrecio());
+                        vector.add(2,"" + monto.getIdPrestacion());
                         break;
                     }
                 }

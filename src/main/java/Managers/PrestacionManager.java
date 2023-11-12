@@ -31,4 +31,10 @@ public class PrestacionManager {
        return PrestacionDAOImpl.getInstance().nameById(id);
    }
 
+   public Prestacion getById(int id){
+        Prestacion prestacion = new Prestacion();
+        prestacion.setId(id);
+        return PrestacionDAOImpl.getInstance().getById(prestacion);
+    }
+
 }

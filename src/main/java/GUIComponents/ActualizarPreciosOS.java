@@ -248,7 +248,7 @@ public class ActualizarPreciosOS extends Panel {
         idsObraSocial = tcm.getColumn(4);
         idsPrestacion = tcm.getColumn(5);
         tcm.removeColumn(tcm.getColumn(4));
-        tcm.removeColumn(tcm.getColumn(5));
+        tcm.removeColumn(tcm.getColumn(4));
     }
 
 
@@ -278,12 +278,16 @@ public class ActualizarPreciosOS extends Panel {
                     ObraSocial obrasocial = ObraSocialList.get(ObraSocialCB.getSelectedIndex()-1);
                     JTable auxTable = CoberturaTableGenerator.getInstance().generateTable(obrasocial);
                     obraSocialJT.setModel(auxTable.getModel());
+                    ActualizarPreciosOS.getInstance().removeColumn();
                     obraSocialJT.setRowHeight(25);
 
 
-                }else{
-                    JOptionPane.showMessageDialog(null, "Debe seleccionar una obra social para cargar la tabla.");
-
+                }
+                else{
+                    JTable auxTable = CoberturaTableGenerator.getInstance().generateTable(null);
+                    obraSocialJT.setModel(auxTable.getModel());
+                    ActualizarPreciosOS.getInstance().removeColumn();
+                    obraSocialJT.setRowHeight(25);
                 }
 
             }
@@ -303,9 +307,8 @@ public class ActualizarPreciosOS extends Panel {
 
         JTable auxTalble = CoberturaTableGenerator.getInstance().generateTable(null);
         obraSocialJT.setModel(auxTalble.getModel());
-        ObraSocialCB.setSelectedIndex(0);
-
         this.removeColumn();
+        ObraSocialCB.setSelectedIndex(0);
     }
 
 

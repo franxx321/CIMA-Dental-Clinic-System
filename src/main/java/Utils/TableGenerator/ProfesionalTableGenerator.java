@@ -29,8 +29,12 @@ public class ProfesionalTableGenerator {
         JTable table = new JTable();
         Vector<Vector<String>> data = new Vector<>();
         Vector<String> header = new Vector<>();
-        List<Monto> montoList = MontoManager.getInstance().getMontoByIdProfesional(profesional.getId());
-        List<Prestacion> prestacionList = PrestacionManager.getInstance().getAllPrestacion();
+        List<Monto> montoList =null;
+        List<Prestacion> prestacionList = null;
+        if(profesional !=null) {
+            montoList = MontoManager.getInstance().getMontoByIdProfesional(profesional.getId());
+            prestacionList = PrestacionManager.getInstance().getAllPrestacion();
+        }
 
         header.add(0, "Prestacion");
         header.add(1, "Monto");

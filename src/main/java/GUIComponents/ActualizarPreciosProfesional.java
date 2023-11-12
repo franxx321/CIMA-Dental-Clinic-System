@@ -196,7 +196,7 @@ public class ActualizarPreciosProfesional extends Panel {
                             Monto monto = new Monto();
                             Monto newMonto = new Monto();
                             profesionalJT.addColumn(idsPrestacion);
-                            Prestacion pr = PrestacionManager.getInstance().getById(Integer.parseInt(profesionalJT.getValueAt(filaSeleccionada,4).toString()));
+                            Prestacion pr = PrestacionManager.getInstance().getById(Integer.parseInt(profesionalJT.getValueAt(filaSeleccionada,2).toString()));
                             profesionalJT.removeColumn(idsPrestacion);
                             monto.setIdPrestacion(pr.getId());
                             newMonto.setIdPrestacion(pr.getId());
@@ -211,11 +211,9 @@ public class ActualizarPreciosProfesional extends Panel {
 
                                 // Agrega nuevos datos a la tabla según la opción seleccionada en el JComboBox
                                 Profesional profesional = ProfesionalList.get(profesionalCB.getSelectedIndex()-1);
-
                                 JTable auxTable = ProfesionalTableGenerator.getInstance().generateTable(profesional);
                                 profesionalJT.setModel(auxTable.getModel());
-                            }else{
-                                JOptionPane.showMessageDialog(ActualizarPreciosProfesional.getInstance(), "Ocurrio un error intentando modificar el monto.");
+                                ActualizarPreciosProfesional.getInstance().removeColumn();
                             }
 
                         } else {
@@ -244,11 +242,14 @@ public class ActualizarPreciosProfesional extends Panel {
                     JTable auxTable = ProfesionalTableGenerator.getInstance().generateTable(profesional);
                     profesionalJT.setModel(auxTable.getModel());
                     profesionalJT.setRowHeight(25);
+                    ActualizarPreciosProfesional.getInstance().removeColumn();
 
 
                 }else{
-                    JOptionPane.showMessageDialog(null, "Debe seleccionar una obra social para cargar la tabla.");
-
+                    JTable auxTable = ProfesionalTableGenerator.getInstance().generateTable(null);
+                    profesionalJT.setModel(auxTable.getModel());
+                    profesionalJT.setRowHeight(25);
+                    ActualizarPreciosProfesional.getInstance().removeColumn();
                 }
 
             }
@@ -257,15 +258,14 @@ public class ActualizarPreciosProfesional extends Panel {
 
     public void removeColumn(){
         DefaultTableColumnModel tcm = (DefaultTableColumnModel)profesionalJT.getColumnModel();
-        idsPrestacion = tcm.getColumn(4);
-        tcm.removeColumn(tcm.getColumn(4));
+        idsPrestacion = tcm.getColumn(2);
+        tcm.removeColumn(tcm.getColumn(2));
 
     }
 
     @Override
     public void setup(List<Object> arguments) {
         //carga de combobox
-
 
         ProfesionalList = ProfesionalManager.getInstance().getAll();
         ComboBoxModel<String> cb = new DefaultComboBoxModel<>();
@@ -279,7 +279,6 @@ public class ActualizarPreciosProfesional extends Panel {
         JTable auxTalble = ProfesionalTableGenerator.getInstance().generateTable(null);
         profesionalJT.setModel(auxTalble.getModel());
         profesionalCB.setSelectedIndex(0);
-
         this.removeColumn();
     }
     

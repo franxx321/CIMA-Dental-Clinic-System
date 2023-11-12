@@ -191,10 +191,10 @@ public class ActualizarPreciosOS extends Panel {
                                 String regex2 = "^[1-9]\\d*(\\.\\d{1,2})?$";
 
                                 if (porcentajeStr.matches(regex1)) {
-                                    int porcentaje = Integer.parseInt(porcentajeStr);
+                                    float porcentaje = Float.parseFloat(porcentajeStr);
 
                                     if (topeStr.matches(regex2)) {
-                                        int tope = Integer.parseInt(topeStr);
+                                        float tope = Float.parseFloat(topeStr);
 
                                         Cobertura cobertura = new Cobertura();
                                         Cobertura aux = new Cobertura();

@@ -277,8 +277,8 @@ public class ActualizarPreciosProfesional extends Panel {
         }
 
         JTable auxTalble = ProfesionalTableGenerator.getInstance().generateTable(null);
-        profesionalJT.setModel(auxTalble.getModel());
         profesionalCB.setSelectedIndex(0);
+        profesionalJT.setModel(auxTalble.getModel());
         this.removeColumn();
     }
     

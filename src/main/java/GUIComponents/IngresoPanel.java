@@ -285,9 +285,10 @@ public class IngresoPanel extends Panel {
             }
             IngresoManager.getInstance().add(fecha,p.getId(),pr.getId(),turno.getId(),obraSocial.getId(),monto, descripcion);
             JOptionPane.showMessageDialog(this,"El ingreso fue registrado exitosamente");
+            confirmarButton.setBackground(new Color (223, 246, 255) );
             PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.finanzas,null);
             SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
-            confirmarButton.setBackground(new Color (152, 251, 152));
+
         }
 
 
@@ -295,13 +296,14 @@ public class IngresoPanel extends Panel {
     }//GEN-LAST:event_confirmarButtonMousePressed
 
     private void cancelarButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMouseExited
-        confirmarButton.setBackground(new Color (223, 246, 255) );
+        cancelarButton.setBackground(new Color (223, 246, 255) );
     }//GEN-LAST:event_cancelarButtonMouseExited
 
     private void cancelarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMousePressed
+        cancelarButton.setBackground(new Color (223, 246, 255) );
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.finanzas,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
-        cancelarButton.setBackground(new Color (223, 246, 255) );
+
     }//GEN-LAST:event_cancelarButtonMousePressed
 
     private void cancelarButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMouseEntered
@@ -314,7 +316,6 @@ public class IngresoPanel extends Panel {
     }//GEN-LAST:event_confirmarButtonMouseExited
 
     private void confirmarButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMouseEntered
-        // TODO add your handling code here:
         confirmarButton.setOpaque(true);
         confirmarButton.setBackground(new Color (152, 251, 152));
     }//GEN-LAST:event_confirmarButtonMouseEntered

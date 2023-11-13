@@ -22,6 +22,7 @@ import org.jdatepicker.impl.UtilDateModel;
 
 
 import javax.swing.*;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -375,6 +376,7 @@ public class MenuModificarTurno extends Panel {
     }//GEN-LAST:event_configurarPrestacionesButtonMousePressed
 
     private void cancelarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMousePressed
+        cancelarButton.setBackground(new Color (223, 246, 255) );
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelInicio,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
     }//GEN-LAST:event_cancelarButtonMousePressed
@@ -443,6 +445,7 @@ public class MenuModificarTurno extends Panel {
             try{
                 TurnoManager.getInstance().modifyTurno(turno,newTurno);
                 JOptionPane.showMessageDialog(this, "El turno fue modificado correctamente");
+                confirmarButton.setBackground(new Color (223, 246, 255) );
                 PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelTurnos,null);
                 SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
             }
@@ -487,12 +490,13 @@ public class MenuModificarTurno extends Panel {
        confirmarButton.setBackground(new Color (223, 246, 255) );
     }//GEN-LAST:event_confirmarButtonMouseExited
 
-    private void configurarPrestacionesButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_configurarPrestacionesButtonMouseEntered
-        // TODO add your handling code here:
+    private void configurarPrestacionesButtonMouseEntered(MouseEvent evt) {//GEN-FIRST:event_configurarPrestacionesButtonMouseEntered
+        configurarPrestacionesButton.setOpaque(true);
+        configurarPrestacionesButton.setBackground(new Color (150, 231, 255) );
     }//GEN-LAST:event_configurarPrestacionesButtonMouseEntered
 
     private void configurarPrestacionesButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_configurarPrestacionesButtonMouseExited
-        // TODO add your handling code here:
+        configurarPrestacionesButton.setBackground(new Color (223, 246, 255) );
     }//GEN-LAST:event_configurarPrestacionesButtonMouseExited
 
 

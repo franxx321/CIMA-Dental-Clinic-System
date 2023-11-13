@@ -242,6 +242,7 @@ public class EliminarTurno extends Panel {
             Turno turno = TurnoManager.getInstance().getById(Integer.parseInt(turnosTable.getValueAt(row,5).toString()));
             turnosTable.removeColumn(idsTurnos);
             TurnoManager.getInstance().deleteTurno(turno);
+            confirmarButton.setBackground(new Color (223, 246, 255) );
             PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelTurnos,null);
             SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
         }else{
@@ -251,6 +252,7 @@ public class EliminarTurno extends Panel {
     }//GEN-LAST:event_confirmarButtonMousePressed
 
     private void cancelarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMousePressed
+        cancelarButton.setBackground(new Color (223, 246, 255) );
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelTurnos,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
     }//GEN-LAST:event_cancelarButtonMousePressed

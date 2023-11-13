@@ -50,7 +50,7 @@ public class AgregarGastoPanel extends Panel {
         initComponents();
         Date date = FormatedDate.formatedDate(new Date());
         model = new UtilDateModel();
-        model.setDate(date.getYear()+1900,date.getMonth()+1,date.getDate());
+        model.setDate(date.getYear()+1900,date.getMonth(),date.getDate());
         Properties p = new Properties();
         p.put("text.today", "Today");
         p.put("text.month", "Month");
@@ -204,7 +204,7 @@ public class AgregarGastoPanel extends Panel {
         String errStr ="";
         String descripcion = descripcionTF.getText();
         float monto= 0;
-        Profesional  profesional = profesionalList.get(profesionalCB.getSelectedIndex()+1);
+        Profesional  profesional = profesionalList.get(profesionalCB.getSelectedIndex()-1);
         Date auxfecha= (Date) datePicker.getModel().getValue();
         java.sql.Date fecha = new java.sql.Date(auxfecha.getTime());
         try {
@@ -220,6 +220,7 @@ public class AgregarGastoPanel extends Panel {
         else{
             GastoManager.getInstance().addGasto(monto, descripcion, fecha, profesional);
             JOptionPane.showMessageDialog(this, "El gasto fue cargado correctamente");
+            confirmarButton.setBackground(new Color (223, 246, 255) );
             PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.finanzas,null);
             SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
             working=false;
@@ -229,6 +230,7 @@ public class AgregarGastoPanel extends Panel {
 
     private void cancelarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMousePressed
         working=false;
+        cancelarButton.setBackground(new Color (223, 246, 255) );
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.finanzas,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
     }//GEN-LAST:event_cancelarButtonMousePressed
@@ -272,7 +274,7 @@ public class AgregarGastoPanel extends Panel {
         }
         if (!working){
             Date date = FormatedDate.formatedDate(new Date());
-            model.setDate(date.getYear()+1900,date.getMonth()+1,date.getDate());
+            model.setDate(date.getYear()+1900,date.getMonth(),date.getDate());
             profesionalCB.setSelectedIndex(0);
             precioTF.setText("");
             descripcionTF.setText("");

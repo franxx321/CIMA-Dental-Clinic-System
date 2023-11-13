@@ -155,6 +155,7 @@ public class ActualizarPreciosOS extends Panel {
     }//GEN-LAST:event_volverButtonMouseExited
 
     private void volverButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volverButtonMousePressed
+        volverButton.setBackground(new Color (223, 246, 255) );
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.actualizarPrecios,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
     }//GEN-LAST:event_volverButtonMousePressed

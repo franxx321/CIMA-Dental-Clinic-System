@@ -135,16 +135,19 @@ public class PanelTurnos extends Panel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarTurnoButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarTurnoButtonMousePressed
+        agregarTurnoButton.setBackground(new Color (223, 246, 255) );
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.agregarTurno,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioTurnos,null);
     }//GEN-LAST:event_agregarTurnoButtonMousePressed
 
     private void modificarTurnoButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarTurnoButtonMousePressed
+        modificarTurnoButton.setBackground(new Color (223, 246, 255) );
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.buscarPaciente,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioTurnos,null);
     }//GEN-LAST:event_modificarTurnoButtonMousePressed
 
     private void eliminarTurnoButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarTurnoButtonMousePressed
+        eliminarTurnoButton.setBackground(new Color (223, 246, 255) );
         PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.eliminarTurno,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioTurnos,null);
     }//GEN-LAST:event_eliminarTurnoButtonMousePressed

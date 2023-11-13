@@ -187,7 +187,7 @@ public class ActualizarPreciosOS extends Panel {
                                 String topeStr = modelo.getValueAt(filaSeleccionada, 2).toString();
                                 String codigo = modelo.getValueAt(filaSeleccionada, 3).toString();
 
-                                String regex1 = "^(0|[1-9]\\d?|100)$";
+                                String regex1 = "^(0*(?:100(?:\\.0+)?|\\d{0,2}(?:\\.\\d+)?)|100(?:\\.0+)?)$";
                                 String regex2 = "^[1-9]\\d*(\\.\\d{1,2})?$";
 
                                 if (porcentajeStr.matches(regex1)) {

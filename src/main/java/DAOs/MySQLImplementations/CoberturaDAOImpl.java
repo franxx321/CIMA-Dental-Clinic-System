@@ -145,8 +145,8 @@ public class CoberturaDAOImpl implements ICoberturaDAO {
                 Cobertura c = new Cobertura();
                 c.setIdObraSocial(rs.getInt(1));
                 c.setIdPrestacion(rs.getInt(2));
-                c.setPorcentaje(rs.getInt(3));
-                c.setTope(rs.getInt(4));
+                c.setPorcentaje(rs.getFloat(3));
+                c.setTope(rs.getFloat(4));
                 c.setCodigo(rs.getString(5));
                 coberturaList.add(c);
             }

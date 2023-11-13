@@ -178,6 +178,7 @@ public class TurnoIngresoPanel extends Panel {
             jTable1.removeColumn(idsTurnos);
             List<Object> arguments = new ArrayList<>();
             arguments.add(turno);
+            confirmarButton.setBackground(new Color (223, 246, 255) );
             PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.agregarIngreso,arguments);
         }
     }//GEN-LAST:event_confirmarButtonMousePressed

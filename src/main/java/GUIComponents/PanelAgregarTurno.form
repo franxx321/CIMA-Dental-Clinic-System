@@ -32,26 +32,26 @@
                   <Component id="profesionalCB" pref="202" max="32767" attributes="0"/>
                   <Component id="pacienteTF" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+              <EmptySpace pref="85" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                   <Component id="servicioTF" pref="202" max="32767" attributes="0"/>
                   <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="datePickerPanel" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+              <EmptySpace pref="85" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                   <Component id="horaFinTF" min="-2" pref="202" max="-2" attributes="0"/>
                   <Component id="horaInicioTF" alignment="0" min="-2" pref="202" max="-2" attributes="0"/>
                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="106" max="32767" attributes="0"/>
+              <EmptySpace pref="93" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Component id="flechaIzqButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="cancelarButton" min="-2" pref="113" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="214" max="-2" attributes="0"/>
               <Component id="confirmarButton" min="-2" pref="113" max="-2" attributes="0"/>

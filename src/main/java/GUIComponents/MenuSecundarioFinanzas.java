@@ -60,6 +60,7 @@ public class MenuSecundarioFinanzas extends Panel {
         });
 
         agregarIngresoButton.setText("Agregar Ingreso");
+        agregarIngresoButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         agregarIngresoButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 agregarIngresoButtonMouseEntered(evt);
@@ -77,9 +78,9 @@ public class MenuSecundarioFinanzas extends Panel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(253, Short.MAX_VALUE)
+                .addGap(255, 255, 255)
                 .addComponent(agregarGastoButton)
-                .addGap(196, 196, 196)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
                 .addComponent(agregarIngresoButton)
                 .addGap(255, 255, 255))
         );
@@ -101,6 +102,8 @@ public class MenuSecundarioFinanzas extends Panel {
 
     private void agregarIngresoButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarIngresoButtonMousePressed
         // TODO add your handling code here:
+        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.turnoIngreso, null);
+        SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioFinanzas, null);
     }//GEN-LAST:event_agregarIngresoButtonMousePressed
 
     private void agregarIngresoButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarIngresoButtonMouseEntered

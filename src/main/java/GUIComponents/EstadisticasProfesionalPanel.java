@@ -85,6 +85,7 @@ public class EstadisticasProfesionalPanel extends Panel {
         jLabel10 = new javax.swing.JLabel();
         estadisticasProCB = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(223, 246, 255));
 
@@ -140,6 +141,8 @@ public class EstadisticasProfesionalPanel extends Panel {
 
         jLabel11.setText("Ultimos 30 dias");
 
+        jLabel12.setText("Total");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -147,11 +150,9 @@ public class EstadisticasProfesionalPanel extends Panel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(98, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(estadisticasProCB, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(estadisticasProCB, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -173,7 +174,8 @@ public class EstadisticasProfesionalPanel extends Panel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGap(18, 18, 18)
-                                .addComponent(saldoLabel)))
+                                .addComponent(saldoLabel))
+                            .addComponent(jLabel12))
                         .addGap(213, 213, 213)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -197,8 +199,8 @@ public class EstadisticasProfesionalPanel extends Panel {
                                     .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addComponent(tALabel30)))
-                        .addContainerGap(176, Short.MAX_VALUE))))
+                                .addComponent(tALabel30)))))
+                .addContainerGap(176, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,7 +210,9 @@ public class EstadisticasProfesionalPanel extends Panel {
                 .addGap(18, 18, 18)
                 .addComponent(estadisticasProCB, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
-                .addComponent(jLabel11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -278,6 +282,9 @@ public class EstadisticasProfesionalPanel extends Panel {
             jLabel8.setVisible(false);
             jLabel9.setVisible(false);
             jLabel10.setVisible(false);
+            jLabel1.setVisible(false);
+            jLabel12.setVisible(false);
+            jLabel11.setVisible(false);
         }
         else{
             profesional = profesionalList.get(estadisticasProCB.getSelectedIndex()-1);
@@ -294,8 +301,9 @@ public class EstadisticasProfesionalPanel extends Panel {
             turnos = EstadisticasManager.getInstance().getTurnosAsistidosyNo(turno);
             ingrGasto = EstadisticasManager.getInstance().getIngresoGastoByProfesional(ingreso, gasto);
 
-
-
+            jLabel1.setVisible(true);
+            jLabel12.setVisible(true);
+            jLabel11.setVisible(true);
             jLabel2.setVisible(true);
             jLabel3.setVisible(true);
             jLabel4.setVisible(true);
@@ -351,6 +359,7 @@ public class EstadisticasProfesionalPanel extends Panel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

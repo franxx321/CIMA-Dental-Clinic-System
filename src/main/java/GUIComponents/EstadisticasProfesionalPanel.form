@@ -24,12 +24,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace pref="98" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="estadisticasProCB" alignment="0" max="32767" attributes="0"/>
-                          <Component id="JLabel1" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="estadisticasProCB" alignment="0" max="32767" attributes="0"/>
+                      <Component id="JLabel1" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -58,6 +55,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="saldoLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="213" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -90,9 +88,9 @@
                               <Component id="tALabel30" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="176" max="32767" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace pref="176" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -104,7 +102,10 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="estadisticasProCB" min="-2" pref="45" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-              <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
@@ -293,6 +294,11 @@
     <Component class="javax.swing.JLabel" name="jLabel11">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ultimos 30 dias"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel12">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Total"/>
       </Properties>
     </Component>
   </SubComponents>

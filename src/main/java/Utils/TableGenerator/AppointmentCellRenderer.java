@@ -19,7 +19,7 @@ public class AppointmentCellRenderer extends DefaultTableCellRenderer {
         final Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         if(column>=1){
             try {
-                if(paintedcell.get(row).get(column)) {
+                if(paintedcell.get(column).get(row)) {
                     c.setBackground(Color.RED);
                 }
             }

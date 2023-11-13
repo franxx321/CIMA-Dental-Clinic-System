@@ -74,7 +74,7 @@ public class EstadisticasManager {
     }
 
     public List<Profesional> getAllProfesional(){
-        return TurnoManager.getInstance().getAllProfesional();
+        return ProfesionalManager.getInstance().getAll();
     }
 
     private Date restarDias(Date fecha, int dias) {

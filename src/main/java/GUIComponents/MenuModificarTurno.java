@@ -103,7 +103,7 @@ public class MenuModificarTurno extends Panel {
                 break;
             }
         }
-        model.setDate(turno.getHoraFin().getYear(), turno.getHoraFin().getMonth(),turno.getHoraFin().getDay());
+        model.setDate(turno.getHoraFin().getYear()+1900, turno.getHoraFin().getMonth(),turno.getHoraFin().getDay());
         profesionalLabel.setText(profesional.getNombre());
         horaFinTF.setText(turno.getHoraFin().getHours()+ ":"+ turno.getHoraFin().getMinutes());
         horaInicioTF.setText(turno.getHoraInicio().getHours()+ ":"+ turno.getHoraInicio().getMinutes());
@@ -387,7 +387,6 @@ public class MenuModificarTurno extends Panel {
         float valor = Float.parseFloat(precioTextField.getText());
         String errorString ="";
         Date fecha = FormatedDate.formatedDate((Date) datePicker.getModel().getValue());
-        fecha.setYear(fecha.getYear()+1900);
         String horaInicioString = horaInicioTF.getText().trim();
         String horaFinString = horaFinTF.getText().trim();
         long milisegundos = fecha.getTime();

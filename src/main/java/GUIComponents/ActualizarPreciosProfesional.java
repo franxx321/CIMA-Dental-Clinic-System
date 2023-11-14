@@ -218,7 +218,7 @@ public class ActualizarPreciosProfesional extends Panel {
                             }
 
                         } else {
-                            JOptionPane.showMessageDialog(ActualizarPreciosProfesional.getInstance(), "El monto introducido no tiene un formato válido.\nDebe ser un número con hasta dos decimales (por ejemplo, 123.45).");
+                            JOptionPane.showMessageDialog(ActualizarPreciosProfesional.getInstance(), "El monto introducido no tiene un formato válido.\nDebe ser un número con hasta dos decimales (por ejemplo, 123.45).", "Error", JOptionPane.WARNING_MESSAGE);
                         }
                         }
                     }

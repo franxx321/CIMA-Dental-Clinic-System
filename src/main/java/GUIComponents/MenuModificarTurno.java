@@ -432,7 +432,7 @@ public class MenuModificarTurno extends Panel {
         }
 
         if(error){
-            JOptionPane.showMessageDialog(this, "Error!\n" + errorString);
+            JOptionPane.showMessageDialog(this, "Error!\n" + errorString, "Error", JOptionPane.WARNING_MESSAGE);
         }else{
             horaInicioEnMilisegundos +=milisegundos;
             horafinEnMilisegundos +=milisegundos;
@@ -451,7 +451,7 @@ public class MenuModificarTurno extends Panel {
                 SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
             }
             catch (CantAddTurno e){
-                JOptionPane.showMessageDialog(this, "Error!\n" + e.getErrors());
+                JOptionPane.showMessageDialog(this, "Error!\n" + e.getErrors(), "Error", JOptionPane.WARNING_MESSAGE);
             }
         }
     }//GEN-LAST:event_confirmarButtonMousePressed

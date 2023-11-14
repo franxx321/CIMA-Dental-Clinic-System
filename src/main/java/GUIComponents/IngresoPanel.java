@@ -277,7 +277,7 @@ public class IngresoPanel extends Panel {
             errStr = errStr+"\n Seleccione una obra social";
         }
         if(error){
-            JOptionPane.showMessageDialog(this, "Error!\n" + errStr);
+            JOptionPane.showMessageDialog(this, "Error!\n" + errStr, "Error", JOptionPane.WARNING_MESSAGE);
         }
         else {
             ObraSocial obraSocial = null;

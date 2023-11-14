@@ -215,7 +215,7 @@ public class BuscarTurnoPaciente extends Panel {
             errorString = errorString + "DNI Ingresado incorrecto \n";
         }
         if (error){
-            JOptionPane.showMessageDialog(this, "Error!\n" + errorString);
+            JOptionPane.showMessageDialog(this, "Error!\n" + errorString, "Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_buscarButtonMousePressed
 
@@ -238,7 +238,7 @@ public class BuscarTurnoPaciente extends Panel {
         confirmarButton.setBackground(new Color (223, 246, 255) );
         }
         else{
-            JOptionPane.showMessageDialog(this, "Error!\n Seleccione un turno");
+            JOptionPane.showMessageDialog(this, "Error!\n Seleccione un turno", "Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_confirmarButtonMousePressed
 

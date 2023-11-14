@@ -401,7 +401,7 @@ public class PanelAgregarTurno extends Panel {
                 int minutos1= Integer.parseInt(matcher1.group(2));
                 horaInicioEnMilisegundos = ((long) hora1 * 60 * 60 * 1000) + ((long) minutos1 * 60 * 1000);
             }else {
-                // JOptionPane.showMessageDialog(null, "Inserte una hora de inicio correcta.");
+                
                 error = true;
                 horaInicioTF.setText("");
                 errorString = errorString+"Hora de inicio incorrecta.\n";
@@ -443,7 +443,7 @@ public class PanelAgregarTurno extends Panel {
         }
 
         if(error){
-            JOptionPane.showMessageDialog(this, "Error!\n" + errorString);
+            JOptionPane.showMessageDialog(this, "Error!\n" + errorString, "Error", JOptionPane.WARNING_MESSAGE);
         }else{
             horaInicioEnMilisegundos +=milisegundos;
             horafinEnMilisegundos +=milisegundos;
@@ -455,7 +455,7 @@ public class PanelAgregarTurno extends Panel {
                 confirmarButton.setBackground(new Color (223, 246, 255) );
             }
             catch (CantAddTurno e){
-                JOptionPane.showMessageDialog(this, "Error!\n" + e.getErrors());
+                JOptionPane.showMessageDialog(this, "Error!\n" + e.getErrors(), "Error", JOptionPane.WARNING_MESSAGE);
             }
         }
         working=false;

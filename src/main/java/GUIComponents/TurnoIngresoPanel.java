@@ -169,7 +169,7 @@ public class TurnoIngresoPanel extends Panel {
             errString = "\n Seleccione un turno";
         }
         if(error){
-            JOptionPane.showMessageDialog(this, "Error!\n" + errString);
+            JOptionPane.showMessageDialog(this, "Error!\n" + errString, "Error", JOptionPane.WARNING_MESSAGE);
 
         }
         else {

@@ -213,7 +213,7 @@ public class EliminarTurno extends Panel {
             errorString = errorString + "DNI Ingresado invalido \n";
         }
         if (error){
-            JOptionPane.showMessageDialog(null, "Error!\n" + errorString);
+            JOptionPane.showMessageDialog(null, "Error!\n" + errorString, "Error", JOptionPane.WARNING_MESSAGE);
         }
 
 

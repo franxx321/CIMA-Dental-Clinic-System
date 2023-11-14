@@ -224,17 +224,19 @@ public class ActualizarPreciosOS extends Panel {
                                             obraSocialJT.setModel(auxTable.getModel());
                                             removeColumn();
                                         } else {
-                                            JOptionPane.showMessageDialog(null, "Ocurrió un error intentando modificar la cobertura.");
+                                            JOptionPane.showMessageDialog(ActualizarPreciosOS.getInstance(), "Ocurrió un error intentando modificar la cobertura.", "Error", JOptionPane.WARNING_MESSAGE);
+
+                                            
                                         }
                                     } else {
-                                        JOptionPane.showMessageDialog(null, "El Tope introducido es incorrecto.\nDebe ser un número entero mayor o igual a 0 con hasta dos decimales.");
+                                        JOptionPane.showMessageDialog(ActualizarPreciosOS.getInstance(), "El Tope introducido es incorrecto.\nDebe ser un número entero mayor o igual a 0 con hasta dos decimales.", "Error", JOptionPane.WARNING_MESSAGE);
 
-                                        modelo.setValueAt(null, filaSeleccionada, 2); // Columna del Tope
+                                        modelo.setValueAt(ActualizarPreciosOS.getInstance(), filaSeleccionada, 2); // Columna del Tope
                                     }
                                 } else {
-                                    JOptionPane.showMessageDialog(null, "El porcentaje introducido es incorrecto.\nDebe ser un número entero mayor o igual a 0 y menor o igual a 100.");
+                                    JOptionPane.showMessageDialog(null, "El porcentaje introducido es incorrecto.\nDebe ser un número entero mayor o igual a 0 y menor o igual a 100.", "Error", JOptionPane.WARNING_MESSAGE);
 
-                                    modelo.setValueAt(null, filaSeleccionada, 1); // Columna del Porcentaje
+                                    modelo.setValueAt(ActualizarPreciosOS.getInstance(), filaSeleccionada, 1); // Columna del Porcentaje
                                 }
                             }
                         }

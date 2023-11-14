@@ -216,7 +216,7 @@ public class AgregarGastoPanel extends Panel {
             errStr ="El numero ingresado es invalido";
         }
         if(error){
-            JOptionPane.showMessageDialog(this,"Error! \n"+errStr);
+            JOptionPane.showMessageDialog(this,"Error! \n"+errStr, "Error", JOptionPane.WARNING_MESSAGE);
         }
         else{
             GastoManager.getInstance().addGasto(monto, descripcion, fecha, profesional);

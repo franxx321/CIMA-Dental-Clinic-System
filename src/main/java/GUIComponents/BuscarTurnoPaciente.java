@@ -32,6 +32,7 @@ public class BuscarTurnoPaciente extends Panel {
     
     @Override
     public void setup(List<Object> arguments) {
+        jTextField1.setText("");
         JTable auxTable = TurnoManager.getInstance().getFuturePatientAppointments(-1);
         turnosTable.setModel(auxTable.getModel());
         this.removeColumn();

@@ -49,9 +49,7 @@ public class TurnoManager {
         else{
             turno.setIdPaciente(paciente.getId());
         }
-
         turno.setIdProfesional(idProfesional);
-
         idPrestacion = PrestacionManager.getInstance().idByName(prestacion.getNombre()).getId();
         if(idPrestacion == -1){
             error = true;
@@ -122,10 +120,9 @@ public class TurnoManager {
     }
 
 
-    public JTable getCalendar (String nombreProfesional, int week){
+    public JTable getCalendar (Profesional profesional, int week){
         List<Turno> turnosList= null;
-        if (nombreProfesional != null){
-            Profesional profesional = ProfesionalManager.getInstance().getProfesionalByName(nombreProfesional);
+        if (profesional != null){
             turnosList = TurnoDAOImpl.getInstance().profesionalFutureApointments(profesional.getId() ,week);
         }
         return CalendarTableGenerator.getInstance().generateTable(turnosList,week);
@@ -147,9 +144,6 @@ public class TurnoManager {
         return PrestacionesByTurnoTableGenerator.getInstance().generateTable(turno);
     }
 
-    public Profesional getProfesionalByName(String profesional){
-        return ProfesionalManager.getInstance().getProfesionalByName(profesional);
-    }
 
     public List<TurnoPrestacion> getPrestacionesByTurno(Turno turno){
         return TurnoPrestacionManager.getInstance().getByTurnoId(turno.getId());
@@ -162,13 +156,11 @@ public class TurnoManager {
     public void addTurnoPrestacion(TurnoPrestacion turnoPrestacion){
         TurnoPrestacionManager.getInstance().addTurnoPrestacion(turnoPrestacion);
     }
-
     public List<Turno> getByProfesional(int idProfesional){
         Turno turno = new Turno();
         turno.setIdProfesional(idProfesional);
         return TurnoDAOImpl.getInstance().getByIdProfesional(turno);
     }
-
 
 
 }

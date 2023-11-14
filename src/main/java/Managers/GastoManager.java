@@ -36,14 +36,9 @@ public class GastoManager {
 
         gasto.setDescripcion(descripcion);
         gasto.setFecha(fecha);
-
         idProfesional = profesional.getId();
-        if (idProfesional == -1) {
-            error = true;
-            errorString = errorString + "\nEl profesional no esta cargado";
-        }else {
-            gasto.setIdProfesional(idProfesional);
-        }
+        gasto.setIdProfesional(idProfesional);
+
 
         if(error){
             throw new CantAddGasto(errorString);

@@ -220,13 +220,6 @@ public class BuscarTurnoPaciente extends Panel {
     private void confirmarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarButtonMousePressed
         int row = turnosTable.getSelectedRow();
         if(row != -1){
-        String profesional = (String) turnosTable.getModel().getValueAt(row,2);
-        String fechaCompleta = (String) turnosTable.getModel().getValueAt(row,3);
-        Date horaInicio = String2Date.string2Date(fechaCompleta);
-        fechaCompleta = (String) turnosTable.getModel().getValueAt(row,4);
-        Date horaFin = String2Date.string2Date(fechaCompleta);
-        Profesional profesional1 = TurnoManager.getInstance().getProfesionalByName(profesional);
-        int idProfesional = profesional1.getId();
         turnosTable.addColumn(idsTurnos);
         Turno turno = TurnoManager.getInstance().getById(Integer.parseInt(turnosTable.getValueAt(row,5).toString()));
         turnosTable.removeColumn(idsTurnos);

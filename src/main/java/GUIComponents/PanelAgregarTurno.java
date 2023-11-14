@@ -335,14 +335,12 @@ public class PanelAgregarTurno extends Panel {
 
 
     private void changeCalendar (){
-        String idProfesional;
-        if(profesionalCB.getSelectedIndex()==0){
-            idProfesional=null;
+        Profesional profesional = null;
+        if(profesionalCB.getSelectedIndex()!=0){
+            profesional=profesionalList.get(profesionalCB.getSelectedIndex()-1);
+
         }
-        else {
-            idProfesional = profesionalCB.getItemAt(profesionalCB.getSelectedIndex());
-        }
-        JTable auxTable = TurnoManager.getInstance().getCalendar(idProfesional,week);
+        JTable auxTable = TurnoManager.getInstance().getCalendar(profesional,week);
         calendarTable.setModel(auxTable.getModel());
         calendarTable.setDefaultRenderer(Object.class,auxTable.getDefaultRenderer(Object.class));
         Frame.getInstance().repaint();

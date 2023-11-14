@@ -58,7 +58,7 @@ public class MenuModificarTurno extends Panel {
     }
 
     private void modifyCalendar(){
-        JTable table = TurnoManager.getInstance().getCalendar(profesional.getNombre(),week);
+        JTable table = TurnoManager.getInstance().getCalendar(profesional,week);
         calendarTable.setModel(table.getModel());
         calendarTable.setDefaultRenderer(Object.class,table.getDefaultRenderer(Object.class));
         this.repaint();

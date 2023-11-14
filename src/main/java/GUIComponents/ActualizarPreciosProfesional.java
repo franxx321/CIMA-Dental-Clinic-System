@@ -107,6 +107,7 @@ public class ActualizarPreciosProfesional extends Panel {
         volverButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         volverButton.setText("Volver");
         volverButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        volverButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         volverButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 volverButtonMouseEntered(evt);

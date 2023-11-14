@@ -48,7 +48,7 @@ public class IngresoPanel extends Panel {
         profesionalLabel.setText(pr.getNombre());
         pacienteLabel.setText(p.getNombre());
         Date today = FormatedDate.formatedDate(new Date());
-        model.setDate(today.getYear()+1900, today.getMonth(),today.getDay());
+        model.setDate(today.getYear()+1900, today.getMonth(),today.getDate());
         model.setSelected(true);
         obraSocialList=IngresoManager.getInstance().getObraSocialByIdPaciente(p.getId());
         for (ObraSocial obraSocial: obraSocialList){
@@ -78,7 +78,8 @@ public class IngresoPanel extends Panel {
         p.put("text.month", "Month");
         p.put("text.year", "Year");
         Date today = FormatedDate.formatedDate(new Date());
-        model.setDate(today.getYear()+1900, today.getMonth(),today.getDay());
+        model.setDate(today.getYear()+1900, today.getMonth(),today.getDate());
+        model.setSelected(true);
         datePanel=new JDatePanelImpl(model,p);
         datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());
         datePickerPanel.add(datePicker);

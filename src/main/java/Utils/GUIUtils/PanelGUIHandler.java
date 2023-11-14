@@ -17,7 +17,6 @@ public class PanelGUIHandler  implements  GUIHandler{
 
     private HashMap<String, Panel> panels;
 
-    private  Panel currentPanel;
 
     public static PanelGUIHandler getinstance(){
         if (panelGUIHandler==null){
@@ -54,7 +53,6 @@ public class PanelGUIHandler  implements  GUIHandler{
         panel.removeAll();
         panel.add(nextPanel);
         nextPanel.setup(objects);
-        currentPanel=nextPanel;
         Frame.getInstance().repaint();
         Frame.getInstance().revalidate();
     }

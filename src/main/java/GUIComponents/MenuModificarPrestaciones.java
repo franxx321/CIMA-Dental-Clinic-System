@@ -203,7 +203,7 @@ import java.util.regex.Pattern;
         TurnoManager.getInstance().deleteTurnoPrestacionByTurno(turno);
         DefaultTableModel tm = (DefaultTableModel) prestacionesTable.getModel();
         List<TurnoPrestacion> turnoPrestacionList = new ArrayList<>();
-        for (int i= 0; i<tm.getColumnCount();i++){
+        for (int i= 0; i<tm.getRowCount();i++){
             for (Prestacion prestacion: allPrestacion){
                 if(prestacion.getNombre().equals((String)tm.getValueAt(i,0))){
                     TurnoPrestacion turnoPrestacion = new TurnoPrestacion();

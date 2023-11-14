@@ -51,6 +51,7 @@ public class AgregarGastoPanel extends Panel {
         Date date = FormatedDate.formatedDate(new Date());
         model = new UtilDateModel();
         model.setDate(date.getYear()+1900,date.getMonth(),date.getDate());
+        model.setSelected(true);
         Properties p = new Properties();
         p.put("text.today", "Today");
         p.put("text.month", "Month");

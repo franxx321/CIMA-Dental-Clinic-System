@@ -36,7 +36,6 @@ import java.util.regex.Pattern;
  */
 public class MenuModificarTurno extends Panel {
 
-
     //IMPORTANTE datepicker necesita un datepanel, que necesita un datemodel, la inicializacion de los mismos esta en el constructor
     // link de instruccion : https://www.codejava.net/java-se/swing/how-to-use-jdatepicker-to-display-calendar-component
     private JDatePickerImpl datePicker;
@@ -104,7 +103,9 @@ public class MenuModificarTurno extends Panel {
                 break;
             }
         }
-        model.setDate(turno.getHoraFin().getYear()+1900, turno.getHoraFin().getMonth(),turno.getHoraFin().getDay());
+        model.setDate(turno.getHoraFin().getYear()+1900, turno.getHoraFin().getMonth(),turno.getHoraFin().getDate());
+        model.setSelected(true);
+        Date date = (Date)datePicker.getModel().getValue();
         profesionalLabel.setText(profesional.getNombre());
         horaFinTF.setText(turno.getHoraFin().getHours()+ ":"+ turno.getHoraFin().getMinutes());
         horaInicioTF.setText(turno.getHoraInicio().getHours()+ ":"+ turno.getHoraInicio().getMinutes());
@@ -372,7 +373,7 @@ public class MenuModificarTurno extends Panel {
 
     private void cancelarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMousePressed
         cancelarButton.setBackground(new Color (223, 246, 255) );
-        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelInicio,null);
+        PanelGUIHandler.getinstance().changePanel(PanelGUIHandler.panelTurnos,null);
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.menuSecundarioVacio,null);
     }//GEN-LAST:event_cancelarButtonMousePressed
 
@@ -381,8 +382,8 @@ public class MenuModificarTurno extends Panel {
         boolean asistio = asistioCheckBox.isSelected();
         float descuento = Float.parseFloat(descuentoTF.getText());
         boolean error = false;
+        String errorString="";
         float valor = Float.parseFloat(precioTextField.getText());
-        String errorString ="";
         Date fecha = FormatedDate.formatedDate((Date) datePicker.getModel().getValue());
         String horaInicioString = horaInicioTF.getText().trim();
         String horaFinString = horaFinTF.getText().trim();

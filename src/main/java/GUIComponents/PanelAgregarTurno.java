@@ -78,7 +78,7 @@ public class PanelAgregarTurno extends Panel {
         p.put("text.month", "Month");
         p.put("text.year", "Year");
         Date today = FormatedDate.formatedDate(new Date());
-        model.setDate(today.getYear()+1900, today.getMonth(),today.getDay());
+        model.setDate(today.getYear()+1900, today.getMonth(),today.getDate());
         datePanel=new JDatePanelImpl(model,p);
         datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());
         datePickerPanel.add(datePicker);
@@ -89,7 +89,7 @@ public class PanelAgregarTurno extends Panel {
     @Override
     public void setup(List<Object> arguments) {
         Date today = FormatedDate.formatedDate(new Date());
-        model.setDate(today.getYear()+1900, today.getMonth(),today.getDay());
+        model.setDate(today.getYear()+1900, today.getMonth(),today.getDate());
         model.setSelected(true);
         profesionalList = TurnoManager.getInstance().getAllProfesional();
         ComboBoxModel<String> cb = new DefaultComboBoxModel<>();

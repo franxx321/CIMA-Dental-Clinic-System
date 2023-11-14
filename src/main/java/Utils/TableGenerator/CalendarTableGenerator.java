@@ -84,7 +84,8 @@ public class CalendarTableGenerator {
                 long day = hi.getTime()/86400000;
                 int column = (int)(day-firstDay+1);
                 int startrow= ((hi.getHours()-8)*2)+(hi.getMinutes()/30);
-                int endrow = ((hf.getHours()-8)*2)+(hi.getMinutes()/30);
+                int endrow = ((hf.getHours()-8)*2)+(hf.getMinutes()/30);
+                int dif=endrow-startrow+1;
                 int i= startrow;
                 do{
                     try{

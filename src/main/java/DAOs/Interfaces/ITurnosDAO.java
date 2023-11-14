@@ -11,7 +11,7 @@ public interface ITurnosDAO {
     public boolean delete(Turno turno);
     public boolean modify(Turno turno, Turno aux);
 
-    public List<Turno> profesionalFutureApointments(int idprofesional, int week);
+    public List<Turno> profesionalFutureApointments(Turno turno );
 
     public List <Turno> getByIdProfesional(Turno turno);
 

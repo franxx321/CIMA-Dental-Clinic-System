@@ -133,12 +133,9 @@ public class TurnoDAOImpl implements ITurnosDAO {
     }
 
     @Override
-    public List<Turno> profesionalFutureApointments(int idprofesional, int week) {
+    public List<Turno> profesionalFutureApointments(Turno turno) {
         List<Turno> turnosList = null;
-        Date date = new Date();
-        date.setHours(0);
-        date.setMinutes(0);
-        date.setSeconds(0);
+
         try{
             DBConnection=DBConnector.getInstance();
             DBConnection.startConnection();
@@ -148,9 +145,9 @@ public class TurnoDAOImpl implements ITurnosDAO {
                     "where id_profesional = ? " +
                     "and horaInicio > ? " +
                     "and horaInicio < ?");
-            ptsm.setInt(1,idprofesional);
-            ptsm.setTimestamp(2,new Timestamp(date.getTime()+(long)week*604800000));
-            ptsm.setTimestamp(3,new Timestamp(date.getTime()+(long)(week+1)*604800000));
+            ptsm.setInt(1,turno.getIdProfesional());
+            ptsm.setTimestamp(2,new Timestamp(turno.getHoraInicio().getTime()));
+            ptsm.setTimestamp(3,new Timestamp(turno.getHoraFin().getTime()));
             ResultSet rs = ptsm.executeQuery();
             if(rs.next()){
                 turnosList= new ArrayList<>();

@@ -10,7 +10,7 @@ public interface IPrestacionDAO {
     public boolean delete(Prestacion prestacion);
     public boolean modify(Prestacion prestacion, Prestacion aux);
     public Prestacion idByName(String Nombre);
-    public Prestacion nameById(int id);
+    public Prestacion nameById(Prestacion pr);
 
     public Prestacion getById(Prestacion p);
 

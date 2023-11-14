@@ -149,8 +149,8 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
         return p;
     }
     
-    @Override
-    public Prestacion nameById(int id){
+    
+    public Prestacion nameById(Prestacion pr){
         Prestacion p = new Prestacion();
         String name = "";
         try{
@@ -158,7 +158,7 @@ public class PrestacionDAOImpl implements IPrestacionDAO {
             DBConnection.startConnection();
             con = DBConnection.getConnection();
             PreparedStatement ptsm = con.prepareStatement("SELECT nombre FROM prestaciones WHERE id = ?");
-            ptsm.setInt(1, id);
+            ptsm.setInt(1, pr.getId());
             ResultSet rs = ptsm.executeQuery();
             if(!rs.next()){
                 name = "";

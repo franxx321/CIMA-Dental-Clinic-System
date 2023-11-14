@@ -400,8 +400,7 @@ public class MenuModificarTurno extends Panel {
             errorString = errorString+"No se puede aplicar un descuento mayor a 100.\n";
         }
 
-        Pattern patron = Pattern.compile("^([01]?[0-9]|2[0-3]):([0-5][0-9])$");
-
+        Pattern patron = Pattern.compile("^([01]?[0-9]|2[0-3])([:.][0-5][0-9])$");
 
         Matcher matcher1 = patron.matcher(horaInicioString);
         if (matcher1.matches()) {

@@ -390,7 +390,7 @@ public class PanelAgregarTurno extends Panel {
         long horafinEnMilisegundos=0;
         // trim recorta los espacios vacios adelante y atras del string
 
-        Pattern patron = Pattern.compile("^([01]?[0-9]|2[0-3]):([0-5][0-9])$");
+        Pattern patron = Pattern.compile("^([01]?[0-9]|2[0-3])([:.][0-5][0-9])$");
         Matcher matcher1 = patron.matcher(horaInicioString);
         Matcher matcher2 = patron.matcher(horaFinString);
 

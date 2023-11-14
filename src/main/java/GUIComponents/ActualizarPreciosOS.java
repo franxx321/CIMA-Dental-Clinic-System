@@ -300,7 +300,6 @@ public class ActualizarPreciosOS extends Panel {
 
     @Override
     public void setup(List<Object> arguments) {
-
         ObraSocialList = ObraSocialManager.getInstance().getAll();
         ComboBoxModel<String> cb = new DefaultComboBoxModel<>();
         ObraSocialCB.setModel(cb);
@@ -308,11 +307,11 @@ public class ActualizarPreciosOS extends Panel {
         for (int i=1;i<=ObraSocialList.size();i++) {
             ObraSocialCB.insertItemAt(ObraSocialList.get(i-1).getNombre(),i);
         }
-
         JTable auxTalble = CoberturaTableGenerator.getInstance().generateTable(null);
         obraSocialJT.setModel(auxTalble.getModel());
         this.removeColumn();
         ObraSocialCB.setSelectedIndex(0);
+        
     }
 
 

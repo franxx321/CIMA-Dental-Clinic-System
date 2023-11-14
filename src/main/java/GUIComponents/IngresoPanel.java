@@ -51,9 +51,15 @@ public class IngresoPanel extends Panel {
         model.setDate(today.getYear()+1900, today.getMonth(),today.getDate());
         model.setSelected(true);
         obraSocialList=IngresoManager.getInstance().getObraSocialByIdPaciente(p.getId());
+        DefaultComboBoxModel cm = new DefaultComboBoxModel<>();
+        jComboBox1.setModel(cm);
+        jComboBox1.addItem("Seleccione una opcion");
+        jComboBox1.addItem("Ninguna");
         for (ObraSocial obraSocial: obraSocialList){
             jComboBox1.addItem(obraSocial.getNombre());
         }
+        this.jTextArea1.setText("");
+        this.montoTF.setText("");
     }
     private static IngresoPanel ingresoPanel;
 

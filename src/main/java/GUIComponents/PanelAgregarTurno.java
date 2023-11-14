@@ -425,6 +425,11 @@ public class PanelAgregarTurno extends Panel {
                 errorString = errorString+"Hora de fin incorrecta.\n";
             }
         }
+        if(horafinEnMilisegundos>0 && horaInicioEnMilisegundos >0 & horafinEnMilisegundos>= horaInicioEnMilisegundos){
+            error= true;
+            errorString= errorString+ "La hora de inicio es mayor a la de fin.\n";
+        }
+
 
         if (pacienteDniString.isBlank()){
             error=true;

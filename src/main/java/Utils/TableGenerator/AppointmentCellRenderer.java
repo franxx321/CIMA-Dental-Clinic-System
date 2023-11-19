@@ -17,10 +17,12 @@ public class AppointmentCellRenderer extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         final Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        if(column>=1){
             try {
-                if(paintedcell.get(column).get(row)) {
+                if(paintedcell.get(column).get(row)==true) {
                     c.setBackground(Color.RED);
+                }
+                else {
+                    c.setBackground(new Color(223,244,255));
                 }
             }
             catch (NullPointerException e){
@@ -28,7 +30,7 @@ public class AppointmentCellRenderer extends DefaultTableCellRenderer {
 
             }
 
-        }
+
         return c;
     }
 }

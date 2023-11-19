@@ -391,7 +391,7 @@ public class TurnoDAOImpl implements ITurnosDAO {
             rs = pstm.executeQuery();
             if (rs.next()) {
                 turnos.add(rs.getInt("totalAsistidos"));
-                turnos.add(rs.getInt("turnosNoAsistidos"));
+                turnos.add(rs.getInt("totalNoAsistidos"));
                 turnos.add(rs.getInt("asistidos30dias"));
                 turnos.add(rs.getInt("noAsistidos30dias"));
             } else {

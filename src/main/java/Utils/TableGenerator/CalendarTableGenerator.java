@@ -71,7 +71,7 @@ public class CalendarTableGenerator {
         tm = new DefaultTableModel(data,header);
         table.setModel(tm);
         HashMap<Integer,HashMap<Integer,Boolean>> hashMap = new HashMap<>();
-        for(int i= 0; i<=7;i++){
+        for(int i= 1; i<=7;i++){
             HashMap<Integer,Boolean> hs = new HashMap<>();
             hashMap.put(i,hs);
         }

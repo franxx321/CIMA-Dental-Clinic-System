@@ -36,10 +36,10 @@ public class EstadisticasManager {
         List<Float> ingrGastos = new ArrayList<>();
         ingresos = IngresoManager.getInstance().getIngresoByProfesional(ingreso);
         gastos = GastoManager.getInstance().getGastoByProfesional(gasto);
+        ingrGastos.add(ingresos.get(0));
         ingrGastos.add(ingresos.get(1));
-        ingrGastos.add(ingresos.get(2));
+        ingrGastos.add(gastos.get(0));
         ingrGastos.add(gastos.get(1));
-        ingrGastos.add(gastos.get(2));
         return ingrGastos;
     }
 

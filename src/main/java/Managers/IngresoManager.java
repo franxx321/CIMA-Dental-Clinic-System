@@ -66,7 +66,7 @@ public class IngresoManager {
         IngresoDAOImpl.getInstance().register(ingreso);
     }
 
-    public List<Ingreso> getIngresoByProfesional(Ingreso ingreso){
+    public List<Float> getIngresoByProfesional(Ingreso ingreso){
         return IngresoDAOImpl.getInstance().getIngresoByProfesional(ingreso);
     }
 

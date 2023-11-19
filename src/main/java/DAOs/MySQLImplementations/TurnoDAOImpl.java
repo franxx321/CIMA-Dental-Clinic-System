@@ -366,7 +366,47 @@ public class TurnoDAOImpl implements ITurnosDAO {
         return turno;
     }
 
-
-
-
+    @Override
+    public List<Integer> getAssistedTurnos(Turno turno) {
+        List<Integer> turnos = new ArrayList<>();
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        try {
+            DBConnection = DBConnector.getInstance();
+            DBConnection.startConnection();
+            con = DBConnection.getConnection();
+            pstm = con.prepareStatement(
+                    "SELECT totalAsistidos, totalNoAsistidos, asistidos30dias, noAsistidos30dias " +
+                            "FROM (" +
+                            "SELECT " +
+                            "SUM(CASE WHEN asistio = TRUE THEN 1 ELSE 0 END) as totalAsistidos, " +
+                            "SUM(CASE WHEN asistio = FALSE THEN 1 ELSE 0 END) as totalNoAsistidos, " +
+                            "SUM(CASE WHEN asistio = TRUE AND horaInicio >= NOW() - INTERVAL 30 DAY THEN 1 ELSE 0 END) as asistidos30dias, " +
+                            "SUM(CASE WHEN asistio = FALSE AND horaInicio >= NOW() - INTERVAL 30 DAY THEN 1 ELSE 0 END) as noAsistidos30dias " +
+                            "FROM Turnos " +
+                            "WHERE id_profesional = ?" +
+                            ") AS subquery"
+            );
+            pstm.setInt(1, turno.getIdProfesional());
+            rs = pstm.executeQuery();
+            if (rs.next()) {
+                turnos.add(rs.getInt("totalAsistidos"));
+                turnos.add(rs.getInt("turnosNoAsistidos"));
+                turnos.add(rs.getInt("asistidos30dias"));
+                turnos.add(rs.getInt("noAsistidos30dias"));
+            } else {
+                turnos.add(-1);
+            }
+            pstm.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Fallo TurnoDAOImpl, getAsistedTurnos " + e.getMessage());
+        }
+        return turnos;
+    }
 }
+
+
+
+
+

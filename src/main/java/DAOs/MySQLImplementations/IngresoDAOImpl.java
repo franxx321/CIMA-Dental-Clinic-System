@@ -136,35 +136,36 @@ public class IngresoDAOImpl implements IIngresoDAO {
     }
 
     @Override
-    public List<Ingreso> getIngresoByProfesional(Ingreso ingreso){
+    public List<Float> getIngresoByProfesional(Ingreso ingreso) {
+        List<Float> ingresos = new ArrayList<>();
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM Ingresos WHERE id_profesional = ?";
-        List<Ingreso> ingresoByProfesionalList = new ArrayList<>();
-        try{
+        try {
             DBConnection = DBConnector.getInstance();
             DBConnection.startConnection();
             con = DBConnection.getConnection();
+            String sql = "SELECT " +
+                    "SUM(monto) as totalIngresos, " +
+                    "SUM(CASE WHEN fecha >= NOW() - INTERVAL 30 DAY THEN monto ELSE 0 END) as ingresos30dias " +
+                    "FROM Ingresos " +
+                    "WHERE id_profesional = ?";
+
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, ingreso.getIdProfesional());
             rs = pstm.executeQuery();
-            while (rs.next()){
-                Ingreso i = new Ingreso();
-                i.setId(rs.getInt(1));
-                i.setFecha(rs.getDate(2));
-                i.setMonto(rs.getFloat(3));
-                i.setDescripcion(rs.getString(4));
-                i.setIdPaciente(rs.getInt(5));
-                i.setIdProfesional(rs.getInt(6));
-                i.setIdObraSocial(rs.getInt(7));
-                ingresoByProfesionalList.add(i);
+
+            if (rs.next()) {
+                ingresos.add(rs.getFloat("totalIngresos"));
+                ingresos.add(rs.getFloat("ingresos30dias"));
+            } else {
+                ingresos.add(Float.valueOf(0));
+                ingresos.add(Float.valueOf(0));
             }
             pstm.close();
             con.close();
-        }catch (SQLException e){
-            System.out.println("Error: Clase IngresoDAOImpl. metodo getIngresoByProfesional. "+ e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Error: Clase IngresoDAOImpl. Método getIngresoByProfesional. " + e.getMessage());
         }
-        return ingresoByProfesionalList;
+        return ingresos;
     }
-
 }

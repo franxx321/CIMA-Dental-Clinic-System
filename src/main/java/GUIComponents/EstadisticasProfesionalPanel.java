@@ -297,7 +297,7 @@ public class EstadisticasProfesionalPanel extends Panel {
             List<Integer> turnos = new ArrayList<>();
             List<Float> ingrGasto = new ArrayList<>();
 
-            turnos = EstadisticasManager.getInstance().getTurnosAsistidosyNo(turno);
+            turnos = EstadisticasManager.getInstance().getAssistedTurnos(turno);
             ingrGasto = EstadisticasManager.getInstance().getIngresoGastoByProfesional(ingreso, gasto);
 
             jLabel1.setVisible(true);

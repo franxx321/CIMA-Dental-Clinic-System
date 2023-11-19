@@ -127,32 +127,36 @@ public class GastoDAOImpl implements IGastoDAO {
     }
 
     @Override
-    public List<Gasto> getGastoByProfesional(Gasto gasto){
+    public List<Float> getGastoByProfesional(Gasto gasto){
+        List<Float> gastos = new ArrayList<>();
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM gastos WHERE id_profesional = ?";
-        List<Gasto> gastoByProfesionalList = new ArrayList<>();
-        try{
+        try {
             DBConnection = DBConnector.getInstance();
             DBConnection.startConnection();
             con = DBConnection.getConnection();
+            String sql = "SELECT " +
+                    "SUM(monto) as totalMonto, " +
+                    "SUM(CASE WHEN fecha >= NOW() - INTERVAL 30 DAY THEN monto ELSE 0 END) as monto30dias " +
+                    "FROM Gastos " +
+                    "WHERE id_profesional = ?";
+
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, gasto.getIdProfesional());
             rs = pstm.executeQuery();
-            while (rs.next()){
-                Gasto g = new Gasto();
-                g.setId(rs.getInt(1));
-                g.setMonto(rs.getInt(2));
-                g.setDescripcion(rs.getString(3));
-                g.setFecha(rs.getDate(4));
-                g.setIdProfesional(rs.getInt(5));
-                gastoByProfesionalList.add(g);
+
+            if (rs.next()) {
+                gastos.add(rs.getFloat("totalMonto"));
+                gastos.add(rs.getFloat("monto30dias"));
+            } else {
+                gastos.add(Float.valueOf(0));
+                gastos.add(Float.valueOf(0));
             }
             pstm.close();
             con.close();
-        }catch (SQLException e){
-            System.out.println("Error: Clase GastoDAOImpl. metodo getGastoByProfesionl."+ e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Error: Clase GastoDAOImpl. Método getGastosByProfesional " + e.getMessage());
         }
-        return gastoByProfesionalList;
+        return gastos;
     }
 }

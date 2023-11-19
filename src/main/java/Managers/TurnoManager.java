@@ -173,5 +173,8 @@ public class TurnoManager {
         return TurnoDAOImpl.getInstance().getByIdProfesional(turno);
     }
 
+    public List<Integer> getAssistedTurnos(Turno turno){
+        return TurnoDAOImpl.getInstance().getAssistedTurnos(turno);
+    }
 
 }

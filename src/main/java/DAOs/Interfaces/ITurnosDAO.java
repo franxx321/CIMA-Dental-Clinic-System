@@ -23,7 +23,7 @@ public interface ITurnosDAO {
 
     public Turno getById(Turno t);
 
-
+    public List<Integer> getAssistedTurnos(Turno turno);
 
 
 }

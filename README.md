@@ -1,1 +1,1 @@
-In this project we developed a mock system for a dental clinic, it allows the clinic's secretary to manage appointments, as well as healthcare coverages, service fees and expected billings
+In this project we developed a mock system for a dental clinic, it allows the clinic's secretary to manage appointments, as well as healthcare coverages, service fees and expected billings. This project was made as the final assignment of the Software Engineering II course at Universidad Nacional de San Luis
